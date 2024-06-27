@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { NgFor } from '@angular/common';
+import { NgFor,NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 /* 
@@ -30,6 +30,7 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
     MatCardContent,
     MatButton,
     NgFor,
+    NgIf,
     HttpClientModule
   ],
   templateUrl: './es101.component.html',
@@ -43,6 +44,7 @@ export class Es101Component implements OnInit {
   fullList:  string[] = [];
   wordList: string[] = [];
   numParole = 5;
+  step:number = 1;
   //TODO: implementare la seeded random
   seed = "abracadabra";
 
@@ -52,6 +54,7 @@ export class Es101Component implements OnInit {
 
   //funzione che viene eseguita all'avvio del componente
   ngOnInit(): void {
+    this.step = 1;
     // ogni 100 millisecondi incrementa il tempo
     setInterval(() => {
       this.timeMillis += 100;
@@ -62,12 +65,13 @@ export class Es101Component implements OnInit {
       this.fullList = data.split('\n');
       this.randomWord = this.fullList[Math.floor(Math.random() * this.fullList.length)];
       for(var i = 0; i < this.numParole; i++) {
-        var word = this.fullList[Math.floor(Math.random() * this.fullList.length)].toLocaleUpperCase();
+        var word = this.fullList[Math.floor(Math.random() * this.fullList.length)];
         //QUESTO WHILE SERVE A FAR SI CHE LE PAROLE SIANO LUNGHE ALMENO 3 LETTERE E NON CONTENGANO LA LETTERA "À"
-        while (word.length < 3 || word.includes('À')) {
-          word = this.fullList[Math.floor(Math.random() * this.fullList.length)].toLocaleUpperCase();
+        //filter è ò à ù 
+        while (word.length < 3 || word.includes('ò') || word.includes('à') || word.includes('ù')) {
+          word = this.fullList[Math.floor(Math.random() * this.fullList.length)];
         }
-        this.wordList.push(word);
+        this.wordList.push(word.toLocaleUpperCase());
       }
     });
   }
