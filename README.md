@@ -1,3 +1,16 @@
+# Linee guida assets
+
+Lessico, parole e immagini --> le facciamo noi!!
+Caratteristiche --> No foto, meglio illustrazioni.
+Argomenti --> scene di vita, animali, elementi naturali.
+Lunghezza parole --> 5+ caratteri
+
+# TODO
+    - Completare tutti gli es ( 2/50 )
+    - Area test --> viene usata in test preliminare per misurare il paziente.
+        Sostanzialmente un esecizio che fa vedere un cerchio, un quadrato, un cubo. Il paziente lo disegna e lo fa vedere.
+    - Assicurarsi che sia tutto anonimo.
+
 # MnemosineFrontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
