@@ -1,0 +1,17 @@
+<h1>Exercise picker</h1>
+
+<p>Scegli un esercizio e naviga</p>
+
+<div class="example-container">
+    <mat-form-field>
+        <mat-label>Inserisci l'ID</mat-label>
+        <input matInput name="url" #urlInput/>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="click(urlInput.value)"
+        >
+        <mat-icon>send</mat-icon>
+        </button>
+      </mat-form-field>
+</div>

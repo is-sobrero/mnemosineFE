@@ -24,7 +24,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 export class Es102Component implements OnInit {
   step:number = 1;
   //questa variabile cambia in base alla difficoltà
-  numeroStimoli = 4;
+  numeroStimoli = 6;
   vettoreCoppie: any[] = [];
   errori = 0;
 
