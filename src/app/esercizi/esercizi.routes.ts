@@ -5,6 +5,7 @@ import { Es102Component } from './es102/es102.component';
 
 
 const routes: Routes = [
+  {path: '', redirectTo: '/esercizi', pathMatch: 'full'},
   {
     path: '101',
     component: Es101Component,
