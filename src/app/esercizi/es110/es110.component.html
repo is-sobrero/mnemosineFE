@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Ricorda le città</mat-card-title>
+    <mat-card-subtitle>Apprendimento e memorizzazione</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content *ngIf="step === 1">
+    <h2 *ngFor="let word of listaCitta">{{ word }}</h2>
+  </mat-card-content>
+  <mat-card-content *ngIf="step === 2">
+    <p>Selezione le città che hai memorizzato</p>
+  </mat-card-content>
+  <mat-card-content *ngIf="step === 3">
+    <p>Bravo! Hai compltato l'esercizio</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button [disabled]="step == 3" (click)="step = step + 1" mat-button>
+      Avanti
+    </button>
+    <p style="color: gray; font-size: 10px">
+      {{ (timeMillis / 1000).toFixed(0) }} s
+    </p>
+  </mat-card-actions>
+</mat-card>
