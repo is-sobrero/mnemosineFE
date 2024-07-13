@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Es101Component } from './es101/es101.component';
 import { Es102Component } from './es102/es102.component';
 import { Es104Component } from './es104/es104.component';
+import { Es105Component } from './es105/es105.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: '104',
     component: Es104Component,
+  },
+  {
+    path: '105',
+    component: Es105Component,
   },
 ];
 
