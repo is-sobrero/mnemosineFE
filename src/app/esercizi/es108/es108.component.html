@@ -10,7 +10,7 @@
     </mat-card-content>
 
     <mat-card-content *ngIf="step === 2">
-        <h2>Inserisci la sequenza:</h2>
+        <h2>Inserisci la sequenza al contrario:</h2>
         <div *ngFor="let lettera of sequenzaNumeri; let i = index">
             <mat-form-field>
                 <input matInput maxlength="1" (input)="aggiornaRisposta(i, $event)">
