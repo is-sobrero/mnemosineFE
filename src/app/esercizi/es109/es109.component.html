@@ -1,17 +1,17 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Span di numeri</mat-card-title>
+        <mat-card-title>Span di lettere</mat-card-title>
         <mat-card-subtitle>Memoria e apprendimento</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content *ngIf="step === 1">
         <h2>Memorizza questa sequenza:</h2>
-        <h2>{{ sequenzaNumeri.join(' ') }}</h2>
+        <h2>{{ sequenzaLettere.join(' ') }}</h2>
     </mat-card-content>
 
     <mat-card-content *ngIf="step === 2">
         <h2>Inserisci la sequenza al contrario:</h2>
-        <div *ngFor="let lettera of sequenzaNumeri; let i = index">
+        <div *ngFor="let lettera of sequenzaLettere; let i = index">
             <mat-form-field>
                 <input matInput maxlength="1" (input)="aggiornaRisposta(i, $event)">
             </mat-form-field>
