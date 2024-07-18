@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-title>Ricerca visiva</mat-card-title>
+    <mat-card-subtitle>Attenzione selettiva</mat-card-subtitle>
+    <div class="grid-container">
+        <h2>Trova gli oggetti</h2>
+        <div *ngFor="let oggetto of oggetti" class="grid-item" [ngClass]="{'target': oggetto.target}"
+            (click)="selezionaOggetto(oggetto.id)">
+            {{ oggetto.id }}
+        </div>
+    </div>
+    <div *ngIf="messaggio">{{ messaggio }}</div>
+</mat-card>

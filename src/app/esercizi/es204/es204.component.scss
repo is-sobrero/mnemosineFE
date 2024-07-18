@@ -1,0 +1,19 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+    width: 400px;
+    margin-top: 20px;
+}
+
+.grid-item {
+    background-color: #ccc;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.grid-item.target {
+    background-color: #0f0;
+}
