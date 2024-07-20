@@ -30,7 +30,7 @@ export class Es104Component implements OnInit {
     step = 1; // Step del gioco (1: mostra sequenza, 2: inserimento, 3: risultato)
     errori = 0; // Numero di errori commessi
 
-    lettere = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Lettere dell'alfabeto
+    lettere = 'ABCDEFGILMNOPQRSTUVZ'; // Lettere dell'alfabeto
 
     ngOnInit(): void {
         this.iniziaGioco();
