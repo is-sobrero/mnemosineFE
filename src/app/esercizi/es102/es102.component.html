@@ -1,15 +1,19 @@
 <mat-card>
-    <mat-card-header>
-      <mat-card-title>Trova le coppie</mat-card-title>
-      <mat-card-subtitle>Apprendimento e
-        memorizzazione</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-            <mat-card class="frutto" *ngFor="let immagine of vettoreCoppie">
-                <p *ngIf="step === 1">{{immagine}}</p>
-            </mat-card>
-    </mat-card-content>
-    <mat-card-actions>
-      <button [disabled]="step === 3" (click)="step = step +1" mat-button>Avanti</button>
-    </mat-card-actions>
+  <mat-card-header>
+    <mat-card-title>Trova le coppie</mat-card-title>
+    <mat-card-subtitle>Apprendimento e
+      memorizzazione</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content *ngIf="step != 3">
+          <mat-card class="frutto" *ngFor="let oggetto of vettoreCoppie" (click)="oggetto.cliccato = true; verificaMemory()">
+              <p *ngIf="oggetto.cliccato == true">{{oggetto.numero}}</p>
+          </mat-card>
+  </mat-card-content>
+  <mat-card-content *ngIf="step == 3">
+    <h3>Complimenti hai completato il memory</h3>
+    <p>{{errori/2}} errori!</p>
+</mat-card-content>
+  <mat-card-actions>
+    <button [disabled]="step != 1" (click)="nextStep()" mat-button>Avanti</button>
+  </mat-card-actions>
 </mat-card>

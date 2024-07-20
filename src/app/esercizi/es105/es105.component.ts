@@ -19,7 +19,7 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
 */
 
 @Component({
-  selector: 'app-es101',
+  selector: 'app-es105',
   standalone: true,
   imports: [
     MatCard,
@@ -33,12 +33,12 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
     NgIf,
     HttpClientModule
   ],
-  templateUrl: './es101.component.html',
-  styleUrl: './es101.component.scss'
+  templateUrl: './es105.component.html',
+  styleUrl: './es105.component.scss'
 })
 
 //il componente in se, implementa "OnInit" che ci consente di poter eseguire del codice all'avvio del componente
-export class Es101Component implements OnInit {
+export class Es105Component implements OnInit {
   //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
   randomWord: string = '';
   fullList:  string[] = [];
