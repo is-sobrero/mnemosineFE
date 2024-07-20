@@ -83,7 +83,10 @@ export class Es110Component implements OnInit {
   }
 
   iniziaGioco() {
-    this.cittaMostrate = [];
+    this.cittaMostrate = this.listaCitta;
+    this.cittaMostrate.sort(() => Math.random() - 0.5);
+    this.cittaMostrate = this.cittaMostrate.slice(0, 6);
+    //Avanti
     this.cittaSelezionate = [];
     this.step = 1;
     this.selezionaCitta();
