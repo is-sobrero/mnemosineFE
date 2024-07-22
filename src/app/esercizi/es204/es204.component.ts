@@ -29,54 +29,71 @@ import { NgFor, NgIf, CommonModule } from '@angular/common';
   styleUrls: ['./es204.component.scss'],
 })
 export class Es204Component implements OnInit {
-  livello = 1;
-  oggetti: { id: number; target: boolean }[] = [];
-  stimoloDaTrovare = 0;
-  messaggio = '';
+  livelloCorrente = 1; // Variabile che tiene traccia del livello selezionato
 
-  ngOnInit(): void {
-    this.generaOggetti();
+  // Liste di elementi per ciascun livello
+  elementiLivelloUno = [
+    { nome: 'e11', src: 'assets/images_es204/pencil.png', eBersaglio: false },
+    { nome: 'e12', src: 'assets/images_es204/pen.png', eBersaglio: false },
+    { nome: 'e13', src: 'assets/images_es204/eraser.png', eBersaglio: false },
+  ];
+
+  elementiLivelloDue = [
+    { nome: 'e21', src: 'assets/images_es204/book.png', eBersaglio: false },
+    { nome: 'e22', src: 'assets/images_es204/book1.png', eBersaglio: false },
+    { nome: 'e23', src: 'assets/images_es204/book2.png', eBersaglio: false },
+    { nome: 'e24', src: 'assets/images_es204/book3.png', eBersaglio: false },
+  ];
+
+  elementiLivelloTre = [
+    { nome: 'e31', src: 'assets/images_es204/ball.png', eBersaglio: false },
+    { nome: 'e32', src: 'assets/images_es204/ball1.png', eBersaglio: false },
+    { nome: 'e33', src: 'assets/images_es204/ball2.png', eBersaglio: false },
+    { nome: 'e34', src: 'assets/images_es204/ball3.png', eBersaglio: false },
+    { nome: 'e35', src: 'assets/images_es204/ball4.png', eBersaglio: false },
+    { nome: 'e36', src: 'assets/images_es204/ball5.png', eBersaglio: false },
+  ];
+
+  // Variabili per memorizzare i bersagli casuali per ogni livello
+  targetLivelloUno: any;
+  targetLivelloDue: any;
+  targetLivelloTre: any;
+
+  ngOnInit() {
+    this.targetLivelloUno = this.selezionaBersaglioCasuale(
+      this.elementiLivelloUno
+    );
+    this.targetLivelloDue = this.selezionaBersaglioCasuale(
+      this.elementiLivelloDue
+    );
+    this.targetLivelloTre = this.selezionaBersaglioCasuale(
+      this.elementiLivelloTre
+    );
   }
 
-  generaOggetti() {
-    this.oggetti = [];
-    this.messaggio = '';
-
-    let numeroOggetti;
-    switch (this.livello) {
-      case 1:
-        numeroOggetti = 6;
-        break;
-      case 2:
-        numeroOggetti = 12;
-        break;
-      case 3:
-        numeroOggetti = 18;
-        break;
-      default:
-        numeroOggetti = 6;
-    }
-
-    // Genera oggetti casuali con un oggetto target
-    for (let i = 0; i < numeroOggetti; i++) {
-      const isTarget = Math.random() < 0.2; // 20% di probabilità di essere il target
-      this.oggetti.push({ id: i + 1, target: isTarget });
-      if (isTarget) {
-        this.stimoloDaTrovare = i + 1; // Salva l'ID del target da trovare
-      }
-    }
+  // Metodo per selezionare il livello
+  selezionaLivello(livello: number) {
+    this.livelloCorrente = livello;
   }
 
-  selezionaOggetto(id: number) {
-    if (id === this.stimoloDaTrovare) {
-      this.messaggio = 'Hai trovato lo stimolo target!';
+  // Metodo per selezionare un bersaglio casuale dalla lista degli elementi
+  selezionaBersaglioCasuale(elementi: any[]): any {
+    const indiceCasuale = Math.floor(Math.random() * elementi.length);
+    elementi[indiceCasuale].eBersaglio = true;
+    return elementi[indiceCasuale];
+  }
+
+  // Metodo per controllare se l'elemento cliccato è il bersaglio
+  controllaBersaglio(elemento: {
+    nome: string;
+    src: string;
+    eBersaglio: boolean;
+  }) {
+    if (elemento.eBersaglio) {
+      alert('Hai trovato il bersaglio!');
+      this.selezionaLivello(this.livelloCorrente + 1);
     } else {
-      this.messaggio = 'Questo non è lo stimolo target. Riprova!';
+      alert('Questo non è il bersaglio. Riprova!');
     }
-  }
-
-  cambiaLivello(nuovoLivello: number) {
-    this.livello = nuovoLivello;
-    this.generaOggetti();
   }
 }

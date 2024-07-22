@@ -1,12 +1,39 @@
-<mat-card>
+<mat-card class="game-container">
     <mat-card-title>Ricerca visiva</mat-card-title>
-    <mat-card-subtitle>Attenzione selettiva</mat-card-subtitle>
-    <div class="grid-container">
-        <h2>Trova gli oggetti</h2>
-        <div *ngFor="let oggetto of oggetti" class="grid-item" [ngClass]="{'target': oggetto.target}"
-            (click)="selezionaOggetto(oggetto.id)">
-            {{ oggetto.id }}
+    <div *ngIf="livelloCorrente === 1" class="livello livello-1">
+        <div class="titolo-livello">
+            <h2>Trova:</h2>
+            <img [src]="targetLivelloUno.src" alt="Target da trovare">
+        </div>
+        <div class="griglia">
+            <div *ngFor="let elemento of elementiLivelloUno" (click)="controllaBersaglio(elemento)">
+                <img [src]="elemento.src" [alt]="elemento.nome">
+            </div>
         </div>
     </div>
-    <div *ngIf="messaggio">{{ messaggio }}</div>
+    <div *ngIf="livelloCorrente === 2" class="livello livello-2">
+        <div class="titolo-livello">
+            <h2>Trova:</h2>
+            <img [src]="targetLivelloDue.src" alt="Target da trovare">
+        </div>
+        <div class="griglia">
+            <div *ngFor="let elemento of elementiLivelloDue" (click)="controllaBersaglio(elemento)">
+                <img [src]="elemento.src" [alt]="elemento.nome">
+            </div>
+        </div>
+    </div>
+    <div *ngIf="livelloCorrente === 3" class="livello livello-3">
+        <div class="titolo-livello">
+            <h2>Trova:</h2>
+            <img [src]="targetLivelloTre.src" alt="Target da trovare">
+        </div>
+        <div class="griglia">
+            <div *ngFor="let elemento of elementiLivelloTre" (click)="controllaBersaglio(elemento)">
+                <img [src]="elemento.src" [alt]="elemento.nome">
+            </div>
+        </div>
+    </div>
+    <div *ngIf="livelloCorrente === 4" class="livello livello-4">
+        <h2>Complimenti, hai completato i livelli!</h2>
+    </div>
 </mat-card>

@@ -1,19 +1,41 @@
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 10px;
-    width: 400px;
-    margin-top: 20px;
-}
+.game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-.grid-item {
-    background-color: #ccc;
     text-align: center;
-    line-height: 40px;
-    cursor: pointer;
-    user-select: none;
+    min-width: 420px;
+    min-height: 200px;
 }
 
-.grid-item.target {
-    background-color: #0f0;
+.titolo-livello {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.livello {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.livello div {
+    margin: 10px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.livello img {
+    width: 100px;
+    height: 100px;
+}
+
+.griglia {
+    display: flex;
+    flex-direction: row;
 }
