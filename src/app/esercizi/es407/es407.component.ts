@@ -146,7 +146,7 @@ export class Es407Component implements OnInit{
       this.current_state = 1;
     }
     this.inputCache.push(this.word_typed);
-    this.inputSection.value = " ";
+    this.inputSection.value = "";
   }
 
   onKey(event:any){
