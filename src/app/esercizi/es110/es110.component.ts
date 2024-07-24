@@ -49,6 +49,7 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
 export class Es110Component implements OnInit {
   //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
   cliccato = false;
+  //Questo array viene utilizzato per disattivare una per volta ogni città selezionata
   arrayCliccato: number [] = [0,0,0,0,0,0,0,0,0,0,0,0];
   count = 0;
   cittaCorrente = 1;
@@ -59,12 +60,8 @@ export class Es110Component implements OnInit {
   errori = 0;
   nCitta = 0;
   nCliccati = 0;
-  arrayShuffle: string [] = [];
-  controlloIndici: number [] = [];
   cittaScelta: string [] = [];
-  random = 0;
   step = 1;
-  parola: string [] = [];
   timer: any;
   //TODO: implementare la seeded random
   seed = 'abracadabra';
@@ -79,6 +76,7 @@ export class Es110Component implements OnInit {
   ngOnInit(): void {
   }
 
+  //Quando clicco il bottone per ricomincira, resetta i contatori
   resetVariabile(){
       this.cittaCorrente = 1;
       this.nCliccati;
@@ -88,7 +86,8 @@ export class Es110Component implements OnInit {
         this.arrayCliccato[i] = 0;
       }
   }
-
+  
+  //Queste tre funzioni vengono richiamate separatamente per in base alla scelta del livello per aggiornare ilnumero di città
   quattroCitta(){
     this.nCitta = 4;
     this.caricaCitta();
@@ -117,7 +116,6 @@ export class Es110Component implements OnInit {
 
         this.iniziaGioco();
         this.selezionaCitta();
-        this.shuffleArray();
       });
   }
 
@@ -126,48 +124,15 @@ export class Es110Component implements OnInit {
     this.cittaSelezionate = this.listaCitta;
     this.cittaSelezionate.sort(() => Math.random() - 0.5);
     this.cittaSelezionate = this.cittaSelezionate.slice(0, 12);
-    //Avanti
   }
 
   selezionaCitta () {
+    //Carico cittàMostrate con un numero di città pari a nCittà, prese da città selezionate, e rimischio le città selezionate
     this.cittaMostrate = this.cittaSelezionate.slice(0, this.nCitta);
+    this.cittaSelezionate.sort(() => Math.random() - 0.5);
   }
 
-  shuffleArray(){
-    let j=0, N=0, max = 11, min = 0;
-    for(let i=0; i<12; i++){
-      if(i==0){
-        this.random = Math.round(Math.random()*(max-min)+min);
-        this.arrayShuffle[i] = this.cittaSelezionate[this.random];
-        this.controlloIndici[j] = this.random;
-        N++;
-      } 
-      else{
-        this.random = Math.round(Math.random()*(max-min)+min);
-        let uguale = false;
-        for(j=0; j<N; j++){
-          if(this.random == this.controlloIndici[j]){
-            uguale = true;
-            break;
-          }
-        }
-
-        if(uguale == false){
-          N++;
-          this.controlloIndici[N-1] = this.random;
-          this.arrayShuffle[i] = this.cittaSelezionate[this.random];
-        }
-        else{
-          i--;
-          uguale = false;
-        }          
-
-      }
-    }
-
-    this.cittaSelezionate = this.arrayShuffle;
-  }
-
+  //Verifico se la città selezionata è presente, di conseguenza calcolo il numero di errori
   controlloCitta(){
     let assente = true;
     for(let i=0; i<this.nCitta; i++){
