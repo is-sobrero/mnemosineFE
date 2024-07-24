@@ -126,7 +126,7 @@ export class Es407Component implements OnInit{
   setWord():void{
     var rand:number = Math.floor(Math.random()*this.list_of_words.at(this.level).length);
     this.display = ""+this.list_of_words.at(this.level).at(rand);
-    this.selectedArray = this.totalArray.at(this.level).split(", ");
+    this.selectedArray = this.totalArray.at(rand).split(", ");
     this.inputCache = [];
     this.errors = 0;
     this.points = 0;
