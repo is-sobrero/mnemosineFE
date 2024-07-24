@@ -4,6 +4,7 @@ import { Es101Component } from './es101/es101.component';
 import { Es102Component } from './es102/es102.component';
 import { Es401Component } from './es401/es401.component';
 import { Es402Component } from './es402/es402.component';
+import { Es403Component } from './es403/es403.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/esercizi', pathMatch: 'full'},
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: "402",
     component: Es402Component,
+  },
+  {
+    path: "403",
+    component: Es403Component,
   }
 ];
 
