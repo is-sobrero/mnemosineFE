@@ -13,19 +13,29 @@ span
     width: 100%;
 }
 
-.word_to_reorder{
-    padding-top:10px;
-    padding-bottom:10px;
-}
-
 .dif-selection{
     margin-left: 7px!important;
     scale: 0.8!important;
 }
-.win{
-    padding: 10px!important;
-}
+
 
 .footer{
     margin-top:10px!important;
+}
+
+.image_container{
+    width:300px;
+    height:300px;
+    padding:10px;
+    display: flex;
+    justify-content: center;
+    align-content:center;
+    margin-top:10px;
+    margin-bottom:10px;
+
+}
+
+.show_image{
+    border-radius: 5px;
+    width:100%;
 }

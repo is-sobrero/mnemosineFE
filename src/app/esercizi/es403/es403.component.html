@@ -3,11 +3,14 @@
         <h2>Indovina l'oggetto</h2>
     </mat-card-header>  
     <mat-card-content *ngIf="current_state == 0">
-        <img src={{image_link}} class="show_image">
+        <p *ngIf="errors>0">errori: {{errors}}</p>
+        <div class="image_container">
+            <img src={{image_link}} class="show_image">
+        </div>
         <form class="check_word" *ngIf="current_state == 0">
             <mat-form-field>
                 <mat-label>Di che oggetto si tratta?</mat-label>
-                <input matInput placeholder="" (keyup)="onKey($event)">
+                <input matInput placeholder="" (keyup)="onKey($event)" class="input">
             </mat-form-field>
         </form>
     </mat-card-content>
@@ -23,6 +26,13 @@
         </mat-select>
         </mat-form-field>
     </mat-card-actions>
+    </mat-card-footer>
+
+    <mat-card-content *ngIf="current_state == 1">
+        <h1>Hai indovinato l'oggetto</h1>
+    </mat-card-content>
+    <mat-card-footer *ngIf="current_state == 1">
+        <h3>Hai commesso {{errors}} errori</h3>
     </mat-card-footer>
 </mat-card>
 

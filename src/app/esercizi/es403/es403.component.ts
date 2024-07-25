@@ -33,23 +33,9 @@ import { start } from 'repl';
   styleUrl: './es403.component.scss'
 })
 export class Es403Component implements OnInit{
-  //private GoogleTTS:string = "https://translate.google.com/translate_tts?ie=UTF-8&tl=it-IT&client=tw-ob&q=";
-  
   private connection = inject(HttpClient);
   private dictionary:any[] = [];
-  private selectionCache:string[] = [];
-  /*
-  *
-  * Here the difficulty variable is pretty much dependent
-  * by how the image_dictionary library is written. 
-  * Basically every value is interpreted as a separator
-  * for simple, medium and hard word. This is usefull to 
-  * put all the necessay assets into a single file.
-  *
-  */
-
-  private difficulty:number[] = [0,1,2];
-
+  private inputSection:any;
   /*
   *
   *   Current state variable.
@@ -89,65 +75,61 @@ export class Es403Component implements OnInit{
   * 
   */
 
-  private list_of_words:string[] = [];
-
+  private list_of_words:any[] = [];
   ngOnInit(){
-    return;
-    this.connection.get("assets/exAssets/dizionario_immagini.txt", {responseType: "text"}).subscribe(data =>{
+    this.connection.get("assets/exAssets/dizionario_immagini/dizionario_semplice.txt", {responseType: "text"}).subscribe(data =>{
       this.dictionary = data.split("\n");
-      for(var i=0;i<3;i++){
-        this.getWord(this.difficulty.at(i),this.dictionary,this.list_of_words);
-      }
+      this.getWord();
+
+      this.connection.get("assets/exAssets/dizionario_immagini/dizionario_normale.txt", {responseType: "text"}).subscribe(data =>{
+        this.dictionary = data.split("\n");
+        this.getWord();
+
+        this.connection.get("assets/exAssets/dizionario_immagini/dizionario_difficile.txt", {responseType: "text"}).subscribe(data =>{
+          this.dictionary = data.split("\n");
+          this.getWord();
+        });
+        this.inputSection = document.querySelector(".input");
+      });
       this.setWord();
     });
+
   }
 
   checkContent(){
-    if(this.display == this.word_typed){
+    if(this.display.toLowerCase() == this.word_typed.toLowerCase()){
       this.current_state = 1;
     }else{
       this.errors += 1;
+      this.inputSection.value = "";
     }
   }
 
   setWord():void{
-    var parse = JSON.parse(""+this.list_of_words.at(this.level));
+    var parse = JSON.parse(this.list_of_words.at(this.level));
     this.display = parse.word;
     this.image_link = parse.link;
     console.log(this.display);
   }
 
 
-  private getWord(diff:any, dictionary:string[], list_of_words:string[]):void{
+  private getWord():void{
 
     var index:number = 0;
-    var start_point:number;
     var line:any[] = [];
     var obj = {};
     var str_obj:string = "";
 
     while(true){
-      start_point = this.dictionary.indexOf(diff);
-      index = Math.floor(Math.random()*this.dictionary.length-start_point)+start_point;
-      line = this.dictionary.at(index).split(",");
+      index = Math.floor(Math.random()*this.dictionary.length);
+      line =  this.dictionary.at(index).split(",");
       obj = {
         "link": ""+line.at(0),
         "word": ""+line.at(1)
       };
       str_obj = JSON.stringify(obj);
-
-      //console.log(word);
-      if(this.selectionCache.length != 0){
-        this.selectionCache.push(str_obj);
-        list_of_words.push(str_obj);
-        return;
-      }else{
-        if(!this.selectionCache.includes(str_obj)){
-          this.selectionCache.push(str_obj);
-          list_of_words.push(str_obj);
-          return;
-        }
-      }
+      this.list_of_words.push(str_obj);
+      return;
     }
   }
 
