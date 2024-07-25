@@ -16,6 +16,10 @@ const routes: Routes = [
     path: '102',
     component: Es102Component,
   },
+  {
+    path: '303',
+    component: Es303Component,
+  },
 ];
 
 @NgModule({

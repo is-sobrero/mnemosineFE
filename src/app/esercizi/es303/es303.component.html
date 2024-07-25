@@ -14,7 +14,7 @@
     <mat-card-content *ngIf="(step === 2)" style="height: 150px;">
       <h2 *ngFor="let word of arrayParole">{{ word }}</h2>
     </mat-card-content>
-    <mat-card-content *ngIf="step === 3" style="height: 640px;">
+    <mat-card-content *ngIf="step === 3" style="height: 440px;">
       <p>Riscrivi le parole in ordine alfabetico</p>
     <mat-form-field *ngFor="let i of arrayParole">
         <mat-label>Inserisci la parola n. {{i}}</mat-label>

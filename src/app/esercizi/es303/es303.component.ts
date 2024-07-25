@@ -73,7 +73,7 @@ export class Es303Component implements OnInit {
   ngOnInit(): void {
     if(this.step != 1){
       this.http
-      .get('assets/dizionario_citta/dizionario_citta.txt', {
+      .get('assets/lista_parole/listaParole.txt', {
         responseType: 'text',
       })
       .subscribe((data) => {
@@ -85,27 +85,24 @@ export class Es303Component implements OnInit {
           this.visualizzaParole();
       });
     }
-    if(this.step == 3){
-      this.step = 1;
-    }
   }
 
   treParole(){
     this.nParole = 3;
-    this.ngOnInit();
     this.step++;
+    this.ngOnInit();
   }
 
   seiParole(){
     this.nParole = 6;
-    this.ngOnInit();
     this.step++;
+    this.ngOnInit();
   }
 
   noveParole(){
     this.nParole = 9;
-    this.ngOnInit();
     this.step++;
+    this.ngOnInit();
   }
 
   visualizzaParole(){
