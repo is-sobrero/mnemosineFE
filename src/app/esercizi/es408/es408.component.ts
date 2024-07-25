@@ -97,6 +97,7 @@ export class Es408Component implements OnInit{
 
   ngOnInit(){
     this.connection.get("assets/exAssets/sinonimi.txt", {responseType: "text"}).subscribe(data =>{
+      data = data.toLowerCase();
       this.dictionary = data.split("\n") as string[];
 
       for(var i=0;i<this.dictionary.length;i++){
@@ -147,7 +148,7 @@ export class Es408Component implements OnInit{
   }
 
   checkContent(){
-    if(this.word_typed != this.display && this.selectedArray.includes(this.word_typed) && !this.inputCache.includes(this.word_typed) && this.errors < 10){
+    if(this.word_typed.toLowerCase() != this.display.toLowerCase() && this.selectedArray.includes(this.word_typed.toLowerCase()) && !this.inputCache.includes(this.word_typed.toLowerCase()) && this.errors < 10){
       this.points += 1;
     }else{
       this.errors += 1;
