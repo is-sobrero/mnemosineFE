@@ -40,6 +40,7 @@ export class Es402Component implements OnInit{
   private dictionary:string[] = [];
   private selectionCache:string[] = [];
   private difficulty:number[] = [4,6,8];
+  private inputSection:any;
 
   /*
   *
@@ -88,17 +89,19 @@ export class Es402Component implements OnInit{
       for(var i=0;i<3;i++){
         this.getWord(this.difficulty.at(i),this.dictionary,this.list_of_words);
       }
+      this.inputSection = document.querySelector(".input");
       this.setWord(false);
     });
   }
 
   checkContent(){
-    if(this.display == this.word_typed){
+    if(this.display.toLowerCase() == this.word_typed.toLowerCase()){
       this.current_state = 1;
       var obj:any = document.querySelector(".word_container_full");
       obj.style.display = "flex"; 
     }else{
       this.errors += 1;
+      this.inputSection.value = "";
     }
   }
 
