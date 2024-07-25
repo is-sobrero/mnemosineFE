@@ -38,12 +38,3 @@ mat-card {
     background-color: rgba(224, 224, 224, 0.966);
     border-radius: 5px;
   }
-  
-  button.changecolor{
-    margin: 0 auto; 
-    width: 200px; 
-    margin-top: 10px;
-    background-color: green($color: #b4fdba);
-  }
-  
-  button.selezione::marker{color: green;}

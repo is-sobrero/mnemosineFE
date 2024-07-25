@@ -6,31 +6,59 @@
     <mat-card-content *ngIf="step === 1" style="height: 350px;">
       <p>Inserire il livello di difficoltà</p>
       <div class="livello">
-        <button class="livello" (click)="step = step + 1; treParole()" mat-button>1</button>
-        <button class="livello" (click)="step = step + 1; seiParole()" mat-button>2</button>
-        <button class="livello" (click)="step = step + 1; noveParole()" mat-button>3</button>
+        <button class="livello" (click)="step = 2; treParole()" mat-button>1</button>
+        <button class="livello" (click)="step = 2; seiParole()" mat-button>2</button>
+        <button class="livello" (click)="step = 2; noveParole()" mat-button>3</button>
       </div>
+
+    <!-- Tre content diversi che cambiano altezza in base alla quantità di parole -->
     </mat-card-content>
-    <mat-card-content *ngIf="(step === 2)" style="height: 150px;">
+    <mat-card-content *ngIf="(step === 2 && nParole == 3)" style="height: 150px;">
       <h2 *ngFor="let word of arrayParole">{{ word }}</h2>
     </mat-card-content>
-    <mat-card-content *ngIf="step === 3" style="height: 440px;">
-      <p>Riscrivi le parole in ordine alfabetico</p>
-    <mat-form-field *ngFor="let i of arrayParole">
-        <mat-label>Inserisci la parola n. {{i}}</mat-label>
-        <input mat-input (change)="aggiornaArray($event.target, i)">
-    </mat-form-field>
+    <mat-card-content *ngIf="(step === 2 && nParole == 6)" style="height: 300px;">
+      <h2 *ngFor="let word of arrayParole">{{ word }}</h2>
     </mat-card-content>
+    <mat-card-content *ngIf="(step === 2 &&  nParole == 9)" style="height: 450px;">
+      <h2 *ngFor="let word of arrayParole">{{ word }}</h2>
+    </mat-card-content>
+
+    <!-- Tre content diversi che cambiano altezza in base alla quantità di parole -->
+    <mat-card-content *ngIf="(step === 3 && nParole == 3)" style="height: 300px;">
+      <p>Riscrivi le parole in ordine alfabetico</p>
+      <mat-form-field *ngFor="let i of nNumeri">
+        <mat-label>Inserisci la parola n. {{i}}</mat-label>
+          <input matInput (change)="aggiornaArray($event.target, i)">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-content *ngIf="(step === 3 && nParole == 6)" style="height: 530px;">
+      <p>Riscrivi le parole in ordine alfabetico</p>
+      <mat-form-field *ngFor="let i of nNumeri">
+        <mat-label>Inserisci la parola n. {{i}}</mat-label>
+          <input matInput (change)="aggiornaArray($event.target, i)">
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-content *ngIf="(step === 3 && nParole == 9)" style="height: 750px;">
+      <p>Riscrivi le parole in ordine alfabetico</p>
+      <mat-form-field *ngFor="let i of nNumeri">
+        <mat-label>Inserisci la parola n. {{i}}</mat-label>
+          <input matInput (change)="aggiornaArray($event.target, i)">
+        </mat-form-field>
+    </mat-card-content>
+
+
     <mat-card-content *ngIf="step === 4;" style="height: 110px;">
+      <p>Esercizio completato! Errori commessi: {{errori}}</p>
+      <h2 *ngFor="let word of paroleInserite">{{word}}</h2>
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="step == 1 || step == 4 || (step == 3 && cliccato == false)" (click)="step = step + 1;" mat-button>
+      <button [disabled]="step == 1 || step == 4" (click)="step = step + 1;" mat-button>
         Avanti
       </button>
       <p style="color: gray; font-size: 10px">
         {{ (timeMillis / 1000).toFixed(0) }} s
       </p>
-      <button style="margin-left: 85px;"  [disabled]="step != 4" (click)="step = 1" mat-button>
+      <button style="margin-left: 85px;"  [disabled]="step != 4" (click)="step = 1; resetVariabili()" mat-button>
         Ricomincia
       </button>
     </mat-card-actions>

@@ -13,6 +13,7 @@ import {
 } from '@angular/material/card';
 import { __values } from 'tslib';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 /* 
 Il modulo component, che rappresenta il componente, è decorato con il decoratore @Component.
 
@@ -40,6 +41,7 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
     MatFormField,
     MatLabel,
     MatButton,
+    MatInputModule,
     NgFor,
     NgIf,
     HttpClientModule,
@@ -54,6 +56,7 @@ export class Es303Component implements OnInit {
   cliccato = false;
   listaParole: string [] = [];
   parola: string [] = [];
+  nNumeri: any [] = [];
   arrayParole: string [] = [];
   paroleInserite: string [] = [];
   nParole = 0;
@@ -70,9 +73,42 @@ export class Es303Component implements OnInit {
 
   timeMillis = 0;
 
+  resetVariabili(){
+    this.errori = 0;
+    this.step = 1;
+
+    for(let i=0; i<this.nParole; i++){
+      this.nNumeri.pop();
+    }
+  }
+
   ngOnInit(): void {
-    if(this.step != 1){
-      this.http
+  }
+
+  treParole(){
+    this.nParole = 3;
+    this.step=2;
+    this.iniziaEsercizio();
+  }
+
+  seiParole(){
+    this.nParole = 6;
+    this.step=2;
+    this.iniziaEsercizio();
+  }
+
+  noveParole(){
+    this.nParole = 9;
+    this.step=2;
+    this.iniziaEsercizio();
+  }
+
+  iniziaEsercizio(){
+    for(let i=0; i<this.nParole; i++){
+      this.nNumeri.push(i+1);
+    }
+
+    this.http
       .get('assets/lista_parole/listaParole.txt', {
         responseType: 'text',
       })
@@ -84,47 +120,30 @@ export class Es303Component implements OnInit {
 
           this.visualizzaParole();
       });
-    }
-  }
-
-  treParole(){
-    this.nParole = 3;
-    this.step++;
-    this.ngOnInit();
-  }
-
-  seiParole(){
-    this.nParole = 6;
-    this.step++;
-    this.ngOnInit();
-  }
-
-  noveParole(){
-    this.nParole = 9;
-    this.step++;
-    this.ngOnInit();
   }
 
   visualizzaParole(){
     this.arrayParole = this.listaParole;
     this.arrayParole.sort(() =>  Math.random() - 0.5);
     this.arrayParole = this.arrayParole.slice(0, this.nParole);
+    
+    for(let i=0; i<this.nParole; i++){
+      this.arrayParole[i] = this.arrayParole[i].toLocaleUpperCase();
+    }
   }
 
   aggiornaArray(parola:any, i:any){
     this.paroleInserite[i-1] = parola.value;
-    if(i == 3){
-      this.cliccato = true;
-      this.step++;
-    }
+      this.controlloParole(i);
   }
 
-  controlloParole(){
-    for(let i=0; i<this.nParole; i++){
-      if(this.paroleInserite[i] != this.arrayParole[i]){
+  controlloParole(i:number){
+    this.arrayParole.sort();
+    this.paroleInserite[i-1] = this.paroleInserite[i-1].toLocaleUpperCase()
+
+      if(this.paroleInserite[i-1] != this.arrayParole[i-1]){
         this.errori++;
       }
-    }
   }
   
 }
