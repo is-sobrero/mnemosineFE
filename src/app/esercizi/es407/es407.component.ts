@@ -40,6 +40,7 @@ export class Es407Component implements OnInit{
   private totalArray:any[] = [];
   private inputCache:string[] = [];
   selectedArray:any[] = [];
+  
 
   /*
   *
@@ -97,6 +98,7 @@ export class Es407Component implements OnInit{
 
   ngOnInit(){
     this.connection.get("assets/exAssets/sinonimi.txt", {responseType: "text"}).subscribe(data =>{
+      data = data.toLowerCase();
       this.dictionary = data.split("\n") as string[];
       //console.log(this.dictionary.at(0));
 
@@ -134,7 +136,7 @@ export class Es407Component implements OnInit{
   }
 
   checkContent(){
-    if(this.word_typed != this.display && this.selectedArray.includes(this.word_typed) && !this.inputCache.includes(this.word_typed) && this.errors < 10){
+    if(this.selectedArray.includes(this.word_typed.toLowerCase()) && !this.inputCache.includes(this.word_typed.toLowerCase()) && this.errors < 10){
       this.points += 1;
     }else{
       this.errors += 1;
@@ -145,7 +147,7 @@ export class Es407Component implements OnInit{
     if(this.points == this.selectedArray.length){
       this.current_state = 1;
     }
-    this.inputCache.push(this.word_typed);
+    this.inputCache.push(this.word_typed.toLowerCase());
     this.inputSection.value = "";
   }
 
