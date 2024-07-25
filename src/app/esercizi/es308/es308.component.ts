@@ -5,9 +5,8 @@ import { NgFor,NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
 
-
 @Component({
-  selector: 'app-es103',
+  selector: 'app-es308',
   standalone: true,
   imports: [
     MatCard,
@@ -23,35 +22,38 @@ import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
     MatLabel,
     HttpClientModule
   ],
-  templateUrl: './es103.component.html',
-  styleUrl: './es103.component.scss'
+  templateUrl: './es308.component.html',
+  styleUrl: './es308.component.scss'
 })
-export class Es103Component implements OnInit {
-//il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
+export class Es308Component {
+
+  //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
 numList: any[] = [];
+risposta = 0;
+risultato = 0;
 numNumeri = 3;
 seqNumeri: any[] = []; //questa roba è un array che va da 1 a numNumeri
-listaRisposte: any[] = [];
 step:number = 1;
 errori:number = 0;
 //TODO: implementare la seeded random
 seed = "abracadabra";
 
-private http = inject(HttpClient);
-
-
-aggiornaRisposte(risposta:any, indice:any){
-  this.listaRisposte[indice-1] = risposta.value;
-  console.log(this.listaRisposte);
+aggiornaRisposte(risposta:any){
+  this.risposta = risposta.value;
+  console.log(this.risposta);
 }
 stepIncrease(){
   this.step++;
   // se step = 3, dobbiamo cross check
+  
   if(this.step == 3){
+    
     for (var i = 0; i < this.numNumeri; i++){
-      if(this.numList[i] != this.listaRisposte[i]){
-        this.errori++;
-      }
+      this.risultato += this.numList[i];
+    }
+    
+    if(this.risultato != this.risposta){
+      this.errori++;
     }
   }
 }
@@ -75,11 +77,25 @@ ngOnInit(): void {
       break;
     }
     var random = Math.floor(Math.random() * 10) + 1;
+    var negative = Math.floor(Math.random() * 2);
+
+    if(negative == 1){
+      random = -random;
+    }
+
     while(this.numList.includes(random)){
       random = Math.floor(Math.random() * 10) + 1;
+      var negative = Math.floor(Math.random() * 2);
+
+    if(negative == 1){
+      random = -random;
+    }
     }
     this.numList.push(random);
+  
+    
   } 
 
 }
 }
+
