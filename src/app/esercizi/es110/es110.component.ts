@@ -124,12 +124,20 @@ export class Es110Component implements OnInit {
     this.cittaSelezionate = this.listaCitta;
     this.cittaSelezionate.sort(() => Math.random() - 0.5);
     this.cittaSelezionate = this.cittaSelezionate.slice(0, 12);
+
+    for(let i=0; i<12; i++){
+      this.cittaSelezionate[i] = this.cittaSelezionate[i].toLocaleUpperCase();
+    }
   }
 
   selezionaCitta () {
     //Carico cittàMostrate con un numero di città pari a nCittà, prese da città selezionate, e rimischio le città selezionate
     this.cittaMostrate = this.cittaSelezionate.slice(0, this.nCitta);
     this.cittaSelezionate.sort(() => Math.random() - 0.5);
+
+    for(let i=0; i<this.nCitta; i++){
+      this.cittaMostrate[i] = this.cittaMostrate[i].toLocaleUpperCase();
+    }
   }
 
   //Verifico se la città selezionata è presente, di conseguenza calcolo il numero di errori
