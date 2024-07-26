@@ -49,7 +49,6 @@
 
     <mat-card-content *ngIf="step === 4;" style="height: 110px;">
       <p>Esercizio completato! Errori commessi: {{errori}}</p>
-      <h2 *ngFor="let word of paroleInserite">{{word}}</h2>
     </mat-card-content>
     <mat-card-actions>
       <button [disabled]="step == 1 || step == 4" (click)="step = step + 1;" mat-button>
