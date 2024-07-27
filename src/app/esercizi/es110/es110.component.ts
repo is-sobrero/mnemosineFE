@@ -2,6 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+//Mat raised button
+import { MatButtonModule } from '@angular/material/button';
 
 import {
   MatCard,
@@ -37,6 +39,7 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
     MatCardSubtitle,
     MatCardContent,
     MatButton,
+    MatButtonModule,
     NgFor,
     NgIf,
     HttpClientModule,

@@ -6,16 +6,16 @@
   <mat-card-content *ngIf="step === 1" style="height: 350px;">
     <p>Inserire il livello di difficoltà</p>
     <div class="livello">
-      <button class="livello" (click)="quattroCitta(); step = step + 1; cliccato = true; nCliccati = 0" mat-button>1</button>
-      <button class="livello" (click)="seiCitta(); step = step + 1; cliccato = true; nCliccati = 0" mat-button>2</button>
-      <button class="livello" (click)="ottoCitta(); step = step + 1; cliccato = true; nCliccati = 0" mat-button>3</button>
+      <button class="livello" (click)="quattroCitta(); step = step + 1; cliccato = true; nCliccati = 0" mat-raised-button>1</button>
+      <button class="livello" (click)="seiCitta(); step = step + 1; cliccato = true; nCliccati = 0" mat-raised-button>2</button>
+      <button class="livello" (click)="ottoCitta(); step = step + 1; cliccato = true; nCliccati = 0" mat-raised-button>3</button>
     </div>
   </mat-card-content>
   <mat-card-content *ngIf="(step === 2)" style="height: 150px;">
     <div style="margin-top: 40px;">
       <h2>{{ cittaMostrate[cittaCorrente-1] }}</h2>
     </div>
-    <button style="margin: 0px;"  [disabled]="cittaCorrente == nCitta" (click)="cittaCorrente = cittaCorrente + 1" mat-button>
+    <button style="margin: 0px;"  [disabled]="cittaCorrente == nCitta" (click)="cittaCorrente = cittaCorrente + 1" mat-raised-button>
       Prossima città {{cittaCorrente}}/{{nCitta}}
     </button>
   </mat-card-content>
