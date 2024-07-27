@@ -5,6 +5,7 @@ import { Es102Component } from './es102/es102.component';
 import { Es103Component } from './es103/es103.component';
 import { Es104Component } from './es104/es104.component';
 import { Es105Component } from './es105/es105.component';
+import { Es108Component } from './es108/es108.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: '105',
     component: Es105Component,
+  },
+  {
+    path: '108',
+    component: Es108Component,
   },
 ];
 
