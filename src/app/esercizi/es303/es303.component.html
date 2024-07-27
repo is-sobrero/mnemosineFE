@@ -6,9 +6,9 @@
     <mat-card-content *ngIf="step === 1" style="height: 350px;">
       <p>Inserire il livello di difficoltà</p>
       <div class="livello">
-        <button class="livello" (click)="step = 2; treParole()" mat-button>1</button>
-        <button class="livello" (click)="step = 2; seiParole()" mat-button>2</button>
-        <button class="livello" (click)="step = 2; noveParole()" mat-button>3</button>
+        <button class="livello" (click)="step = 2; setParole(3)" mat-raised-button>1</button>
+        <button class="livello" (click)="step = 2; setParole(6)" mat-raised-button>2</button>
+        <button class="livello" (click)="step = 2; setParole(9)" mat-raised-button>3</button>
       </div>
 
     <!-- Tre content diversi che cambiano altezza in base alla quantità di parole -->
@@ -51,7 +51,7 @@
       <p>Esercizio completato! Errori commessi: {{errori}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="step == 1 || step == 4" (click)="step = step + 1;" mat-button>
+      <button [disabled]="step == 1 || step == 4" (click)="nextStep()" mat-button>
         Avanti
       </button>
       <p style="color: gray; font-size: 10px">

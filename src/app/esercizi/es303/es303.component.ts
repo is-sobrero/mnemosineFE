@@ -85,20 +85,8 @@ export class Es303Component implements OnInit {
   ngOnInit(): void {
   }
 
-  treParole(){
-    this.nParole = 3;
-    this.step=2;
-    this.iniziaEsercizio();
-  }
-
-  seiParole(){
-    this.nParole = 6;
-    this.step=2;
-    this.iniziaEsercizio();
-  }
-
-  noveParole(){
-    this.nParole = 9;
+  setParole( n: number){
+    this.nParole = n;
     this.step=2;
     this.iniziaEsercizio();
   }
@@ -134,16 +122,29 @@ export class Es303Component implements OnInit {
 
   aggiornaArray(parola:any, i:any){
     this.paroleInserite[i-1] = parola.value;
-      this.controlloParole(i);
   }
 
   controlloParole(i:number){
-    this.arrayParole.sort();
-    this.paroleInserite[i-1] = this.paroleInserite[i-1].toLocaleUpperCase()
 
-      if(this.paroleInserite[i-1] != this.arrayParole[i-1]){
-        this.errori++;
-      }
+  }
+
+  nextStep(){
+    this.step++;
+    if(this.step == 4){
+      this.arrayParole.sort();
+      for(let i=0; i<this.nParole; i++){
+        if(this.paroleInserite[i] == null || this.paroleInserite[i] == "" || this.paroleInserite[i] == "undefined"){ 
+          this.errori++;
+          continue;
+        }
+        this.paroleInserite[i] = this.paroleInserite[i].toLocaleUpperCase()
+        console.log(this.paroleInserite[i]);
+        if(this.paroleInserite[i] != this.arrayParole[i]){
+          this.errori++;
+        }
+     }
+    }
+
   }
   
 }
