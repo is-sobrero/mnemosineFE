@@ -7,7 +7,7 @@ import { Es104Component } from './es104/es104.component';
 import { Es105Component } from './es105/es105.component';
 import { Es108Component } from './es108/es108.component';
 import { Es109Component } from './es109/es109.component';
-
+import { Es110Component } from './es110/es110.component';
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
   {
@@ -15,8 +15,8 @@ const routes: Routes = [
     component: Es101Component,
   },
   {
-    path: '102',
-    component: Es102Component,
+    path: '110',
+    component: Es110Component,
   },
   {
     path: '103',
@@ -38,10 +38,15 @@ const routes: Routes = [
     path: '109',
     component: Es109Component,
   },
+  {
+   path: '110',
+   component: Es109Component,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class EsercizioRoutes { }
+export class EsercizioRoutes {}
+
