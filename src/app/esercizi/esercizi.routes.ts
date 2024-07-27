@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Es101Component } from './es101/es101.component';
 import { Es102Component } from './es102/es102.component';
+import { Es103Component } from './es103/es103.component';
+
 
 
 const routes: Routes = [
@@ -13,6 +15,10 @@ const routes: Routes = [
   {
     path: '102',
     component: Es102Component,
+  },
+  {
+    path: '103',
+    component: Es103Component,
   },
 ];
 
