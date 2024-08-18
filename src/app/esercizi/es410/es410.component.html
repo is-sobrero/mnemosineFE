@@ -20,7 +20,7 @@
         <mat-card-actions>
             <button (click)="checkContent()" mat-button>Avanti</button>
 
-        <mat-form-field class="dif-selectio">
+        <mat-form-field class="dif-selection">
             <mat-label>Difficolta'</mat-label>
             <mat-select [(value)]="level">
                 <mat-option value="0" (click)="changeState(0)">Facile</mat-option>
@@ -36,8 +36,8 @@
         <h1>Congratualzioni</h1>
     </mat-card-header>
     <mat-card-content>
-        <h2>La frase completa era:</h2>
-        <p><strong>"{{complete_string}}"</strong></p>
+        <p>La frase completa era:</p>
+        <h2><strong>"{{complete_string}}"</strong></h2>
         </mat-card-content>  
     <mat-card-footer class="footer">
         <p>Hai completato l'esercizio con errori pari a: {{errors}} </p>
@@ -48,8 +48,8 @@
         <h1>Hai perso</h1>
     </mat-card-header>
     <mat-card-content>
-        <h2>La frase completa era:</h2>
-        <p><strong>"{{complete_string}}"</strong></p>
+        <p>La frase completa era:</p>
+        <h2><strong>"{{complete_string}}"</strong></h2>
         </mat-card-content>  
     <mat-card-footer class="footer">
         <p>Hai totalizzato un numero di errori pari a {{errors}}</p>
