@@ -82,33 +82,34 @@ export class Es410Component implements OnInit{
         resolve(data.split("\n"));
       });
     });
-    result_0.then(res =>{
-      this.simple = res;
-    });
     const result_1 = new Promise<string[]>((resolve,reject)=>{
       this.connection.get("assets/exAssets/es410_dialoghi/es410_medio.txt", {responseType: "text"}).subscribe(data =>{
         resolve(data.split("\n"));
       })
-    });
-    result_1.then(res =>{
-      this.medium = res;
     });
     const result_2 = new Promise<string[]>((resolve,reject)=>{
       this.connection.get("assets/exAssets/es410_dialoghi/es410_difficile.txt", {responseType: "text"}).subscribe(data =>{
         resolve(data.split("\n"));
       })
     });
-    result_2.then(res =>{
-      this.hard = res;
-    })
     const result_3 = new Promise<string[]>((resolve,reject)=>{
       this.connection.get("assets/exAssets/dizionarioitaliano1000.txt", {responseType: "text"}).subscribe(data =>{
         resolve(data.split("\n"));
       });
     })
+
+    result_0.then(res =>{
+      this.simple = res;
+    });
+    result_1.then(res =>{
+      this.medium = res;
+    });
+    result_2.then(res =>{
+      this.hard = res;
+    });
     result_3.then(res=>{
       this.dictionary = res;
-    })
+    });
   }
 
   ngOnInit(){
