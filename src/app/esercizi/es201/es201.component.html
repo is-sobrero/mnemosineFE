@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Barrage</mat-card-title>
+        <mat-card-subtitle>Attenzione visiva sostenuta e velocità di elaborazione</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <h2>Trova le emoji 😄 - Livello {{ livello }}</h2>
+        <div class="griglia">
+            <div *ngFor="let riga of griglia; let i = index" class="riga">
+                <div *ngFor="let elemento of riga; let j = index" class="elemento" (click)="selezionaElemento(i, j)">
+                    {{ elemento }}
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions *ngIf="livello === 3">
+        <button mat-button (click)="cambiaLivello(1)">Ricomincia</button>
+    </mat-card-actions>
+</mat-card>
