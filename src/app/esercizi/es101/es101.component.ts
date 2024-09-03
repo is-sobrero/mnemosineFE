@@ -65,9 +65,7 @@ export interface Word {
   styleUrls: ['./es101.component.scss'],
 })
 
-//il componente in se, implementa "OnInit" che ci consente di poter eseguire del codice all'avvio del componente
 export class Es101Component implements OnInit {
-  //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
   readonly addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   readonly words = signal<Word[]>([]);
@@ -93,10 +91,9 @@ export class Es101Component implements OnInit {
       this.timeMillis += 100;
     }, 100);
 
-    // aggiorna numero parole in base alla difficolta    
-
   }
 
+  // funzione che incrementa lo step e controlla se è arrivato al terzo step (nel caso controlla gli errori)
   nextStep() {
     this.step++;
     if(this.step == 3) {
@@ -124,6 +121,7 @@ export class Es101Component implements OnInit {
       });
   }
 
+  // funzione che inizializza il gioco
   start() {
     this.step = 1;
     console.log("Difficolta: " + this.difficulty);
@@ -132,18 +130,20 @@ export class Es101Component implements OnInit {
     console.log(this.wordList);
   }
   
+  // funzione che aggiunge una parola alla lista di chip
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
+    // aggiunge il valore solo se non è vuoto e lo trasforma in maiuscolo
     if (value) {
       this.words.update(words => [...words, {name: value.toUpperCase()}]);
     }
 
-    // Clear the input value
+    // Cancella il valore inserito
     event.chipInput!.clear();
   }
 
+  // funzione che rimuove una parola dalla lista di chip
   remove(fruit: Word): void {
     this.words.update(words => {
       const index = words.indexOf(fruit);
@@ -157,16 +157,17 @@ export class Es101Component implements OnInit {
     });
   }
 
+  // funzione che permette di editare una chip
   edit(word: Word, event: MatChipEditedEvent) {
     const value = event.value.trim();
     console.log(word.name, value);
-    // Remove fruit if it no longer has a name
+    // Cancella la chip se il valore dopo l'editing è vuoto
     if (!value) {
       this.remove(word);
       return;
     }
 
-    // Edit existing fruit
+    // modifica il valore della chip
     this.words.update(words => {
       const index = words.indexOf(word);
       if (index >= 0) {
@@ -177,6 +178,7 @@ export class Es101Component implements OnInit {
     });
   }
 
+  // controlla gli errori e termina il gioco
   checkErrors() {
     this.words.update(words => {
       const paroleInserite = words.map(word => word.name);
