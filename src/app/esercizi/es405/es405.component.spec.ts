@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Es102Component } from './es102.component';
+import { Es405Component } from './es405.component';
 
-describe('Es102Component', () => {
-  let component: Es102Component;
-  let fixture: ComponentFixture<Es102Component>;
+describe('Es405Component', () => {
+  let component: Es405Component;
+  let fixture: ComponentFixture<Es405Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Es102Component]
+      imports: [Es405Component]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Es102Component);
+    fixture = TestBed.createComponent(Es405Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
