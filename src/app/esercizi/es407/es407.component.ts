@@ -40,6 +40,7 @@ export class Es407Component implements OnInit{
   private totalArray:any[] = [];
   private inputCache:string[] = [];
   selectedArray:any[] = [];
+  
 
   /*
   *
@@ -97,6 +98,7 @@ export class Es407Component implements OnInit{
 
   ngOnInit(){
     this.connection.get("assets/exAssets/sinonimi.txt", {responseType: "text"}).subscribe(data =>{
+      data = data.toLowerCase();
       this.dictionary = data.split("\n") as string[];
       //console.log(this.dictionary.at(0));
 
@@ -126,7 +128,7 @@ export class Es407Component implements OnInit{
   setWord():void{
     var rand:number = Math.floor(Math.random()*this.list_of_words.at(this.level).length);
     this.display = ""+this.list_of_words.at(this.level).at(rand);
-    this.selectedArray = this.totalArray.at(this.level).split(", ");
+    this.selectedArray = this.totalArray.at(rand).split(", ");
     this.inputCache = [];
     this.errors = 0;
     this.points = 0;
@@ -134,7 +136,7 @@ export class Es407Component implements OnInit{
   }
 
   checkContent(){
-    if(this.word_typed != this.display && this.selectedArray.includes(this.word_typed) && !this.inputCache.includes(this.word_typed) && this.errors < 10){
+    if(this.selectedArray.includes(this.word_typed.toLowerCase()) && !this.inputCache.includes(this.word_typed.toLowerCase()) && this.errors < 10){
       this.points += 1;
     }else{
       this.errors += 1;
@@ -145,8 +147,8 @@ export class Es407Component implements OnInit{
     if(this.points == 3){
       this.current_state = 1;
     }
-    this.inputCache.push(this.word_typed);
-    this.inputSection.value = " ";
+    this.inputCache.push(this.word_typed.toLowerCase());
+    this.inputSection.value = "";
   }
 
   onKey(event:any){
