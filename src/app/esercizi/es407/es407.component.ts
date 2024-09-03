@@ -144,7 +144,7 @@ export class Es407Component implements OnInit{
     if(this.errors>=10){
       this.current_state = -1;
     }
-    if(this.points == this.selectedArray.length){
+    if(this.points == 3){
       this.current_state = 1;
     }
     this.inputCache.push(this.word_typed.toLowerCase());
