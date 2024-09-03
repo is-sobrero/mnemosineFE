@@ -34,6 +34,7 @@ export class Es401Component implements OnInit{
   private dictionary:string[] = [];
   private selectionCache:string[] = [];
   private difficulty:number[] = [4,6,8];
+  private inputSection:any;
 
   /*
   *
@@ -84,6 +85,7 @@ export class Es401Component implements OnInit{
       for(var i=0;i<3;i++){
         this.getWord(this.difficulty.at(i),this.dictionary,this.list_of_words);
       }
+      this.inputSection = document.querySelector(".input");
       this.setWord();
     });
 
@@ -96,10 +98,11 @@ export class Es401Component implements OnInit{
   }
 
   checkContent(){
-    if(this.display == this.word_typed){
+    if(this.display.toLowerCase() == this.word_typed.toLowerCase()){
       this.current_state = 1;
     }else{
       this.errors += 1;
+      this.inputSection.value = "";
     }
   }
 

@@ -8,7 +8,6 @@ import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { __await } from 'tslib';
 
-import * as googleTTS from "google-tts-api";
 
 
 @Component({
@@ -34,12 +33,13 @@ import * as googleTTS from "google-tts-api";
   styleUrl: './es402.component.scss'
 })
 export class Es402Component implements OnInit{
-  //private GoogleTTS:string = "https://translate.google.com/translate_tts?ie=UTF-8&tl=it-IT&client=tw-ob&q=";
   
   private connection = inject(HttpClient);
   private dictionary:string[] = [];
   private selectionCache:string[] = [];
   private difficulty:number[] = [4,6,8];
+  private inputSection:any;
+  private base_link:string = "https://res.cloudinary.com/djjwizrmr/video/upload/v1725207724/mnemosine/audio_402/";
 
   /*
   *
@@ -88,17 +88,19 @@ export class Es402Component implements OnInit{
       for(var i=0;i<3;i++){
         this.getWord(this.difficulty.at(i),this.dictionary,this.list_of_words);
       }
+      this.inputSection = document.querySelector(".input");
       this.setWord(false);
     });
   }
 
   checkContent(){
-    if(this.display == this.word_typed){
+    if(this.display.toLowerCase() == this.word_typed.toLowerCase()){
       this.current_state = 1;
       var obj:any = document.querySelector(".word_container_full");
       obj.style.display = "flex"; 
     }else{
       this.errors += 1;
+      this.inputSection.value = "";
     }
   }
 
@@ -120,10 +122,14 @@ export class Es402Component implements OnInit{
         
     random_character = Math.floor(Math.random()*this.display.length);
 
-  if(redoing === true){
-    container.innerHTML = "";
-    container_full.innerHTML = "";
-  }
+    if(redoing === true){
+      container.innerHTML = "";
+      container_full.innerHTML = "";
+    }
+
+    this.speech = this.base_link+this.display+".mp3";
+    //this.speech = this.base_link+"territorio"+".mp3";
+
 
     /* this.speech = this.GoogleTTS+this.display; */
 
