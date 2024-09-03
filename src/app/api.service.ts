@@ -15,4 +15,8 @@ export class ApiService {
     const req = this.http.get(this.baseUrl + url);
     return req;
   };
+  post(url: string, data: any) {
+    const req = this.http.post(this.baseUrl + url, data);
+    return req;
+  };
 }
