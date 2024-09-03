@@ -34,13 +34,13 @@ import * as googleTTS from "google-tts-api";
   styleUrl: './es402.component.scss'
 })
 export class Es402Component implements OnInit{
-  //private GoogleTTS:string = "https://translate.google.com/translate_tts?ie=UTF-8&tl=it-IT&client=tw-ob&q=";
   
   private connection = inject(HttpClient);
   private dictionary:string[] = [];
   private selectionCache:string[] = [];
   private difficulty:number[] = [4,6,8];
   private inputSection:any;
+  private base_link:string = "https://res.cloudinary.com/djjwizrmr/video/upload/v1725207724/mnemosine/audio_402/";
 
   /*
   *
@@ -123,10 +123,14 @@ export class Es402Component implements OnInit{
         
     random_character = Math.floor(Math.random()*this.display.length);
 
-  if(redoing === true){
-    container.innerHTML = "";
-    container_full.innerHTML = "";
-  }
+    if(redoing === true){
+      container.innerHTML = "";
+      container_full.innerHTML = "";
+    }
+
+    this.speech = this.base_link+this.display+".mp3";
+    //this.speech = this.base_link+"territorio"+".mp3";
+
 
     /* this.speech = this.GoogleTTS+this.display; */
 
