@@ -1,0 +1,41 @@
+*{
+    text-align: center;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+a,
+span
+{
+    width: 100%;
+}
+
+.dif-selection{
+    margin-left: 7px!important;
+    scale: 0.8!important;
+}
+
+
+.footer{
+    margin-top:10px!important;
+}
+
+.image_container{
+    width:300px;
+    height:300px;
+    padding:10px;
+    display: flex;
+    justify-content: center;
+    align-content:center;
+    margin-top:10px;
+    margin-bottom:10px;
+
+}
+
+.show_image{
+    border-radius: 5px;
+    width:100%;
+}
