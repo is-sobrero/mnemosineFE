@@ -6,9 +6,12 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { __await } from 'tslib';
+import { start } from 'repl';
+
 
 @Component({
-  selector: 'app-es401',
+  selector: 'app-es403',
   standalone: true,
   imports: [
     MatCard, 
@@ -26,16 +29,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     NgIf
   ],
-  templateUrl: './es401.component.html',
-  styleUrl: './es401.component.scss'
+  templateUrl: './es403.component.html',
+  styleUrl: './es403.component.scss'
 })
-export class Es401Component implements OnInit{
+export class Es403Component implements OnInit{
   private connection = inject(HttpClient);
-  private dictionary:string[] = [];
-  private selectionCache:string[] = [];
-  private difficulty:number[] = [4,6,8];
+  private dictionary:any[] = [];
   private inputSection:any;
-
   /*
   *
   *   Current state variable.
@@ -54,9 +54,8 @@ export class Es401Component implements OnInit{
 
   errors:number = 0;
   display:string = "";
-  blend:string = "";
   word_typed = "";
-
+  image_link:string = "";
 
  /*
   *  Level: varable used to set the difficulty
@@ -76,25 +75,25 @@ export class Es401Component implements OnInit{
   * 
   */
 
-  private list_of_words:string[] = [];
-
-
+  private list_of_words:any[] = [];
   ngOnInit(){
-    this.connection.get("assets/exAssets/dizionarioitaliano1000.txt", {responseType: "text"}).subscribe(data =>{
+    this.connection.get("assets/exAssets/dizionario_immagini/dizionario_semplice.txt", {responseType: "text"}).subscribe(data =>{
       this.dictionary = data.split("\n");
-      for(var i=0;i<3;i++){
-        this.getWord(this.difficulty.at(i),this.dictionary,this.list_of_words);
-      }
-      this.inputSection = document.querySelector(".input");
+      this.getWord();
+
+      this.connection.get("assets/exAssets/dizionario_immagini/dizionario_normale.txt", {responseType: "text"}).subscribe(data =>{
+        this.dictionary = data.split("\n");
+        this.getWord();
+
+        this.connection.get("assets/exAssets/dizionario_immagini/dizionario_difficile.txt", {responseType: "text"}).subscribe(data =>{
+          this.dictionary = data.split("\n");
+          this.getWord();
+        });
+        this.inputSection = document.querySelector(".input");
+      });
       this.setWord();
     });
 
-  }
-
-  setWord():void{
-    this.display = ""+this.list_of_words.at(this.level);
-    this.blend = this.shuffle(this.display);
-    console.log(this.display);
   }
 
   checkContent(){
@@ -106,49 +105,32 @@ export class Es401Component implements OnInit{
     }
   }
 
-  changeState(newState:number){
-    if(newState != this.level){
-      this.level = newState;
-      this.setWord();
-    }
+  setWord():void{
+    var parse = JSON.parse(this.list_of_words.at(this.level));
+    this.display = parse.word;
+    this.image_link = parse.link;
+    console.log(this.display);
   }
 
-  private getWord(len:any, dictionary:string[], list_of_words:string[]):void{
-    var word:string = "";
+
+  private getWord():void{
+
     var index:number = 0;
+    var line:any[] = [];
+    var obj = {};
+    var str_obj:string = "";
 
     while(true){
       index = Math.floor(Math.random()*this.dictionary.length);
-      word = ""+this.dictionary.at(index);
-      //console.log(word);
-      if(this.selectionCache.length != 0){
-        this.selectionCache.push(word);
-        list_of_words.push(word);
-        return;
-      }else{
-        if(!this.selectionCache.includes(word) && (word.length <= len)){
-          this.selectionCache.push(word);
-          list_of_words.push(word);
-          return;
-        }
-      }
+      line =  this.dictionary.at(index).split(",");
+      obj = {
+        "link": ""+line.at(0),
+        "word": ""+line.at(1)
+      };
+      str_obj = JSON.stringify(obj);
+      this.list_of_words.push(str_obj);
+      return;
     }
-  }
-
-  private shuffle(word:any) {
-    var arr:any[] = word.split("");
-    var len = arr.length;
-    var swap;
-    var i;
-  
-    while (len > 0) {
-      i = Math.floor(Math.random() * len);
-      len--;
-      swap = arr[len];
-      arr[len] = arr[i];
-      arr[i] = swap;
-    }
-    return arr.join(" ");
   }
 
   onKey(event:any){

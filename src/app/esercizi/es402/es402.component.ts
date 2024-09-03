@@ -6,9 +6,12 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { __await } from 'tslib';
+
+
 
 @Component({
-  selector: 'app-es401',
+  selector: 'app-es402',
   standalone: true,
   imports: [
     MatCard, 
@@ -26,15 +29,17 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     NgIf
   ],
-  templateUrl: './es401.component.html',
-  styleUrl: './es401.component.scss'
+  templateUrl: './es402.component.html',
+  styleUrl: './es402.component.scss'
 })
-export class Es401Component implements OnInit{
+export class Es402Component implements OnInit{
+  
   private connection = inject(HttpClient);
   private dictionary:string[] = [];
   private selectionCache:string[] = [];
   private difficulty:number[] = [4,6,8];
   private inputSection:any;
+  private base_link:string = "https://res.cloudinary.com/djjwizrmr/video/upload/v1725207724/mnemosine/audio_402/";
 
   /*
   *
@@ -54,9 +59,8 @@ export class Es401Component implements OnInit{
 
   errors:number = 0;
   display:string = "";
-  blend:string = "";
   word_typed = "";
-
+  speech:any =  null;
 
  /*
   *  Level: varable used to set the difficulty
@@ -78,7 +82,6 @@ export class Es401Component implements OnInit{
 
   private list_of_words:string[] = [];
 
-
   ngOnInit(){
     this.connection.get("assets/exAssets/dizionarioitaliano1000.txt", {responseType: "text"}).subscribe(data =>{
       this.dictionary = data.split("\n");
@@ -86,32 +89,88 @@ export class Es401Component implements OnInit{
         this.getWord(this.difficulty.at(i),this.dictionary,this.list_of_words);
       }
       this.inputSection = document.querySelector(".input");
-      this.setWord();
+      this.setWord(false);
     });
-
-  }
-
-  setWord():void{
-    this.display = ""+this.list_of_words.at(this.level);
-    this.blend = this.shuffle(this.display);
-    console.log(this.display);
   }
 
   checkContent(){
     if(this.display.toLowerCase() == this.word_typed.toLowerCase()){
       this.current_state = 1;
+      var obj:any = document.querySelector(".word_container_full");
+      obj.style.display = "flex"; 
     }else{
       this.errors += 1;
       this.inputSection.value = "";
     }
   }
 
-  changeState(newState:number){
-    if(newState != this.level){
-      this.level = newState;
-      this.setWord();
+  setWord(redoing:boolean):void{
+    this.display = ""+this.list_of_words.at(this.level);
+    var container:any = document.querySelector(".word_container");
+    var container_full:any = document.querySelector(".word_container_full");
+   
+    var text:any = null;
+    var text_2:any = null;
+    
+    var obj:any = null;
+    var obj_2:any = null;
+    
+    var cell_style:string = "padding:15px!important;margin:5px!important;margin-left:10px!important;margin-right:10px!important;border: 3px solid #383838!important;border-radius: 5px!important;width: min-content!important;height: min-content!important;filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));";
+    var obj_style:string = "display: flex!important;flex-direction: row!important;justify-content: center!important;align-content: center!important;margin-top:40px!important;margin-bottom:30px!important;";
+    
+    var random_character:any = null;
+        
+    random_character = Math.floor(Math.random()*this.display.length);
+
+    if(redoing === true){
+      container.innerHTML = "";
+      container_full.innerHTML = "";
     }
+
+    this.speech = this.base_link+this.display+".mp3";
+    //this.speech = this.base_link+"territorio"+".mp3";
+
+
+    /* this.speech = this.GoogleTTS+this.display; */
+
+    /* this.speech = googleTTS.getAudioUrl(this.display, {
+       lang: "it",
+        slow: false,
+        host: "https://translate.google.com"
+      });
+    */
+
+    
+    obj = document.createElement("div");
+    obj_2 = document.createElement("div");
+    obj.setAttribute("class", "cell_container");
+    obj.setAttribute("style", obj_style);
+    obj_2.setAttribute("class", "cell_container");
+    obj_2.setAttribute("style", obj_style);
+
+    for(var i=0;i<this.display.length; i++){
+      text = document.createElement("h1");
+      text_2 = document.createElement("h1");
+      text.setAttribute("class", "cell")
+      text.setAttribute("style", cell_style);
+      text_2.setAttribute("class", "cell")
+      text_2.setAttribute("style", cell_style);
+
+      text_2.innerHTML += this.display.at(i);
+      if(i!=random_character){
+        text.innerHTML = this.display.at(i);
+      }else{
+        text.innerHTML = "-";
+      }
+      obj.appendChild(text);
+      obj_2.appendChild(text_2);
+    }
+    container.appendChild(obj);
+    container_full.appendChild(obj_2);
+
+    console.log(this.display);
   }
+
 
   private getWord(len:any, dictionary:string[], list_of_words:string[]):void{
     var word:string = "";
@@ -133,22 +192,6 @@ export class Es401Component implements OnInit{
         }
       }
     }
-  }
-
-  private shuffle(word:any) {
-    var arr:any[] = word.split("");
-    var len = arr.length;
-    var swap;
-    var i;
-  
-    while (len > 0) {
-      i = Math.floor(Math.random() * len);
-      len--;
-      swap = arr[len];
-      arr[len] = arr[i];
-      arr[i] = swap;
-    }
-    return arr.join(" ");
   }
 
   onKey(event:any){
