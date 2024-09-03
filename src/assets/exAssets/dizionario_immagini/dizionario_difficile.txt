@@ -1,0 +1,15 @@
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854457/mnemosine/hard_image/i0wwdpj6t26xgasxe5gv.jpg,Proiettore
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854458/mnemosine/hard_image/gqhie4hzqk1dnq1denqr.jpg,Termometro
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854456/mnemosine/hard_image/tkukm6icbcxtjetgdyoa.jpg,Depuratore
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854456/mnemosine/hard_image/zcju0jovzqn8deyuwtlf.jpg,Microscopio
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854456/mnemosine/hard_image/trddlcaifcmaxg6z60fh.jpg,Lanciafiamme
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854457/mnemosine/hard_image/ehcsxpaofcxcop24iciz.jpg,Saldatrice
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854457/mnemosine/hard_image/tl7fqwkqvfgxn1k9d95w.jpg,Pianoforte
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854456/mnemosine/hard_image/hhcdp0w7l4cxay7ulxue.jpg,Organo
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854458/mnemosine/hard_image/nd0umztdxshcu275eijc.jpg,Violino
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854460/mnemosine/hard_image/wwrsvph7ttq9mjvokckw.jpg,Violoncello
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854458/mnemosine/hard_image/w9acgfntgza2x72fivvn.jpg,Spartito
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854459/mnemosine/hard_image/mktqfuvdwtffw70caksn.jpg,Oscilloscopio
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854458/mnemosine/hard_image/bqmnspkzqceb2lfckhnp.jpg,Termosifone
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854456/mnemosine/hard_image/dtahgegh4ykaqfcf6s2e.jpg,Aspirapolvere
+https://res.cloudinary.com/djjwizrmr/image/upload/v1721854458/mnemosine/hard_image/icoasibopu9g7nxirnh7.jpg,Pesco
