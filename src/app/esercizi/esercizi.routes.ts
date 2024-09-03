@@ -12,9 +12,11 @@ import { Es204Component } from './es204/es204.component';
 import { Es110Component } from './es110/es110.component';
 import { Es303Component } from './es303/es303.component';
 import { Es401Component } from './es401/es401.component';
+import { Es407Component } from './es407/es407.component';
 import { Es402Component } from './es402/es402.component';
 import { Es403Component } from './es403/es403.component';
 import { Es405Component } from './es405/es405.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -69,6 +71,10 @@ const routes: Routes = [
   {
     path: "401",
     component: Es401Component,
+  },
+  {
+    path: "407",
+    component: Es407Component,
   },
   {
     path: "402",
