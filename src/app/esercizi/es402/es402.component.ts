@@ -8,7 +8,6 @@ import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { __await } from 'tslib';
 
-import * as googleTTS from "google-tts-api";
 
 
 @Component({
