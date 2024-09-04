@@ -7,6 +7,7 @@ import {MatSelectModule} from "@angular/material/select";
 import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { __await } from 'tslib';
+import { ExerciseService } from '../../exercise.service';
 import { start } from 'repl';
 
 @Component({
@@ -31,6 +32,7 @@ import { start } from 'repl';
   styleUrl: './es405.component.scss'
 })
 export class Es405Component implements OnInit{
+  constructor(private ES: ExerciseService) { }
   private connection = inject(HttpClient);
   private dictionary:string[] = [];
   private word_cache:string[] = [];
@@ -100,8 +102,9 @@ export class Es405Component implements OnInit{
     }else{
       this.errors += 1;
     }
-    if(this.points > 5){
+    if(this.points >= 5){
       this.current_state = 1;
+      this.ES.nextExercise(405, {errors: this.errors});
     }
   }
 
