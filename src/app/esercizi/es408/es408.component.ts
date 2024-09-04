@@ -156,7 +156,7 @@ export class Es408Component implements OnInit{
     if(this.errors>=10){
       this.current_state = -1;
     }
-    if(this.points == 3){
+    if(this.points == 1){
       this.current_state = 1;
     }
     this.inputCache.push(this.word_typed);
