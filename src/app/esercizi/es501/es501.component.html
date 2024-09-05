@@ -1,0 +1,17 @@
+<mat-card class="mat_main">
+    <mat-card-content>
+        <h2 class="word_to_reorder">Disegna quello che vedi sullo schermo</h2>
+    </mat-card-content>
+    <mat-card-content>
+        <div class="canvas_container">
+            <canvas width={{canvas_width}} height={{canvas_height}} id="canvas_bg"></canvas>
+            <canvas width={{canvas_width}} height={{canvas_height}} id="canvas_fg"></canvas>
+        </div>
+    </mat-card-content>
+    <mat-card-footer class="footer">
+        <mat-card-actions>
+        <button (click)="checkContent()" mat-button >Controlla</button>
+    </mat-card-actions>
+    </mat-card-footer>
+</mat-card>
+

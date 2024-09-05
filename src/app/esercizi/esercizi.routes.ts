@@ -18,6 +18,7 @@ import { Es402Component } from './es402/es402.component';
 import { Es403Component } from './es403/es403.component';
 import { Es405Component } from './es405/es405.component';
 import { Es410Component } from './es410/es410.component';
+import { Es501Component } from './es501/es501.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -96,6 +97,10 @@ const routes: Routes = [
   {
     path: "410",
     component: Es410Component,
+  },
+  {
+    path: "501",
+    component: Es501Component,
   }
 ];
 
