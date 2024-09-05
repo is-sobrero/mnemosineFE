@@ -14,5 +14,9 @@
     </a>
 </mat-toolbar>
 <body>
-    <router-outlet></router-outlet>
+    <app-progress *ngIf="showProgress"></app-progress>
+    <br>
+    <div class="route">
+        <router-outlet></router-outlet>
+    </div>
 </body>
