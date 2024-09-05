@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild, OnInit } from '@angular/core';
-import { MatStepper, MatStep, MatStepperNext, MatStepContent, MatStepHeader, MatStepLabel, } from '@angular/material/stepper';
+import { MatStepper, MatStep, MatStepperNext, MatStepContent, MatStepHeader, MatStepLabel, MatStepperIcon } from '@angular/material/stepper';
 import { NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIcon} from '@angular/material/icon';
@@ -22,7 +22,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIcon,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatStepperIcon
   ],
   templateUrl: './progress.component.html',
   styleUrl: './progress.component.scss'

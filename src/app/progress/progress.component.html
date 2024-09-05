@@ -1,6 +1,8 @@
 <!--add class blank if disabled == true-->
 <mat-stepper #stepper orientation="horizontal" linear *ngIf="visible">
-
+    <ng-template matStepperIcon="edit">
+        <mat-icon>check</mat-icon>
+      </ng-template>
 
         <mat-step *ngFor="let exercise of sessionInfo.exercises" disabled>
             <ng-template matStepLabel>Esercizio {{exercise.id}}</ng-template>
