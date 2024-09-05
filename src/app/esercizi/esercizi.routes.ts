@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Es101Component } from './es101/es101.component';
 import { Es103Component } from './es103/es103.component';
 import { Es104Component } from './es104/es104.component';
 import { Es105Component } from './es105/es105.component';
@@ -19,8 +20,13 @@ import { Es403Component } from './es403/es403.component';
 import { Es405Component } from './es405/es405.component';
 import { Es410Component } from './es410/es410.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
+  {
+    path: '101',
+    component: Es101Component,
+  },
   {
     path: '110',
     component: Es110Component,
