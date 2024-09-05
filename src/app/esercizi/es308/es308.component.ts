@@ -31,6 +31,7 @@ export class Es308Component {
 numList: any[] = [];
 risposta = 0;
 risultato = 0;
+livello = 1;
 numNumeri = 3;
 seqNumeri: any[] = []; //questa roba è un array che va da 1 a numNumeri
 step:number = 1;
@@ -57,6 +58,40 @@ stepIncrease(){
     }
   }
 }
+
+resetVar(){
+  this.seqNumeri = [];
+  this.step = 1;
+  this.numList = [];
+  this.errori = 0;
+  this.numNumeri = 0;
+  this.livello = 1;
+}
+
+treNumeri(){
+  for(var  i = 0; i < this.numNumeri; i++){
+    this.numList.shift();
+  }
+   this.numNumeri = 3;
+   this.ngOnInit();
+}
+
+cinqueNumeri(){
+  for(var  i = 0; i < this.numNumeri; i++){
+    this.numList.shift();
+  }
+  this.numNumeri = 5;
+  this.ngOnInit();
+}
+
+setteNumeri(){
+for(var  i = 0; i < this.numNumeri; i++){
+  this.numList.shift();
+}
+this.numNumeri = 7;
+this.ngOnInit();
+}
+
 
 timeMillis = 0;
 
@@ -98,4 +133,3 @@ ngOnInit(): void {
 
 }
 }
-
