@@ -9,6 +9,7 @@ import {
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es202',
@@ -30,12 +31,24 @@ import { NgFor, NgIf, CommonModule } from '@angular/common';
 })
 export class Es202Component implements OnInit {
   livello = 1;
+  timeMillis = 0;
+  errori = 0;
   punti: { x: number; y: number; numero: number }[] = [];
   puntiUniti: number[] = [];
   messaggio = '';
 
+  constructor(private ES: ExerciseService) { }
+
   ngOnInit(): void {
+    this.timeMillis = 0;
+    this.errori = 0;
+
     this.generaPunti();
+
+    setInterval(() => {
+      this.timeMillis += 100;
+    }
+    , 100);
   }
 
   generaPunti() {
@@ -94,11 +107,13 @@ export class Es202Component implements OnInit {
           this.livello++; // Aumenta il livello
         } else {
           alert('Hai completato tutti i livelli!'); // Mostra un messaggio di completamento
+          this.ES.nextExercise(202, {errors: this.errori, time: this.timeMillis});
         }
         this.generaPunti(); // Genera nuovamente i punti
       }
     } else {
       this.messaggio = `Hai selezionato il numero ${punto.numero} invece di ${prossimoNumero}. Riprova!`; // Mostra un messaggio di errore
+      this.errori++;
     }
   }
 
