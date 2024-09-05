@@ -63,6 +63,7 @@ timeMillis = 0;
 
 //funzione che viene eseguita all'avvio del componente
 ngOnInit(): void {
+  this.numNumeri = this.ES.currentInfo().difficulty * 3;
   this.step = 1;
   // ogni 100 millisecondi incrementa il tempo
       setInterval(() => {

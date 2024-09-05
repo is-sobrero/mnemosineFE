@@ -23,7 +23,7 @@ export class ExerciseService {
       exercises: [
         {
           id: 103,
-          difficulty: 1,
+          difficulty: 2,
         },
         {
           id: 108,
@@ -46,6 +46,17 @@ export class ExerciseService {
     this.router.navigate(['/esercizio/' + apiResponse.exercises[0].id]);
   }
 
+  currentInfo() {
+    //find current exercise
+    //@ts-ignore
+    const sessionInfo = JSON.parse(localStorage.getItem('SessionInfo'));
+    //@ts-ignore
+    const exerciseInfo = JSON.parse(localStorage.getItem('ExerciseInfo'));
+    const currentExerciseIndex = exerciseInfo.length;
+    const currentExerciseID = sessionInfo.exercises[currentExerciseIndex].id;
+    const currentExerciseObject = sessionInfo.exercises[currentExerciseIndex];
+    return currentExerciseObject;
+  }
   nextExercise( currentExerciseID: number, currentExerciseResultData: any ) {
     //@ts-ignore
     const sessionInfo = JSON.parse(localStorage.getItem('SessionInfo'));
