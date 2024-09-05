@@ -27,7 +27,7 @@ import { ExerciseService } from '../../exercise.service';
     styleUrls: ['./es105.component.scss']
 })
 export class Es105Component implements OnInit {
-    livello = 1;
+    livello = 0;
     immagine: string = '';
     rispostaCorretta: string = '';
     rispostaUtente = '';
@@ -70,6 +70,8 @@ export class Es105Component implements OnInit {
     constructor(private ES: ExerciseService) { }
 
     ngOnInit(): void {
+        this.livello = this.ES.currentInfo().difficulty;
+
         this.iniziaGioco();
 
         setInterval(() => {
@@ -88,7 +90,7 @@ export class Es105Component implements OnInit {
 
     mostraImmagine() {
         this.step = 1;
-        const immagineCorrente = this.immagini[this.immagineCorrenteIndex];
+        const immagineCorrente = this.immagini[this.livello];
         this.immagine = immagineCorrente.immagine;
         this.rispostaCorretta = immagineCorrente.domande[this.domandaCorrenteIndex].risposta;
 
@@ -107,20 +109,13 @@ export class Es105Component implements OnInit {
     verificaRisposta() {
         if (this.rispostaUtente.toLowerCase() === this.rispostaCorretta.toLowerCase()) {
             this.domandaCorrenteIndex++;
-            if (this.domandaCorrenteIndex < this.immagini[this.immagineCorrenteIndex].domande.length) {
+            if (this.domandaCorrenteIndex < this.immagini[this.livello].domande.length) {
                 this.rispostaUtente = '';
                 this.step = 2;
-                this.rispostaCorretta = this.immagini[this.immagineCorrenteIndex].domande[this.domandaCorrenteIndex].risposta;
+                this.rispostaCorretta = this.immagini[this.livello].domande[this.domandaCorrenteIndex].risposta;
             } else {
-                this.immagineCorrenteIndex++;
-                if (this.immagineCorrenteIndex < this.immagini.length) {
-                    this.domandaCorrenteIndex = 0;
-                    this.rispostaUtente = '';
-                    this.mostraImmagine();
-                } else {
-                    this.step = 3; // Fine del gioco
-                    this.ES.nextExercise(105, {errors: this.errori, time: this.timeMillis});
-                }
+                this.step = 3; // Fine del gioco
+                this.ES.nextExercise(105, {errors: this.errori, time: this.timeMillis});
             }
         } else {
             alert('Risposta errata. Riprova.');
@@ -132,6 +127,6 @@ export class Es105Component implements OnInit {
     }
 
     getDomandaCorrente(): string {
-        return this.immagini[this.immagineCorrenteIndex].domande[this.domandaCorrenteIndex].domanda;
+        return this.immagini[this.livello].domande[this.domandaCorrenteIndex].domanda;
     }
 }
