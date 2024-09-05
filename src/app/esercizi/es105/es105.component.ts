@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
     selector: 'app-es105',
@@ -32,6 +33,8 @@ export class Es105Component implements OnInit {
     rispostaUtente = '';
     step = 1;
     timerImmagine: any;
+    errori: number = 0;
+    timeMillis: number = 0;
 
     // Array di oggetti immagine e domande
     immagini = [
@@ -64,10 +67,15 @@ export class Es105Component implements OnInit {
     immagineCorrenteIndex = 0;
     domandaCorrenteIndex = 0;
 
-    constructor() { }
+    constructor(private ES: ExerciseService) { }
 
     ngOnInit(): void {
         this.iniziaGioco();
+
+        setInterval(() => {
+            this.timeMillis += 100;
+          }
+          , 100);
     }
 
     iniziaGioco() {
@@ -110,12 +118,14 @@ export class Es105Component implements OnInit {
                     this.mostraImmagine();
                 } else {
                     this.step = 3; // Fine del gioco
+                    this.ES.nextExercise(103, {errors: this.errori, time: this.timeMillis});
                 }
             }
         } else {
             alert('Risposta errata. Riprova.');
             this.rispostaUtente = '';
             this.step = 1;
+            this.errori++;
             this.mostraImmagine();
         }
     }
