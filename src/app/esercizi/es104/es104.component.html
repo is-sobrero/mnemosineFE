@@ -1,27 +1,37 @@
 <mat-card>
     <mat-card-header>
-      <mat-card-title>Memorizza la
-        lista di parole e
-        componi</mat-card-title>
-      <mat-card-subtitle>Apprendimento e
-        memorizzazione</mat-card-subtitle>
+        <mat-card-title>Span di lettere</mat-card-title>
+        <mat-card-subtitle>Memoria e apprendimento</mat-card-subtitle>
     </mat-card-header>
+
     <mat-card-content *ngIf="step === 1">
-        <h2 *ngFor="let numero of numList">{{numero}}</h2>
+        <h2>Memorizza questa sequenza:</h2>
+        <h2>{{ sequenzaLettere.join(' ') }}</h2>
     </mat-card-content>
+
     <mat-card-content *ngIf="step === 2">
-        <mat-form-field *ngFor="let i of seqNumeri">
-            <mat-label>Inserisci il n. {{i}}</mat-label>
-            <input matInput (change)="aggiornaRisposte($event.target, i)"/>
-        </mat-form-field>
+        <h2>Inserisci la sequenza:</h2>
+        <div *ngFor="let lettera of sequenzaLettere; let i = index">
+            <mat-form-field>
+                <input matInput maxlength="1" (input)="aggiornaRisposta(i, $event)">
+            </mat-form-field>
+        </div>
     </mat-card-content>
+
     <mat-card-content *ngIf="step === 3">
-      <p *ngIf="errori == 0 ">Bravo! Hai memorizzato correttamente la sequenza con 0 errori</p>
-      <p *ngIf="errori == 1 ">Hai commesso un errore</p>
-      <p *ngIf="errori > 1 ">Hai commesso {{errori}} errori</p>
+        <p *ngIf="errori === 0">Bravo! Hai memorizzato correttamente la sequenza con 0 errori</p>
+        <p *ngIf="errori === 1">Hai commesso 1 errore</p>
+        <p *ngIf="errori > 1">Hai commesso {{ errori }} errori</p>
     </mat-card-content>
+
     <mat-card-actions>
-      <button [disabled]="step==3" (click)="stepIncrease()" mat-button>Avanti</button>
-      <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+        <button mat-button (click)="stepSuccessivo()" [disabled]="step === 3">Avanti</button>
+        <button mat-button (click)="iniziaGioco()">Ricomincia</button>
+        <div>
+            <label class="">Livello di difficoltà:</label>
+            <button mat-button (click)="cambiaLivello(1)">1</button>
+            <button mat-button (click)="cambiaLivello(2)">2</button>
+            <button mat-button (click)="cambiaLivello(3)">3</button>
+        </div>
     </mat-card-actions>
-  </mat-card>
+</mat-card>

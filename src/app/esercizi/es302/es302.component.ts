@@ -29,10 +29,11 @@ import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
 export class Es302Component implements OnInit {
 //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
 numList: any[] = [];
-numNumeri = 3;
+numNumeri = 0;
 seqNumeri: any[] = []; //questa roba è un array che va da 1 a numNumeri
 listaRisposte: any[] = [];
 step:number = 1;
+livello = 1;
 errori:number = 0;
 //TODO: implementare la seeded random
 seed = "abracadabra";
@@ -63,6 +64,38 @@ stepIncrease(){
       }
     }
   
+    resetVar(){
+      this.seqNumeri = [];
+      this.step = 1;
+      this.numList = [];
+      this.errori = 0;
+      this.numNumeri = 0;
+      this.livello = 1;
+    }
+
+    treNumeri(){
+      for(var  i = 0; i < this.numNumeri; i++){
+        this.numList.shift();
+      }
+       this.numNumeri = 3;
+       this.ngOnInit();
+    }
+
+    seiNumeri(){
+      for(var  i = 0; i < this.numNumeri; i++){
+        this.numList.shift();
+      }
+      this.numNumeri = 6;
+      this.ngOnInit();
+   }
+
+   noveNumeri(){
+    for(var  i = 0; i < this.numNumeri; i++){
+      this.numList.shift();
+    }
+    this.numNumeri = 9;
+    this.ngOnInit();
+ }
 
 timeMillis = 0;
 

@@ -1,85 +1,86 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { NgFor,NgIf } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
-
+import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-es104',
-  standalone: true,
-  imports: [
-    MatCard,
-    MatCardActions,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardSubtitle,
-    MatCardContent,
-    MatButton,
-    NgFor,
-    NgIf,
-    MatInputModule,
-    MatLabel,
-    HttpClientModule
-  ],
-  templateUrl: './es104.component.html',
-  styleUrl: './es104.component.scss'
+    selector: 'app-es104',
+    standalone: true,
+    imports: [
+        MatCard,
+        MatCardActions,
+        MatCardHeader,
+        MatCardTitle,
+        MatCardSubtitle,
+        MatCardContent,
+        MatButton,
+        NgFor,
+        NgIf,
+        CommonModule,
+        MatInputModule
+    ],
+    templateUrl: './es104.component.html',
+    styleUrls: ['./es104.component.scss']
 })
 export class Es104Component implements OnInit {
-//il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
-numList: any[] = [];
-numNumeri = 3;
-seqNumeri: any[] = []; //questa roba è un array che va da 1 a numNumeri
-listaRisposte: any[] = [];
-step:number = 1;
-errori:number = 0;
-//TODO: implementare la seeded random
-seed = "abracadabra";
+    livello = 1; // Livello di difficoltà (1, 2, o 3)
+    sequenzaLettere: string[] = []; // Sequenza di lettere da memorizzare
+    inputUtente: string[] = []; // Sequenza di lettere inserita dall'utente
+    step = 1; // Step del gioco (1: mostra sequenza, 2: inserimento, 3: risultato)
+    errori = 0; // Numero di errori commessi
 
-private http = inject(HttpClient);
+    lettere = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Lettere dell'alfabeto
 
-
-aggiornaRisposte(risposta:any, indice:any){
-  this.listaRisposte[indice-1] = risposta.value;
-  console.log(this.listaRisposte);
-}
-stepIncrease(){
-  this.step++;
-  // se step = 3, dobbiamo cross check
-  if(this.step == 3){
-    for (var i = 0; i < this.numNumeri; i++){
-      if(this.numList[i] != this.listaRisposte[i]){
-        this.errori++;
-      }
+    ngOnInit(): void {
+        this.iniziaGioco();
     }
-  }
-}
 
-timeMillis = 0;
-
-//funzione che viene eseguita all'avvio del componente
-ngOnInit(): void {
-  this.step = 1;
-  // ogni 100 millisecondi incrementa il tempo
-      setInterval(() => {
-        this.timeMillis += 100;
-      }
-      , 100);
-  // faccio un ciclo for che cicla numNumeri volte, e pusha ogni volta un numero randomico tra 1 e 10, assicurandomi che non ci siano duplicati
-  for (var i = 0; i< this.numNumeri; i++){
-    this.seqNumeri.push(i + 1);
-    //ATTENZIONE! 
-    if(this.numNumeri > 10){
-      alert("Il numero di numeri deve essere minore di 10");
-      break;
+    // Inizia il gioco
+    iniziaGioco() {
+        this.step = 1;
+        this.errori = 0;
+        this.inputUtente = [];
+        this.generaSequenza();
     }
-    var random = Math.floor(Math.random() * 10) + 1;
-    while(this.numList.includes(random)){
-      random = Math.floor(Math.random() * 10) + 1;
-    }
-    this.numList.push(random);
-  } 
 
-}
+    // Genera una sequenza di lettere casuali in base al livello di difficoltà
+    generaSequenza() {
+        const lunghezza = this.livello === 1 ? 3 : this.livello === 2 ? 5 : this.livello === 3 ? 7 : 3;
+        this.sequenzaLettere = [];
+        for (let i = 0; i < lunghezza; i++) {
+            const letteraCasuale = this.lettere[Math.floor(Math.random() * this.lettere.length)];
+            this.sequenzaLettere.push(letteraCasuale);
+        }
+    }
+
+    // Avanza allo step successivo
+    stepSuccessivo() {
+        if (this.step === 2) {
+            this.verificaRisposta();
+        }
+        this.step++;
+    }
+
+    // Aggiorna la risposta dell'utente
+    aggiornaRisposta(indice: number, evento: Event) {
+        const inputElement = evento.target as HTMLInputElement;
+        this.inputUtente[indice] = inputElement.value.toUpperCase();
+    }
+
+    // Verifica la risposta dell'utente confrontandola con la sequenza corretta
+    verificaRisposta() {
+        this.errori = 0;
+        for (let i = 0; i < this.sequenzaLettere.length; i++) {
+            if (this.sequenzaLettere[i] !== this.inputUtente[i]) {
+                this.errori++;
+            }
+        }
+    }
+
+    // Cambia il livello di difficoltà
+    cambiaLivello(nuovoLivello: number) {
+        this.livello = nuovoLivello;
+        this.iniziaGioco();
+    }
 }

@@ -22,5 +22,12 @@
     <mat-card-actions>
       <button [disabled]="step==3" (click)="stepIncrease()" mat-button>Avanti</button>
       <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+      <button mat-button (click)="resetVar()">Ricomincia</button>
+      <div>
+        <label class="">Livello di difficoltà:</label>
+        <button mat-button (click)="treNumeri()">1</button>
+        <button mat-button (click)="cinqueNumeri()">2</button>
+        <button mat-button (click)="setteNumeri()">3</button>
+    </div>
     </mat-card-actions>
   </mat-card>

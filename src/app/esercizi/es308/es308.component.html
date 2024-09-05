@@ -1,24 +1,22 @@
 <mat-card>
     <mat-card-header>
-      <mat-card-title>Ordina i numeri
-        in ordine
-        crescente </mat-card-title>
-      <mat-card-subtitle>Ragionamento e
-        calcolo </mat-card-subtitle>
+      <mat-card-title>Risolvile operazioni e
+      scegli la risposta corretta</mat-card-title>
+      <mat-card-subtitle>Deficit di working
+        memory e calcolo</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content *ngIf="step === 1">
         <h2 *ngFor="let numero of numList">{{numero}}</h2>
     </mat-card-content>
     <mat-card-content *ngIf="step === 2">
-        <mat-form-field *ngFor="let i of seqNumeri">
-            <mat-label>Inserisci il n. {{i}}</mat-label>
-            <input matInput (change)="aggiornaRisposte($event.target, i)"/>
+        <mat-form-field >
+            <mat-label>Inserisci il risultato</mat-label>
+            <input matInput (change)="aggiornaRisposte($event.target)"/>
         </mat-form-field>
     </mat-card-content>
     <mat-card-content *ngIf="step === 3">
-      <p *ngIf="errori == 0 ">Bravo! Hai memorizzato correttamente la sequenza con 0 errori</p>
-      <p *ngIf="errori == 1 ">Hai commesso un errore</p>
-      <p *ngIf="errori > 1 ">Hai commesso {{errori}} errori</p>
+        <p *ngIf="errori == 0">Bravo!, il numero inserito è uguale al risultato</p>
+        <p *ngIf="errori == 1">Hai sbagliato!</p>
     </mat-card-content>
     <mat-card-actions>
       <button [disabled]="step==3" (click)="stepIncrease()" mat-button>Avanti</button>
@@ -27,8 +25,8 @@
       <div>
         <label class="">Livello di difficoltà:</label>
         <button mat-button (click)="treNumeri()">1</button>
-        <button mat-button (click)="seiNumeri()">2</button>
-        <button mat-button (click)="noveNumeri()">3</button>
+        <button mat-button (click)="cinqueNumeri()">2</button>
+        <button mat-button (click)="setteNumeri()">3</button>
     </div>
     </mat-card-actions>
   </mat-card>

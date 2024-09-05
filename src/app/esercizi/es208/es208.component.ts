@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { NgFor,NgIf } from '@angular/common';
+import { NgClass, NgFor,NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
 
@@ -18,6 +18,7 @@ import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
     MatButton,
     NgFor,
     NgIf,
+    NgClass,
     MatInputModule,
     MatLabel,
     HttpClientModule
@@ -28,7 +29,12 @@ import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
 export class Es208Component {
 //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
 numList: any[] = [];
+operazioni: any[] = [];
 numNumeri = 3;
+risultato = 0;
+livello = 1;
+risposta = 0;
+colore = 0;
 seqNumeri: any[] = []; //questa roba è un array che va da 1 a numNumeri
 listaRisposte: any[] = [];
 step:number = 1;
@@ -36,16 +42,60 @@ errori:number = 0;
 //TODO: implementare la seeded random
 seed = "abracadabra";
 
+ngClassConverter(i:any){
+  if(this.operazioni[i] == 0)
+    return "Blu";
+  
+  else
+    return "Rosso";
+}
+
+aggiornaRisposte(risposta:any){
+  this.risposta = risposta.value;
+  console.log(this.risposta);
+}
+
 stepIncrease(){
   this.step++;
   // se step = 3, dobbiamo cross check
   if(this.step == 3){
-    for (var i = 0; i < this.numNumeri; i++){
-      if(this.numList[i] != this.listaRisposte[i]){
-        this.errori++;
-      }
+    if(this.risultato != this.risposta){
+      this.errori++;
     }
   }
+}
+
+resetVar(){
+  this.seqNumeri = [];
+  this.step = 1;
+  this.numList = [];
+  this.errori = 0;
+  this.numNumeri = 0;
+  this.livello = 1;
+}
+
+treNumeri(){
+  for(var  i = 0; i < this.numNumeri; i++){
+    this.numList.shift();
+  }
+   this.numNumeri = 3;
+   this.ngOnInit();
+}
+
+cinqueNumeri(){
+  for(var  i = 0; i < this.numNumeri; i++){
+    this.numList.shift();
+  }
+  this.numNumeri = 5;
+  this.ngOnInit();
+}
+
+setteNumeri(){
+for(var  i = 0; i < this.numNumeri; i++){
+  this.numList.shift();
+}
+this.numNumeri = 7;
+this.ngOnInit();
 }
 
 timeMillis = 0;
@@ -73,25 +123,18 @@ ngOnInit(): void {
     
   } 
 
-  var risultato = 0;
-  var colore;
-
   for(i = 0; i < this.numNumeri; i++){
-   colore = Math.floor(Math.random() * 2); //cosi va da 0 a 1
-    if(colore == 0){
-      risultato += this.numList[i]
-      String(this.numList[i]);
-      this.numList[i].style.color = "#00FF00";
+    this.colore = Math.floor(Math.random() * 2); //cosi va da 0 = 'blu' a 1 = 'rosso'
+    if(this.colore == 0){
+      this.risultato += this.numList[i]
+      this.operazioni[i] = 0;
     }
     else{
-      risultato -= this.numList[i];
-      String(this.numList[i]);
-      this.numList[i].style.color = "#FF0000";
+      this.risultato -= this.numList[i];
+      this.operazioni[i] = 1;
     }
   }
 
 }
-    // Il colore dei numeri non si vede
 }
-
 
