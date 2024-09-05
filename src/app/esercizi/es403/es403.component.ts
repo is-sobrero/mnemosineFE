@@ -8,6 +8,7 @@ import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { __await } from 'tslib';
 import { start } from 'repl';
+import { ExerciseService } from '../../exercise.service';
 
 
 @Component({
@@ -33,6 +34,7 @@ import { start } from 'repl';
   styleUrl: './es403.component.scss'
 })
 export class Es403Component implements OnInit{
+  constructor(private ES: ExerciseService) { }
   private connection = inject(HttpClient);
   private dictionary:any[] = [];
   private inputSection:any;
@@ -99,6 +101,7 @@ export class Es403Component implements OnInit{
   checkContent(){
     if(this.display.toLowerCase() == this.word_typed.toLowerCase()){
       this.current_state = 1;
+      this.ES.nextExercise(403, {errors: this.errors});
     }else{
       this.errors += 1;
       this.inputSection.value = "";

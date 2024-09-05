@@ -11,8 +11,6 @@
         <p class="text_above_input">Indovina una parola che inizia per:</p>
         <h2 class="word_to_reorder">{{display}}</h2>
         <form class="check_word">
-            
-        
             <mat-form-field>
                 <mat-label>Inserisci una parola giusta</mat-label>
                 <input class="input" matInput placeholder="" (keyup)="onKey($event)">
@@ -22,7 +20,6 @@
     <mat-card-footer class="footer">
         <mat-card-actions>
             <button (click)="checkContent()" mat-button>Avanti</button>
-
         <mat-form-field class="dif-selection">
             <mat-label>Difficolta'</mat-label>
             <mat-select [(value)]="level">

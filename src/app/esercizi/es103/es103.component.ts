@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { NgFor,NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
+import { ExerciseService } from '../../exercise.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
   styleUrl: './es103.component.scss'
 })
 export class Es103Component implements OnInit {
+  constructor(private ES: ExerciseService) { }
 //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
 numList: any[] = [];
 numNumeri = 3;
@@ -53,6 +55,7 @@ stepIncrease(){
         this.errori++;
       }
     }
+    this.ES.nextExercise(103, {errors: this.errori, time: this.timeMillis});
   }
 }
 
@@ -60,6 +63,7 @@ timeMillis = 0;
 
 //funzione che viene eseguita all'avvio del componente
 ngOnInit(): void {
+  this.numNumeri = this.ES.currentInfo().difficulty * 3;
   this.step = 1;
   // ogni 100 millisecondi incrementa il tempo
       setInterval(() => {
