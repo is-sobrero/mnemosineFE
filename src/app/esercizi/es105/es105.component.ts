@@ -118,7 +118,7 @@ export class Es105Component implements OnInit {
                     this.mostraImmagine();
                 } else {
                     this.step = 3; // Fine del gioco
-                    this.ES.nextExercise(103, {errors: this.errori, time: this.timeMillis});
+                    this.ES.nextExercise(105, {errors: this.errori, time: this.timeMillis});
                 }
             }
         } else {
