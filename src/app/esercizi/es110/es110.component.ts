@@ -4,6 +4,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 //Mat raised button
 import { MatButtonModule } from '@angular/material/button';
+import { ExerciseService } from '../../exercise.service';
 
 import {
   MatCard,
@@ -51,7 +52,6 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
 //il componente in se, implementa "OnInit" che ci consente di poter eseguire del codice all'avvio del componente
 export class Es110Component implements OnInit {
   //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
-  cliccato = false;
   //Questo array viene utilizzato per disattivare una per volta ogni città selezionata
   arrayCliccato: number [] = [0,0,0,0,0,0,0,0,0,0,0,0];
   count = 0;
@@ -62,49 +62,30 @@ export class Es110Component implements OnInit {
   cittaSelezionate: string[] = [];
   errori = 0;
   nCitta = 0;
+  livelli: number[] = [4,6,8];
   nCliccati = 0;
   cittaScelta: string [] = [];
   step = 1;
   timer: any;
-  //TODO: implementare la seeded random
-  seed = 'abracadabra';
 
   private http = inject(HttpClient);
 
-  constructor() {}
+  constructor(private ES: ExerciseService) { }
 
   timeMillis = 0;
 
   //funzione che viene eseguita all'avvio del componente
   ngOnInit(): void {
+    this.timeMillis = 0;
+    setInterval(() => {
+      this.timeMillis += 100;
+    }, 100);
+    this.nCitta = this.livelli[this.ES.currentInfo().difficulty-1];
+    this.caricaCitta();
   }
 
-  //Quando clicco il bottone per ricomincira, resetta i contatori
-  resetVariabile(){
-      this.cittaCorrente = 1;
-      this.nCliccati;
-      this.count = 0;
-      this.errori = 0;
-      for(let i=0; i<12; i++){
-        this.arrayCliccato[i] = 0;
-      }
-  }
   
   //Queste tre funzioni vengono richiamate separatamente per in base alla scelta del livello per aggiornare ilnumero di città
-  quattroCitta(){
-    this.nCitta = 4;
-    this.caricaCitta();
-  }
-
-  seiCitta(){
-    this.nCitta = 6;
-    this.caricaCitta();
-  }
-
-  ottoCitta(){
-    this.nCitta = 8;
-    this.caricaCitta();
-  }
 
   caricaCitta() {
     this.http
@@ -121,6 +102,15 @@ export class Es110Component implements OnInit {
         this.selezionaCitta();
       });
   }
+
+  nextStep() {
+    this.step++;
+    if(this.step == 4){
+      this.ES.nextExercise(110, {time: this.timeMillis, errors: this.errori});
+    }
+  
+  }
+
 
 
   iniziaGioco() {
