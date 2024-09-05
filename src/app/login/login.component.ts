@@ -33,17 +33,17 @@ export class LoginComponent implements OnInit {
   ) { }
   
   ngOnInit() {
-    this.api.get('ciao').subscribe(data => {
-      //@ts-ignore
-      alert(data.message);
-    });
   }
   
   username: string = '';
   password: string = '';
 
   login() {
-    console.log('username', this.username);
-    console.log('password ', this.password);
+    alert('Username: ' + this.username + ' Password: ' + this.password);
+    this.api.post('login', {username: this.username, password: this.password}).subscribe(data => {
+      //@ts-ignore
+      alert(data.token);
+    }
+    );
   }
 }

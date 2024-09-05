@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es108',
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./es108.component.scss']
 })
 export class Es108Component implements OnInit {
+  constructor(private ES: ExerciseService) { }
   livello = 1; // Livello di difficoltà (1, 2, o 3)
   sequenzaNumeri: string[] = []; // Sequenza di numeri da memorizzare
   inputUtente: string[] = []; // Sequenza di numeri inseriti dall'utente
@@ -79,6 +81,7 @@ export class Es108Component implements OnInit {
         this.errori++;
       }
     }
+    this.ES.nextExercise(108, { errors: this.errori });
   }
 
   // Cambia il livello di difficoltà
