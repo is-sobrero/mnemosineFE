@@ -23,7 +23,7 @@ export class ExerciseService {
       exercises: [
         {
           id: 103,
-          difficulty: 2,
+          difficulty: 1,
         },
         {
           id: 108,
@@ -72,6 +72,8 @@ export class ExerciseService {
       this.router.navigate(['/esercizio/' + sessionInfo.exercises[nextExerciseIndex].id]);
     } else {
       //if there are no more exercises in the session navigate to the results page
+      localStorage.removeItem('SessionInfo');
+      localStorage.removeItem('ExerciseInfo');
       this.router.navigate(['/risultati']);
     }
   } 

@@ -1,0 +1,17 @@
+<!--add class blank if disabled == true-->
+<mat-stepper #stepper orientation="horizontal" linear *ngIf="visible">
+
+
+        <mat-step *ngFor="let exercise of sessionInfo.exercises" disabled>
+            <ng-template matStepLabel>Esercizio {{exercise.id}}</ng-template>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>
+                <!--End-->
+                <mat-icon>
+                    done_all 
+                </mat-icon>
+            </ng-template>
+        </mat-step>
+
+</mat-stepper>
