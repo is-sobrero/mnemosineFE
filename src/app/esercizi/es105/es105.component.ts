@@ -81,6 +81,7 @@ export class Es105Component implements OnInit {
     iniziaGioco() {
         this.immagineCorrenteIndex = 0;
         this.domandaCorrenteIndex = 0;
+        this.errori = 0;
         this.step = 1;
         this.mostraImmagine();
     }
