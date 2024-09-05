@@ -9,6 +9,7 @@ import {
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es204',
@@ -29,7 +30,11 @@ import { NgFor, NgIf, CommonModule } from '@angular/common';
   styleUrls: ['./es204.component.scss'],
 })
 export class Es204Component implements OnInit {
-  livelloCorrente = 1; // Variabile che tiene traccia del livello selezionato
+  livelloCorrente = 0; // Variabile che tiene traccia del livello selezionato
+  timeMillis = 0;
+  errori = 0;
+
+  constructor(private ES: ExerciseService) { }
 
   // Liste di elementi per ciascun livello
   elementiLivelloUno = [
@@ -60,6 +65,10 @@ export class Es204Component implements OnInit {
   targetLivelloTre: any;
 
   ngOnInit() {
+    this.errori = 0;
+    this.timeMillis = 0;
+    this.livelloCorrente = this.ES.currentInfo().difficulty;
+
     this.targetLivelloUno = this.selezionaBersaglioCasuale(
       this.elementiLivelloUno
     );
@@ -69,6 +78,11 @@ export class Es204Component implements OnInit {
     this.targetLivelloTre = this.selezionaBersaglioCasuale(
       this.elementiLivelloTre
     );
+
+    setInterval(() => {
+      this.timeMillis += 100;
+    }
+    , 100);
   }
 
   // Metodo per selezionare il livello
@@ -91,9 +105,10 @@ export class Es204Component implements OnInit {
   }) {
     if (elemento.eBersaglio) {
       alert('Hai trovato il bersaglio!');
-      this.selezionaLivello(this.livelloCorrente + 1);
+      this.ES.nextExercise(204, {errors: this.errori, time: this.timeMillis});
     } else {
       alert('Questo non è il bersaglio. Riprova!');
+      this.errori++;
     }
   }
 }
