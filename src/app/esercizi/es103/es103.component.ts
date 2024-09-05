@@ -30,6 +30,7 @@ import { ExerciseService } from '../../exercise.service';
 export class Es103Component implements OnInit {
   constructor(private ES: ExerciseService) { }
 //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
+level: number[] = [3,5,7];
 numList: any[] = [];
 numNumeri = 3;
 seqNumeri: any[] = []; //questa roba è un array che va da 1 a numNumeri
@@ -55,6 +56,8 @@ stepIncrease(){
         this.errori++;
       }
     }
+    
+  } else if (this.step == 4){
     this.ES.nextExercise(103, {errors: this.errori, time: this.timeMillis});
   }
 }
@@ -63,7 +66,8 @@ timeMillis = 0;
 
 //funzione che viene eseguita all'avvio del componente
 ngOnInit(): void {
-  this.numNumeri = this.ES.currentInfo().difficulty * 3;
+  console.log(this.ES.currentInfo().difficulty);
+  this.numNumeri = this.level[this.ES.currentInfo().difficulty-1];
   this.step = 1;
   // ogni 100 millisecondi incrementa il tempo
       setInterval(() => {
