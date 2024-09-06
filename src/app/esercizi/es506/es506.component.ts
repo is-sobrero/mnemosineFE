@@ -1,7 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   MatCard,
@@ -11,7 +11,6 @@ import {
   MatCardSubtitle,
   MatCardContent,
 } from '@angular/material/card';
-import { __values } from 'tslib';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -38,9 +37,11 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class Es506Component implements OnInit {
   step = 1;
+  disattivaImmagine: any = [0, 0, 0, 0, 0, 0];
   sequenzaImmagini: any = [];
   immagineCorrente: any;
-  sequenzaSelezionata: any = []
+  sequenzaFissa: any = [];
+  sequenzaSelezionata: any = [];
   timer: any;
   livello = 1;
   errori = 0;
@@ -73,9 +74,22 @@ export class Es506Component implements OnInit {
   ]
 
   ngOnInit() {
+    this.iniziaGioco();
+  }
+
+  iniziaGioco() {
     this.creaSequenza();
     this.immagineCorrente = this.sequenzaImmagini[0];
     this.mostraSequenza();
+  }
+
+  resettaGioco() {
+    this.step = 1;
+    this.errori = 0;
+    this.sequenzaImmagini = [];
+    this.sequenzaSelezionata = [];
+    this.sequenzaFissa = [];
+    this.disattivaImmagine = [0, 0, 0, 0, 0, 0];
   }
 
   creaSequenza() {
@@ -90,7 +104,16 @@ export class Es506Component implements OnInit {
         this.sequenzaImmagini = this.elementiLivello3;
         break;
     }
-    this.sequenzaImmagini = this.sequenzaImmagini.sort(() => 0.5 - Math.random());
+    this.sequenzaFissa = [...this.sequenzaImmagini];
+    this.sequenzaImmagini = this.shuffleArray(this.sequenzaImmagini);
+  }
+
+  shuffleArray(array: any[]): any[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
 
   mostraSequenza() {
@@ -104,16 +127,21 @@ export class Es506Component implements OnInit {
         clearInterval(this.timer);
         this.nextStep();
       }
-    }, 500);
+    }, 200);
   }
 
   nextStep() {
     this.step += 1;
   }
 
+  nextLevel() {
+    this.livello += 1;
+    this.resettaGioco();
+    this.iniziaGioco();
+  }
+
   seleziona(id: number) {
     this.sequenzaSelezionata.push(id);
-    console.log("Hai selezionato" + this.sequenzaSelezionata);
 
     if (this.sequenzaSelezionata.length == 6) {
       this.verificaErrori();

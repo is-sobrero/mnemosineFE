@@ -3,42 +3,64 @@
         <mat-card-title>Immagini sequenza</mat-card-title>
         <mat-card-subtitle>Memorizza la sequenza di immagini</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content *ngIf="step === 1">
+    <mat-card-content *ngIf="(livello === 1 || livello === 2 || livello === 3) && step === 1">
         <Img [src]="immagineCorrente.src" alt="Immagine da memorizzare" />
     </mat-card-content>
     <mat-card-content *ngIf="step === 2 && livello === 1">
         <div class="allElements">
-            <Img (click)="seleziona(0)" [src]="elementiLivello1[0].src" alt="Immagine da selezionare" />
-            <Img (click)="seleziona(1)" [src]="elementiLivello1[1].src" alt="Immagine da selezionare" />
-            <Img (click)="seleziona(2)" [src]="elementiLivello1[2].src" alt="Immagine da selezionare" />
-            <Img (click)="seleziona(3)" [src]="elementiLivello1[3].src" alt="Immagine da selezionare" />
-            <Img (click)="seleziona(4)" [src]="elementiLivello1[4].src" alt="Immagine da selezionare" />
-            <Img (click)="seleziona(5)" [src]="elementiLivello1[5].src" alt="Immagine da selezionare" />
+            <button [disabled]="disattivaImmagine[0] == true" (click)="seleziona(0); disattivaImmagine[0] = 1"><Img
+                    [src]="sequenzaFissa[0].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[1] == true" (click)="seleziona(1); disattivaImmagine[1] = 1"><Img
+                    [src]="sequenzaFissa[1].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[2] == true" (click)="seleziona(2); disattivaImmagine[2] = 1"><Img
+                    [src]="sequenzaFissa[2].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[3] == true" (click)="seleziona(3); disattivaImmagine[3] = 1"><Img
+                    [src]="sequenzaFissa[3].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[4] == true" (click)="seleziona(4); disattivaImmagine[4] = 1"><Img
+                    [src]="sequenzaFissa[4].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[5] == true" (click)="seleziona(5); disattivaImmagine[5] = 1"><Img
+                    [src]="sequenzaFissa[5].src" alt="Immagine da selezionare"></button>
         </div>
     </mat-card-content>
     <mat-card-content *ngIf="step === 2 && livello === 2">
         <div class="allElements">
-            <Img [src]="elementiLivello2[0].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello2[1].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello2[2].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello2[3].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello2[4].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello2[5].src" alt="Immagine da selezionare" />
+            <button [disabled]="disattivaImmagine[0] == true" (click)="seleziona(6); disattivaImmagine[0] = 1"><Img
+                    [src]="sequenzaFissa[0].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[1] == true" (click)="seleziona(7); disattivaImmagine[1] = 1"><Img
+                    [src]="sequenzaFissa[1].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[2] == true" (click)="seleziona(8); disattivaImmagine[2] = 1"><Img
+                    [src]="sequenzaFissa[2].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[3] == true" (click)="seleziona(9); disattivaImmagine[3] = 1"><Img
+                    [src]="sequenzaFissa[3].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[4] == true" (click)="seleziona(10); disattivaImmagine[4] = 1"><Img
+                    [src]="sequenzaFissa[4].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[5] == true" (click)="seleziona(11); disattivaImmagine[5] = 1"><Img
+                    [src]="sequenzaFissa[5].src" alt="Immagine da selezionare"></button>
         </div>
     </mat-card-content>
     <mat-card-content *ngIf="step === 2 && livello === 3">
         <div class="allElements">
-            <Img [src]="elementiLivello3[0].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello3[1].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello3[2].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello3[3].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello3[4].src" alt="Immagine da selezionare" />
-            <Img [src]="elementiLivello3[5].src" alt="Immagine da selezionare" />
+            <button [disabled]="disattivaImmagine[0] == true" (click)="seleziona(12); disattivaImmagine[0] = 1"><Img
+                    [src]="sequenzaFissa[0].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[1] == true" (click)="seleziona(13); disattivaImmagine[1] = 1"><Img
+                    [src]="sequenzaFissa[1].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[2] == true" (click)="seleziona(14); disattivaImmagine[2] = 1"><Img
+                    [src]="sequenzaFissa[2].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[3] == true" (click)="seleziona(15); disattivaImmagine[3] = 1"><Img
+                    [src]="sequenzaFissa[3].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[4] == true" (click)="seleziona(16); disattivaImmagine[4] = 1"><Img
+                    [src]="sequenzaFissa[4].src" alt="Immagine da selezionare"></button>
+            <button [disabled]="disattivaImmagine[5] == true" (click)="seleziona(17); disattivaImmagine[5] = 1"><Img
+                    [src]="sequenzaFissa[5].src" alt="Immagine da selezionare"></button>
         </div>
     </mat-card-content>
     <mat-card-content *ngIf="step === 3">
-        <p *ngIf="errori === 0">Hai completato il gioco! Ben fatto!</p>
+        <p *ngIf="errori === 0">Nessun errore</p>
         <p *ngIf="errori === 1">Hai fatto un solo errore</p>
-        <p *ngIf="errori === 1">Hai fatto {{ errori }} errori</p>
+        <p *ngIf="errori > 1">Hai fatto {{ errori }} errori</p>
+        <button (click)="nextLevel()">Avanti</button>
     </mat-card-content>
+    <mat-card-actions *ngIf="livello === 4">
+        <p>Hai completato il gioco! Ben fatto!</p>
+    </mat-card-actions>
 </mat-card>
