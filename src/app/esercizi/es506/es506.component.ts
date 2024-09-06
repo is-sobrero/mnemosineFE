@@ -127,7 +127,7 @@ export class Es506Component implements OnInit {
         clearInterval(this.timer);
         this.nextStep();
       }
-    }, 200);
+    }, 2000);
   }
 
   nextStep() {
