@@ -170,6 +170,7 @@ export class Es506Component implements OnInit {
     for (let i = 0; i < 6; i++) {
       if (this.sequenzaSelezionata[i] != this.sequenzaImmagini[i].id) {
         this.errori += 1;
+        this.erroriTotali += 1;
       }
     }
   }
