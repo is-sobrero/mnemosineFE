@@ -45,6 +45,7 @@ export class Es506Component implements OnInit {
   timer: any;
   livello = 1;
   errori = 0;
+  erroriTotali = 0;
 
   elementiLivello1 = [
     { id: 0, src: '../../assets/es506_images/lvl1/albero.png' },
@@ -155,6 +156,7 @@ export class Es506Component implements OnInit {
     for (let i = 0; i < 6; i++) {
       if (this.sequenzaSelezionata[i] != this.sequenzaImmagini[i].id) {
         this.errori += 1;
+        this.erroriTotali += 1;
       }
     }
   }
