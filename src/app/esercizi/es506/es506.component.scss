@@ -1,10 +1,19 @@
 mat-card {
     margin: 10px;
     padding: 10px;
-    min-height: 450px;
+    min-height: 160px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+button {
+    all: unset;
+    transition: all 0.3 ease-in-out;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 img {
@@ -20,5 +29,17 @@ img {
 
     & img {
         width: 180px;
+        // Non li rende selezionabili e trascinabili
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    & button:active {
+        transform: scale(0.95);
+    }
+
+    & button[disabled] {
+        opacity: 40%;
+        cursor: not-allowed;
     }
 }
