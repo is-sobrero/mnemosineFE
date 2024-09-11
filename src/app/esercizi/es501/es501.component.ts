@@ -68,8 +68,26 @@ export class Es501Component implements OnInit{
 
   canvas_width:number = 400;
   canvas_height:number = 400;
+  canvas_depth:number = 200;
+
+  scale_factor_3d:number = 200;
+
+  /* max axes rotation allowed:
+
+    0: rotate by x axes
+
+    1: rotate by y axes
+
+    2: rotate by z axes
+
+    for more you need to update the switch case int the rotation matrix function
+  
+  */
+  max_rotation_allowed_for_3d = 2;
+
   bg_color = "#303030a0";
   fg_color = "#101010";
+
   limit_bound:number = 30;
   random_cursor:number = 0;
 
@@ -207,6 +225,35 @@ export class Es501Component implements OnInit{
 
     /* generate random coordinates */
 
+    this.cbx.beginPath();   
+
+    switch(this.level){
+      case 0:
+            this.easy_generation();
+            break;
+      case 1:
+            this.medium_generation();
+            break;
+      case 3:
+            this.hard_generation();
+            break;
+    }
+
+    this.cbx.stroke();
+
+    /*
+
+      Prepare the foreground for drawing
+    
+    */
+
+    this.cfx.beginPath();
+    this.cfx.strokeStyle = this.fg_color;
+    this.cfx.stroke();
+  }
+
+  private easy_generation(){
+
     var random_x = Math.floor((Math.random())*this.canvas_width/2);
     var random_y = Math.floor((Math.random())*this.canvas_height/2);
    
@@ -270,7 +317,7 @@ export class Es501Component implements OnInit{
     var commands:string[] = this.difficulty.at(this.level)?.at(this.random_cursor)?.split(";");
 
 
-    this.cbx.beginPath();   
+
     this.cbx.strokeStyle = this.bg_color;
     
     for(let i=0;i<commands.length;i++){
@@ -278,17 +325,125 @@ export class Es501Component implements OnInit{
       eval("this.cbx."+commands[i]);
     }
     
-    this.cbx.stroke();
+  }
 
-    /*
+  private medium_generation(){
+    var random_x = Math.floor((Math.random())*this.canvas_width/2);
+    var random_y = Math.floor((Math.random())*this.canvas_height/2);
+    var random_z = Math.floor(Math.random() * this.canvas_depth);
+    var scale_factor = Math.floor(Math.random() * this.scale_factor_3d);
+    var rotation_factor=  Math.floor(Math.random()*60);
+    var select_rotation = Math.floor(Math.random()*this.max_rotation_allowed_for_3d);
 
-      Prepare the foreground for drawing
-    
-    */
 
-    this.cfx.beginPath();
-    this.cfx.strokeStyle = this.fg_color;
-    this.cfx.stroke();
+    if(random_x > this.canvas_width-this.limit_bound){
+      random_x = this.canvas_width-this.limit_bound;
+    }else if(random_x < this.limit_bound){
+      random_x = this.limit_bound;
+    }
+
+    if(random_y > this.canvas_height-this.limit_bound){
+      random_y = this.canvas_height-this.limit_bound;
+    }else if(random_y < this.limit_bound){
+      random_y = this.limit_bound;
+    }
+
+    if(random_z > this.canvas_height-this.limit_bound){
+      random_z = this.canvas_depth-this.limit_bound;
+    }else if(random_z < this.limit_bound){
+      random_z = this.limit_bound;
+    }
+
+    var cube = new Cube(random_x,random_y,random_z, scale_factor);
+    cube =this.rotation_matrix(cube, rotation_factor, select_rotation);
+
+    var points = this.plane_projection(cube);
+
+
+  }
+
+  private hard_generation(){
+
+  }
+
+
+
+  private plane_projection(cube:Cube):Point[]{
+    var point:Point[] = [];
+
+
+    return point;
+  }
+
+
+  private rotation_matrix(cube:Cube, rotation_factor:number, select_rotation:number):Cube{
+    var points:any[] = [];
+
+    /* push point into an array */
+
+    if(!(select_rotation > 0 && select_rotation < this.max_rotation_allowed_for_3d)){
+      return cube;
+    }
+
+    points.push(cube.p1);
+    points.push(cube.p2);
+    points.push(cube.p3);
+    points.push(cube.p4);
+    points.push(cube.z1);
+    points.push(cube.z2);
+    points.push(cube.z3);
+    points.push(cube.z4);
+
+    switch(select_rotation){
+      case 0:
+            
+            /* rotate by x axes */
+
+            for(let i=0;i<points.length;i++){
+              points.at(i).y = points.at(i).y*Math.cos(rotation_factor)+points.at(i).y*Math.sin(rotation_factor);
+              points.at(i).z = points.at(i).z*(-Math.sin(rotation_factor))+points.at(i).z*Math.cos(rotation_factor);
+            }
+
+            break;
+      case 1:
+
+
+            /* rotate by y axes */
+
+            for(let i=0;i<points.length;i++){
+              points.at(i).x = points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*(-Math.sin(rotation_factor));
+              points.at(i).z = points.at(i).z*Math.sin(rotation_factor)+points.at(i).z*Math.cos(rotation_factor);
+            }
+
+            break;
+
+      case 2:
+
+            /* rotate by z axes */
+
+            for(let i=0;i<points.length;i++){
+              points.at(i).x = points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*Math.sin(rotation_factor);
+              points.at(i).y = points.at(i).y*(-Math.sin(rotation_factor))+points.at(i).y*Math.cos(rotation_factor);
+            }
+
+            break;
+      default:
+            console.log("no rotation type provided! check your code");
+            break;
+    }
+
+    /* push calculated point back in place */
+
+    cube.p1 = points.at(0);
+    cube.p2 = points.at(1);
+    cube.p3 = points.at(2);
+    cube.p4 = points.at(3);
+    cube.z1 = points.at(4);
+    cube.z2 = points.at(5);
+    cube.z3 = points.at(6);
+    cube.z4 = points.at(7);
+
+    return cube;
   }
 }
 
@@ -306,15 +461,19 @@ export class Point{
 }
 
 export class Cube{
-  private p1;
-  private p2;
-  private p3;
-  private p4;
+  /* from plane */
 
-  private z1;
-  private z2;
-  private z3;
-  private z4;
+  p1;
+  p2;
+  p3;
+  p4;
+
+  /* back plane */
+
+  z1;
+  z2;
+  z3;
+  z4;
 
   constructor(origin_x:number, origin_y:number, origin_z:number, radius:number){
     this.p1 = new Point(origin_x-radius,origin_y+radius, origin_z);
