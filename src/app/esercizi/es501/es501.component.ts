@@ -376,23 +376,16 @@ export class Es501Component implements OnInit{
   }
 
 
-  private rotation_matrix(cube:Cube, rotation_factor:number, select_rotation:number):Cube{
+  private rotation_matrix(obj:any, rotation_factor:number, select_rotation:number):Cube{
     var points:any[] = [];
 
     /* push point into an array */
 
     if(!(select_rotation > 0 && select_rotation < this.max_rotation_allowed_for_3d)){
-      return cube;
+      return obj;
     }
 
-    points.push(cube.p1);
-    points.push(cube.p2);
-    points.push(cube.p3);
-    points.push(cube.p4);
-    points.push(cube.z1);
-    points.push(cube.z2);
-    points.push(cube.z3);
-    points.push(cube.z4);
+    points = obj.getPoints();
 
     switch(select_rotation){
       case 0:
@@ -434,16 +427,9 @@ export class Es501Component implements OnInit{
 
     /* push calculated point back in place */
 
-    cube.p1 = points.at(0);
-    cube.p2 = points.at(1);
-    cube.p3 = points.at(2);
-    cube.p4 = points.at(3);
-    cube.z1 = points.at(4);
-    cube.z2 = points.at(5);
-    cube.z3 = points.at(6);
-    cube.z4 = points.at(7);
+    obj.loadPoints(points);
 
-    return cube;
+    return obj;
   }
 }
 
@@ -457,6 +443,10 @@ export class Point{
     this.x = x;
     this.y = y;
     this.z = z;
+  }
+
+  public clone(point:Point):Point{
+    return new Point(point.x,point.y,point.z);
   }
 }
 
@@ -485,6 +475,35 @@ export class Cube{
     this.z2 = new Point(origin_x+radius,origin_y-radius, origin_z+radius);
     this.z3 = new Point(origin_x+radius,origin_y+radius, origin_z+radius);
     this.z4 = new Point(origin_x-radius,origin_y-radius, origin_z+radius);
+  }
+
+
+  public getPoints():Point[]{
+    var points:Point[] = [];
+
+    points.push(this.p1);
+    points.push(this.p2);
+    points.push(this.p3);
+    points.push(this.p4);
+
+    points.push(this.z1);
+    points.push(this.z2);
+    points.push(this.z3);
+    points.push(this.z4);
+
+    return points;
+  }
+
+  public loadPoints(points:Point[]):void{
+    this.p1 = points.at(0) as Point;
+    this.p2 = points.at(1) as Point;
+    this.p3 = points.at(2) as Point;
+    this.p4 = points.at(3) as Point;
+
+    this.z1 = points.at(4) as Point;
+    this.z2 = points.at(5) as Point;
+    this.z3 = points.at(6) as Point;
+    this.z4 = points.at(7) as Point;
   }
 
 }
