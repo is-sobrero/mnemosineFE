@@ -291,3 +291,41 @@ export class Es501Component implements OnInit{
     this.cfx.stroke();
   }
 }
+
+
+export class Point{
+  x:number = 0;
+  y:number = 0;
+  z:number = 0;
+
+  constructor(x:number,y:number,z:number){
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+}
+
+export class Cube{
+  private p1;
+  private p2;
+  private p3;
+  private p4;
+
+  private z1;
+  private z2;
+  private z3;
+  private z4;
+
+  constructor(origin_x:number, origin_y:number, origin_z:number, radius:number){
+    this.p1 = new Point(origin_x-radius,origin_y+radius, origin_z);
+    this.p2 = new Point(origin_x+radius,origin_y-radius, origin_z);
+    this.p3 = new Point(origin_x+radius,origin_y+radius, origin_z);
+    this.p4 = new Point(origin_x-radius,origin_y-radius, origin_z);
+
+    this.z1 = new Point(origin_x-radius,origin_y+radius, origin_z+radius);
+    this.z2 = new Point(origin_x+radius,origin_y-radius, origin_z+radius);
+    this.z3 = new Point(origin_x+radius,origin_y+radius, origin_z+radius);
+    this.z4 = new Point(origin_x-radius,origin_y-radius, origin_z+radius);
+  }
+
+}
