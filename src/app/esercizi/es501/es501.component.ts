@@ -57,6 +57,8 @@ export class Es501Component implements OnInit{
   errors:number = 0;
   points:number = 0;
   current_obj:any;
+  automatic:boolean = true;
+  private random:boolean = true;
 
 /*
 
@@ -64,10 +66,17 @@ export class Es501Component implements OnInit{
 
 */
 
-  canvas_width = 400;
-  canvas_height = 400;
+  canvas_width:number = 400;
+  canvas_height:number = 400;
   bg_color = "#303030a0";
   fg_color = "#101010";
+  limit_bound:number = 30;
+  random_cursor:number = 0;
+
+  //angle = 30;
+  //scale = 60;           /* these variable are here only for showcase */
+  //random_x = 0;
+  //random_y = 0;
 
 
     /* 
@@ -91,23 +100,63 @@ export class Es501Component implements OnInit{
 
   level = 0;
 
-  private easy:string[] = [
-    "",
+  private easy_random:string[] = [
+      "moveTo(random_x,random_y);\
+       lineTo(random_x_arc,random_y_arc);\
+       lineTo(random_x_arc, random_y_arc);\
+       lineTo(random_x_scaled, random_y);\
+       lineTo(random_x,random_y)",
+
+      "moveTo(random_x_scaled,random_y);\
+       lineTo(random_x,random_y_scaled);\
+       lineTo(random_x, random_y_arc);\
+       lineTo(random_x_arc,random_y_arc);\
+       lineTo(random_x_arc,random_y)",
+
+       "arc(random_x_arc,random_y, radius, 0, Math.PI)",
+
+       "arc(random_x_scaled,random_y_arc, radius, 0, (3/2)*Math.PI)",
+
+       "moveTo(random_x_scaled,random_y);\
+       lineTo(random_x,random_y);\
+       lineTo(random_x_arc, random_y_scaled);\
+       lineTo(random_x,random_y);\
+       lineTo(random_x,random_y)",
+
+       "moveTo(random_x,random_y_scaled);\
+       lineTo(random_x,random_y);\
+       lineTo(random_x_arc, random_y_arc);\
+       lineTo(random_x_scaled,random_y_scaled);\
+       lineTo(random_x_arc,random_y);\
+       lineTo(random_x_scaled,random_y);\
+       lineTo(random_x,random_y)",
+
   ]
-  private medium:string[] = [
-    "",
+  private medium_random:string[] = [
+
   ]
-  private hard:string[] = [
+  private hard_random:string[] = [
     "",
   ];
+
+  private easy:string[] = [""];
+  private medium:string[] = [""];
+  private hard:string[] = [""];
 
   private difficulty:any[] = [];
 
   ngOnInit(){
     /* set up the level of difficulty */
-    this.difficulty.push(this.easy);
-    this.difficulty.push(this.medium);
-    this.difficulty.push(this.hard);
+    if(this.random){
+      this.difficulty.push(this.easy_random);
+      this.difficulty.push(this.medium_random);
+      this.difficulty.push(this.hard_random);
+    }else{
+      this.difficulty.push(this.easy);
+      this.difficulty.push(this.medium);
+      this.difficulty.push(this.hard);
+    }
+
 
     this.canvas_background = document.getElementById("canvas_bg");
     this.canvas_foreground = document.getElementById("canvas_fg");
@@ -137,51 +186,108 @@ export class Es501Component implements OnInit{
 
   checkCanvasDrawing():number{
     let status  = 0; /* status variable: 1 = correct; 2 = wrong */
-    let padding = 0 /* range where a painting would be considered valid */
 
-    /* 
-
-        check if what the patient have drawn correspond with what is displayed 
-        within a padding of N pixels ( could be related with diffìculty level )
-    
-    
-    */
+    /* switch between automatic check and operator-related check */
+    if(this.automatic){
+      let padding = 0 /* range where a painting would be considered valid */
+  
+      /* 
+  
+          check if what the patient have drawn correspond with what is displayed 
+          within a padding of N pixels ( could be related with diffìculty level )
+      
+      
+      */
+    }
 
     return status;
   }
 
   beginDrawing():void{
-    var random_x:any = Math.floor(Math.random()*this.canvas_width);
-    var random_y:any = Math.floor(Math.random()*this.canvas_height);
 
-    var random_cursor = Math.floor(Math.random()*this.difficulty.at(this.level)?.length);
+    /* generate random coordinates */
 
-    var commands:string[] = this.difficulty.at(this.level)?.at(random_cursor).split(";");
-
-    this.cbx?.beginPath();
-
-    /* 
-    
-      draw the background
-    
-    */
+    var random_x = Math.floor((Math.random())*this.canvas_width/2);
+    var random_y = Math.floor((Math.random())*this.canvas_height/2);
    
-    //this.cbx.strokeStyle = this.bg_color;
+    var angle = Math.floor(Math.random()*60);
+    var scale = 80+Math.floor(Math.random()*100);
+
+    var random_x_scaled = random_x+scale;
+    var random_y_scaled = random_y+scale;
+
+    var random_x_arc = random_x*Math.cos(angle);
+    var random_y_arc = random_y*Math.sin(angle);
+
+    var radius = scale;
+
+    /* get index of random figure */
+
+    this.random_cursor = Math.floor(Math.random()*this.difficulty.at(this.level)?.length);
+
+    // this.random_cursor = 5; for testing figures
+    
+    /* bounds check */
+
+    if(random_x > this.canvas_width-this.limit_bound){
+      random_x = this.canvas_width-this.limit_bound;
+    }else if(random_x < this.limit_bound){
+      random_x = this.limit_bound;
+    }
+
+    if(random_y > this.canvas_height-this.limit_bound){
+      random_y = this.canvas_height-this.limit_bound;
+    }else if(random_y < this.limit_bound){
+      random_y = this.limit_bound;
+    }
+
+    if(random_x_scaled > this.canvas_width-this.limit_bound){
+      random_x_scaled = this.canvas_width-this.limit_bound;
+    }else if(random_x_scaled < this.limit_bound){
+      random_x_scaled = this.limit_bound;
+    }
+
+    if(random_y_scaled > this.canvas_height-this.limit_bound){
+      random_y_scaled = this.canvas_height-this.limit_bound;
+    }else if(random_y_scaled < this.limit_bound){
+      random_y_scaled = this.limit_bound;
+    }
+
+    if(random_x_arc > this.canvas_width-this.limit_bound){
+      random_x_arc = this.canvas_width-this.limit_bound;
+    }else if(random_x_arc < this.limit_bound){
+      random_x_arc = this.limit_bound;
+    }
+
+    if(random_y_arc > this.canvas_height-this.limit_bound){
+      random_y_arc = this.canvas_height-this.limit_bound;
+    }else if(random_y_arc < this.limit_bound){
+      random_y_arc = this.limit_bound;
+    }
+
+    /* get js commands */
+
+    var commands:string[] = this.difficulty.at(this.level)?.at(this.random_cursor)?.split(";");
+
+
+    this.cbx.beginPath();   
+    this.cbx.strokeStyle = this.bg_color;
     
     for(let i=0;i<commands.length;i++){
-      eval(commands[i]);
+      console.log(commands[i]);
+      eval("this.cbx."+commands[i]);
     }
     
     this.cbx.stroke();
 
     /*
 
-      Prepare the foreground
+      Prepare the foreground for drawing
     
     */
 
     this.cfx.beginPath();
-    //this.cfx.strokeStyle = this.fg_color;
+    this.cfx.strokeStyle = this.fg_color;
     this.cfx.stroke();
   }
 }
