@@ -60,6 +60,9 @@ export class Es501Component implements OnInit{
   automatic:boolean = true;
   private random:boolean = true;
 
+  /* enable debug info */
+  debug:boolean = true;
+
 /*
 
   canvas related propieties
@@ -88,7 +91,7 @@ export class Es501Component implements OnInit{
   bg_color = "#303030a0";
   fg_color = "#101010";
 
-  limit_bound:number = 30;
+  limit_bound:number = 100;
   random_cursor:number = 0;
 
   //angle = 30;
@@ -116,7 +119,7 @@ export class Es501Component implements OnInit{
   *
   */
 
-  level = 0;
+  level = 1;
 
   private easy_random:string[] = [
       "moveTo(random_x,random_y);\
@@ -225,7 +228,8 @@ export class Es501Component implements OnInit{
 
     /* generate random coordinates */
 
-    this.cbx.beginPath();   
+    this.cbx.beginPath();  
+    this.cbx.lineWidth = "5"; 
 
     switch(this.level){
       case 0:
@@ -265,8 +269,6 @@ export class Es501Component implements OnInit{
 
     var random_x_arc = random_x*Math.cos(angle);
     var random_y_arc = random_y*Math.sin(angle);
-
-    var radius = scale;
 
     /* get index of random figure */
 
@@ -312,6 +314,18 @@ export class Es501Component implements OnInit{
       random_y_arc = this.limit_bound;
     }
 
+    if(this.debug){
+      console.log("currento level 2 parameters: ");
+      console.log("X -> "+random_x);
+      console.log("Y -> "+random_y);
+      console.log("X-scaled -> "+random_x_scaled);
+      console.log("Y-scaled -> "+random_y_scaled);
+      console.log("X-arc -> "+random_x_arc);
+      console.log("Y-arc -> "+random_y_arc);
+      console.log("angle: "+angle);
+      console.log("scale: "+scale)
+    }
+
     /* get js commands */
 
     var commands:string[] = this.difficulty.at(this.level)?.at(this.random_cursor)?.split(";");
@@ -328,14 +342,15 @@ export class Es501Component implements OnInit{
   }
 
   private medium_generation(){
+    this.cbx.clearRect(0,0,this.canvas_width,this.canvas_height);
+    console.clear();
     var random_x = Math.floor((Math.random())*this.canvas_width/2);
     var random_y = Math.floor((Math.random())*this.canvas_height/2);
     var random_z = Math.floor(Math.random() * this.canvas_depth);
     var scale_factor = Math.floor(Math.random() * this.scale_factor_3d);
-    var rotation_factor=  Math.floor(Math.random()*60);
-    var select_rotation = Math.floor(Math.random()*this.max_rotation_allowed_for_3d);
-
-
+    var rotation_factor=  Math.floor(Math.random()*360);
+    var select_rotation = Math.floor(Math.random()*this.max_rotation_allowed_for_3d+1);
+    
     if(random_x > this.canvas_width-this.limit_bound){
       random_x = this.canvas_width-this.limit_bound;
     }else if(random_x < this.limit_bound){
@@ -354,12 +369,41 @@ export class Es501Component implements OnInit{
       random_z = this.limit_bound;
     }
 
+
+    if(this.debug){
+      console.log("currento level 2 parameters: ");
+      console.log("X -> "+random_x);
+      console.log("Y -> "+random_y);
+      console.log("Z -> "+random_z);
+      console.log("rotation factor: "+rotation_factor);
+      switch(select_rotation){
+        case 0:
+              console.log("rotation: rotate by x axes");
+              break;
+        case 1:
+              console.log("rotation: rotate by y axes");
+              break;
+        case 2:
+              console.log("rotation: rotate by z axes");
+              break;
+      }
+    }
+
+    /* creating and manipulating polygons */
+
     var cube = new Cube(random_x,random_y,random_z, scale_factor);
-    cube =this.rotation_matrix(cube, rotation_factor, select_rotation);
+    cube = this.rotation_matrix(cube, rotation_factor, select_rotation) as Cube;
+      
+    this.plane_projection(cube, 1);
+    if(this.debug){
+      cube.pointToString();
+    }
+    if(cube.pan_object(this.limit_bound,this.canvas_width-this.limit_bound,this.canvas_height-this.limit_bound) == 0){
+      console.log("Object between limits");
+    }
 
-    var points = this.plane_projection(cube);
 
-
+    cube.stroke_vertex(this.cbx);
   }
 
   private hard_generation(){
@@ -368,22 +412,36 @@ export class Es501Component implements OnInit{
 
 
 
-  private plane_projection(cube:Cube):Point[]{
-    var point:Point[] = [];
+  private plane_projection(cube:Object_3d, focal_lenght:number):void{
+    var point:any[] = [];
+    point = cube.getPoints();
 
+    for(let i=0;i<point.length;i++){
 
-    return point;
+      var x = point.at(i).x;
+      var y = point.at(i).y;
+      var z = point.at(i).z;
+
+      /* a simple and primitive kind of plane projection */
+      
+      x = Math.floor((focal_lenght)*x-(z*2));
+      y = Math.floor((focal_lenght)*y-(z*2));
+
+      /* normalize points */
+
+      point.at(i).x = x;
+      point.at(i).y = y;
+      point.at(i).z = 0;
+    }
+
+    cube.loadPoints(point);
   }
 
 
-  private rotation_matrix(obj:any, rotation_factor:number, select_rotation:number):Cube{
+  private rotation_matrix(obj:Object_3d, rotation_factor:number, select_rotation:number):Object_3d{
     var points:any[] = [];
 
     /* push point into an array */
-
-    if(!(select_rotation > 0 && select_rotation < this.max_rotation_allowed_for_3d)){
-      return obj;
-    }
 
     points = obj.getPoints();
 
@@ -393,8 +451,9 @@ export class Es501Component implements OnInit{
             /* rotate by x axes */
 
             for(let i=0;i<points.length;i++){
-              points.at(i).y = points.at(i).y*Math.cos(rotation_factor)+points.at(i).y*Math.sin(rotation_factor);
-              points.at(i).z = points.at(i).z*(-Math.sin(rotation_factor))+points.at(i).z*Math.cos(rotation_factor);
+              points.at(i).y = Math.floor(points.at(i).y*Math.cos(rotation_factor)+points.at(i).y*Math.sin(rotation_factor));
+              points.at(i).z = Math.floor(points.at(i).z*(-Math.sin(rotation_factor))+points.at(i).z*Math.cos(rotation_factor));
+
             }
 
             break;
@@ -404,8 +463,9 @@ export class Es501Component implements OnInit{
             /* rotate by y axes */
 
             for(let i=0;i<points.length;i++){
-              points.at(i).x = points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*(-Math.sin(rotation_factor));
-              points.at(i).z = points.at(i).z*Math.sin(rotation_factor)+points.at(i).z*Math.cos(rotation_factor);
+              points.at(i).x = Math.floor(points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*(-Math.sin(rotation_factor)));
+              points.at(i).z = Math.floor(points.at(i).z*Math.sin(rotation_factor)+points.at(i).z*Math.cos(rotation_factor));
+
             }
 
             break;
@@ -415,8 +475,9 @@ export class Es501Component implements OnInit{
             /* rotate by z axes */
 
             for(let i=0;i<points.length;i++){
-              points.at(i).x = points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*Math.sin(rotation_factor);
-              points.at(i).y = points.at(i).y*(-Math.sin(rotation_factor))+points.at(i).y*Math.cos(rotation_factor);
+              points.at(i).x = Math.floor(points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*Math.sin(rotation_factor));
+              points.at(i).y = Math.floor(points.at(i).y*(-Math.sin(rotation_factor))+points.at(i).y*Math.cos(rotation_factor));
+
             }
 
             break;
@@ -450,7 +511,25 @@ export class Point{
   }
 }
 
-export class Cube{
+
+export class Object_3d{
+  constructor(){}
+
+  public getPoints():Point[]{
+    var points:Point[] = [];
+
+    return points;
+  }
+  public loadPoints(points:Point[]):void{}
+
+  public stroke_vertex(cbx:any):void{}
+
+  public pointToString(){}
+
+  public pan_object(min:number,max:number, maxy:number){}
+}
+
+export class Cube extends Object_3d{
   /* from plane */
 
   p1;
@@ -466,19 +545,20 @@ export class Cube{
   z4;
 
   constructor(origin_x:number, origin_y:number, origin_z:number, radius:number){
-    this.p1 = new Point(origin_x-radius,origin_y+radius, origin_z);
-    this.p2 = new Point(origin_x+radius,origin_y-radius, origin_z);
+    super();
+    this.p1 = new Point(origin_x,origin_y, origin_z);
+    this.p2 = new Point(origin_x+radius,origin_y, origin_z);
     this.p3 = new Point(origin_x+radius,origin_y+radius, origin_z);
-    this.p4 = new Point(origin_x-radius,origin_y-radius, origin_z);
+    this.p4 = new Point(origin_x,origin_y+radius, origin_z);
 
-    this.z1 = new Point(origin_x-radius,origin_y+radius, origin_z+radius);
-    this.z2 = new Point(origin_x+radius,origin_y-radius, origin_z+radius);
+    this.z1 = new Point(origin_x,origin_y, origin_z+radius);
+    this.z2 = new Point(origin_x+radius,origin_y, origin_z+radius);
     this.z3 = new Point(origin_x+radius,origin_y+radius, origin_z+radius);
-    this.z4 = new Point(origin_x-radius,origin_y-radius, origin_z+radius);
+    this.z4 = new Point(origin_x,origin_y+radius, origin_z+radius);
   }
 
-
-  public getPoints():Point[]{
+  
+  override getPoints():Point[]{
     var points:Point[] = [];
 
     points.push(this.p1);
@@ -494,7 +574,7 @@ export class Cube{
     return points;
   }
 
-  public loadPoints(points:Point[]):void{
+  override loadPoints(points:Point[]):void{
     this.p1 = points.at(0) as Point;
     this.p2 = points.at(1) as Point;
     this.p3 = points.at(2) as Point;
@@ -506,4 +586,106 @@ export class Cube{
     this.z4 = points.at(7) as Point;
   }
 
+  override stroke_vertex(cbx:any): void {
+
+    cbx.beginPath();
+    cbx.moveTo(this.p1.x, this.p1.y);
+    cbx.lineTo(this.p2.x,this.p2.y);
+    cbx.lineTo(this.p3.x,this.p3.y);
+    cbx.lineTo(this.p4.x,this.p4.y);
+    cbx.lineTo(this.p1.x,this.p1.y);
+
+    
+    cbx.moveTo(this.z1.x,this.z1.y);
+    cbx.lineTo(this.z2.x,this.z2.y);
+    cbx.lineTo(this.z3.x,this.z3.y);
+    cbx.lineTo(this.z4.x,this.z4.y);
+    cbx.lineTo(this.z1.x,this.z1.y);
+    
+
+    cbx.moveTo(this.p1.x, this.p1.y);
+    cbx.lineTo(this.z1.x, this.z1.y);
+
+    cbx.moveTo(this.p2.x, this.p2.y);
+    cbx.lineTo(this.z2.x, this.z2.y);
+
+    cbx.moveTo(this.p3.x, this.p3.y);
+    cbx.lineTo(this.z3.x, this.z3.y);
+
+    cbx.moveTo(this.p4.x, this.p4.y);
+    cbx.lineTo(this.z4.x, this.z4.y);
+
+  }
+
+  override pointToString():void{
+    console.log("p1 -> x:"+this.p1.x+" y:"+this.p1.y);
+    console.log("p2 -> x:"+this.p2.x+" y:"+this.p2.y);
+    console.log("p3 -> x:"+this.p3.x+" y:"+this.p3.y);
+    console.log("p4 -> x:"+this.p4.x+" y:"+this.p4.y);
+
+    console.log("z1 -> x:"+this.z1.x+" y:"+this.z1.y);
+    console.log("z2 -> x:"+this.z2.x+" y:"+this.z2.y);
+    console.log("z3 -> x:"+this.z3.x+" y:"+this.z3.y);
+    console.log("z4 -> x:"+this.z4.x+" y:"+this.z4.y);
+  }
+
+  /* function to center the object into the canvas */
+
+  override pan_object(min:number,max:number, maxy:number):any{
+
+    var end:boolean = false;
+    var check_negative_x:number = 0;
+    var check_negative_y:number = 0;
+    var check_overflow_x:number = 0;
+    var check_overflow_y:number = 0;
+
+    /* 
+    
+      How this function operate ( incomplete ):
+
+      1 - identify the direction where the object overflow from the canvas 
+      2 - then check for all the 4 possibility and operate for them
+
+      (panning/operation)
+      3 - pan by a fixed value ( ex 10 ) until all point would enter in the 
+      equation: 0+limit_bound > px > c_width-limit_bound && 0+limit_bound > py > c_height-limit_bound
+    
+    
+    */
+
+    /* check for negative overflow by any of this points */
+    if(this.p1.x < min || this.p2.x < min || this.p3.x < min || this.p4.x < min){
+      check_negative_x++;
+    }
+    if(this.p1.y < min || this.p2.y < min || this.p3.y < min || this.p4.y < min){
+      check_negative_y++;
+    }
+
+    if(this.z1.x < min || this.z2.x < min || this.z3.x < min || this.z4.x < min){
+      check_negative_x++;
+    }
+    if(this.z1.y < min || this.z2.y < min || this.z3.y < min || this.z4.y < min){
+      check_negative_y++;
+    }
+
+    /* check for positive width-bounds overflow by any of this points */
+
+    if(this.p1.x > max || this.p2.x > max || this.p3.x > max || this.p4.x > max){
+      check_overflow_x++;
+    }
+    if(this.p1.y > maxy || this.p2.y > maxy || this.p3.y > maxy || this.p4.y > maxy){
+      check_overflow_y++;
+    }
+
+    if(this.z1.x > max || this.z2.x > max || this.z3.x > max || this.z4.x > max){
+      check_overflow_x++;
+    }
+    if(this.z1.y > maxy || this.z2.y > maxy || this.z3.y > maxy || this.z4.y > maxy ){
+      check_overflow_y++;
+    }
+
+    if(check_negative_x == 0 && check_negative_y == 0 && check_overflow_x == 0 && check_overflow_y == 0){
+      return 0;
+    }
+  }
 }
