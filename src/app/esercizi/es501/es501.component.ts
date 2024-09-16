@@ -72,9 +72,9 @@ export class Es501Component implements OnInit{
 
   canvas_width:number = 400;
   canvas_height:number = 400;
-  canvas_depth:number = 400;
+  canvas_depth:number = 100;
 
-  scale_factor_3d:number = 100;
+  scale_factor_3d:number = 70;
 
   /* max axes rotation allowed:
 
@@ -84,10 +84,18 @@ export class Es501Component implements OnInit{
 
     2: rotate by z axes
 
+    3: rotate by x and y
+
+    4: rotate by y and z
+
+    5: rotate by x and x
+
+    6: rotate by x, y, z
+
     for more you need to update the switch case int the rotation matrix function
   
   */
-  max_rotation_allowed_for_3d = 2;
+  max_rotation_allowed_for_3d = 5;
 
   bg_color = "#303030a0";
   fg_color = "#101010";
@@ -155,7 +163,9 @@ export class Es501Component implements OnInit{
 
   ]
   private medium_random:string[] = [
+    "cube = new Cube(random_x,random_y,random_z, scale_factor);cube = this.rotation_matrix(cube, rotation_factor, select_rotation);this.plane_projection(cube, 1);cube.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,20);cube.stroke_vertex(this.cbx);",
 
+    "piramid = new Piramid(random_x, random_y, random_z, scale_factor);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);piramid.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,20);piramid.stroke_vertex(this.cbx);"
   ]
   private hard_random:string[] = [
     "",
@@ -230,7 +240,7 @@ export class Es501Component implements OnInit{
     /* generate random coordinates */
 
     this.cbx.beginPath();  
-    this.cbx.lineWidth = "5"; 
+    this.cbx.lineWidth = "2"; 
 
     switch(this.level){
       case 0:
@@ -345,33 +355,18 @@ export class Es501Component implements OnInit{
   private medium_generation(){
     var random_cursor = Math.floor(Math.random()*this.difficulty.at(1).length);
 
-    var bias = Math.floor(Math.random()*10);
     this.cbx.clearRect(0,0,this.canvas_width,this.canvas_height);
     console.clear();
-    var random_x = this.limit_bound+Math.floor((Math.random())*(this.canvas_width-this.limit_bound)/bias);
-    var random_y = this.limit_bound+Math.floor((Math.random())*(this.canvas_height-this.limit_bound)/bias);
-    var random_z = this.limit_bound+Math.floor(Math.random() * (this.canvas_depth-this.limit_bound)/bias);
-    var scale_factor = 50 + Math.floor(Math.random() * this.scale_factor_3d);
+
+    /* position */
+    var random_x = this.limit_bound+Math.floor((Math.random())*this.canvas_width-this.limit_bound);
+    var random_y = this.limit_bound+Math.floor((Math.random())*this.canvas_height-this.limit_bound);
+    var random_z = this.limit_bound+Math.floor(Math.random() * this.canvas_depth-this.limit_bound);
+
+    /* scaling factor, rotation factor and selected rotation */
+    var scale_factor = 80 + Math.floor(Math.random() * this.scale_factor_3d);
     var rotation_factor=  Math.floor(Math.random()*360);
     var select_rotation = Math.floor(Math.random()*(this.max_rotation_allowed_for_3d+1));
-    
-    if(random_x > this.canvas_width-this.limit_bound){
-      random_x = this.canvas_width-this.limit_bound;
-    }else if(random_x < this.limit_bound){
-      random_x = this.limit_bound;
-    }
-
-    if(random_y > this.canvas_height-this.limit_bound){
-      random_y = this.canvas_height-this.limit_bound;
-    }else if(random_y < this.limit_bound){
-      random_y = this.limit_bound;
-    }
-
-    if(random_z > this.canvas_height-this.limit_bound){
-      random_z = this.canvas_depth-this.limit_bound;
-    }else if(random_z < this.limit_bound){
-      random_z = this.limit_bound;
-    }
 
 
     if(this.debug){
@@ -390,44 +385,33 @@ export class Es501Component implements OnInit{
         case 2:
               console.log("rotation: rotate by z axes");
               break;
+        case 3:
+              console.log("rotation: rotate by x, y axes");
+              break;
+        case 4:
+              console.log("rotation: rotate by y, z axes");
+              break;
+        case 5:
+              console.log("rotation: rotate by x, z axes");
+              break;
+        case 6:
+              console.log("rotation: rotate by x, y, z axes");
+              break;
       }
     }
 
-    /* 
-        DEV NOTE:
-
-        implement a generation like the easy one but using the 3d object instead.
-        By using the eval function and add thins in the medium array it's possible to 
-        generate random 3d figures, with random rotation size and position.
-    
-    */
-
-
-    //var commands:string[] = this.difficulty.at(this.level)?.at(this.random_cursor)?.split(";");
+    var commands:string[] = this.difficulty.at(this.level)?.at(random_cursor)?.split(";");
 
     this.cbx.strokeStyle = this.bg_color;
     var cube = null;
+    var piramid = null;
 
-/*
     for(let i=0;i<commands.length;i++){
-      console.log(commands[i]);
       eval(commands[i]);
     }
-*/
+
 
     /* creating and manipulating polygons */
-
-    cube = new Cube(random_x,random_y,random_z, scale_factor);
-    cube = this.rotation_matrix(cube, rotation_factor, select_rotation) as Cube;
-    this.plane_projection(cube, 1);
-    cube.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,10);
-
-    if(this.debug){
-      cube.pointToString();
-    }
-
-    cube.stroke_vertex(this.cbx);
-
   }
 
   private hard_generation(){
@@ -505,6 +489,55 @@ export class Es501Component implements OnInit{
             }
 
             break;
+
+    case 3:
+            /* rotate by x and y */
+          for(let i=0;i<points.length;i++){
+            points.at(i).y = Math.floor(points.at(i).y*Math.cos(rotation_factor)+points.at(i).y*Math.sin(rotation_factor));
+            points.at(i).z = Math.floor(points.at(i).z*(-Math.sin(rotation_factor))+points.at(i).z*Math.cos(rotation_factor));
+
+          }
+
+          for(let i=0;i<points.length;i++){
+            points.at(i).x = Math.floor(points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*(-Math.sin(rotation_factor)));
+            points.at(i).z = Math.floor(points.at(i).z*Math.sin(rotation_factor)+points.at(i).z*Math.cos(rotation_factor));
+
+          }
+          break;
+    case 4:
+          /* rotate by y and z */
+
+          for(let i=0;i<points.length;i++){
+            points.at(i).x = Math.floor(points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*(-Math.sin(rotation_factor)));
+            points.at(i).z = Math.floor(points.at(i).z*Math.sin(rotation_factor)+points.at(i).z*Math.cos(rotation_factor));
+
+          }
+
+          for(let i=0;i<points.length;i++){
+            points.at(i).x = Math.floor(points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*Math.sin(rotation_factor));
+            points.at(i).y = Math.floor(points.at(i).y*(-Math.sin(rotation_factor))+points.at(i).y*Math.cos(rotation_factor));
+
+          }
+          break;
+            
+    case 5:
+          /* rotate by x and z */
+
+          for(let i=0;i<points.length;i++){
+            points.at(i).y = Math.floor(points.at(i).y*Math.cos(rotation_factor)+points.at(i).y*Math.sin(rotation_factor));
+            points.at(i).z = Math.floor(points.at(i).z*(-Math.sin(rotation_factor))+points.at(i).z*Math.cos(rotation_factor));
+
+          }
+
+
+          for(let i=0;i<points.length;i++){
+            points.at(i).x = Math.floor(points.at(i).x*Math.cos(rotation_factor)+points.at(i).x*Math.sin(rotation_factor));
+            points.at(i).y = Math.floor(points.at(i).y*(-Math.sin(rotation_factor))+points.at(i).y*Math.cos(rotation_factor));
+
+          }
+
+          break;
+    
       default:
             console.log("no rotation type provided! check your code");
             break;
@@ -736,39 +769,6 @@ export class Cube extends Object_3d{
       return 1;
     }
 
-    if(check_negative_x > 0 && check_negative_y > 0){
-      console.log("negative x and y");
-      while(!end){
-        if( this.p1.x < min || this.p1.x < min || this.p3.x < min || this.p4.x < min || 
-            this.z1.x < min || this.z2.x < min || this.z3.x < min || this.z4.x < min ||
-            this.p1.y < min || this.p1.y < min || this.p3.y < min || this.p4.y < min || 
-            this.z1.y < min || this.z2.y < min || this.z3.y < min || this.z4.y < min
-          ){
-
-          this.p1.x += fix_count;
-          this.p2.x += fix_count;
-          this.p3.x += fix_count;
-          this.p4.x += fix_count;
-          this.z1.x += fix_count;
-          this.z2.x += fix_count;
-          this.z3.x += fix_count;
-          this.z4.x += fix_count;
-
-          this.p1.y += fix_count;
-          this.p2.y += fix_count;
-          this.p3.y += fix_count;
-          this.p4.y += fix_count;
-          this.z1.y += fix_count;
-          this.z2.y += fix_count;
-          this.z3.y += fix_count;
-          this.z4.y += fix_count;
-          
-        }else end = true;
-      }
-      return 1;
-    }
-
-
     if(check_negative_y > 0){
       console.log("negative y");
       while(!end){
@@ -809,37 +809,6 @@ export class Cube extends Object_3d{
       return 1;
     }
 
-    if(check_overflow_x > 0 && check_overflow_y > 0){
-      console.log("overflow x and y");
-      while(!end){
-        if( this.p1.x > max || this.p1.x > max || this.p3.x > max || this.p4.x > max || 
-            this.z1.x > max || this.z2.x > max || this.z3.x > max || this.z4.x > max ||
-            this.p1.y > maxy || this.p1.y > maxy || this.p3.y > maxy || this.p4.y > maxy || 
-            this.z1.y > maxy || this.z2.y > maxy || this.z3.y > maxy || this.z4.y > maxy
-          ){
-
-          this.p1.x -= fix_count;
-          this.p2.x -= fix_count;
-          this.p3.x -= fix_count;
-          this.p4.x -= fix_count;
-          this.z1.x -= fix_count;
-          this.z2.x -= fix_count;
-          this.z3.x -= fix_count;
-          this.z4.x -= fix_count;
-
-          this.p1.y -= fix_count;
-          this.p2.y -= fix_count;
-          this.p3.y -= fix_count;
-          this.p4.y -= fix_count;
-          this.z1.y -= fix_count;
-          this.z2.y -= fix_count;
-          this.z3.y -= fix_count;
-          this.z4.y -= fix_count;
-          
-        }else end = true;
-      }
-      return 1;
-    }
 
     if(check_overflow_y > 0){
       console.log("overflow y");
@@ -859,15 +828,289 @@ export class Cube extends Object_3d{
       }
       return 1;
     }
+
+    if(check_negative_x > 0 && check_negative_y > 0){
+      console.log("negative x and y");
+      while(!end){
+        if( this.p1.x < min || this.p1.x < min || this.p3.x < min || this.p4.x < min || 
+            this.z1.x < min || this.z2.x < min || this.z3.x < min || this.z4.x < min ||
+            this.p1.y < min || this.p1.y < min || this.p3.y < min || this.p4.y < min || 
+            this.z1.y < min || this.z2.y < min || this.z3.y < min || this.z4.y < min
+        ){
+
+          this.p1.x += fix_count;
+          this.p2.x += fix_count;
+          this.p3.x += fix_count;
+          this.p4.x += fix_count;
+          this.z1.x += fix_count;
+          this.z2.x += fix_count;
+          this.z3.x += fix_count;
+          this.z4.x += fix_count;
+
+          this.p1.y += fix_count;
+          this.p2.y += fix_count;
+          this.p3.y += fix_count;
+          this.p4.y += fix_count;
+          this.z1.y += fix_count;
+          this.z2.y += fix_count;
+          this.z3.y += fix_count;
+          this.z4.y += fix_count;
+
+        }else end = true;
+      }
+      return 1;
+    }
+
+    if(check_overflow_x > 0 && check_overflow_y > 0){
+      console.log("overflow x and y");
+      while(!end){
+        if( this.p1.y > maxy || this.p1.y > maxy || this.p3.y > maxy || this.p4.y > maxy || 
+            this.z1.y > maxy || this.z2.y > maxy || this.z3.y > maxy || this.z4.y > maxy ||
+            this.p1.x > max || this.p1.x > max || this.p3.x > max || this.p4.x > max || 
+            this.z1.x > max || this.z2.x > max || this.z3.x > max || this.z4.x > max
+        ){
+
+          this.p1.x -= fix_count;
+          this.p2.x -= fix_count;
+          this.p3.x -= fix_count;
+          this.p4.x -= fix_count;
+          this.z1.x -= fix_count;
+          this.z2.x -= fix_count;
+          this.z3.x -= fix_count;
+          this.z4.x -= fix_count;
+          this.p1.y -= fix_count;
+          this.p2.y -= fix_count;
+          this.p3.y -= fix_count;
+          this.p4.y -= fix_count;
+          this.z1.y -= fix_count;
+          this.z2.y -= fix_count;
+          this.z3.y -= fix_count;
+          this.z4.y -= fix_count;
+        }else end = true;
+      }
+      return 1;
+    }
   }
 
   override pan(min:number,max:number, maxy:number, cicle:number){
     var end:boolean = false;
-    while(!end && cicle<20){
+    var it = 0;
+    while(!end && it < cicle){
       if(this.pan_object(min, max, maxy) == 0){
         end = true;
       }
-      cicle+=1;
+      it+=1;
+  }
+}
+
+}
+
+export class Piramid extends Object_3d{
+  /* base points */
+
+  b1;
+  b2;
+  b3;
+  b4;
+
+  /* top point */
+  t1;
+
+  constructor(origin_x:number, origin_y:number, origin_z:number, scale:number){
+    super();
+    this.b1 = new Point(origin_x,origin_y,origin_z);
+    this.b2 = new Point(origin_x+scale,origin_y,origin_z);
+    this.b4 = new Point(origin_x,origin_y,origin_z+scale);
+    this.b3 = new Point(origin_x+scale,origin_y,origin_z+scale);
+    this.t1 = new Point(origin_x+(scale/2), origin_y+scale+Math.floor(Math.random()*30), origin_z+(scale/2));
+  }
+
+  override loadPoints(points:Point[]):void{
+    this.b1 = points.at(0) as Point;
+    this.b2 = points.at(1) as Point;
+    this.b3 = points.at(2) as Point;
+    this.b4 = points.at(3) as Point;
+    this.t1 = points.at(4) as Point;
+  }
+
+  override getPoints():Point[]{
+    var points:Point[] = [];
+
+    points.push(this.b1);
+    points.push(this.b2);
+    points.push(this.b3);
+    points.push(this.b4);
+    points.push(this.t1);
+
+    return points;
+  }
+
+
+  override stroke_vertex(cbx:any):void{
+    
+    cbx.beginPath();
+    cbx.moveTo(this.b1.x, this.b1.y);
+    cbx.lineTo(this.b2.x, this.b2.y);
+    cbx.lineTo(this.b3.x, this.b3.y);
+    cbx.lineTo(this.b4.x, this.b4.y);
+    cbx.lineTo(this.b1.x, this.b1.y);
+
+    cbx.moveTo(this.b1.x, this.b1.y);
+    cbx.lineTo(this.t1.x, this.t1.y);
+
+    cbx.moveTo(this.b2.x, this.b2.y);
+    cbx.lineTo(this.t1.x, this.t1.y);
+
+    cbx.moveTo(this.b3.x, this.b3.y);
+    cbx.lineTo(this.t1.x, this.t1.y);
+
+    cbx.moveTo(this.b4.x, this.b4.y);
+    cbx.lineTo(this.t1.x, this.t1.y);
+  }
+
+  override pointToString():void{
+    console.log("b1 -> x:"+this.b1.x+" y:"+this.b1.y);
+    console.log("b2 -> x:"+this.b2.x+" y:"+this.b2.y);
+    console.log("b3 -> x:"+this.b3.x+" y:"+this.b3.y);
+    console.log("b4 -> x:"+this.b4.x+" y:"+this.b4.y);
+    console.log("t1 -> x:"+this.t1.x+" y:"+this.t1.y);
+  }
+
+  override pan_object(min: number, max: number, maxy: number): any {
+    var end:boolean = false;
+    var check_negative_x:number = 0;
+    var check_negative_y:number = 0;
+    var check_overflow_x:number = 0;
+    var check_overflow_y:number = 0;
+    var fix_count = 10;
+
+    if(this.b1.x < min || this.b2.x < min || this.b3.x < min || this.b4.x < min || this.t1.x < min){
+      check_negative_x++;
+    }
+    if(this.b1.y < min || this.b2.y < min || this.b3.y < min || this.b4.y < min || this.t1.y < min){
+      check_negative_y++;
+    }
+
+    if(this.b1.x > max || this.b2.x > max || this.b3.x > max || this.b4.x > max || this.t1.x > max){
+      check_overflow_x++;
+    }
+    if(this.b1.y > maxy || this.b2.y > maxy || this.b3.y > maxy || this.b4.y > maxy || this.t1.y > maxy){
+      check_overflow_y++;
+    }
+
+    if(check_negative_x == 0 && check_negative_y == 0 && check_overflow_x == 0 && check_overflow_y == 0){
+      return 0;
+    }
+
+    if(check_negative_x > 0){
+      console.log("negative x");
+      while(!end){
+        if(this.b1.x < min || this.b2.x < min || this.b3.x < min || this.b4.x < min || this.t1.x < min){
+          this.b1.x += fix_count;
+          this.b2.x += fix_count;
+          this.b3.x += fix_count;
+          this.b4.x += fix_count;
+          this.t1.x += fix_count;
+        }else end = true;
+      }
+      return 1;
+    }
+
+    if(check_negative_y > 0){
+      console.log("negative y");
+      while(!end){
+        if(this.b1.y < min || this.b2.y < min || this.b3.y < min || this.b4.y < min || this.t1.y < min){
+          this.b1.y += fix_count;
+          this.b2.y += fix_count;
+          this.b3.y += fix_count;
+          this.b4.y += fix_count;
+          this.t1.y += fix_count;
+        }else end = true;
+      }
+      return 1;
+    }
+
+    if(check_overflow_x > 0){
+      console.log("overflow x");
+      while(!end){
+        if(this.b1.x > max || this.b2.x > max  || this.b3.x > max  || this.b4.x > max  || this.t1.x > max ){
+          this.b1.x -= fix_count;
+          this.b2.x -= fix_count;
+          this.b3.x -= fix_count;
+          this.b4.x -= fix_count;
+          this.t1.x -= fix_count;
+        }else end = true;
+      }
+      return 1;
+    }
+
+    if(check_overflow_y > 0){
+      console.log("overflow y");
+      while(!end){
+        if(this.b1.y > maxy || this.b2.y > maxy  || this.b3.y > maxy  || this.b4.y > maxy || this.t1.y > maxy){
+          this.b1.y -= fix_count;
+          this.b2.y -= fix_count;
+          this.b3.y -= fix_count;
+          this.b4.y -= fix_count;
+          this.t1.y -= fix_count;
+        }else end = true;
+      }
+      return 1;
+    }
+
+    if(check_negative_x > 0 && check_negative_y > 0){
+      console.log("negative x and y");
+      while(!end){
+        if(this.b1.x < min || this.b2.x < min || this.b3.x < min || this.b4.x < min || this.t1.x < min ||
+            this.b1.y < min || this.b2.y < min || this.b3.y < min || this.b4.y < min || this.t1.y < min
+        ){
+          this.b1.x += fix_count;
+          this.b2.x += fix_count;
+          this.b3.x += fix_count;
+          this.b4.x += fix_count;
+          this.t1.x += fix_count;
+
+          this.b1.y += fix_count;
+          this.b2.y += fix_count;
+          this.b3.y += fix_count;
+          this.b4.y += fix_count;
+          this.t1.y += fix_count;
+        }else end = true;
+      }
+      return 1;
+    }
+
+    if(check_overflow_x > 0 && check_overflow_y > 0){
+      console.log("overflow x and y");
+      while(!end){
+        if( this.b1.x > max || this.b2.x > max  || this.b3.x > max  || this.b4.x > max  || this.t1.x > max ||
+            this.b1.y > maxy || this.b2.y > maxy  || this.b3.y > maxy  || this.b4.y > maxy || this.t1.y > maxy
+        ){
+          this.b1.x -= fix_count;
+          this.b2.x -= fix_count;
+          this.b3.x -= fix_count;
+          this.b4.x -= fix_count;
+          this.t1.x -= fix_count;
+
+          this.b1.y -= fix_count;
+          this.b2.y -= fix_count;
+          this.b3.y -= fix_count;
+          this.b4.y -= fix_count;
+          this.t1.y -= fix_count;
+        }else end = true;
+      }
+      return 1;
+    }
+  }
+
+  override pan(min:number,max:number, maxy:number, cicle:number){
+    var end:boolean = false;
+    var it = 0;
+    while(!end && it < cicle){
+      if(this.pan_object(min, max, maxy) == 0){
+        end = true;
+      }
+      it+=1;
     }
   }
 }
