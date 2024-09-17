@@ -70,8 +70,8 @@ export class Es501Component implements OnInit{
 
 */
 
-  canvas_width:number = 400;
-  canvas_height:number = 400;
+  canvas_width:number = 500;
+  canvas_height:number = 500;
   canvas_depth:number = 100;
 
   scale_factor_3d:number = 70;
@@ -103,12 +103,6 @@ export class Es501Component implements OnInit{
   limit_bound:number = 100;
   random_cursor:number = 0;
 
-  //angle = 30;
-  //scale = 60;           /* these variable are here only for showcase */
-  //random_x = 0;
-  //random_y = 0;
-
-
     /* 
       structure for command list:
 
@@ -120,13 +114,6 @@ export class Es501Component implements OnInit{
         "command1();"                                         3rd figure
       ]
     */
-
-
- /*
-  *  Level: varable used to set the difficulty
-  *  Default state: 0 ( easier );
-  *
-  */
 
   level = 1;
 
@@ -163,9 +150,14 @@ export class Es501Component implements OnInit{
 
   ]
   private medium_random:string[] = [
-    "cube = new Cube(random_x,random_y,random_z, scale_factor);cube = this.rotation_matrix(cube, rotation_factor, select_rotation);this.plane_projection(cube, 1);cube.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,20);cube.stroke_vertex(this.cbx);",
+    "cube = new Cube(random_x,random_y,random_z, scale_factor);cube = this.rotation_matrix(cube, rotation_factor, select_rotation);this.plane_projection(cube, 1);cube.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube.stroke_vertex(this.cbx);",
 
-    "piramid = new Piramid(random_x, random_y, random_z, scale_factor);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);piramid.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,20);piramid.stroke_vertex(this.cbx);"
+    "piramid = new Piramid(random_x, random_y, random_z, scale_factor, 1);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);piramid.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid.stroke_vertex(this.cbx);",
+
+    "cube_2 = new Cube(random_x,random_y,random_z*2, scale_factor);cube = this.rotation_matrix(cube_2, rotation_factor, select_rotation);this.plane_projection(cube_2, 0.5);cube_2.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube_2.stroke_vertex(this.cbx);",
+
+    "piramid_2 = new Piramid(random_x, random_y, random_z, scale_factor, 5);piramid_2 = this.rotation_matrix(piramid_2, rotation_factor, select_rotation);this.plane_projection(piramid_2, 0.5);piramid_2.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid_2.stroke_vertex(this.cbx);",
+
   ]
   private hard_random:string[] = [
     "",
@@ -273,14 +265,14 @@ export class Es501Component implements OnInit{
     var random_y = Math.floor((Math.random())*this.canvas_height/2);
    
     var angle = Math.floor(Math.random()*60);
-    var scale = 80+Math.floor(Math.random()*100);
+    var scale = 100+Math.floor(Math.random()*100);
 
     var random_x_scaled = random_x+scale;
     var random_y_scaled = random_y+scale;
 
     var random_x_arc = random_x*Math.cos(angle);
     var random_y_arc = random_y*Math.sin(angle);
-
+    var radius = scale;
     /* get index of random figure */
 
     this.random_cursor = Math.floor(Math.random()*this.difficulty.at(this.level)?.length);
@@ -340,8 +332,6 @@ export class Es501Component implements OnInit{
     /* get js commands */
 
     var commands:string[] = this.difficulty.at(this.level)?.at(this.random_cursor)?.split(";");
-
-
 
     this.cbx.strokeStyle = this.bg_color;
     
@@ -404,6 +394,8 @@ export class Es501Component implements OnInit{
 
     this.cbx.strokeStyle = this.bg_color;
     var cube = null;
+    var cube_2 = null;
+    var piramid_2 = null;
     var piramid = null;
 
     for(let i=0;i<commands.length;i++){
@@ -916,13 +908,13 @@ export class Piramid extends Object_3d{
   /* top point */
   t1;
 
-  constructor(origin_x:number, origin_y:number, origin_z:number, scale:number){
+  constructor(origin_x:number, origin_y:number, origin_z:number, scale:number, height_multiplier:number){
     super();
     this.b1 = new Point(origin_x,origin_y,origin_z);
     this.b2 = new Point(origin_x+scale,origin_y,origin_z);
     this.b4 = new Point(origin_x,origin_y,origin_z+scale);
     this.b3 = new Point(origin_x+scale,origin_y,origin_z+scale);
-    this.t1 = new Point(origin_x+(scale/2), origin_y+scale+Math.floor(Math.random()*30), origin_z+(scale/2));
+    this.t1 = new Point(origin_x+(scale/2), origin_y+scale * height_multiplier, origin_z+(scale/2));
   }
 
   override loadPoints(points:Point[]):void{
