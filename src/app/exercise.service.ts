@@ -52,15 +52,7 @@ export class ExerciseService {
         {
           id: 303,
           difficulty: 1,
-        },
-        {
-          id: 403,
-          difficulty: 3,
-        },
-        {
-          id: 405,
-          difficulty: 3,
-        },
+        }
       ]
     }
     //store the session info in local storage
