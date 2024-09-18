@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { Es308Component } from './es308/es308.component';
+import { Es509Component } from './es509/es509.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/esercizi', pathMatch: 'full'},
   {
-    path: '308',
-    component: Es308Component,
+    path: '509',
+    component: Es509Component,
   },
 ];
 
