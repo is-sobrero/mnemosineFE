@@ -9,6 +9,8 @@ import {
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { ExerciseService } from '../../exercise.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-es203',
@@ -29,12 +31,21 @@ import { NgFor, NgIf, CommonModule } from '@angular/common';
   styleUrl: './es203.component.scss',
 })
 export class Es203Component implements OnInit {
-  livello = 1;
+  livello = 0; // Livello di difficoltà (1, 2, o 3)
   punti: { x: number; y: number; label: string }[] = [];
   puntiUniti: string[] = [];
   messaggio = '';
+  timeMillis = 0;
+  errors = 0;
+
+  constructor(private ES: ExerciseService) {}
 
   ngOnInit(): void {
+    console.log('Livello:', this.ES.currentInfo());
+    this.livello = this.ES.currentInfo().difficulty;
+    setInterval(() => {
+      this.timeMillis += 100;
+    }, 100);
     this.generaPunti();
   }
 
@@ -86,16 +97,12 @@ export class Es203Component implements OnInit {
 
       // Controlla se tutti i punti sono stati uniti
       if (this.puntiUniti.length === this.punti.length) {
-        if (this.livello < 3) {
-          alert('Hai completato il livello! Prossimo livello!');
-          this.livello++;
-          this.cambiaLivello(this.livello);
-        } else {
-          alert('Hai completato tutti i livelli!');
-        }
+        this.livello++;
+        this.ES.nextExercise(203, {errors: this.errors, time: this.timeMillis});
       }
     } else {
       this.messaggio = `Hai selezionato ${punto.label} invece di ${prossimoLabel}. Riprova!`;
+      this.errors++;
     }
   }
 
@@ -118,11 +125,5 @@ export class Es203Component implements OnInit {
     } else {
       return (Number(ultimoLabel.charCodeAt(0) - 64) + 1).toString(); // Converte la lettera in numero
     }
-  }
-
-  // Cambia il livello e genera nuovi punti
-  cambiaLivello(nuovoLivello: number) {
-    this.livello = nuovoLivello;
-    this.generaPunti();
   }
 }

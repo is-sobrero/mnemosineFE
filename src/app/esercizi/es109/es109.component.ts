@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es109',
@@ -31,11 +32,19 @@ export class Es109Component implements OnInit {
   inputUtente: string[] = []; // Sequenza di lettere inseriti dall'utente
   step = 1; // Step del gioco (1: mostra sequenza, 2: inserimento, 3: risultato)
   errori = 0; // Numero di errori commessi
+  timeMillis = 0; // Tempo trascorso in millisecondi
 
   lettere = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Lettere
 
+  constructor(private ES: ExerciseService) { }
+
   ngOnInit(): void {
     this.iniziaGioco();
+    this.timeMillis = 0;
+    setInterval(() => {
+      this.timeMillis += 100;
+    }, 100);
+    this.livello = this.ES.currentInfo().difficulty;
   }
 
   // Inizia il gioco
@@ -60,6 +69,8 @@ export class Es109Component implements OnInit {
   stepSuccessivo() {
     if (this.step === 2) {
       this.verificaRisposta();
+    } else if (this.step === 3) {
+      this.ES.nextExercise(109, { errors: this.errori, time: this.timeMillis });
     }
     this.step++;
   }
@@ -79,11 +90,5 @@ export class Es109Component implements OnInit {
         this.errori++;
       }
     }
-  }
-
-  // Cambia il livello di difficoltà
-  cambiaLivello(nuovoLivello: number) {
-    this.livello = nuovoLivello;
-    this.iniziaGioco();
   }
 }

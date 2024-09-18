@@ -25,13 +25,7 @@
     </mat-card-content>
 
     <mat-card-actions>
-        <button mat-button (click)="stepSuccessivo()" [disabled]="step === 3">Avanti</button>
-        <button mat-button (click)="iniziaGioco()">Ricomincia</button>
-        <div>
-            <label class="">Livello di difficoltà:</label>
-            <button mat-button (click)="cambiaLivello(1)">1</button>
-            <button mat-button (click)="cambiaLivello(2)">2</button>
-            <button mat-button (click)="cambiaLivello(3)">3</button>
-        </div>
+        <button mat-button (click)="stepSuccessivo()" [disabled]="step === 4">Avanti</button>
+        <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p> 
     </mat-card-actions>
 </mat-card>
