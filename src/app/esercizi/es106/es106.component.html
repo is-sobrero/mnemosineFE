@@ -44,7 +44,7 @@
   <p>Errori commessi: {{errori}}</p>
  </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="step === 4 || step == 1 || step == 3 || cliccato == false" (click)="stepIncrease()" mat-button>
+      <button [disabled]="step === 4 || step == 1 || step == 3 || step == 2 || cliccato == false" (click)="stepIncrease()" mat-button>
         Avanti
       </button>
       <button style="margin-left: 85px;"  [disabled]="step !== 4" (click)="step = 1; errori = 0; resetVariabile()" mat-button>

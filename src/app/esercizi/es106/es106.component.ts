@@ -32,40 +32,38 @@ import { __values } from 'tslib';
   styleUrls: ['./es106.component.scss'],
 })
 
-export class Es106Component implements OnInit {
-
+export class Es106Component {
   cliccato = false;
   arraySequenza = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-  buttonClicked: string[] = [];
-  count = 0;
+  buttonClicked: any[] = [];
   errori = 0;
   nAccensioni = 0;
   nCliccati = 0;
   step = 1;
-  i = 0;
+  indice = 0;
   nameID: any;
   timer: any;
   seed = 'abracadabra';
 
   private http = inject(HttpClient);
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   resetVariabile() {
     this.arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     this.nCliccati = 0;
-    this.count = 0;
     this.errori = 0;
     clearInterval(this.timer);
   }
 
+  /**
+   * Imposta il livello di difficolt  dell'esercizio, n  il numero di accensioni
+   * della sequenza di luci da memorizzare.
+   * @param N livello di difficoltà.
+   */
   setLivello(N: number) {
+    console.log(this.nAccensioni);
     this.nAccensioni = N;
-    this.arraySequenza = this.shuffleArray(this.arraySequenza);
+    // this.arraySequenza = this.shuffleArray(this.arraySequenza);
     console.log(this.arraySequenza);
     this.avvioSequenza();
   }
@@ -105,23 +103,21 @@ export class Es106Component implements OnInit {
       console.log(this.nameID);
       index++;
       if (index == this.nAccensioni - 1) {
-        clearInterval(this.timer);
+        this.stepIncrease();
       }
     }, 1000);
   }
 
   sequenzaSelezionata(valore: number) {
-    this.buttonClicked[this.i] = valore.toString();
-    this.i++;
+    this.buttonClicked[this.indice] = valore;
+    this.indice++;
   }
 
   crossCheck() {
-    for (this.i = 0; this.i < this.nAccensioni; this.i++) {
-      if (this.buttonClicked[this.i] != this.arraySequenza[this.i]) {
+    for (let i = 0; i < this.nAccensioni; i++) {
+      if (this.buttonClicked[i] != this.arraySequenza[i]) {
         this.errori++;
       }
     }
   }
-
 }
-
