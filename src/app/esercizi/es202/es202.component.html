@@ -9,5 +9,8 @@
             {{ punto.numero }}
         </div>
     </div>
+    <mat-card-actions>
+        <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+      </mat-card-actions>
     <div *ngIf="messaggio">{{ messaggio }}</div>
 </mat-card>

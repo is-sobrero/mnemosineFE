@@ -30,12 +30,16 @@ export class ExerciseService {
           difficulty: 1,
         },
         {
+          id: 105,
+          difficulty: 1,
+        },
+        {
           id: 108,
           difficulty: 2,
         },
         {
           id: 109,
-          difficulty: 2,
+          difficulty: 1,
         },
         {
           id: 110,
@@ -46,13 +50,21 @@ export class ExerciseService {
           difficulty: 1,
         },
         {
+          id: 202,
+          difficulty: 1,
+        },
+        {
           id: 203,
           difficulty: 1,
         },
         {
+          id: 204,
+          difficulty: 2,
+        },
+        {
           id: 303,
           difficulty: 1,
-        }
+        },
       ]
     }
     //store the session info in local storage
