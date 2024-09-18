@@ -950,3 +950,64 @@ export class Piramid extends Object_3d{
     console.log("t1 -> x:"+this.t1.x+" y:"+this.t1.y);
   }
 }
+
+export class Prism extends Object_3d{
+  t1;
+  b1;
+
+  xl;
+  xr;
+
+  zl;
+  zr;
+
+  constructor(origin_x:number, origin_y:number, origin_z:number, scale:number){
+    super();
+    this.t1 = new Point(origin_x, origin_y,origin_z);
+    this.b1 = new Point(origin_x, origin_y*3,origin_z);
+
+    this.xl = new Point(origin_x*2,origin_y*2, origin_z);
+    this.xr = new Point(origin_x*-2,origin_y*2, origin_z);
+
+    this.zl = new Point(origin_x,origin_y*2, origin_z*2);
+    this.zr = new Point(origin_x,origin_y*2, origin_z*-2);
+  }
+
+  override getPoints():Point[]{
+    var points:Point[] = [];
+
+    points.push(this.t1);
+    points.push(this.b1);
+    points.push(this.xl);
+    points.push(this.xr);
+    points.push(this.zl);
+    points.push(this.zr);
+
+    return points;
+  }
+  override loadPoints(points:Point[]):void{
+    this.t1 = points.at(0) as Point;
+    this.b1 = points.at(1) as Point;
+
+    this.xl = points.at(2) as Point;
+    this.xr = points.at(3) as Point;
+
+    this.zl = points.at(4) as Point;
+    this.zr = points.at(5) as Point;
+  }
+
+  override stroke_vertex(cbx:any):void{
+
+  }
+
+  override pointToString(){
+    console.log("top point x: "+this.t1.x+" y: "+this.t1.y);
+    console.log("bottom point x: "+this.b1.x+" y: "+this.b1.y);
+
+    console.log("Horizontal left point x: "+this.xl.x+" y: "+this.xl.y);
+    console.log("Horizontal right point x: "+this.xr.x+" y: "+this.xr.y);
+
+    console.log("Depth left point x: "+this.zl.x+" y: "+this.zl.y);
+    console.log("Depth right point x: "+this.zr.x+" y: "+this.zr.y);
+  }
+}
