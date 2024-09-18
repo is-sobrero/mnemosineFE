@@ -50,6 +50,10 @@ export class ExerciseService {
           difficulty: 1,
         },
         {
+          id: 303,
+          difficulty: 1,
+        },
+        {
           id: 403,
           difficulty: 3,
         },
