@@ -111,7 +111,7 @@ export class Es501Component implements OnInit{
   bg_color = "#303030a0";
   fg_color = "#000000";
 
-  limit_bound:number = 100;
+  limit_bound:number = 150;
   random_cursor:number = 0;
 
     /* 
@@ -196,7 +196,12 @@ export class Es501Component implements OnInit{
 
     "cube = new Cube(random_x,random_y,random_z-Math.floor(Math.random()*50), scale_factor*1.5);cube = this.rotation_matrix(cube, rotation_factor, select_rotation);this.plane_projection(cube, 1);this.pan(cube,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,70);cube.stroke_vertex(this.cbx);",
 
+    "prism  = new Prism(random_x, random_y, random_z, scale_factor*0.5); prism = this.rotation_matrix(prism, rotation_factor, select_rotation); this.plane_projection(prism, 1);this.pan(prism,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,70);prism.stroke_vertex(this.cbx);",
+
+
     "piramid = new Piramid(random_x+ scale_factor*Math.cos(10), random_y, random_z, scale_factor*2, 1);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);this.pan(piramid,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,70);piramid.stroke_vertex(this.cbx);",
+
+    "prism  = new Prism(random_x, random_y, random_z, scale_factor); prism = this.rotation_matrix(prism, rotation_factor, select_rotation); this.plane_projection(prism, 1);this.pan(prism,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,70);prism.stroke_vertex(this.cbx);"
 
   ];
   private hard_random:string[] = [
@@ -458,9 +463,9 @@ export class Es501Component implements OnInit{
     console.clear();
 
     /* position */
-    var random_x = this.limit_bound+Math.floor((Math.random())*this.canvas_width-this.limit_bound);
-    var random_y = this.limit_bound+Math.floor((Math.random())*this.canvas_height-this.limit_bound);
-    var random_z = this.limit_bound+Math.floor(Math.random() * this.canvas_depth-this.limit_bound);
+    var random_x = Math.floor((Math.random())*this.canvas_width-this.limit_bound);
+    var random_y = Math.floor((Math.random())*this.canvas_height-this.limit_bound);
+    var random_z = Math.floor(Math.random() * this.canvas_depth-this.limit_bound);
 
     /* scaling factor, rotation factor and selected rotation */
     var scale_factor = 100 + Math.floor(Math.random() * this.scale_factor_3d);
@@ -504,6 +509,7 @@ export class Es501Component implements OnInit{
     this.cbx.strokeStyle = this.bg_color;
     var cube = null;
     var piramid = null;
+    var prism = null;
 
     for(let i=0;i<commands.length;i++){
       eval(commands[i]);
@@ -657,7 +663,7 @@ export class Es501Component implements OnInit{
     var check_negative_y:number = 0;
     var check_overflow_x:number = 0;
     var check_overflow_y:number = 0;
-    var fix_count = 50;
+    var fix_count = 80;
 
     for(let i=0;i<points.length;i++){
       if(points.at(i)?.x < min){
@@ -963,14 +969,15 @@ export class Prism extends Object_3d{
 
   constructor(origin_x:number, origin_y:number, origin_z:number, scale:number){
     super();
+
     this.t1 = new Point(origin_x, origin_y,origin_z);
-    this.b1 = new Point(origin_x, origin_y*3,origin_z);
+    this.b1 = new Point(origin_x, origin_y+scale*2,origin_z);
 
-    this.xl = new Point(origin_x*2,origin_y*2, origin_z);
-    this.xr = new Point(origin_x*-2,origin_y*2, origin_z);
+    this.xl = new Point(origin_x+scale,origin_y+scale, origin_z);
+    this.xr = new Point(origin_x-scale,origin_y+scale, origin_z);
 
-    this.zl = new Point(origin_x,origin_y*2, origin_z*2);
-    this.zr = new Point(origin_x,origin_y*2, origin_z*-2);
+    this.zl = new Point(origin_x,origin_y+scale, origin_z+scale);
+    this.zr = new Point(origin_x,origin_y+scale, origin_z-scale);
   }
 
   override getPoints():Point[]{
@@ -997,7 +1004,37 @@ export class Prism extends Object_3d{
   }
 
   override stroke_vertex(cbx:any):void{
+    cbx.beginPath();
 
+    cbx.moveTo(this.t1.x, this.t1.y);
+    cbx.lineTo(this.xl.x,this.xl.y);
+
+    cbx.moveTo(this.t1.x, this.t1.y);
+    cbx.lineTo(this.xr.x,this.xr.y);
+
+    cbx.moveTo(this.t1.x, this.t1.y);
+    cbx.lineTo(this.zl.x,this.zl.y);
+
+    cbx.moveTo(this.t1.x, this.t1.y);
+    cbx.lineTo(this.zr.x,this.zr.y);
+
+    cbx.moveTo(this.b1.x, this.b1.y);
+    cbx.lineTo(this.xl.x,this.xl.y);
+
+    cbx.moveTo(this.b1.x, this.b1.y);
+    cbx.lineTo(this.xr.x,this.xr.y);
+
+    cbx.moveTo(this.b1.x, this.b1.y);
+    cbx.lineTo(this.zr.x,this.zr.y);
+
+    cbx.moveTo(this.b1.x, this.b1.y);
+    cbx.lineTo(this.zl.x,this.zl.y);
+
+    cbx.moveTo(this.xl.x, this.xl.y);
+    cbx.lineTo(this.zl.x,this.zl.y);
+    cbx.lineTo(this.xr.x,this.xr.y);
+    cbx.lineTo(this.zr.x,this.zr.y);
+    cbx.lineTo(this.xl.x,this.xl.y);
   }
 
   override pointToString(){
