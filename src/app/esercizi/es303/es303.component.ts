@@ -82,7 +82,7 @@ export class Es303Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setParole(this.ES.currentInfo().difficulty);
+    this.setParole(this.ES.currentInfo().difficulty*3);
     setInterval(() => {
       this.timeMillis += 100;
     }, 100);
@@ -134,7 +134,7 @@ export class Es303Component implements OnInit {
   nextStep(){
     this.step++;
     if(this.step === 5) {
-      this.ES.nextExercise(304, {time: this.timeMillis, errors: this.errori});
+      this.ES.nextExercise(303, {time: this.timeMillis, errors: this.errori});
     }
     if(this.step == 4){
       this.arrayParole.sort();
