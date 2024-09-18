@@ -39,6 +39,10 @@
       <button id="9" class="luce" [disabled]="arrayCliccato[8] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[8] = 1; clickIncrease(); sequenzaSelezionata(9)"></button>
     </div>
  </mat-card-content>
+ <mat-card-content *ngIf="(step === 4)">
+  <p>Hai completato l'esercizio.</p>
+  <p>Errori commessi: {{errori}}</p>
+ </mat-card-content>
     <mat-card-actions>
       <button [disabled]="step === 4 || step == 1 || step == 3 || cliccato == false" (click)="stepIncrease()" mat-button>
         Avanti
@@ -51,5 +55,5 @@
 
 
   <script>
-      document.getElementById(nameID).style.backgroundColor("#FFFF00");
+      
   </script>

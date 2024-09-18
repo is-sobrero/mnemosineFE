@@ -12,19 +12,6 @@ import {
   MatCardContent,
 } from '@angular/material/card';
 import { __values } from 'tslib';
-/* 
-Il modulo component, che rappresenta il componente, è decorato con il decoratore @Component.
-
-Include un selettore che serve  per identificare il componente in un template HTML.
-Il selettore è il nome del componente, che è app-es101 in questo caso.
-
-Il campo standalone: true indica che il componente è autonomo e non dipende da altri componenti.
-
-Il campo imports: [] è un array che contiene i moduli che il componente richiede per funzionare correttamente.
-
-Il campo templateUrl: './es101.component.html' è il percorso del file HTML del template del componente.
-Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del componente.
-*/
 
 @Component({
   selector: 'app-es106',
@@ -42,17 +29,15 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
     HttpClientModule,
   ],
   templateUrl: './es106.component.html',
-  styleUrl: './es106.component.scss',
+  styleUrls: ['./es106.component.scss'],
 })
 
-//il componente in se, implementa "OnInit" che ci consente di poter eseguire del codice all'avvio del componente
 export class Es106Component implements OnInit {
-  //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
+
   cliccato = false;
-  //Questo array viene utilizzato per disattivare una per volta ogni città selezionata
   arraySequenza = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-  buttonClicked: number[] = [];
+  buttonClicked: string[] = [];
   count = 0;
   errori = 0;
   nAccensioni = 0;
@@ -65,50 +50,78 @@ export class Es106Component implements OnInit {
 
   private http = inject(HttpClient);
 
-  constructor() {}
+  constructor() { }
 
-  //funzione che viene eseguita all'avvio del componente
   ngOnInit(): void {
   }
 
-  //Quando clicco il bottone per ricomincira, resetta i contatori
-  resetVariabile(){
-      this.arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-      this.nCliccati = 0;
-      this.count = 0;
-      this.errori = 0;
-      clearInterval(this.timer);
+  resetVariabile() {
+    this.arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.nCliccati = 0;
+    this.count = 0;
+    this.errori = 0;
+    clearInterval(this.timer);
   }
-  
-  //Queste tre funzioni vengono richiamate separatamente per in base alla scelta del livello per aggiornare ilnumero di città
-  setLivello(N: number){
+
+  setLivello(N: number) {
     this.nAccensioni = N;
-    this.arraySequenza = this.arraySequenza.sort();
+    this.arraySequenza = this.shuffleArray(this.arraySequenza);
+    console.log(this.arraySequenza);
     this.avvioSequenza();
   }
 
-  stepIncrease(){
-    this.step++;
+  shuffleArray(array: any[]): any[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
 
-  clickIncrease(){
-    this.nCliccati++;
+  stepIncrease() {
+    this.step++;
 
-    if(this.nCliccati == this.nAccensioni){
-      this.step++;
+    if (this.step == 2) {
+      this.avvioSequenza();
+    }
+
+    if (this.step == 4) {
+      this.crossCheck();
     }
   }
 
-  async avvioSequenza(){
-      this.timer = setInterval(() => {
-      this.nameID = this.arraySequenza[this.i];
-      this.i++;
+  clickIncrease() {
+    this.nCliccati++;
+
+    if (this.nCliccati == this.nAccensioni) {
+      this.stepIncrease();
+    }
+  }
+
+  avvioSequenza() {
+    let index = 0;
+    this.timer = setInterval(() => {
+      this.nameID = this.arraySequenza[index];
+      console.log(this.nameID);
+      index++;
+      if (index == this.nAccensioni - 1) {
+        clearInterval(this.timer);
+      }
     }, 1000);
   }
 
-  sequenzaSelezionata(valore:number){
-    this.buttonClicked[this.i] = valore;
+  sequenzaSelezionata(valore: number) {
+    this.buttonClicked[this.i] = valore.toString();
     this.i++;
   }
 
+  crossCheck() {
+    for (this.i = 0; this.i < this.nAccensioni; this.i++) {
+      if (this.buttonClicked[this.i] != this.arraySequenza[this.i]) {
+        this.errori++;
+      }
+    }
+  }
+
 }
+
