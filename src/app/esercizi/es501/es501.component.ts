@@ -150,13 +150,13 @@ export class Es501Component implements OnInit{
 
   ]
   private medium_random:string[] = [
-    "cube = new Cube(random_x,random_y,random_z, scale_factor);cube = this.rotation_matrix(cube, rotation_factor, select_rotation);this.plane_projection(cube, 1);cube.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube.stroke_vertex(this.cbx);",
+    "cube = new Cube(random_x,random_y,random_z, scale_factor);cube = this.rotation_matrix(cube, rotation_factor, select_rotation);this.plane_projection(cube, 1);this.pan(cube,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube.stroke_vertex(this.cbx);",
 
-    "piramid = new Piramid(random_x, random_y, random_z, scale_factor, 1);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);piramid.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid.stroke_vertex(this.cbx);",
+    "piramid = new Piramid(random_x, random_y, random_z, scale_factor, 1);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);this.pan(piramid,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid.stroke_vertex(this.cbx);",
 
-    "cube_2 = new Cube(random_x,random_y,random_z*2, scale_factor);cube = this.rotation_matrix(cube_2, rotation_factor, select_rotation);this.plane_projection(cube_2, 0.5);cube_2.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube_2.stroke_vertex(this.cbx);",
+    "cube_2 = new Cube(random_x,random_y,random_z*2, scale_factor);cube = this.rotation_matrix(cube_2, rotation_factor, select_rotation);this.plane_projection(cube_2, 0.5);this.pan(cube_2,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube_2.stroke_vertex(this.cbx);",
 
-    "piramid_2 = new Piramid(random_x, random_y, random_z, scale_factor, 5);piramid_2 = this.rotation_matrix(piramid_2, rotation_factor, select_rotation);this.plane_projection(piramid_2, 0.5);piramid_2.pan(this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid_2.stroke_vertex(this.cbx);",
+    "piramid_2 = new Piramid(random_x, random_y, random_z, scale_factor, 5);piramid_2 = this.rotation_matrix(piramid_2, rotation_factor, select_rotation);this.plane_projection(piramid_2, 0.5);this.pan(piramid_2,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid_2.stroke_vertex(this.cbx);",
 
   ]
   private hard_random:string[] = [
@@ -272,7 +272,7 @@ export class Es501Component implements OnInit{
 
     var random_x_arc = random_x*Math.cos(angle);
     var random_y_arc = random_y*Math.sin(angle);
-    var radius = scale;
+    var radius = scale+Math.floor(Math.random ()*scale/2);
     /* get index of random figure */
 
     this.random_cursor = Math.floor(Math.random()*this.difficulty.at(this.level)?.length);
@@ -541,6 +541,74 @@ export class Es501Component implements OnInit{
 
     return obj;
   }
+
+
+  private pan_object(obj:Object_3d,min:number,max:number, maxy:number,cicle:number):any{
+    var points:any[] = obj.getPoints() as Point[];
+
+    var check_negative_x:number = 0;
+    var check_negative_y:number = 0;
+    var check_overflow_x:number = 0;
+    var check_overflow_y:number = 0;
+    var fix_count = 10;
+
+    for(let i=0;i<points.length;i++){
+      if(points.at(i)?.x < min){
+        check_negative_x+=1;
+      }
+      if(points.at(i).y < min){
+        check_negative_y+=1;
+      }
+      if(points.at(i).x > max){
+        check_overflow_x+=1;
+      }
+      if(points.at(i).y > maxy){
+        check_overflow_y+=1;
+      }
+    }
+
+    if(check_negative_x == 0 && check_negative_y == 0 && check_overflow_x == 0 && check_overflow_y == 0){
+      return 0;
+    }
+
+    if(check_negative_x > 0 ){
+      for(let i=0;i<points.length;i++){
+        points.at(i).x += fix_count;
+      }
+      return 1;
+    }
+
+    if(check_negative_y > 0 ){
+      for(let i=0;i<points.length;i++){
+        points.at(i).y += fix_count;
+      }
+      return 1;
+    }
+
+    if(check_overflow_x > 0 ){
+      for(let i=0;i<points.length;i++){
+        points.at(i).x -= fix_count;
+      }
+      return 1;
+    }
+
+    if(check_overflow_y > 0 ){
+      for(let i=0;i<points.length;i++){
+        points.at(i).y -= fix_count;
+      }
+      return 1;
+    }
+    return -1;
+  }
+
+  private pan(obj:Object_3d,min:number,max:number, maxy:number,cicle:number){
+    var end:boolean = false;
+    while(!end){
+      if(this.pan_object(obj,min,max,maxy,50) == 0){
+        end = true;
+      }
+    }
+  }
 }
 
 
@@ -574,11 +642,6 @@ export class Object_3d{
   public stroke_vertex(cbx:any):void{}
 
   public pointToString(){}
-
-  public pan_object(min:number,max:number, maxy:number){}
-
-  public pan(min:number,max:number, maxy:number,cicle:number){}
-
 }
 
 export class Cube extends Object_3d{
@@ -681,220 +744,6 @@ export class Cube extends Object_3d{
     console.log("z4 -> x:"+this.z4.x+" y:"+this.z4.y);
   }
 
-  /* function to center the object into the canvas */
-
-  override pan_object(min:number,max:number, maxy:number):any{
-
-    var end:boolean = false;
-    var check_negative_x:number = 0;
-    var check_negative_y:number = 0;
-    var check_overflow_x:number = 0;
-    var check_overflow_y:number = 0;
-    var fix_count = 10;
-
-    /* 
-    
-      How this function operate ( incomplete ):
-
-      1 - identify the direction where the object overflow from the canvas 
-      2 - then check for all the 4 possibility and operate for them
-
-      (panning/operation)
-      3 - pan by a fixed value ( ex 10 ) until all point would enter in the 
-      equation: 0+limit_bound > px > c_width-limit_bound && 0+limit_bound > py > c_height-limit_bound
-    
-    
-    */
-
-    /* check for negative overflow by any of this points */
-    if(this.p1.x < min || this.p2.x < min || this.p3.x < min || this.p4.x < min){
-      check_negative_x++;
-    }
-    if(this.p1.y < min || this.p2.y < min || this.p3.y < min || this.p4.y < min){
-      check_negative_y++;
-    }
-
-    if(this.z1.x < min || this.z2.x < min || this.z3.x < min || this.z4.x < min){
-      check_negative_x++;
-    }
-    if(this.z1.y < min || this.z2.y < min || this.z3.y < min || this.z4.y < min){
-      check_negative_y++;
-    }
-
-    /* check for positive width-bounds overflow by any of this points */
-
-    if(this.p1.x > max || this.p2.x > max || this.p3.x > max || this.p4.x > max){
-      check_overflow_x++;
-    }
-    if(this.p1.y > maxy || this.p2.y > maxy || this.p3.y > maxy || this.p4.y > maxy){
-      check_overflow_y++;
-    }
-
-    if(this.z1.x > max || this.z2.x > max || this.z3.x > max || this.z4.x > max){
-      check_overflow_x++;
-    }
-    if(this.z1.y > maxy || this.z2.y > maxy || this.z3.y > maxy || this.z4.y > maxy ){
-      check_overflow_y++;
-    }
-
-    if(check_negative_x == 0 && check_negative_y == 0 && check_overflow_x == 0 && check_overflow_y == 0){
-      return 0;
-    }
-
-    if(check_negative_x > 0){
-      console.log("negative x");
-      while(!end){
-        if( this.p1.x < min || this.p1.x < min || this.p3.x < min || this.p4.x < min || 
-            this.z1.x < min || this.z2.x < min || this.z3.x < min || this.z4.x < min){
-
-          this.p1.x += fix_count;
-          this.p2.x += fix_count;
-          this.p3.x += fix_count;
-          this.p4.x += fix_count;
-          this.z1.x += fix_count;
-          this.z2.x += fix_count;
-          this.z3.x += fix_count;
-          this.z4.x += fix_count;
-
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_negative_y > 0){
-      console.log("negative y");
-      while(!end){
-        if( this.p1.y < min || this.p1.y < min || this.p3.y < min || this.p4.y < min || 
-            this.z1.y < min || this.z2.y < min || this.z3.y < min || this.z4.y < min){
-
-          this.p1.y += fix_count;
-          this.p2.y += fix_count;
-          this.p3.y += fix_count;
-          this.p4.y += fix_count;
-          this.z1.y += fix_count;
-          this.z2.y += fix_count;
-          this.z3.y += fix_count;
-          this.z4.y += fix_count;
-
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_overflow_x > 0){
-      console.log("overflow x");
-      while(!end){
-        if( this.p1.x > max || this.p1.x > max || this.p3.x > max || this.p4.x > max || 
-            this.z1.x > max || this.z2.x > max || this.z3.x > max || this.z4.x > max){
-
-          this.p1.x -= fix_count;
-          this.p2.x -= fix_count;
-          this.p3.x -= fix_count;
-          this.p4.x -= fix_count;
-          this.z1.x -= fix_count;
-          this.z2.x -= fix_count;
-          this.z3.x -= fix_count;
-          this.z4.x -= fix_count;
-
-        }else end = true;
-      }
-      return 1;
-    }
-
-
-    if(check_overflow_y > 0){
-      console.log("overflow y");
-      while(!end){
-        if( this.p1.y > maxy || this.p1.y > maxy || this.p3.y > maxy || this.p4.y > maxy || 
-            this.z1.y > maxy || this.z2.y > maxy || this.z3.y > maxy || this.z4.y > maxy){
-
-          this.p1.y -= fix_count;
-          this.p2.y -= fix_count;
-          this.p3.y -= fix_count;
-          this.p4.y -= fix_count;
-          this.z1.y -= fix_count;
-          this.z2.y -= fix_count;
-          this.z3.y -= fix_count;
-          this.z4.y -= fix_count;
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_negative_x > 0 && check_negative_y > 0){
-      console.log("negative x and y");
-      while(!end){
-        if( this.p1.x < min || this.p1.x < min || this.p3.x < min || this.p4.x < min || 
-            this.z1.x < min || this.z2.x < min || this.z3.x < min || this.z4.x < min ||
-            this.p1.y < min || this.p1.y < min || this.p3.y < min || this.p4.y < min || 
-            this.z1.y < min || this.z2.y < min || this.z3.y < min || this.z4.y < min
-        ){
-
-          this.p1.x += fix_count;
-          this.p2.x += fix_count;
-          this.p3.x += fix_count;
-          this.p4.x += fix_count;
-          this.z1.x += fix_count;
-          this.z2.x += fix_count;
-          this.z3.x += fix_count;
-          this.z4.x += fix_count;
-
-          this.p1.y += fix_count;
-          this.p2.y += fix_count;
-          this.p3.y += fix_count;
-          this.p4.y += fix_count;
-          this.z1.y += fix_count;
-          this.z2.y += fix_count;
-          this.z3.y += fix_count;
-          this.z4.y += fix_count;
-
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_overflow_x > 0 && check_overflow_y > 0){
-      console.log("overflow x and y");
-      while(!end){
-        if( this.p1.y > maxy || this.p1.y > maxy || this.p3.y > maxy || this.p4.y > maxy || 
-            this.z1.y > maxy || this.z2.y > maxy || this.z3.y > maxy || this.z4.y > maxy ||
-            this.p1.x > max || this.p1.x > max || this.p3.x > max || this.p4.x > max || 
-            this.z1.x > max || this.z2.x > max || this.z3.x > max || this.z4.x > max
-        ){
-
-          this.p1.x -= fix_count;
-          this.p2.x -= fix_count;
-          this.p3.x -= fix_count;
-          this.p4.x -= fix_count;
-          this.z1.x -= fix_count;
-          this.z2.x -= fix_count;
-          this.z3.x -= fix_count;
-          this.z4.x -= fix_count;
-          this.p1.y -= fix_count;
-          this.p2.y -= fix_count;
-          this.p3.y -= fix_count;
-          this.p4.y -= fix_count;
-          this.z1.y -= fix_count;
-          this.z2.y -= fix_count;
-          this.z3.y -= fix_count;
-          this.z4.y -= fix_count;
-        }else end = true;
-      }
-      return 1;
-    }
-  }
-
-  override pan(min:number,max:number, maxy:number, cicle:number){
-    var end:boolean = false;
-    var it = 0;
-    while(!end && it < cicle){
-      if(this.pan_object(min, max, maxy) == 0){
-        end = true;
-      }
-      it+=1;
-  }
-}
-
 }
 
 export class Piramid extends Object_3d{
@@ -966,143 +815,5 @@ export class Piramid extends Object_3d{
     console.log("b3 -> x:"+this.b3.x+" y:"+this.b3.y);
     console.log("b4 -> x:"+this.b4.x+" y:"+this.b4.y);
     console.log("t1 -> x:"+this.t1.x+" y:"+this.t1.y);
-  }
-
-  override pan_object(min: number, max: number, maxy: number): any {
-    var end:boolean = false;
-    var check_negative_x:number = 0;
-    var check_negative_y:number = 0;
-    var check_overflow_x:number = 0;
-    var check_overflow_y:number = 0;
-    var fix_count = 10;
-
-    if(this.b1.x < min || this.b2.x < min || this.b3.x < min || this.b4.x < min || this.t1.x < min){
-      check_negative_x++;
-    }
-    if(this.b1.y < min || this.b2.y < min || this.b3.y < min || this.b4.y < min || this.t1.y < min){
-      check_negative_y++;
-    }
-
-    if(this.b1.x > max || this.b2.x > max || this.b3.x > max || this.b4.x > max || this.t1.x > max){
-      check_overflow_x++;
-    }
-    if(this.b1.y > maxy || this.b2.y > maxy || this.b3.y > maxy || this.b4.y > maxy || this.t1.y > maxy){
-      check_overflow_y++;
-    }
-
-    if(check_negative_x == 0 && check_negative_y == 0 && check_overflow_x == 0 && check_overflow_y == 0){
-      return 0;
-    }
-
-    if(check_negative_x > 0){
-      console.log("negative x");
-      while(!end){
-        if(this.b1.x < min || this.b2.x < min || this.b3.x < min || this.b4.x < min || this.t1.x < min){
-          this.b1.x += fix_count;
-          this.b2.x += fix_count;
-          this.b3.x += fix_count;
-          this.b4.x += fix_count;
-          this.t1.x += fix_count;
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_negative_y > 0){
-      console.log("negative y");
-      while(!end){
-        if(this.b1.y < min || this.b2.y < min || this.b3.y < min || this.b4.y < min || this.t1.y < min){
-          this.b1.y += fix_count;
-          this.b2.y += fix_count;
-          this.b3.y += fix_count;
-          this.b4.y += fix_count;
-          this.t1.y += fix_count;
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_overflow_x > 0){
-      console.log("overflow x");
-      while(!end){
-        if(this.b1.x > max || this.b2.x > max  || this.b3.x > max  || this.b4.x > max  || this.t1.x > max ){
-          this.b1.x -= fix_count;
-          this.b2.x -= fix_count;
-          this.b3.x -= fix_count;
-          this.b4.x -= fix_count;
-          this.t1.x -= fix_count;
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_overflow_y > 0){
-      console.log("overflow y");
-      while(!end){
-        if(this.b1.y > maxy || this.b2.y > maxy  || this.b3.y > maxy  || this.b4.y > maxy || this.t1.y > maxy){
-          this.b1.y -= fix_count;
-          this.b2.y -= fix_count;
-          this.b3.y -= fix_count;
-          this.b4.y -= fix_count;
-          this.t1.y -= fix_count;
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_negative_x > 0 && check_negative_y > 0){
-      console.log("negative x and y");
-      while(!end){
-        if(this.b1.x < min || this.b2.x < min || this.b3.x < min || this.b4.x < min || this.t1.x < min ||
-            this.b1.y < min || this.b2.y < min || this.b3.y < min || this.b4.y < min || this.t1.y < min
-        ){
-          this.b1.x += fix_count;
-          this.b2.x += fix_count;
-          this.b3.x += fix_count;
-          this.b4.x += fix_count;
-          this.t1.x += fix_count;
-
-          this.b1.y += fix_count;
-          this.b2.y += fix_count;
-          this.b3.y += fix_count;
-          this.b4.y += fix_count;
-          this.t1.y += fix_count;
-        }else end = true;
-      }
-      return 1;
-    }
-
-    if(check_overflow_x > 0 && check_overflow_y > 0){
-      console.log("overflow x and y");
-      while(!end){
-        if( this.b1.x > max || this.b2.x > max  || this.b3.x > max  || this.b4.x > max  || this.t1.x > max ||
-            this.b1.y > maxy || this.b2.y > maxy  || this.b3.y > maxy  || this.b4.y > maxy || this.t1.y > maxy
-        ){
-          this.b1.x -= fix_count;
-          this.b2.x -= fix_count;
-          this.b3.x -= fix_count;
-          this.b4.x -= fix_count;
-          this.t1.x -= fix_count;
-
-          this.b1.y -= fix_count;
-          this.b2.y -= fix_count;
-          this.b3.y -= fix_count;
-          this.b4.y -= fix_count;
-          this.t1.y -= fix_count;
-        }else end = true;
-      }
-      return 1;
-    }
-  }
-
-  override pan(min:number,max:number, maxy:number, cicle:number){
-    var end:boolean = false;
-    var it = 0;
-    while(!end && it < cicle){
-      if(this.pan_object(min, max, maxy) == 0){
-        end = true;
-      }
-      it+=1;
-    }
   }
 }
