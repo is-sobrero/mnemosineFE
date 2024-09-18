@@ -82,8 +82,10 @@ export class Es501Component implements OnInit{
   currY:number = 0;
   dot_flag = false;
 
-  mouse_width:number = 3;
+  mouse_width:number = 5;
   mouse_end:boolean = false;
+
+  rect:any = null;
 
   /* max axes rotation allowed:
 
@@ -107,7 +109,7 @@ export class Es501Component implements OnInit{
   max_rotation_allowed_for_3d = 5;
 
   bg_color = "#303030a0";
-  fg_color = "#ffffff";
+  fg_color = "#000000";
 
   limit_bound:number = 100;
   random_cursor:number = 0;
@@ -124,7 +126,7 @@ export class Es501Component implements OnInit{
       ]
     */
 
-  level = 1;
+  level = 0;
 
   private easy_random:string[] = [
       "moveTo(random_x,random_y);\
@@ -163,11 +165,10 @@ export class Es501Component implements OnInit{
 
     "piramid = new Piramid(random_x, random_y, random_z, scale_factor, 1);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);this.pan(piramid,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid.stroke_vertex(this.cbx);",
 
-    "cube_2 = new Cube(random_x,random_y,random_z*2, scale_factor);cube = this.rotation_matrix(cube_2, rotation_factor, select_rotation);this.plane_projection(cube_2, 0.5);this.pan(cube_2,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube_2.stroke_vertex(this.cbx);",
+    "cube_2 = new Cube(random_x,random_y,random_z*2, scale_factor/2);cube = this.rotation_matrix(cube_2, rotation_factor, select_rotation);this.plane_projection(cube_2, 2);this.pan(cube_2,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube_2.stroke_vertex(this.cbx);",
 
-    "piramid_2 = new Piramid(random_x, random_y, random_z, scale_factor, 5);piramid_2 = this.rotation_matrix(piramid_2, rotation_factor, select_rotation);this.plane_projection(piramid_2, 0.5);this.pan(piramid_2,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid_2.stroke_vertex(this.cbx);",
-
-  ]
+    "piramid_2 = new Piramid(random_x, random_y, random_z, scale_factor, 5);piramid_2 = this.rotation_matrix(piramid_2, rotation_factor, select_rotation);this.plane_projection(piramid_2, 2);this.pan(piramid_2,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid_2.stroke_vertex(this.cbx);",
+  ];
   private hard_random:string[] = [
     "",
   ];
@@ -193,6 +194,8 @@ export class Es501Component implements OnInit{
 
     this.canvas_background = document.getElementById("canvas_bg");
     this.canvas_foreground = document.getElementById("canvas_fg");
+    
+    this.rect = this.canvas_foreground.getBoundingClientRect();
   
 
     if(this.canvas_background?.getContext){
@@ -256,11 +259,83 @@ export class Es501Component implements OnInit{
     }
     this.cbx.stroke();
 
+    this.canvas_foreground.addEventListener("mousemove", (e:any)=>{
+      this.getMousePosition("move", e);
+    }, false);
+    this.canvas_foreground.addEventListener("mouseup", (e:any)=>{
+      this.getMousePosition("up", e);
+    }, false);
+    this.canvas_foreground.addEventListener("mousedown", (e:any)=>{
+      this.getMousePosition("down", e);
+    }, false);
+    this.canvas_foreground.addEventListener("mouseout", (e:any)=>{
+      this.getMousePosition("out", e);
+    }, false);
   }
 
-  private getMousePosition(e:any){
+  private getMousePosition(command:string, e:any){
+    switch(command){
+      case "down":
+        this.prevX = this.currX;
+        this.prevY = this.currY;
+        this.currX = (e.clientX-this.rect.left)*(this.canvas_width/this.rect.width);
+        this.currY = (e.clientY-this.rect.top)*(this.canvas_height/this.rect.height);
+        this.mouse_end = true;
+        this.dot_flag = true;
+        
+        if(this.debug){
+          console.log("Current mouse X: "+this.currX + " | client x: "+e.clientX);
+            console.log("Current mouse Y: "+this.currY + " | client y: "+e.clientY);
+          console.log("mouse down");
+        }
 
-    
+        if(this.dot_flag){
+          this.cfx.beginPath();
+          this.cfx.fillStyle = this.fg_color;
+          this.cfx.fillRect(this.currX, this.currY, 2, 2);
+          this.cfx.closePath();
+          this.dot_flag = false;
+        }
+        break;
+      case "up":
+        this.dot_flag = false;
+        this.mouse_end = false;
+        if(this.debug){
+          console.log("mouse up");
+        }
+        
+        break;
+      case "move":
+        if(this.mouse_end){
+          this.prevX = this.currX;
+          this.prevY = this.currY;
+          this.currX = (e.clientX-this.rect.left)*(this.canvas_width/this.rect.width);
+          this.currY = (e.clientY-this.rect.top)*(this.canvas_height/this.rect.height);
+          if(this.debug){
+            console.log("Current mouse X: "+this.currX + " | client x: "+e.clientX);
+            console.log("Current mouse Y: "+this.currY + " | client y: "+e.clientY);
+          }
+          this.cfx.beginPath();
+          this.cfx.moveTo(this.prevX, this.prevY);
+          this.cfx.lineTo(this.currX, this.currY);
+          this.cfx.strokeStyle = this.fg_color;
+          this.cfx.lineWidth = this.mouse_width;
+          this.cfx.stroke();
+          this.cfx.closePath();
+          if(this.debug){
+            console.log("mouse move");
+          }
+          
+        }
+        break;
+      case "out":
+        this.mouse_end = false;
+        this.dot_flag = false;
+        if(this.debug){
+          console.log("mouse out");
+        }
+        break;
+    }
   }
 
   private easy_generation(){
