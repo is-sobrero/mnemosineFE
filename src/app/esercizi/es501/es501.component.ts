@@ -126,7 +126,7 @@ export class Es501Component implements OnInit{
       ]
     */
 
-  level = 0;
+  level = 1;
 
   private easy_random:string[] = [
       "moveTo(random_x,random_y);\
@@ -137,8 +137,8 @@ export class Es501Component implements OnInit{
 
       "moveTo(random_x_scaled,random_y);\
        lineTo(random_x,random_y_scaled);\
-       lineTo(random_x, random_y_arc);\
-       lineTo(random_x_arc,random_y_arc);\
+       lineTo(random_x, random_y);\
+       lineTo(random_x_arc,random_y);\
        lineTo(random_x_arc,random_y)",
 
        "arc(random_x_arc,random_y, radius, 0, Math.PI)",
@@ -153,11 +153,40 @@ export class Es501Component implements OnInit{
 
        "moveTo(random_x,random_y_scaled);\
        lineTo(random_x,random_y);\
-       lineTo(random_x_arc, random_y_arc);\
+       lineTo(random_x_scaled, random_y);\
        lineTo(random_x_scaled,random_y_scaled);\
-       lineTo(random_x_arc,random_y);\
+       lineTo(random_x,random_y);\
        lineTo(random_x_scaled,random_y);\
        lineTo(random_x,random_y)",
+
+       "moveTo(random_x,random_y_scaled);\
+        strokeRect(random_x,random_y_scaled, radius*2, radius*2)",
+
+        "moveTo(random_x,random_y_scaled);\
+        strokeRect(random_x_arc,random_y, radius*2, radius*2);\
+        strokeRect(random_x,random_y_scaled, radius, radius*2)",
+
+        "moveTo(random_x/2,random_y_arc);\
+        strokeRect(random_x/2,random_y_arc, radius*0.5, radius*2);\
+        strokeRect(random_x_arc,random_y_scaled, radius*2, radius)",
+
+        "moveTo(random_x/2,random_y_arc);\
+        strokeRect(random_x/2,random_y_arc, radius*0.5, radius*2);\
+        arc(random_x_scaled,random_y_arc, radius, 0, (3/2)*Math.PI)",
+
+
+        "moveTo(random_x/2,random_y_arc);\
+        strokeRect(random_x,random_y, radius, radius);\
+        strokeRect(random_x,random_y_scaled, radius, radius*2);\
+        strokeRect(random_x_arc,random_y_arc, radius*0.4, radius);",
+
+        "moveTo(random_x/2,random_y_arc);\
+        strokeRect(random_x,random_y, radius, radius);\
+        strokeRect(random_x,random_y_scaled, radius, radius*2);\
+        strokeRect(random_x,random_y_arc, radius*0.4, radius);\
+        arc(random_x_scaled,random_y_arc, radius, 0, (3/2)*Math.PI)",
+
+
 
   ]
   private medium_random:string[] = [
@@ -165,9 +194,10 @@ export class Es501Component implements OnInit{
 
     "piramid = new Piramid(random_x, random_y, random_z, scale_factor, 1);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);this.pan(piramid,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid.stroke_vertex(this.cbx);",
 
-    "cube_2 = new Cube(random_x,random_y,random_z*2, scale_factor/2);cube = this.rotation_matrix(cube_2, rotation_factor, select_rotation);this.plane_projection(cube_2, 2);this.pan(cube_2,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube_2.stroke_vertex(this.cbx);",
+    "cube = new Cube(random_x,random_y,random_z-Math.floor(Math.random()*50), scale_factor*1.5);cube = this.rotation_matrix(cube, rotation_factor, select_rotation);this.plane_projection(cube, 1);this.pan(cube,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,70);cube.stroke_vertex(this.cbx);",
 
-    "piramid_2 = new Piramid(random_x, random_y, random_z, scale_factor, 5);piramid_2 = this.rotation_matrix(piramid_2, rotation_factor, select_rotation);this.plane_projection(piramid_2, 2);this.pan(piramid_2,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);piramid_2.stroke_vertex(this.cbx);",
+    "piramid = new Piramid(random_x+ scale_factor*Math.cos(10), random_y, random_z, scale_factor*2, 1);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 1);this.pan(piramid,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,70);piramid.stroke_vertex(this.cbx);",
+
   ];
   private hard_random:string[] = [
     "",
@@ -473,8 +503,6 @@ export class Es501Component implements OnInit{
 
     this.cbx.strokeStyle = this.bg_color;
     var cube = null;
-    var cube_2 = null;
-    var piramid_2 = null;
     var piramid = null;
 
     for(let i=0;i<commands.length;i++){
