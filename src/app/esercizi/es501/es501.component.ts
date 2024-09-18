@@ -256,84 +256,11 @@ export class Es501Component implements OnInit{
     }
     this.cbx.stroke();
 
-    this.canvas_foreground.addEventListener("mousemove", (e:any)=>{
-      this.getMousePosition("move", e);
-    }, false);
-    this.canvas_foreground.addEventListener("mouseup", (e:any)=>{
-      this.getMousePosition("up", e);
-    }, false);
-    this.canvas_foreground.addEventListener("mousedown", (e:any)=>{
-      this.getMousePosition("down", e);
-    }, false);
-    this.canvas_foreground.addEventListener("mouseout", (e:any)=>{
-      this.getMousePosition("out", e);
-    }, false);
   }
 
-  private getMousePosition(command:string, e:any){
-    
-    switch(command){
-      case "down":
-        this.prevX = this.currX;
-        this.prevY = this.currY;
-        this.currX = e.clientX - this.canvas_foreground.offsetLeft;
-        this.currY = e.clientY - this.canvas_foreground.offsetTop;
-        this.mouse_end = true;
-        this.dot_flag = true;
-        
-        if(this.debug){
-          console.log("Current mouse X: "+this.currX);
-          console.log("Current mouse Y: "+this.currY);
-          console.log("mouse down");
-        }
+  private getMousePosition(e:any){
 
-        if(this.dot_flag){
-          this.cfx.beginPath();
-          this.cfx.fillStyle = this.fg_color;
-          this.cfx.fillRect(this.currX, this.currY, 2, 2);
-          this.cfx.closePath();
-          this.dot_flag = false;
-        }
-        break;
-      case "up":
-        this.dot_flag = false;
-        this.mouse_end = false;
-        if(this.debug){
-          console.log("mouse up");
-        }
-        
-        break;
-      case "move":
-        if(this.mouse_end){
-          this.prevX = this.currX;
-          this.prevY = this.currY;
-          this.currX = e.clientX - this.canvas_foreground.offsetLeft;
-          this.currY = e.clientY - this.canvas_foreground.offsetTop;
-          if(this.debug){
-            console.log("Current mouse X: "+this.currX);
-            console.log("Current mouse Y: "+this.currY);
-          }
-          this.cfx.beginPath();
-          this.cfx.moveTo(this.prevX, this.prevY);
-          this.cfx.lineTo(this.currX, this.currY);
-          this.cfx.strokeStyle = "#ff0000" //this.fg_color;
-          this.cfx.lineWidth = this.mouse_width;
-          this.cfx.stroke();
-          this.cfx.closePath();
-          if(this.debug){
-            console.log("mouse move");
-          }
-          
-        }
-        break;
-      case "out":
-        this.dot_flag = false;
-        this.mouse_end = false;
-        if(this.debug){
-          console.log("mouse out");
-        }
-        break;
-    }
+    
   }
 
   private easy_generation(){
