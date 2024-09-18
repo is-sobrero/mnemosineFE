@@ -89,9 +89,11 @@ span
 }
 
 #canvas_bg{
-    background: transparent;
+    background:none;
     position: absolute!important;
     z-index: 5;
+    min-height:500px;
+    min-width: 500px;
 }
 
 #canvas_fg{
@@ -100,4 +102,6 @@ span
     z-index: 6;
     border:2px solid rgba(46, 46, 46, 0.326);
     border-radius: 5px;
+    min-height:500px;
+    min-width: 500px;
 }

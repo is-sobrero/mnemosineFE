@@ -76,6 +76,15 @@ export class Es501Component implements OnInit{
 
   scale_factor_3d:number = 70;
 
+  prevX:number = 0;
+  currX:number = 0;
+  prevY:number = 0;
+  currY:number = 0;
+  dot_flag = false;
+
+  mouse_width:number = 3;
+  mouse_end:boolean = false;
+
   /* max axes rotation allowed:
 
     0: rotate by x axes
@@ -98,7 +107,7 @@ export class Es501Component implements OnInit{
   max_rotation_allowed_for_3d = 5;
 
   bg_color = "#303030a0";
-  fg_color = "#101010";
+  fg_color = "#ffffff";
 
   limit_bound:number = 100;
   random_cursor:number = 0;
@@ -232,7 +241,7 @@ export class Es501Component implements OnInit{
     /* generate random coordinates */
 
     this.cbx.beginPath();  
-    this.cbx.lineWidth = "2"; 
+    this.cbx.lineWidth = "4"; 
 
     switch(this.level){
       case 0:
@@ -245,18 +254,86 @@ export class Es501Component implements OnInit{
             this.hard_generation();
             break;
     }
-
     this.cbx.stroke();
 
-    /*
+    this.canvas_foreground.addEventListener("mousemove", (e:any)=>{
+      this.getMousePosition("move", e);
+    }, false);
+    this.canvas_foreground.addEventListener("mouseup", (e:any)=>{
+      this.getMousePosition("up", e);
+    }, false);
+    this.canvas_foreground.addEventListener("mousedown", (e:any)=>{
+      this.getMousePosition("down", e);
+    }, false);
+    this.canvas_foreground.addEventListener("mouseout", (e:any)=>{
+      this.getMousePosition("out", e);
+    }, false);
+  }
 
-      Prepare the foreground for drawing
+  private getMousePosition(command:string, e:any){
     
-    */
+    switch(command){
+      case "down":
+        this.prevX = this.currX;
+        this.prevY = this.currY;
+        this.currX = e.clientX - this.canvas_foreground.offsetLeft;
+        this.currY = e.clientY - this.canvas_foreground.offsetTop;
+        this.mouse_end = true;
+        this.dot_flag = true;
+        
+        if(this.debug){
+          console.log("Current mouse X: "+this.currX);
+          console.log("Current mouse Y: "+this.currY);
+          console.log("mouse down");
+        }
 
-    this.cfx.beginPath();
-    this.cfx.strokeStyle = this.fg_color;
-    this.cfx.stroke();
+        if(this.dot_flag){
+          this.cfx.beginPath();
+          this.cfx.fillStyle = this.fg_color;
+          this.cfx.fillRect(this.currX, this.currY, 2, 2);
+          this.cfx.closePath();
+          this.dot_flag = false;
+        }
+        break;
+      case "up":
+        this.dot_flag = false;
+        this.mouse_end = false;
+        if(this.debug){
+          console.log("mouse up");
+        }
+        
+        break;
+      case "move":
+        if(this.mouse_end){
+          this.prevX = this.currX;
+          this.prevY = this.currY;
+          this.currX = e.clientX - this.canvas_foreground.offsetLeft;
+          this.currY = e.clientY - this.canvas_foreground.offsetTop;
+          if(this.debug){
+            console.log("Current mouse X: "+this.currX);
+            console.log("Current mouse Y: "+this.currY);
+          }
+          this.cfx.beginPath();
+          this.cfx.moveTo(this.prevX, this.prevY);
+          this.cfx.lineTo(this.currX, this.currY);
+          this.cfx.strokeStyle = "#ff0000" //this.fg_color;
+          this.cfx.lineWidth = this.mouse_width;
+          this.cfx.stroke();
+          this.cfx.closePath();
+          if(this.debug){
+            console.log("mouse move");
+          }
+          
+        }
+        break;
+      case "out":
+        this.dot_flag = false;
+        this.mouse_end = false;
+        if(this.debug){
+          console.log("mouse out");
+        }
+        break;
+    }
   }
 
   private easy_generation(){
@@ -354,7 +431,7 @@ export class Es501Component implements OnInit{
     var random_z = this.limit_bound+Math.floor(Math.random() * this.canvas_depth-this.limit_bound);
 
     /* scaling factor, rotation factor and selected rotation */
-    var scale_factor = 80 + Math.floor(Math.random() * this.scale_factor_3d);
+    var scale_factor = 100 + Math.floor(Math.random() * this.scale_factor_3d);
     var rotation_factor=  Math.floor(Math.random()*360);
     var select_rotation = Math.floor(Math.random()*(this.max_rotation_allowed_for_3d+1));
 
@@ -550,7 +627,7 @@ export class Es501Component implements OnInit{
     var check_negative_y:number = 0;
     var check_overflow_x:number = 0;
     var check_overflow_y:number = 0;
-    var fix_count = 10;
+    var fix_count = 50;
 
     for(let i=0;i<points.length;i++){
       if(points.at(i)?.x < min){
@@ -585,6 +662,16 @@ export class Es501Component implements OnInit{
       return 1;
     }
 
+    if(check_negative_x > 0 && check_negative_y > 0){
+      for(let i=0;i<points.length;i++){
+        points.at(i).x += fix_count;
+      }
+      for(let i=0;i<points.length;i++){
+        points.at(i).y += fix_count;
+      }
+      return 1;
+    }
+
     if(check_overflow_x > 0 ){
       for(let i=0;i<points.length;i++){
         points.at(i).x -= fix_count;
@@ -598,15 +685,31 @@ export class Es501Component implements OnInit{
       }
       return 1;
     }
+
+    if(check_overflow_y > 0 && check_overflow_y > 0){
+      for(let i=0;i<points.length;i++){
+        points.at(i).y -= fix_count;
+      }
+      for(let i=0;i<points.length;i++){
+        points.at(i).x -= fix_count;
+      }
+      return 1;
+    }
+
     return -1;
   }
 
   private pan(obj:Object_3d,min:number,max:number, maxy:number,cicle:number){
     var end:boolean = false;
-    while(!end){
+    var j:number = 0;
+    while(!end && j<cicle){
       if(this.pan_object(obj,min,max,maxy,50) == 0){
         end = true;
+        console.log("Task end with "+j+" iterations")
+      }else{
+        console.log("repositioning");
       }
+      j+=1;
     }
   }
 }
