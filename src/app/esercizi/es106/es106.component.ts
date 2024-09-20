@@ -34,9 +34,12 @@ import { __values } from 'tslib';
 
 export class Es106Component {
   cliccato = false;
-  arraySequenza = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  arraySequenza = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  arrayluci: string[] = [];
   buttonClicked: any[] = [];
+  spenta = "off";
+  accesa = "on";
   errori = 0;
   nAccensioni = 0;
   nCliccati = 0;
@@ -63,9 +66,12 @@ export class Es106Component {
   setLivello(N: number) {
     console.log(this.nAccensioni);
     this.nAccensioni = N;
-    // this.arraySequenza = this.shuffleArray(this.arraySequenza);
+    this.arraySequenza = this.shuffleArray(this.arraySequenza);
     console.log(this.arraySequenza);
-    this.avvioSequenza();
+
+    for (let i = 0; i < 9; i++) {
+      this.arrayluci[i] = this.spenta;
+    }
   }
 
   shuffleArray(array: any[]): any[] {
@@ -99,10 +105,20 @@ export class Es106Component {
   avvioSequenza() {
     let index = 0;
     this.timer = setInterval(() => {
-      this.nameID = this.arraySequenza[index];
-      console.log(this.nameID);
+
+      if(index < this.nAccensioni+ 1){
+        for (let i = 0; i < 9; i++) {
+          this.arrayluci[i] = this.spenta;
+          console.log(this.arrayluci[i]);
+        }
+  
+        this.arrayluci[this.arraySequenza[index]] = this.accesa;
+      }
+
       index++;
-      if (index == this.nAccensioni - 1) {
+
+      if(index == this.nAccensioni + 1){
+        clearInterval(this.timer);
         this.stepIncrease();
       }
     }, 1000);

@@ -14,29 +14,13 @@
     <mat-card-content *ngIf="(step === 2)" style="height: 270px;">
       <p>Memorizza la sequenza di luci</p>
       <div id="contenitore">
-        <div id="1" class="luce"></div>
-        <div id="2" class="luce"></div>
-        <div id="3" class="luce"></div>
-        <div id="4" class="luce"></div>
-        <div id="5" class="luce"></div>
-        <div id="6" class="luce"></div>
-        <div id="7" class="luce"></div>
-        <div id="8" class="luce"></div>
-        <div id="9" class="luce"></div>
+        <div *ngFor="let immagini of arrayluci, index as i" class="luce-{{arrayluci[i]}}"></div>
       </div>
    </mat-card-content>
    <mat-card-content *ngIf="(step === 3)" style="height: 270px;">
     <p>Ricomponi la sequenza di luci</p>
     <div id="contenitore">
-      <button id="1" class="luce" [disabled]="arrayCliccato[0] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[0] = 1; clickIncrease(); sequenzaSelezionata(1)"></button>
-      <button id="2" class="luce" [disabled]="arrayCliccato[1] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[1] = 1; clickIncrease(); sequenzaSelezionata(2)"></button>
-      <button id="3" class="luce" [disabled]="arrayCliccato[2] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[2] = 1; clickIncrease(); sequenzaSelezionata(3)"></button>
-      <button id="4" class="luce" [disabled]="arrayCliccato[3] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[3] = 1; clickIncrease(); sequenzaSelezionata(4)"></button>
-      <button id="5" class="luce" [disabled]="arrayCliccato[4] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[4] = 1; clickIncrease(); sequenzaSelezionata(5)"></button>
-      <button id="6" class="luce" [disabled]="arrayCliccato[5] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[5] = 1; clickIncrease(); sequenzaSelezionata(6)"></button>
-      <button id="7" class="luce" [disabled]="arrayCliccato[6] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[6] = 1; clickIncrease(); sequenzaSelezionata(7)"></button>
-      <button id="8" class="luce" [disabled]="arrayCliccato[7] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[7] = 1; clickIncrease(); sequenzaSelezionata(8)"></button>
-      <button id="9" class="luce" [disabled]="arrayCliccato[8] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[8] = 1; clickIncrease(); sequenzaSelezionata(9)"></button>
+      <button class="luce" *ngFor="let luce of arrayCliccato, index as i" [disabled]="arrayCliccato[i] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[i] = 1; clickIncrease(); sequenzaSelezionata(i)"></button>
     </div>
  </mat-card-content>
  <mat-card-content *ngIf="(step === 4)">

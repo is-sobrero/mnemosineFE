@@ -36,7 +36,7 @@ mat-card {
     height: 210px;
   }
 
-  .luce{
+  .luce-off, .luce{
     border: 1px solid lightgray;
     float: left;
     border-radius: 5px;
@@ -46,7 +46,7 @@ mat-card {
     background-color: white;
   }
 
-  .luceAccesa{
+  .luce-on{
     border: 1px solid lightgray;
     float: left;
     border-radius: 5px;
