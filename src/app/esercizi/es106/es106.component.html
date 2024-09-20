@@ -20,7 +20,7 @@
    <mat-card-content *ngIf="(step === 3)" style="height: 270px;">
     <p>Ricomponi la sequenza di luci</p>
     <div id="contenitore">
-      <button class="luce" *ngFor="let luce of arrayCliccato, index as i" [disabled]="arrayCliccato[i] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[i] = 1; clickIncrease(); sequenzaSelezionata(i)"></button>
+      <button class="luce" *ngFor="let luce of arrayCliccato, index as i" [disabled]="arrayCliccato[i] == 1 || nCliccati == nAccensioni" (click)="arrayCliccato[i] = 1; sequenzaSelezionata(i)"></button>
     </div>
  </mat-card-content>
  <mat-card-content *ngIf="(step === 4)">
@@ -28,6 +28,7 @@
   <p>Errori commessi: {{errori}}</p>
  </mat-card-content>
     <mat-card-actions>
+      <!--Bottone avanti non necessario-->
       <button [disabled]="step === 4 || step == 1 || step == 3 || step == 2 || cliccato == false" (click)="stepIncrease()" mat-button>
         Avanti
       </button>

@@ -44,8 +44,6 @@ export class Es106Component {
   nAccensioni = 0;
   nCliccati = 0;
   step = 1;
-  indice = 0;
-  nameID: any;
   timer: any;
   seed = 'abracadabra';
 
@@ -55,7 +53,6 @@ export class Es106Component {
     this.arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     this.nCliccati = 0;
     this.errori = 0;
-    clearInterval(this.timer);
   }
 
   /**
@@ -64,10 +61,8 @@ export class Es106Component {
    * @param N livello di difficoltà.
    */
   setLivello(N: number) {
-    console.log(this.nAccensioni);
     this.nAccensioni = N;
     this.arraySequenza = this.shuffleArray(this.arraySequenza);
-    console.log(this.arraySequenza);
 
     for (let i = 0; i < 9; i++) {
       this.arrayluci[i] = this.spenta;
@@ -94,14 +89,6 @@ export class Es106Component {
     }
   }
 
-  clickIncrease() {
-    this.nCliccati++;
-
-    if (this.nCliccati == this.nAccensioni) {
-      this.stepIncrease();
-    }
-  }
-
   avvioSequenza() {
     let index = 0;
     this.timer = setInterval(() => {
@@ -109,7 +96,6 @@ export class Es106Component {
       if(index < this.nAccensioni+ 1){
         for (let i = 0; i < 9; i++) {
           this.arrayluci[i] = this.spenta;
-          console.log(this.arrayluci[i]);
         }
   
         this.arrayluci[this.arraySequenza[index]] = this.accesa;
@@ -125,8 +111,12 @@ export class Es106Component {
   }
 
   sequenzaSelezionata(valore: number) {
-    this.buttonClicked[this.indice] = valore;
-    this.indice++;
+    this.buttonClicked[this.nCliccati] = valore;
+    this.nCliccati++;
+
+    if (this.nCliccati == this.nAccensioni) {
+      this.stepIncrease();
+    }
   }
 
   crossCheck() {

@@ -56,8 +56,12 @@ mat-card {
     background-color: #FF0;
   }
 
-  button.luce:hover{background-color: #FFFF00;}
+  button.luce:hover{
+    background-color: #FFFF00;
+    cursor: pointer;
+  }
 
   button.luce:disabled{
     background-color: #FFFF00;
+    cursor: not-allowed;
   }
