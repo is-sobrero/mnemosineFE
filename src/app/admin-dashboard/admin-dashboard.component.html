@@ -1,0 +1,67 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Assegna Esercizio</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-label>Seleziona un utente
+      </mat-label>
+      <mat-select [(value)]="selectedUser">
+          <mat-option value="test">
+          Test
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
+  <br>
+  <!-- repeat this this 10 times-->
+  <div >
+    <mat-form-field *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" style="width: 300px;">
+      <mat-label>Seleziona esercizio {{i}}
+      </mat-label>
+      <mat-select [(value)]="selectedExercise">
+          <mat-option value="test">
+           Esercizio 103
+          </mat-option>
+          <mat-option value="test">
+            Esercizio 104
+          </mat-option>
+          <mat-option value="test">
+            Esercizio 105
+          </mat-option>
+          <mat-option value="test">
+            Esercizio 108
+          </mat-option>
+          <mat-option value="test">
+            Esercizio 109
+          </mat-option>
+          <mat-option value="test">
+            Esercizio 110
+          </mat-option>
+          <mat-option value="test">
+            Esercizio 201
+          </mat-option> 
+          <mat-option value="test">
+            Esercizio 202
+          </mat-option> 
+          <mat-option value="test">
+            Esercizio 203
+          </mat-option>   
+          <mat-option value="test">
+            Esercizio 204
+          </mat-option> 
+          <mat-option value="test">
+            Esercizio 303
+          </mat-option> 
+      </mat-select>
+  </mat-form-field>
+  </div>
+
+  <br>
+  <!--Round plus button -->
+  <button style="margin-right: 10px;" mat-raised-button (click)="addexe()">Aggiungi Esercizio</button>
+  <button style="margin-right: 10px;" color="accent" mat-raised-button (click)="addexe()">Rimuovi Esercizio</button>
+  <button (click)="assign()"  mat-raised-button color="primary">Assegna</button>
+  </mat-card-content>
+
+</mat-card>
+
