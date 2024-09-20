@@ -129,13 +129,8 @@ export class Es201Component implements OnInit {
   // Verifica se l'utente ha vinto
   verificaVittoria() {
     if (this.targetTrovati >= this.numeroTarget) {
-      alert('Hai trovato tutti i target! Passa al livello successivo.');
-      if (this.livello < 3) {
-        this.livello++;
-      } else {
-        alert('Hai completato tutti i livelli!');
-      }
-      this.iniziaGioco();
+      //done
+      this.ES.nextExercise(201, { time: this.timeMillis, errors: this.errori });
     }
   }
 
