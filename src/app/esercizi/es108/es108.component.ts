@@ -28,22 +28,30 @@ import { ExerciseService } from '../../exercise.service';
 })
 export class Es108Component implements OnInit {
   constructor(private ES: ExerciseService) { }
-  livello = 1; // Livello di difficoltà (1, 2, o 3)
+  livello = 0;
   sequenzaNumeri: string[] = []; // Sequenza di numeri da memorizzare
   inputUtente: string[] = []; // Sequenza di numeri inseriti dall'utente
   step = 1; // Step del gioco (1: mostra sequenza, 2: inserimento, 3: risultato)
   errori = 0; // Numero di errori commessi
+  timeMillis = 0;
 
   numeri = '1234567890'; // Numeri
 
   ngOnInit(): void {
+    this.livello = this.ES.currentInfo().difficulty;
     this.iniziaGioco();
+
+    setInterval(() => {
+      this.timeMillis += 100;
+    }
+    , 100);
   }
 
   // Inizia il gioco
   iniziaGioco() {
     this.step = 1;
     this.errori = 0;
+    this.timeMillis = 0;
     this.inputUtente = [];
     this.generaSequenza();
   }
@@ -81,12 +89,6 @@ export class Es108Component implements OnInit {
         this.errori++;
       }
     }
-    this.ES.nextExercise(108, { errors: this.errori });
-  }
-
-  // Cambia il livello di difficoltà
-  cambiaLivello(nuovoLivello: number) {
-    this.livello = nuovoLivello;
-    this.iniziaGioco();
+    this.ES.nextExercise(108, { errors: this.errori, time: this.timeMillis });
   }
 }

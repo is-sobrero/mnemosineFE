@@ -21,7 +21,7 @@
       <p *ngIf="errori > 1 ">Hai commesso {{errori}} errori</p>
     </mat-card-content>
     <mat-card-actions>
-      <button [disabled]="step==3" (click)="stepIncrease()" mat-button>Avanti</button>
+      <button [disabled]="step==4" (click)="stepIncrease()" mat-button>Avanti</button>
       <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
     </mat-card-actions>
   </mat-card>

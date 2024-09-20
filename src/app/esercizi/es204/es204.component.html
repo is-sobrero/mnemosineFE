@@ -33,6 +33,9 @@
             </div>
         </div>
     </div>
+    <mat-card-actions>
+        <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+      </mat-card-actions>
     <div *ngIf="livelloCorrente === 4" class="livello livello-4">
         <h2>Complimenti, hai completato i livelli!</h2>
     </div>

@@ -15,6 +15,7 @@
     </mat-card-content>
     <mat-card-actions *ngIf="step === 2">
         <button mat-button (click)="stepSuccessivo()">Avanti</button>
+        <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
     </mat-card-actions>
     <mat-card-content *ngIf="step === 3">
         <p>Hai completato il gioco! Ben fatto!</p>

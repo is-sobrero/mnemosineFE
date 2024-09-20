@@ -9,6 +9,7 @@ import {
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es201',
@@ -30,15 +31,24 @@ import { NgFor, NgIf, CommonModule } from '@angular/common';
 })
 export class Es201Component implements OnInit {
   livello = 1; // Livello di difficoltà (1, 2, o 3)
+  step = 1; // Passo del gioco (1 o 2)
   griglia: string[][] = []; // Griglia di elementi
   target = '😄'; // Stimolo target
   larghezzaGriglia = 5; // Default per livello 1
   altezzaGriglia = 5; // Default per livello 1
   numeroTarget = 3; // Numero di target da trovare per livello 1
   targetTrovati = 0; // Contatore dei target trovati dall'utente
+  timeMillis = 0; // Tempo trascorso dall'inizio del gioco
+  errori = 0; // Numero di errori commessi dall'utente
+
+  constructor(private ES: ExerciseService) {}
 
   ngOnInit(): void {
     this.iniziaGioco();
+    setInterval(() => {
+      this.timeMillis += 100;
+    }, 100);
+    this.livello = this.ES.currentInfo().difficulty;
   }
 
   // Inizia il gioco
@@ -112,6 +122,7 @@ export class Es201Component implements OnInit {
       this.verificaVittoria();
     } else {
       this.griglia[i][j] = '✗'; // Segna come errato
+      this.errori++;
     }
   }
 
@@ -128,9 +139,14 @@ export class Es201Component implements OnInit {
     }
   }
 
-  // Cambia il livello di difficoltà
-  cambiaLivello(nuovoLivello: number) {
-    this.livello = nuovoLivello;
-    this.iniziaGioco();
+  nextStep() {
+    this.step++;
+    if(this.step == 3) {
+      this.ES.nextExercise(201, {
+        time: this.timeMillis,
+        errors: this.errori,
+      });
+    }
   }
+
 }

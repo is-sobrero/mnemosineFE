@@ -26,16 +26,44 @@ export class ExerciseService {
           difficulty: 1,
         },
         {
+          id: 104,
+          difficulty: 1,
+        },
+        {
+          id: 105,
+          difficulty: 1,
+        },
+        {
           id: 108,
           difficulty: 2,
         },
         {
-          id: 403,
-          difficulty: 3,
+          id: 109,
+          difficulty: 1,
         },
         {
-          id: 405,
-          difficulty: 3,
+          id: 110,
+          difficulty: 1,
+        },
+        {
+          id: 201,
+          difficulty: 1,
+        },
+        {
+          id: 202,
+          difficulty: 1,
+        },
+        {
+          id: 203,
+          difficulty: 1,
+        },
+        {
+          id: 204,
+          difficulty: 2,
+        },
+        {
+          id: 303,
+          difficulty: 1,
         },
       ]
     }
