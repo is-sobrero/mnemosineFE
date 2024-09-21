@@ -41,6 +41,9 @@ export class AdminDashboardComponent {
 
   exersicesNumber = 11;
 
+  esercizi = [
+    { id: 1, name: 'Squats' }];
+
   assign() {
     console.log('Assigning...');
     this.api.post('addSession', { userId: 1 }).subscribe((res: any) => {
@@ -54,6 +57,13 @@ export class AdminDashboardComponent {
   addexe() {
     console.log('Adding...');
     this.exersicesNumber++;
+    this.esercizi.push({ id: this.exersicesNumber, name: 'Esercizio ' + this.exersicesNumber });
+  }
+
+  remexe() {
+    console.log('Removing...');
+    this.exersicesNumber--;
+    this.esercizi.pop();
   }
 
 }
