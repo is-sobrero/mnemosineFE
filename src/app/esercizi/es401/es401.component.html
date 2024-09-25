@@ -1,41 +1,23 @@
-<mat-card *ngIf="current_state == 0">
-    <mat-card-header>
-        <h2>Ricomponi la parola</h2>
-    </mat-card-header>  
-    <mat-card-content>
-        <p *ngIf="errors > 0">errori {{errors}}</p>
-        <h2 class="word_to_reorder">{{blend}}</h2>
+<mat-card>
+  <mat-card-header>
+    <h2>Ricomponi la parola</h2>
+  </mat-card-header>
+  <mat-card-content *ngIf="current_state == 0">
+    <h2 class="word_to_reorder">{{ blend }}</h2>
 
-        <form class="check_word">
-            <mat-form-field>
-                <mat-label>Inserisci la parola giusta</mat-label>
-                <input matInput placeholder="" (keyup)="onKey($event)" class="input">
-            </mat-form-field>
-        </form>
-    </mat-card-content>
-    <mat-card-footer class="footer">
-        <mat-card-actions>
-            <button (click)="checkContent()" mat-button>Controlla</button>
-
-        <mat-form-field class="dif-selection">
-            <mat-label>livello</mat-label>
-            <mat-select [(value)]="level">
-                <mat-option value="0" (click)="setWord()">Facile</mat-option>
-                <mat-option value="1" (click)="setWord()">Medio</mat-option>
-                <mat-option value="2" (click)="setWord()">Difficile</mat-option>
-        </mat-select>
-        </mat-form-field>
+    <div class="check_word">
+      <mat-form-field>
+        <mat-label>Inserisci la parola giusta</mat-label>
+        <input matInput placeholder="" (keyup)="onKey($event)" class="input" />
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-content *ngIf="current_state == 1">
+    <p>Hai commesso {{ errors }} errori</p>
+  </mat-card-content>
+  <mat-card-footer class="footer">
+    <mat-card-actions>
+      <button (click)="checkContent()" mat-button>Avanti</button>
     </mat-card-actions>
-    </mat-card-footer>
-</mat-card>
-<mat-card *ngIf="current_state == 1" class="win">
-    <mat-card-header>
-        <h2>Congratualzioni</h2>
-    </mat-card-header>
-    <mat-card-content>
-        <h2>La parola era "{{display}}"</h2>
-    </mat-card-content>  
-    <mat-card-footer class="footer">
-        <p>Errori commessi: {{errors}} </p>
-    </mat-card-footer>
+  </mat-card-footer>
 </mat-card>
