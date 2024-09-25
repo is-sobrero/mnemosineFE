@@ -89,10 +89,6 @@ export class Es401Component implements OnInit {
   timeMillis = 0;
 
   ngOnInit() {
-    console.log(this.level)
-    setInterval(() => {
-      this.timeMillis += 100;
-    }, 100);
     this.connection
       .get('assets/exAssets/dizionarioitaliano1000.txt', {
         responseType: 'text',
@@ -109,6 +105,9 @@ export class Es401Component implements OnInit {
         this.inputSection = document.querySelector('.input');
         this.setWord();
       });
+    setInterval(() => {
+      this.timeMillis += 100;
+    }, 100);
   }
 
   setWord(): void {
@@ -121,9 +120,8 @@ export class Es401Component implements OnInit {
     if (this.display.toLowerCase() != this.word_typed.toLowerCase()) {
       this.errors += 1;
       this.inputSection.value = '';
-      alert("La risposta è sbagliata, riprova!")
-    }
-    else {
+      alert('La risposta è sbagliata, riprova!');
+    } else {
       this.current_state++;
     }
     if (this.current_state == 2) {
