@@ -18,6 +18,9 @@
   <mat-card-footer class="footer">
     <mat-card-actions>
       <button (click)="checkContent()" mat-button>Avanti</button>
+      <p style="color: gray; font-size: 10px">
+        {{ (timeMillis / 1000).toFixed(0) }} s
+      </p>
     </mat-card-actions>
   </mat-card-footer>
 </mat-card>
