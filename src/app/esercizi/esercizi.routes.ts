@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Es101Component } from './es101/es101.component';
-import { Es402Component } from './es402/es402.component';
 import { Es102Component } from './es102/es102.component';
 import { Es103Component } from './es103/es103.component';
 import { Es104Component } from './es104/es104.component';
@@ -15,12 +14,13 @@ import { Es204Component } from './es204/es204.component';
 import { Es110Component } from './es110/es110.component';
 import { Es303Component } from './es303/es303.component';
 import { Es401Component } from './es401/es401.component';
+import { Es402Component } from './es402/es402.component';
 import { Es407Component } from './es407/es407.component';
 import { Es408Component } from './es408/es408.component';
 import { Es403Component } from './es403/es403.component';
 import { Es405Component } from './es405/es405.component';
 import { Es410Component } from './es410/es410.component';
-
+import { Es506Component } from './es506/es506.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -81,6 +81,9 @@ const routes: Routes = [
     component: Es303Component,
   },
   {
+    path: '506',
+    component: Es506Component,
+  },
     path: "401",
     component: Es401Component,
   },
