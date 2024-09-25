@@ -3,7 +3,7 @@ import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, 
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
-
+import { ExerciseService } from '../../exercise.service';
 @Component({
     selector: 'app-es104',
     standalone: true,
@@ -29,10 +29,17 @@ export class Es104Component implements OnInit {
     inputUtente: string[] = []; // Sequenza di lettere inserita dall'utente
     step = 1; // Step del gioco (1: mostra sequenza, 2: inserimento, 3: risultato)
     errori = 0; // Numero di errori commessi
+    timeMillis = 0; // Tempo impiegato dall'utente per completare il gioco
 
     lettere = 'ABCDEFGILMNOPQRSTUVZ'; // Lettere dell'alfabeto
 
+    constructor(private ES: ExerciseService) { }
+
     ngOnInit(): void {
+        setInterval(() => {
+            this.timeMillis += 100;
+        }, 100);
+        this.livello = this.ES.currentInfo().difficulty;
         this.iniziaGioco();
     }
 
@@ -59,6 +66,9 @@ export class Es104Component implements OnInit {
         if (this.step === 2) {
             this.verificaRisposta();
         }
+        else if (this.step === 3) {
+            this.ES.nextExercise(104, { errors: this.errori , time: this.timeMillis });
+        }
         this.step++;
     }
 
@@ -78,9 +88,4 @@ export class Es104Component implements OnInit {
         }
     }
 
-    // Cambia il livello di difficoltà
-    cambiaLivello(nuovoLivello: number) {
-        this.livello = nuovoLivello;
-        this.iniziaGioco();
-    }
 }

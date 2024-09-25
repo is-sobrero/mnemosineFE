@@ -14,6 +14,7 @@ import {
 import { __values } from 'tslib';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ExerciseService } from '../../exercise.service';
 /* 
 Il modulo component, che rappresenta il componente, è decorato con il decoratore @Component.
 
@@ -62,27 +63,29 @@ export class Es303Component implements OnInit {
   nParole = 0;
   step = 1;
   errori = 0;
-  
   timer: any;
   //TODO: implementare la seeded random
   seed = 'abracadabra';
 
   private http = inject(HttpClient);
 
-  constructor() {}
+  constructor( private ES: ExerciseService) {}
 
   timeMillis = 0;
 
   resetVariabili(){
     this.errori = 0;
     this.step = 1;
-
     for(let i=0; i<this.nParole; i++){
       this.nNumeri.pop();
     }
   }
 
   ngOnInit(): void {
+    this.setParole(this.ES.currentInfo().difficulty*3);
+    setInterval(() => {
+      this.timeMillis += 100;
+    }, 100);
   }
 
   setParole( n: number){
@@ -130,6 +133,9 @@ export class Es303Component implements OnInit {
 
   nextStep(){
     this.step++;
+    if(this.step === 5) {
+      this.ES.nextExercise(303, {time: this.timeMillis, errors: this.errori});
+    }
     if(this.step == 4){
       this.arrayParole.sort();
       for(let i=0; i<this.nParole; i++){

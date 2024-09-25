@@ -1,13 +1,22 @@
 <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" [routerLink]="['/home']"> 
+      <mat-icon>home</mat-icon>
     </button>
     <span>Mnemosine</span>
     <span class="example-spacer"></span>
+    <a mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [routerLink]="['/login']">
+    
+      <mat-icon>login</mat-icon>
+    </a>
     <a mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" [routerLink]="['/esercizi']">
+    
       <mat-icon>link</mat-icon>
     </a>
 </mat-toolbar>
 <body>
-    <router-outlet></router-outlet>
+    <app-progress *ngIf="showProgress"></app-progress>
+    <br>
+    <div class="route">
+        <router-outlet></router-outlet>
+    </div>
 </body>

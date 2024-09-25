@@ -4,6 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
     selector: 'app-es105',
@@ -26,12 +27,14 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./es105.component.scss']
 })
 export class Es105Component implements OnInit {
-    livello = 1;
+    livello = 0;
     immagine: string = '';
     rispostaCorretta: string = '';
     rispostaUtente = '';
     step = 1;
     timerImmagine: any;
+    errori: number = 0;
+    timeMillis: number = 0;
 
     // Array di oggetti immagine e domande
     immagini = [
@@ -64,22 +67,30 @@ export class Es105Component implements OnInit {
     immagineCorrenteIndex = 0;
     domandaCorrenteIndex = 0;
 
-    constructor() { }
+    constructor(private ES: ExerciseService) { }
 
     ngOnInit(): void {
+        this.livello = this.ES.currentInfo().difficulty;
+
         this.iniziaGioco();
+
+        setInterval(() => {
+            this.timeMillis += 100;
+          }
+          , 100);
     }
 
     iniziaGioco() {
         this.immagineCorrenteIndex = 0;
         this.domandaCorrenteIndex = 0;
+        this.errori = 0;
         this.step = 1;
         this.mostraImmagine();
     }
 
     mostraImmagine() {
         this.step = 1;
-        const immagineCorrente = this.immagini[this.immagineCorrenteIndex];
+        const immagineCorrente = this.immagini[this.livello];
         this.immagine = immagineCorrente.immagine;
         this.rispostaCorretta = immagineCorrente.domande[this.domandaCorrenteIndex].risposta;
 
@@ -98,29 +109,24 @@ export class Es105Component implements OnInit {
     verificaRisposta() {
         if (this.rispostaUtente.toLowerCase() === this.rispostaCorretta.toLowerCase()) {
             this.domandaCorrenteIndex++;
-            if (this.domandaCorrenteIndex < this.immagini[this.immagineCorrenteIndex].domande.length) {
+            if (this.domandaCorrenteIndex < this.immagini[this.livello].domande.length) {
                 this.rispostaUtente = '';
                 this.step = 2;
-                this.rispostaCorretta = this.immagini[this.immagineCorrenteIndex].domande[this.domandaCorrenteIndex].risposta;
+                this.rispostaCorretta = this.immagini[this.livello].domande[this.domandaCorrenteIndex].risposta;
             } else {
-                this.immagineCorrenteIndex++;
-                if (this.immagineCorrenteIndex < this.immagini.length) {
-                    this.domandaCorrenteIndex = 0;
-                    this.rispostaUtente = '';
-                    this.mostraImmagine();
-                } else {
-                    this.step = 3; // Fine del gioco
-                }
+                this.step = 3; // Fine del gioco
+                this.ES.nextExercise(105, {errors: this.errori, time: this.timeMillis});
             }
         } else {
             alert('Risposta errata. Riprova.');
             this.rispostaUtente = '';
             this.step = 1;
+            this.errori++;
             this.mostraImmagine();
         }
     }
 
     getDomandaCorrente(): string {
-        return this.immagini[this.immagineCorrenteIndex].domande[this.domandaCorrenteIndex].domanda;
+        return this.immagini[this.livello].domande[this.domandaCorrenteIndex].domanda;
     }
 }
