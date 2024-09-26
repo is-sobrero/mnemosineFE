@@ -32,44 +32,24 @@ import { ExerciseService } from '../../exercise.service';
 })
 
 export class Es501Component implements OnInit{
-  private ES:any;
   private canvas_background:any;
   private canvas_foreground:any;
   private cbx:any = null;
   private cfx:any = null;
 
-  constructor(ES:ExerciseService){}
+  constructor(private ES:ExerciseService){
+  }
 
-  /*
-  *
-  *   Current state variable.
-  *   This variable control the state of the application
-  *
-  *
-  */
-
-
-  /*
-   *  variable used to manage the I/O system
-   *
-  */
-
+  /* application related variable */
 
   errors:number = 0;
   points:number = 0;
   current_obj:any;
   automatic:boolean = true;
-  private random:boolean = true;
 
-  /* enable debug info */
-  debug:boolean = true;
+  debug:boolean = true; // debug flag: enable it to show debug info on console
 
-/*
-
-  canvas related propieties
-
-*/
-
+  /* canvas related variable */
   canvas_width:number = 500;
   canvas_height:number = 500;
   canvas_depth:number = 100;
@@ -86,6 +66,10 @@ export class Es501Component implements OnInit{
   mouse_end:boolean = false;
 
   rect:any = null;
+  bg_color = "#303030a0";
+  fg_color = "#000000";
+  limit_bound:number = 150;
+  random_cursor:number = 0;
 
   /* max axes rotation allowed:
 
@@ -104,15 +88,10 @@ export class Es501Component implements OnInit{
     6: rotate by x, y, z
 
     for more you need to update the switch case int the rotation matrix function
-
   */
+
   max_rotation_allowed_for_3d = 5;
 
-  bg_color = "#303030a0";
-  fg_color = "#000000";
-
-  limit_bound:number = 150;
-  random_cursor:number = 0;
 
     /*
       structure for command list:
@@ -126,7 +105,15 @@ export class Es501Component implements OnInit{
       ]
     */
 
-  level = 2;
+   //=================================================
+
+  /* API call for get difficulty */
+
+  //level = this.ES.currentInfo().difficulty - 1;
+
+  level = 1;
+
+  /* easy drawing */
 
   private easy_random:string[] = [
       "moveTo(random_x,random_y);\
@@ -188,7 +175,10 @@ export class Es501Component implements OnInit{
 
 
 
-  ]
+  ];
+
+  /* medium drawing */
+
   private medium_random:string[] = [
     "cube = new Cube(random_x,random_y,random_z, scale_factor);cube = this.rotation_matrix(cube, rotation_factor, select_rotation);this.plane_projection(cube, 0.5);this.pan(cube,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,50);cube.stroke_vertex(this.cbx);",
 
@@ -199,6 +189,9 @@ export class Es501Component implements OnInit{
     "prism  = new Prism(random_x, random_y, random_z, scale_factor*0.5); prism = this.rotation_matrix(prism, rotation_factor, select_rotation); this.plane_projection(prism, 1.2);this.pan(prism,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,70);prism.stroke_vertex(this.cbx);",
 
   ];
+
+  /* hard drawing */
+
   private hard_random:string[] = [
     "piramid = new Piramid(random_x+ scale_factor*Math.cos(10), random_y, random_z, scale_factor*2, 1);piramid = this.rotation_matrix(piramid, rotation_factor, select_rotation);this.plane_projection(piramid, 0.8);this.pan(piramid,this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound,70);piramid.stroke_vertex(this.cbx);",
 
@@ -214,24 +207,13 @@ export class Es501Component implements OnInit{
     "hexprism = new HexPrism(random_x, random_y, random_z, scale_factor,20+Math.floor(Math.random()*100)); hexprism = this.rotation_matrix(hexprism, rotation_factor, select_rotation); this.plane_projection(hexprism, 1); this.pan(hexprism, this.limit_bound, this.canvas_width-this.limit_bound, this.canvas_height-this.limit_bound, 50); hexprism.stroke_vertex(this.cbx);"
   ];
 
-  private easy:string[] = [""];
-  private medium:string[] = [""];
-  private hard:string[] = [""];
-
   private difficulty:any[] = [];
 
   ngOnInit(){
     /* set up the level of difficulty */
-    if(this.random){
-      this.difficulty.push(this.easy_random);
-      this.difficulty.push(this.medium_random);
-      this.difficulty.push(this.hard_random);
-    }else{
-      this.difficulty.push(this.easy);
-      this.difficulty.push(this.medium);
-      this.difficulty.push(this.hard);
-    }
-
+    this.difficulty.push(this.easy_random);
+    this.difficulty.push(this.medium_random);
+    this.difficulty.push(this.hard_random);
 
     this.canvas_background = document.getElementById("canvas_bg");
     this.canvas_foreground = document.getElementById("canvas_fg");
@@ -252,7 +234,7 @@ export class Es501Component implements OnInit{
   checkContent(){
     let res = this.checkCanvasDrawing();
 
-    if(res == 2){
+    if(res >= 2){
       this.ES.nextExercise(501, {error:this.errors, points:this.points});
     }
     if(this.errors > 3){
@@ -263,30 +245,23 @@ export class Es501Component implements OnInit{
 
   checkCanvasDrawing():number{
     let status  = 0; /* status variable: 1 = correct; 2 = wrong */
+    let padding = 0 /* range where a painting would be considered valid */
 
-    /* switch between automatic check and operator-related check */
-    if(this.automatic){
-      let padding = 0 /* range where a painting would be considered valid */
+    /*
 
-      /*
-
-          check if what the patient have drawn correspond with what is displayed
-          within a padding of N pixels ( could be related with diffìculty level )
-
-
-      */
-    }
+       check if what the patient have drawn correspond with what is displayed
+       within a padding of N pixels ( could be related with diffìculty level )
+*/
 
     return status;
   }
 
   beginDrawing():void{
 
-    /* generate random coordinates */
-
+    /* start by initialize canvas */
     this.cbx.beginPath();
     this.cbx.lineWidth = "4";
-
+    /* then chose the generation by the level variable*/
     switch(this.level){
       case 0:
             this.easy_generation();
@@ -297,9 +272,14 @@ export class Es501Component implements OnInit{
       case 2:
             this.hard_generation();
             break;
+      default:
+            alert("No such generation mode, aborting");
+            return;
+            break;
     }
     this.cbx.stroke();
 
+    /* setting up the foreground drawing */
     this.canvas_foreground.addEventListener("mousemove", (e:any)=>{
       this.getMousePosition("move", e);
     }, false);
@@ -314,6 +294,7 @@ export class Es501Component implements OnInit{
     }, false);
   }
 
+  /* mouse action */
   private getMousePosition(command:string, e:any){
     switch(command){
       case "down":
@@ -379,6 +360,7 @@ export class Es501Component implements OnInit{
     }
   }
 
+  /* easy generation */
   private easy_generation(){
 
     var random_x = Math.floor((Math.random())*this.canvas_width/2);
@@ -461,6 +443,7 @@ export class Es501Component implements OnInit{
 
   }
 
+  /* medium generation */
   private medium_generation(){
     var random_cursor = Math.floor(Math.random()*this.difficulty.at(1).length);
 
@@ -512,6 +495,7 @@ export class Es501Component implements OnInit{
     var commands:string[] = this.difficulty.at(this.level)?.at(random_cursor)?.split(";");
 
     this.cbx.strokeStyle = this.bg_color;
+    /* 3d object variable */
     var cube = null;
     var piramid = null;
     var prism = null;
@@ -520,11 +504,9 @@ export class Es501Component implements OnInit{
     for(let i=0;i<commands.length;i++){
       eval(commands[i]);
     }
-
-
-    /* creating and manipulating polygons */
   }
 
+  /* hard generation, similar to the medium one, but with more polygon */
   private hard_generation(){
     var random_cursor = Math.floor(Math.random()*this.difficulty.at(2).length);
 
@@ -576,6 +558,7 @@ export class Es501Component implements OnInit{
     var commands:string[] = this.difficulty.at(this.level)?.at(random_cursor)?.split(";");
 
     this.cbx.strokeStyle = this.bg_color;
+    /* 3d object variable */
     var cube = null;
     var piramid = null;
     var prism = null;
@@ -585,12 +568,10 @@ export class Es501Component implements OnInit{
     for(let i=0;i<commands.length;i++){
       eval(commands[i]);
     }
-
-
   }
 
 
-
+/* 3d plane projection function */
   private plane_projection(cube:Object_3d, focal_lenght:number):void{
     var point:any[] = [];
     point = cube.getPoints();
@@ -616,6 +597,7 @@ export class Es501Component implements OnInit{
     cube.loadPoints(point);
   }
 
+/* rotation matrix function */
 
   private rotation_matrix(obj:Object_3d, rotation_factor:number, select_rotation:number):Object_3d{
     var points:any[] = [];
@@ -721,7 +703,7 @@ export class Es501Component implements OnInit{
     return obj;
   }
 
-
+/* pan object function, use it to align the projected polygon inside the canvas */
   private pan_object(obj:Object_3d,min:number,max:number, maxy:number,cicle:number):any{
     var points:any[] = obj.getPoints() as Point[];
 
@@ -817,6 +799,7 @@ end = true;
   }
 }
 
+/* 3d point class */
 
 export class Point{
   x:number = 0;
@@ -834,6 +817,7 @@ export class Point{
   }
 }
 
+/* Object 3d father class */
 
 export class Object_3d{
   constructor(){}
@@ -909,7 +893,6 @@ export class Cube extends Object_3d{
 
   override stroke_vertex(cbx:any): void {
 
-    cbx.beginPath();
     cbx.moveTo(this.p1.x, this.p1.y);
     cbx.lineTo(this.p2.x,this.p2.y);
     cbx.lineTo(this.p3.x,this.p3.y);
@@ -995,7 +978,6 @@ export class Piramid extends Object_3d{
 
   override stroke_vertex(cbx:any):void{
 
-    cbx.beginPath();
     cbx.moveTo(this.b1.x, this.b1.y);
     cbx.lineTo(this.b2.x, this.b2.y);
     cbx.lineTo(this.b3.x, this.b3.y);
@@ -1071,7 +1053,6 @@ export class Prism extends Object_3d{
   }
 
   override stroke_vertex(cbx:any):void{
-    cbx.beginPath();
 
     cbx.moveTo(this.t1.x, this.t1.y);
     cbx.lineTo(this.xl.x,this.xl.y);
@@ -1167,7 +1148,6 @@ export class HexPiramid extends Object_3d{
   }
 
   override stroke_vertex(cbx:any):void{
-    cbx.beginPath();
 
     /* vertical line */
     cbx.moveTo(this.t1.x,this.t1.y);
@@ -1277,7 +1257,6 @@ export class HexPrism extends Object_3d{
   }
 
   override stroke_vertex(cbx:any):void{
-    cbx.beginPath();
 
     cbx.moveTo(this.p1.x, this.p1.y);
     cbx.lineTo(this.p3.x, this.p3.y);
