@@ -47,7 +47,8 @@ export class Es501Component implements OnInit{
   current_obj:any;
   automatic:boolean = true;
 
-  debug:boolean = true; // debug flag: enable it to show debug info on console
+  debug:boolean = false; // debug flag: enable it to show debug info on console
+  mouse_debug:boolean = false;
 
   /* canvas related variable */
   canvas_width:number = 500;
@@ -70,6 +71,7 @@ export class Es501Component implements OnInit{
   fg_color = "#000000";
   limit_bound:number = 150;
   random_cursor:number = 0;
+  private mouse_points:Point[] = [];
 
   /* max axes rotation allowed:
 
@@ -214,6 +216,7 @@ export class Es501Component implements OnInit{
     this.difficulty.push(this.easy_random);
     this.difficulty.push(this.medium_random);
     this.difficulty.push(this.hard_random);
+    this.mouse_points = [];
 
     this.canvas_background = document.getElementById("canvas_bg");
     this.canvas_foreground = document.getElementById("canvas_fg");
@@ -240,6 +243,8 @@ export class Es501Component implements OnInit{
     if(this.errors > 3){
       this.ES.nextExercise(501, {error:this.errors, points:this.points});
     }
+    this.mouse_points = [];
+    this.cfx.clearRect(0,0,this.canvas_width, this.canvas_height);
     return;
   }
 
@@ -247,11 +252,24 @@ export class Es501Component implements OnInit{
     let status  = 0; /* status variable: 1 = correct; 2 = wrong */
     let padding = 0 /* range where a painting would be considered valid */
 
-    /*
 
-       check if what the patient have drawn correspond with what is displayed
-       within a padding of N pixels ( could be related with diffìculty level )
-*/
+    var parsed_point = '[';
+    var reg = [];
+
+    /* creating the main mouse position JSON */
+
+    this.mouse_points.forEach((points) => {
+      var point = '{"x":' +points.x+ ',"y":' + points.y+ "},";
+      parsed_point += point;
+    });
+    reg = parsed_point.split("");
+    reg[reg.length-1] = "]";
+    parsed_point = "";
+    for(let i=0; i<reg.length; i++ ){
+      parsed_point += reg[i];
+    }
+    if(this.mouse_debug)console.log(JSON.parse(parsed_point));
+
 
     return status;
   }
@@ -296,20 +314,25 @@ export class Es501Component implements OnInit{
 
   /* mouse action */
   private getMousePosition(command:string, e:any){
+    var pt:any;
     switch(command){
       case "down":
         this.prevX = this.currX;
         this.prevY = this.currY;
         this.currX = (e.clientX-this.rect.left)*(this.canvas_width/this.rect.width);
         this.currY = (e.clientY-this.rect.top)*(this.canvas_height/this.rect.height);
+
         this.mouse_end = true;
         this.dot_flag = true;
 
-        if(this.debug){
+        if(this.mouse_debug){
           console.log("Current mouse X: "+this.currX + " | client x: "+e.clientX);
             console.log("Current mouse Y: "+this.currY + " | client y: "+e.clientY);
           console.log("mouse down");
         }
+        /* load new point and load the mouse array */
+        pt = new Point(Math.floor(this.currX), Math.floor(this.currY), 0);
+        this.mouse_points.push(pt);
 
         if(this.dot_flag){
           this.cfx.beginPath();
@@ -322,7 +345,7 @@ export class Es501Component implements OnInit{
       case "up":
         this.dot_flag = false;
         this.mouse_end = false;
-        if(this.debug){
+        if(this.mouse_debug){
           console.log("mouse up");
         }
 
@@ -333,10 +356,13 @@ export class Es501Component implements OnInit{
           this.prevY = this.currY;
           this.currX = (e.clientX-this.rect.left)*(this.canvas_width/this.rect.width);
           this.currY = (e.clientY-this.rect.top)*(this.canvas_height/this.rect.height);
-          if(this.debug){
+          if(this.mouse_debug){
             console.log("Current mouse X: "+this.currX + " | client x: "+e.clientX);
             console.log("Current mouse Y: "+this.currY + " | client y: "+e.clientY);
           }
+
+          pt = new Point(Math.floor(this.currX), Math.floor(this.currY), 0);
+          this.mouse_points.push(pt);
           this.cfx.beginPath();
           this.cfx.moveTo(this.prevX, this.prevY);
           this.cfx.lineTo(this.currX, this.currY);
