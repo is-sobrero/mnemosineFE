@@ -47,8 +47,7 @@ export class Es501Component implements OnInit{
   current_obj:any;
   automatic:boolean = true;
 
-  debug:boolean = false; // debug flag: enable it to show debug info on console
-  mouse_debug:boolean = false;
+  debug:boolean = true; // debug flag: enable it to show debug info on console
 
   /* canvas related variable */
   canvas_width:number = 500;
@@ -72,6 +71,7 @@ export class Es501Component implements OnInit{
   limit_bound:number = 150;
   random_cursor:number = 0;
   private mouse_points:Point[] = [];
+  private object_variable:string[] = [];
 
   /* max axes rotation allowed:
 
@@ -113,7 +113,7 @@ export class Es501Component implements OnInit{
 
   //level = this.ES.currentInfo().difficulty - 1;
 
-  level = 1;
+  level = 2;
 
   /* easy drawing */
 
@@ -244,6 +244,7 @@ export class Es501Component implements OnInit{
       this.ES.nextExercise(501, {error:this.errors, points:this.points});
     }
     this.mouse_points = [];
+    this.object_variable = [];
     this.cfx.clearRect(0,0,this.canvas_width, this.canvas_height);
     return;
   }
@@ -252,11 +253,11 @@ export class Es501Component implements OnInit{
     let status  = 0; /* status variable: 1 = correct; 2 = wrong */
     let padding = 0 /* range where a painting would be considered valid */
 
-
     var parsed_point = '[';
+    var object_status = "{";
     var reg = [];
 
-    /* creating the main mouse position JSON */
+    /* generating json mouse message */
 
     this.mouse_points.forEach((points) => {
       var point = '{"x":' +points.x+ ',"y":' + points.y+ "},";
@@ -268,8 +269,41 @@ export class Es501Component implements OnInit{
     for(let i=0; i<reg.length; i++ ){
       parsed_point += reg[i];
     }
-    if(this.mouse_debug)console.log(JSON.parse(parsed_point));
 
+    /* generating json object property */
+
+    this.object_variable.forEach((prop) =>{
+      object_status += prop+",";
+    });
+    reg = object_status.split("");
+    reg[reg.length-1] = "}";
+    object_status = "";
+    for(let i=0;i<reg.length;i++){
+      object_status += reg[i];
+    }
+
+
+    /* defining the main json message status */
+    const es501_state_json = {
+      exercise: {
+          commands: this.difficulty.at(this.level).at(this.random_cursor),
+          user_input: JSON.parse(parsed_point),
+      },
+      current_canvas_stat:{
+        canvas_width: this.canvas_width,
+        canvas_height: this.canvas_height,
+        canvas_depth: this.canvas_depth,
+        scale_factor_3d: this.scale_factor_3d,
+        difficulty: this.difficulty,
+      },
+      object_variable:JSON.parse(object_status),
+    };
+    if(this.debug) console.log(es501_state_json);
+
+    /*
+     *  TODO: Send status and wait for response
+     *
+     * */
 
     return status;
   }
@@ -325,11 +359,6 @@ export class Es501Component implements OnInit{
         this.mouse_end = true;
         this.dot_flag = true;
 
-        if(this.mouse_debug){
-          console.log("Current mouse X: "+this.currX + " | client x: "+e.clientX);
-            console.log("Current mouse Y: "+this.currY + " | client y: "+e.clientY);
-          console.log("mouse down");
-        }
         /* load new point and load the mouse array */
         pt = new Point(Math.floor(this.currX), Math.floor(this.currY), 0);
         this.mouse_points.push(pt);
@@ -345,9 +374,6 @@ export class Es501Component implements OnInit{
       case "up":
         this.dot_flag = false;
         this.mouse_end = false;
-        if(this.mouse_debug){
-          console.log("mouse up");
-        }
 
         break;
       case "move":
@@ -356,10 +382,6 @@ export class Es501Component implements OnInit{
           this.prevY = this.currY;
           this.currX = (e.clientX-this.rect.left)*(this.canvas_width/this.rect.width);
           this.currY = (e.clientY-this.rect.top)*(this.canvas_height/this.rect.height);
-          if(this.mouse_debug){
-            console.log("Current mouse X: "+this.currX + " | client x: "+e.clientX);
-            console.log("Current mouse Y: "+this.currY + " | client y: "+e.clientY);
-          }
 
           pt = new Point(Math.floor(this.currX), Math.floor(this.currY), 0);
           this.mouse_points.push(pt);
@@ -370,18 +392,12 @@ export class Es501Component implements OnInit{
           this.cfx.lineWidth = this.mouse_width;
           this.cfx.stroke();
           this.cfx.closePath();
-          if(this.debug){
-            console.log("mouse move");
-          }
 
         }
         break;
       case "out":
         this.mouse_end = false;
         this.dot_flag = false;
-        if(this.debug){
-          console.log("mouse out");
-        }
         break;
     }
   }
@@ -406,6 +422,15 @@ export class Es501Component implements OnInit{
     this.random_cursor = Math.floor(Math.random()*this.difficulty.at(0)?.length);
 
     // this.random_cursor = 5; for testing figures
+    this.object_variable.push('"random_x":'+random_x);
+    this.object_variable.push('"random_y":'+random_y);
+    this.object_variable.push('"angle":'+angle);
+    this.object_variable.push('"scale":'+scale);
+    this.object_variable.push('"random_x_scaled":'+random_x_scaled);
+    this.object_variable.push('"random_y_scaled":'+random_y_scaled);
+    this.object_variable.push('"random_x_arc":'+random_x_arc);
+    this.object_variable.push('"random_y":'+random_y_arc);
+    this.object_variable.push('"radius":'+radius);
 
     /* bounds check */
 
@@ -471,7 +496,7 @@ export class Es501Component implements OnInit{
 
   /* medium generation */
   private medium_generation(){
-    var random_cursor = Math.floor(Math.random()*this.difficulty.at(1).length);
+    this.random_cursor = Math.floor(Math.random()*this.difficulty.at(1).length);
 
     this.cbx.clearRect(0,0,this.canvas_width,this.canvas_height);
     console.clear();
@@ -485,6 +510,13 @@ export class Es501Component implements OnInit{
     var scale_factor = 100 + Math.floor(Math.random() * this.scale_factor_3d);
     var rotation_factor=  Math.floor(Math.random()*60);
     var select_rotation = Math.floor(Math.random()*(this.max_rotation_allowed_for_3d+1));
+
+    this.object_variable.push('"random_x":'+random_x);
+    this.object_variable.push('"random_y":'+random_y);
+    this.object_variable.push('"random_z":'+random_z);
+    this.object_variable.push('"scale_factor":'+scale_factor);
+    this.object_variable.push('"rotation_factor":'+rotation_factor);
+    this.object_variable.push('"select_rotation":'+select_rotation);
 
 
     if(this.debug){
@@ -518,7 +550,7 @@ export class Es501Component implements OnInit{
       }
     }
 
-    var commands:string[] = this.difficulty.at(this.level)?.at(random_cursor)?.split(";");
+    var commands:string[] = this.difficulty.at(this.level)?.at(this.random_cursor)?.split(";");
 
     this.cbx.strokeStyle = this.bg_color;
     /* 3d object variable */
@@ -534,7 +566,7 @@ export class Es501Component implements OnInit{
 
   /* hard generation, similar to the medium one, but with more polygon */
   private hard_generation(){
-    var random_cursor = Math.floor(Math.random()*this.difficulty.at(2).length);
+    this.random_cursor = Math.floor(Math.random()*this.difficulty.at(2).length);
 
     this.cbx.clearRect(0,0,this.canvas_width,this.canvas_height);
     console.clear();
@@ -549,6 +581,12 @@ export class Es501Component implements OnInit{
     var rotation_factor=  Math.floor(Math.random()*60);
     var select_rotation = Math.floor(Math.random()*(this.max_rotation_allowed_for_3d+1));
 
+    this.object_variable.push('"random_x":'+random_x);
+    this.object_variable.push('"random_y":'+random_y);
+    this.object_variable.push('"random_z":'+random_z);
+    this.object_variable.push('"scale_factor":'+scale_factor);
+    this.object_variable.push('"rotation_factor":'+rotation_factor);
+    this.object_variable.push('"select_rotation":'+select_rotation);
 
     if(this.debug){
       console.log("currento level 2 parameters: ");
@@ -581,7 +619,7 @@ export class Es501Component implements OnInit{
       }
     }
 
-    var commands:string[] = this.difficulty.at(this.level)?.at(random_cursor)?.split(";");
+    var commands:string[] = this.difficulty.at(this.level)?.at(this.random_cursor)?.split(";");
 
     this.cbx.strokeStyle = this.bg_color;
     /* 3d object variable */
