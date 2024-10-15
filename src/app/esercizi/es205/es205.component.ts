@@ -30,7 +30,7 @@ export class Es205Component {
   livello = 0;
     immagineSinistra: string = '';
     immagineDestra: string = '';
-    step = 1;
+    step = 0;
     errori: number = 0;
     timeMillis: number = 0;
     differenzeTrovate: number = 0;
@@ -39,9 +39,19 @@ export class Es205Component {
     // Array di oggetti immagine per i tre livelli
     immagini = [
         {
-            sinistra: 'assets/images_es205/es205_01.jpg',
-            destra: 'assets/images_es205/es205_01.jpg',
+            sinistra: 'assets/images_es205/zebra_sinistra.jpg',
+            destra: 'assets/images_es205/zebra_destra.jpg',
             differenze: 3
+        },
+        {
+            sinistra: 'assets/images_es205/albero_sinistra.jpg',
+            destra: 'assets/images_es205/albero_destra.jpg',
+            differenze: 5
+        },
+        {
+            sinistra: 'assets/images_es205/albero_sinistra.jpg',
+            destra: 'assets/images_es205/albero_destra.jpg',
+            differenze: 7
         },
        
     ];
@@ -49,12 +59,14 @@ export class Es205Component {
     constructor() { }
 
     ngOnInit(): void {
-        this.livello = 0; // Puoi impostare il livello a partire da una logica esterna
-        this.iniziaGioco();
-
         setInterval(() => {
             this.timeMillis += 100;
         }, 100);
+    }
+
+    selezionaLivello(livello: number) {
+        this.livello = livello;
+        this.iniziaGioco();
     }
 
     iniziaGioco() {
@@ -73,7 +85,10 @@ export class Es205Component {
             alert('Non hai ancora trovato tutte le differenze!');
         }
     }
-
+    contaErrori(){
+        this.errori+=1;
+        alert(this.errori);
+    }
    
 }
 
