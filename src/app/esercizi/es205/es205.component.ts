@@ -7,10 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { ExerciseService } from '../../exercise.service';
 
 @Component({
-  selector: 'app-es205',
-  standalone: true,
-  imports: [
-    MatCard,
+    selector: 'app-es205',
+    standalone: true,
+    imports: [
+        MatCard,
         MatCardActions,
         MatCardHeader,
         MatCardTitle,
@@ -22,12 +22,12 @@ import { ExerciseService } from '../../exercise.service';
         CommonModule,
         MatInputModule,
         FormsModule
-  ],
-  templateUrl: './es205.component.html',
-  styleUrl: './es205.component.scss'
+    ],
+    templateUrl: './es205.component.html',
+    styleUrl: './es205.component.scss'
 })
 export class Es205Component {
-  livello = 0;
+    livello = 0;
     immagineSinistra: string = '';
     immagineDestra: string = '';
     step = 0;
@@ -44,8 +44,8 @@ export class Es205Component {
             differenze: 3
         },
         {
-            sinistra: 'assets/images_es205/albero_sinistra.jpg',
-            destra: 'assets/images_es205/albero_destra.jpg',
+            sinistra: 'assets/images_es205/cucina_sinistra.jpg',
+            destra: 'assets/images_es205/cucina_destra.jpg',
             differenze: 5
         },
         {
@@ -53,7 +53,7 @@ export class Es205Component {
             destra: 'assets/images_es205/albero_destra.jpg',
             differenze: 7
         },
-       
+
     ];
 
     constructor() { }
@@ -77,19 +77,18 @@ export class Es205Component {
         this.immagineDestra = this.immagini[this.livello].destra;
     }
 
-    checkDifferenze() {
-        // Per semplificare, qui simuliamo la verifica delle differenze
+    contaErrori() {
+        this.errori += 1;
+        alert("errori: " + this.errori);
+    }
+
+    contaDifferenze(eleClass: any) {
+        this.differenzeTrovate += 1;
+        let ele = document.querySelector(`${eleClass}`) as HTMLElement;
+        ele.style.display = 'none';
+        alert("differenze trovate: " + this.differenzeTrovate);
         if (this.differenzeTrovate === this.totaleDifferenze) {
             this.step = 2; // Fine del gioco
-        } else {
-            alert('Non hai ancora trovato tutte le differenze!');
-        }
     }
-    contaErrori(){
-        this.errori+=1;
-        alert(this.errori);
-    }
-   
 }
-
-
+}

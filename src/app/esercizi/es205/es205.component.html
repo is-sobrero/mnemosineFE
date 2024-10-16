@@ -21,11 +21,13 @@
         <div class="immagini-container">
             <img [src]="immagineSinistra" alt="Immagine sinistra">
             <button class="overlay-button" (click)="contaErrori()"></button>
+            <button class="overlay-overlay-button" id="btn-diff1" (click)="contaDifferenze('#btn-diff1')"></button>
+            <button class="overlay-overlay-button" id="btn-diff2" (click)="contaDifferenze('#btn-diff2')"></button>
+            <button class="overlay-overlay-button" id="btn-diff3" (click)="contaDifferenze('#btn-diff3')"></button>
             <img [src]="immagineDestra" alt="Immagine destra">
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button (click)="checkDifferenze()">Verifica</button>
         <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
     </mat-card-actions>
     </mat-card>
