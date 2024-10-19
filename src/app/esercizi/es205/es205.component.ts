@@ -35,6 +35,7 @@ export class Es205Component {
     timeMillis: number = 0;
     differenzeTrovate: number = 0;
     totaleDifferenze: number = 0;
+    generaBtns: any[] = [];
 
     // Array di oggetti immagine per i tre livelli
     immagini = [
@@ -43,15 +44,41 @@ export class Es205Component {
             destra: 'assets/images_es205/zebra_destra.jpg',
             differenze: 3
         },
+            differenze: 3,
+            posizioni: [
+                { id: 'btn-diff1', bottom: '90px', right: '360px', width: '50px', height: '100px' },
+                { id: 'btn-diff2', bottom: '100px', right: '25px', width: '25px', height: '53px' },
+                { id: 'btn-diff3', bottom: '335px', right: '165px', width: '33px', height: '33px' }
+            ]
+            },
         {
             sinistra: 'assets/images_es205/cucina_sinistra.jpg',
             destra: 'assets/images_es205/cucina_destra.jpg',
             differenze: 5
         },
+            differenze: 5,
+            posizioni: [
+                { id: 'btn-diff1', bottom: '365px', right: '185px', width: '35px', height: '70px' },
+                { id: 'btn-diff2', bottom: '230px', right: '90px', width: '30px', height: '55px' },
+                { id: 'btn-diff3', bottom: '180px', right: '275px', width: '25px', height: '25px' },
+                { id: 'btn-diff4', bottom: '220px', right: '370px', width: '40px', height: '100px' },
+                { id: 'btn-diff5', bottom: '220px', right: '250px', width: '75px', height: '45px' }                
+            ]
+            },
         {
             sinistra: 'assets/images_es205/albero_sinistra.jpg',
             destra: 'assets/images_es205/albero_destra.jpg',
             differenze: 7
+            differenze: 7,
+            posizioni: [
+                { id: 'btn-diff1', bottom: '365px', right: '185px', width: '35px', height: '70px' },
+                { id: 'btn-diff2', bottom: '230px', right: '90px', width: '30px', height: '55px' },
+                { id: 'btn-diff3', bottom: '180px', right: '275px', width: '25px', height: '25px' },
+                { id: 'btn-diff4', bottom: '220px', right: '370px', width: '40px', height: '100px' },
+                { id: 'btn-diff5', bottom: '220px', right: '250px', width: '75px', height: '45px' },
+                { id: 'btn-diff6', bottom: '365px', right: '185px', width: '35px', height: '70px' },
+                { id: 'btn-diff7', bottom: '230px', right: '90px', width: '30px', height: '55px' }
+            ]
         },
 
     ];
@@ -75,6 +102,7 @@ export class Es205Component {
         this.totaleDifferenze = this.immagini[this.livello].differenze;
         this.immagineSinistra = this.immagini[this.livello].sinistra;
         this.immagineDestra = this.immagini[this.livello].destra;
+        this.generaBtns = this.immagini[this.livello].posizioni;
     }
 
     contaErrori() {

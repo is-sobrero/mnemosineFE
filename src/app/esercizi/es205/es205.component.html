@@ -21,9 +21,15 @@
         <div class="immagini-container">
             <img [src]="immagineSinistra" alt="Immagine sinistra">
             <button class="overlay-button" (click)="contaErrori()"></button>
-            <button class="overlay-overlay-button" id="btn-diff1" (click)="contaDifferenze('#btn-diff1')"></button>
-            <button class="overlay-overlay-button" id="btn-diff2" (click)="contaDifferenze('#btn-diff2')"></button>
-            <button class="overlay-overlay-button" id="btn-diff3" (click)="contaDifferenze('#btn-diff3')"></button>
+            <button *ngFor="let btn of generaBtns"
+                    class="overlay-overlay-button"
+                    [id]="btn.id"
+                    [style.bottom]="btn.bottom"
+                    [style.right]="btn.right"
+                    [style.width]="btn.width"
+                    [style.height]="btn.height"
+                    (click)="contaDifferenze('#' + btn.id)">
+            </button>
             <img [src]="immagineDestra" alt="Immagine destra">
         </div>
     </mat-card-content>
