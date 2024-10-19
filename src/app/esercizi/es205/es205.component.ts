@@ -42,8 +42,6 @@ export class Es205Component {
         {
             sinistra: 'assets/images_es205/zebra_sinistra.jpg',
             destra: 'assets/images_es205/zebra_destra.jpg',
-            differenze: 3
-        },
             differenze: 3,
             posizioni: [
                 { id: 'btn-diff1', bottom: '90px', right: '360px', width: '50px', height: '100px' },
@@ -54,8 +52,6 @@ export class Es205Component {
         {
             sinistra: 'assets/images_es205/cucina_sinistra.jpg',
             destra: 'assets/images_es205/cucina_destra.jpg',
-            differenze: 5
-        },
             differenze: 5,
             posizioni: [
                 { id: 'btn-diff1', bottom: '365px', right: '185px', width: '35px', height: '70px' },
@@ -68,7 +64,6 @@ export class Es205Component {
         {
             sinistra: 'assets/images_es205/albero_sinistra.jpg',
             destra: 'assets/images_es205/albero_destra.jpg',
-            differenze: 7
             differenze: 7,
             posizioni: [
                 { id: 'btn-diff1', bottom: '365px', right: '185px', width: '35px', height: '70px' },
