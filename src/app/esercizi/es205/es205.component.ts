@@ -62,17 +62,17 @@ export class Es205Component {
             ]
             },
         {
-            sinistra: 'assets/images_es205/albero_sinistra.jpg',
-            destra: 'assets/images_es205/albero_destra.jpg',
+            sinistra: 'assets/images_es205/camera_sinistra.jpg',
+            destra: 'assets/images_es205/camera_destra.jpg',
             differenze: 7,
             posizioni: [
-                { id: 'btn-diff1', bottom: '365px', right: '185px', width: '35px', height: '70px' },
-                { id: 'btn-diff2', bottom: '230px', right: '90px', width: '30px', height: '55px' },
-                { id: 'btn-diff3', bottom: '180px', right: '275px', width: '25px', height: '25px' },
-                { id: 'btn-diff4', bottom: '220px', right: '370px', width: '40px', height: '100px' },
-                { id: 'btn-diff5', bottom: '220px', right: '250px', width: '75px', height: '45px' },
-                { id: 'btn-diff6', bottom: '365px', right: '185px', width: '35px', height: '70px' },
-                { id: 'btn-diff7', bottom: '230px', right: '90px', width: '30px', height: '55px' }
+                { id: 'btn-diff1', bottom: '255px', right: '210px', width: '20px', height: '20px' },
+                { id: 'btn-diff2', bottom: '135px', right: '165px', width: '30px', height: '30px' },
+                { id: 'btn-diff3', bottom: '120px', right: '440px', width: '25px', height: '25px' },
+                { id: 'btn-diff4', bottom: '100px', right: '340px', width: '25px', height: '25px' },
+                { id: 'btn-diff5', bottom: '190px', right: '260px', width: '45px', height: '30px' },
+                { id: 'btn-diff6', bottom: '60px', right: '195px', width: '60px', height: '40px' },
+                { id: 'btn-diff7', bottom: '355px', right: '90px', width: '30px', height: '30px' }
             ]
         },
 
@@ -102,14 +102,12 @@ export class Es205Component {
 
     contaErrori() {
         this.errori += 1;
-        alert("errori: " + this.errori);
     }
 
     contaDifferenze(eleClass: any) {
         this.differenzeTrovate += 1;
         let ele = document.querySelector(`${eleClass}`) as HTMLElement;
         ele.style.display = 'none';
-        alert("differenze trovate: " + this.differenzeTrovate);
         if (this.differenzeTrovate === this.totaleDifferenze) {
             this.step = 2; // Fine del gioco
     }
