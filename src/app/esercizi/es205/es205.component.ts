@@ -107,7 +107,7 @@ export class Es205Component {
     contaDifferenze(eleClass: any) {
         this.differenzeTrovate += 1;
         let ele = document.querySelector(`${eleClass}`) as HTMLElement;
-        ele.style.display = 'none';
+        ele.style.cursor = 'not-allowed';
         if (this.differenzeTrovate === this.totaleDifferenze) {
             this.step = 2; // Fine del gioco
     }
