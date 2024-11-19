@@ -1,0 +1,40 @@
+mat-card {
+    margin: 20px;
+    padding: 20px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.livelli-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.puzzle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.puzzle-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.puzzle-piece {
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    cursor: grab;
+}
+
+.puzzle-target {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed gray;
+}
