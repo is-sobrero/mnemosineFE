@@ -12,66 +12,23 @@ export class ExerciseService {
     private apiService: ApiService
   ) { }
 
-  startSession() {
+  startSession(sessionId: string) {
     //clear the local storage SessionInfo and ExerciseInfo
     localStorage.removeItem('SessionInfo');
     localStorage.removeItem('ExerciseInfo');
     //right here will go and api call to start the session
-    const apiResponse = {
-      sessionID: '1234',
-      assignedBy: 'John Doe',
-      exercises: [
-        {
-          id: 103,
-          difficulty: 1,
-        },
-        {
-          id: 104,
-          difficulty: 1,
-        },
-        {
-          id: 105,
-          difficulty: 1,
-        },
-        {
-          id: 108,
-          difficulty: 2,
-        },
-        {
-          id: 109,
-          difficulty: 1,
-        },
-        {
-          id: 110,
-          difficulty: 1,
-        },
-        {
-          id: 201,
-          difficulty: 1,
-        },
-        {
-          id: 202,
-          difficulty: 1,
-        },
-        {
-          id: 203,
-          difficulty: 1,
-        },
-        {
-          id: 204,
-          difficulty: 2,
-        },
-        {
-          id: 303,
-          difficulty: 1,
-        },
-      ]
-    }
+    this.apiService.get('activeSessions').subscribe( (apiResponses: any) => {
+      console.log(apiResponses);
+      console.log(sessionId);
+    //find the session with the id that was passed
+    const apiResponse = apiResponses.find( (session:any) => session._id === sessionId );
+    console.log(apiResponse);
     //store the session info in local storage
     localStorage.setItem('SessionInfo', JSON.stringify(apiResponse));
     localStorage.setItem('ExerciseInfo', JSON.stringify([]));
     //navigate to the first exercise (will be the first in the array) /esercizio/103
     this.router.navigate(['/esercizio/' + apiResponse.exercises[0].id]);
+  });
   }
 
   currentInfo() {

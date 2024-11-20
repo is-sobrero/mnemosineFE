@@ -1,22 +1,42 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 import { ExerciseService } from '../exercise.service';
+import { N } from '@angular/cdk/keycodes';
+import { NgFor, NgIf } from '@angular/common';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     MatButton,
+    NgIf,
+    NgFor
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
-  constructor(private ES: ExerciseService) { }
+export class HomeComponent implements OnInit {
+  constructor(private ES: ExerciseService,
+    private api: ApiService,
+  ) { }
 
-  startSession() {
-    this.ES.startSession();
+  sessionPresent = true;
+  sessions:any = [];
+
+  ngOnInit() {
+    this.api.get('activeSessions').subscribe((res: any) => {
+      this.sessions = res;
+      if (res.length === 0) {
+        this.sessionPresent = false;
+      }
+      console.log(res);
+    });
+  }
+
+  startSession(sessionId: string) {
+    this.ES.startSession(sessionId);
   }
   
 
