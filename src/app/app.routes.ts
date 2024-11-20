@@ -3,6 +3,7 @@ import { PickerComponent } from './picker/picker.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RisultatiComponent } from './risultati/risultati.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -11,5 +12,6 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'picker', component: PickerComponent},
     {path: 'esercizio', loadChildren: () => import('./esercizi/esercizi.routes').then(m => m.EsercizioRoutes)},
-    {path: 'risultati', component: RisultatiComponent}
+    {path: 'risultati', component: RisultatiComponent},
+    {path: 'dashboard', component: AdminDashboardComponent}
 ];
