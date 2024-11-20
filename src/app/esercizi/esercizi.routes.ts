@@ -84,6 +84,7 @@ const routes: Routes = [
     path: '506',
     component: Es506Component,
   },
+  {
     path: "401",
     component: Es401Component,
   },
