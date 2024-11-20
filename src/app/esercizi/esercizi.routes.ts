@@ -25,6 +25,7 @@ import { Es410Component } from './es410/es410.component';
 import { Es205Component } from './es205/es205.component';
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
   {
