@@ -1,4 +1,17 @@
-<h1>Benvenuto, Utente</h1>
+<h1>Benvenuto, UtenteDemo</h1>
 <p>Accedi ora alla tua sessione pianificata di esercizi</p>
 
-<button mat-raised-button (click)="startSession()">Entra</button>
+<div class="card-container" *ngFor="let session of sessions">
+  <div class="card" >
+    <!--first 3 chars-->
+    <h3>Sessione {{session._id.substring(0, 3)}}</h3>
+    <button mat-raised-button (click)="startSession(session._id)">Inizia</button>
+  </div>
+</div>
+
+<div class="card-container" *ngIf="!sessionPresent">
+    <div class="card-no" >
+      <h3>Nessuna sessione disponibile</h3>
+      <p>Ritorna più tardi o attendi informazioni dal tuo caregiver.</p>
+    </div>
+</div>

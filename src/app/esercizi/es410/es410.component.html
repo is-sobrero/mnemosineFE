@@ -1,0 +1,57 @@
+<mat-card *ngIf="current_state == 0">
+    <mat-card-header class="header">
+        <h2 class="title">Completa il dialogo inserendo la parola mancante</h2>
+        <p>Sostituisci lo spazio "___" con una delle scelte sottostanti</p>
+    </mat-card-header>  
+
+    <mat-card-content class="body_of_card">
+        <h3 class="word_to_reorder">{{display}}</h3>
+        <div class="content">
+            <p class="suggerimento" *ngFor="let suggerimento of consigli">{{suggerimento}}</p>
+        </div>
+        <form class="check_word">
+            <mat-form-field>
+                <mat-label>Inserisci una parola</mat-label>
+                <input class="input" matInput placeholder="" (keyup)="onKey($event)">
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-footer class="footer">
+        <mat-card-actions>
+            <button (click)="checkContent()" mat-button>Avanti</button>
+
+        <mat-form-field class="dif-selection">
+            <mat-label>Difficolta'</mat-label>
+            <mat-select [(value)]="level">
+                <mat-option value="0" (click)="changeState(0)">Facile</mat-option>
+                <mat-option value="1" (click)="changeState(1)">Medio</mat-option>
+                <mat-option value="2" (click)="changeState(2)">Difficile</mat-option>
+        </mat-select>
+        </mat-form-field>
+    </mat-card-actions>
+    </mat-card-footer>
+</mat-card>
+<mat-card *ngIf="current_state == 1" class="win">
+    <mat-card-header>
+        <h1>Congratualzioni</h1>
+    </mat-card-header>
+    <mat-card-content>
+        <p>La frase completa era:</p>
+        <h2><strong>"{{complete_string}}"</strong></h2>
+        </mat-card-content>  
+    <mat-card-footer class="footer">
+        <p>Hai completato l'esercizio con errori pari a: {{errors}} </p>
+    </mat-card-footer>
+</mat-card>
+<mat-card *ngIf="current_state == 2" class="lose">
+    <mat-card-header>
+        <h1>Hai perso</h1>
+    </mat-card-header>
+    <mat-card-content>
+        <p>La frase completa era:</p>
+        <h2><strong>"{{complete_string}}"</strong></h2>
+        </mat-card-content>  
+    <mat-card-footer class="footer">
+        <p>Hai totalizzato un numero di errori pari a {{errors}}</p>
+    </mat-card-footer>
+</mat-card>

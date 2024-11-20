@@ -9,6 +9,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../api.service';
+import { LoginService } from '../login.service';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -29,7 +30,8 @@ import { ApiService } from '../api.service';
 export class LoginComponent implements OnInit {
   
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    private loginService: LoginService
   ) { }
   
   ngOnInit() {
@@ -39,11 +41,6 @@ export class LoginComponent implements OnInit {
   password: string = '';
 
   login() {
-    alert('Username: ' + this.username + ' Password: ' + this.password);
-    this.api.post('login', {username: this.username, password: this.password}).subscribe(data => {
-      //@ts-ignore
-      alert(data.token);
-    }
-    );
+   this.loginService.login(this.username, this.password);
   }
 }
