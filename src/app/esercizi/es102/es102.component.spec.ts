@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Es205Component } from './es205.component';
+import { Es102Component } from './es102.component';
 
-describe('Es205Component', () => {
-  let component: Es205Component;
-  let fixture: ComponentFixture<Es205Component>;
+describe('Es102Component', () => {
+  let component: Es102Component;
+  let fixture: ComponentFixture<Es102Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Es205Component]
+      imports: [Es102Component]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Es205Component);
+    fixture = TestBed.createComponent(Es102Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -20,4 +20,4 @@ describe('Es205Component', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+})

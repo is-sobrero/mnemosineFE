@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { Es106Component } from './es106/es106.component';
 import { Es101Component } from './es101/es101.component';
 import { Es402Component } from './es402/es402.component';
@@ -24,12 +25,9 @@ import { Es410Component } from './es410/es410.component';
 import { Es205Component } from './es205/es205.component';
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
-  {
-    path: '106',
-    component: Es106Component,
-  },
   {
     path: '101',
     component: Es101Component,
@@ -117,7 +115,11 @@ const routes: Routes = [
   {
     path: '205',
     component: Es205Component,
-  }
+  },
+  {
+    path: '106',
+    component: Es106Component,
+  },
 ];
 
 @NgModule({
