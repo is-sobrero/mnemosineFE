@@ -1,0 +1,62 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Memorizza la
+      lista di parole e
+      componi</mat-card-title>
+    <mat-card-subtitle>Apprendimento e
+      memorizzazione</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content *ngIf="step === 0">
+    <h2>Seleziona la difficoltà</h2>
+    <mat-form-field class="dif-selection">
+      <mat-label>Difficolta'</mat-label>
+      <mat-select [(value)]="difficulty">
+        <mat-option value="0" (click) = "start()">Facile</mat-option>
+        <mat-option value="1" (click) = "start()">Medio</mat-option>
+        <mat-option value="2" (click) = "start()">Difficile</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="step === 1">
+    <h2>Quando sei pronto premi avanti...</h2>
+    <h3 *ngFor="let parola of wordList">{{parola}}</h3>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="step === 2">
+    <h2>Scrivi qua sotto le parole inserite</h2>
+    <mat-form-field class="example-chip-list">
+  <mat-chip-grid #chipGrid aria-label="Enter words">
+    @for (word of words(); track word) {
+      <mat-chip-row
+        (removed)="remove(word)"
+        [editable]="true" 
+        (edited)="edit(word, $event)"
+      >
+        {{word.name}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+    <input
+      placeholder="New word..."
+      [matChipInputFor]="chipGrid"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-grid>
+</mat-form-field>
+
+  </mat-card-content>
+
+  <mat-card-content *ngIf="step === 3">
+    <h2>Hai commesso {{ errors }} errori.</h2>
+  </mat-card-content>
+  <mat-card-actions>
+    <button [disabled]="step==3" (click)="nextStep()" mat-button>Avanti</button>
+    <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+  </mat-card-actions>
+</mat-card>
