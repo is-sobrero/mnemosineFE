@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Unisci i punti numeri</mat-card-title>
+        <mat-card-subtitle>Attenzione selettiva e coordinazione oculo-manuale </mat-card-subtitle>
+    </mat-card-header>
+    <div class="grid-container">
+        <div *ngFor="let punto of punti" class="grid-item" [ngClass]="{'selected': puntiUniti.includes(punto.numero)}"
+            (click)="selezionaPunto(punto)" [style.top.%]="punto.y" [style.left.%]="punto.x">
+            {{ punto.numero }}
+        </div>
+    </div>
+    <mat-card-actions>
+        <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+      </mat-card-actions>
+    <div *ngIf="messaggio">{{ messaggio }}</div>
+</mat-card>
