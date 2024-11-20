@@ -1,0 +1,54 @@
+mat-card {
+    width: 1100px;
+}
+
+.immagini-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    position: relative;
+}
+
+mat-card img {
+    width: 500px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+mat-card img.selected {
+    border-color: red;
+}
+
+.overlay-button {
+    position: absolute;
+    top: 3px;
+    right: 11px;
+    width: 500px;
+    height: 500px;
+    background-color: transparent;    
+    border: none;
+    cursor: pointer;
+}
+
+.overlay-overlay-button {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.livelli-container {
+    align-items: center;
+    text-align: center;
+}
+
+.livelli-container button {
+    width: 150px;
+}
+
+.livello{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
