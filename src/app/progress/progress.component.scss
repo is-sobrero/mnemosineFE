@@ -1,0 +1,15 @@
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}
+
+        
+
+mat-stepper{
+    background-color: #00000000;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.blank{
+    opacity: 0.2;
+}
