@@ -1,0 +1,28 @@
+.card-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  min-width: 320px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-no {
+    flex: 0 0 auto;
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    min-width: 320px;
+    border: 3px dotted #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
