@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { Es106Component } from './es106/es106.component';
 import { Es101Component } from './es101/es101.component';
 import { Es402Component } from './es402/es402.component';
 import { Es102Component } from './es102/es102.component';
@@ -20,6 +22,7 @@ import { Es408Component } from './es408/es408.component';
 import { Es403Component } from './es403/es403.component';
 import { Es405Component } from './es405/es405.component';
 import { Es410Component } from './es410/es410.component';
+import { Es205Component } from './es205/es205.component';
 
 
 const routes: Routes = [
@@ -107,7 +110,15 @@ const routes: Routes = [
   {
     path: "410",
     component: Es410Component,
-  }
+  },
+  {
+    path: '205',
+    component: Es205Component,
+  },
+  {
+    path: '106',
+    component: Es106Component,
+  },
 ];
 
 @NgModule({
