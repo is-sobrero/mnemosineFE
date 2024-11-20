@@ -4,7 +4,9 @@
 <div class="card-container" *ngFor="let session of sessions">
   <div class="card" >
     <!--first 3 chars-->
-    <h3>Sessione {{session._id.substring(0, 3)}}</h3>
+    <h3>Sessione {{session.sessionName}}</h3>
+    <p *ngIf="session.exercises.length > 2" style="color: gray;">Include {{session.exercises.length}} esercizi</p>
+    <p *ngIf="session.exercises.length == 1" style="color: gray;">Include un solo esercizio.</p>
     <button mat-raised-button (click)="startSession(session._id)">Inizia</button>
   </div>
 </div>

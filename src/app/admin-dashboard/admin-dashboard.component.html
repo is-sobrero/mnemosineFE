@@ -7,67 +7,71 @@
       <mat-label>Seleziona un utente
       </mat-label>
       <mat-select [(value)]="selectedUser">
-          <mat-option value="test">
+          <mat-option value=1>
           Test
           </mat-option>
       </mat-select>
   </mat-form-field>
   <br>
   <!-- repeat this this 10 times-->
-  <div *ngFor="let esercizi of esercizi; let i = index"
+  <div *ngFor="let esercizio of esercizi; let i = index"
    style="width: 300px; display: inline-block;">
     <mat-form-field >
       <mat-label>Seleziona esercizio {{i+1}}
       </mat-label>
-      <mat-select [(value)]="selectedExercise">
-          <mat-option value="test">
+      <mat-select [(value)]="esercizio.id">
+          <mat-option value="103">
            Esercizio 103
           </mat-option>
-          <mat-option value="test">
+          <mat-option value="104">
             Esercizio 104
           </mat-option>
-          <mat-option value="test">
+          <mat-option value="105">
             Esercizio 105
           </mat-option>
-          <mat-option value="test">
+          <mat-option value="108">
             Esercizio 108
           </mat-option>
-          <mat-option value="test">
+          <mat-option value="109">
             Esercizio 109
           </mat-option>
-          <mat-option value="test">
+          <mat-option value="110">
             Esercizio 110
           </mat-option>
-          <mat-option value="test">
+          <mat-option value="201">
             Esercizio 201
           </mat-option> 
-          <mat-option value="test">
+          <mat-option value="202">
             Esercizio 202
           </mat-option> 
-          <mat-option value="test">
+          <mat-option value="203">
             Esercizio 203
           </mat-option>   
-          <mat-option value="test">
+          <mat-option value="204">
             Esercizio 204
           </mat-option> 
-          <mat-option value="test">
+          <mat-option value="303">
             Esercizio 303
           </mat-option> 
+          <mat-option value="405">
+            Esercizio 405
+          </mat-option> 
       </mat-select>
+
       
   </mat-form-field>
   <mat-form-field>
     <mat-label>
       Difficoltà {{i+1}}
     </mat-label>
-    <mat-select>
-      <mat-option value="test">
+    <mat-select [(value)]="esercizio.difficulty">
+      <mat-option value="1">
         1 - Facile
       </mat-option> 
-      <mat-option value="test">
+      <mat-option value="2">
         2 - Intermedio
       </mat-option> 
-      <mat-option value="test">
+      <mat-option value="3">
         3 - Avanzato
       </mat-option> 
   </mat-select>

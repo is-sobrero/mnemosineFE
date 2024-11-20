@@ -37,16 +37,19 @@ export class AdminDashboardComponent {
   ];
 
   selectedUser = this.users[0];
-  selectedExercise = 'Squats';
 
   exersicesNumber = 11;
 
   esercizi = [
-    { id: 1, name: 'Squats' }];
+    { id: 103, difficulty: 1 }];
 
   assign() {
     console.log('Assigning...');
-    this.api.post('addSession', { userId: 1 }).subscribe((res: any) => {
+    console.log(this.selectedUser);
+    console.log(this.esercizi);
+    //create a session name based on the current date
+    var sessionName = "del " + new Date().toLocaleDateString() + " alle " + new Date().toLocaleTimeString();
+    this.api.post('addSession', { userId: 1, exercises: this.esercizi, sessionName: sessionName}).subscribe((res: any) => {
       console.log(res);
       if(res.message === 'Sessione salvata') {
         alert('Session assigned successfully');
@@ -57,7 +60,7 @@ export class AdminDashboardComponent {
   addexe() {
     console.log('Adding...');
     this.exersicesNumber++;
-    this.esercizi.push({ id: this.exersicesNumber, name: 'Esercizio ' + this.exersicesNumber });
+    this.esercizi.push({ id: 103, difficulty: 1 });
   }
 
   remexe() {
