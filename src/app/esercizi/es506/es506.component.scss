@@ -1,0 +1,45 @@
+mat-card {
+    margin: 10px;
+    padding: 10px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+button {
+    all: unset;
+    transition: all 0.3 ease-in-out;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+img {
+    width: 360px;
+}
+
+.allElements {
+    display: grid;
+    grid-template: "img img img";
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 4px;
+
+    & img {
+        width: 180px;
+        // Non li rende selezionabili e trascinabili
+        user-select: none;
+        -webkit-user-drag: none;
+    }
+
+    & button:active {
+        transform: scale(0.95);
+    }
+
+    & button[disabled] {
+        opacity: 40%;
+        cursor: not-allowed;
+    }
+}
