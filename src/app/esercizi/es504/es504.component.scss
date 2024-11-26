@@ -1,40 +1,52 @@
 mat-card {
-    margin: 20px;
-    padding: 20px;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+width: 500px;
+height: 1000px;
 }
 
-.livelli-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.puzzle-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.puzzle-board {
+.grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.puzzle-piece {
-    width: 100px;
-    height: 100px;
-    background-size: cover;
-    cursor: grab;
-}
-
-.puzzle-target {
-    width: 100px;
-    height: 100px;
-    border: 2px dashed gray;
-}
+    grid-template-columns: repeat(5, 1fr);
+    
+    width: max-content;
+    margin: 20px auto; 
+  }
+  
+  .grid-button {
+    width: 60px;
+    height: 60px;
+    font-size: 16px;
+    cursor: pointer;
+    background-image: image('assets/images_es504/Bianco.png');
+    color: black;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .grid-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .image-row {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    width: max-content;
+    margin: 20px auto;
+  }
+  
+  .image-slot {
+    width: 60px;
+    height: 60px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .image-slot img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 5px;
+  }

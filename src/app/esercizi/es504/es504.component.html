@@ -1,48 +1,25 @@
-<mat-card *ngIf="step === 0">
-    <mat-card-header>
-        <mat-card-title>Seleziona il Livello di Difficoltà</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="livelli-container">
-            <button mat-button (click)="selezionaLivello(0)">Livello 1</button>
-            <button mat-button (click)="selezionaLivello(1)">Livello 2</button>
-            <button mat-button (click)="selezionaLivello(2)">Livello 3</button>
-        </div>
-    </mat-card-content>
-</mat-card>
-
-<mat-card *ngIf="step === 1">
-    <mat-card-header>
-        <mat-card-title>Risolvi il Puzzle</mat-card-title>
-        <mat-card-subtitle>Ricostruisci l'immagine correttamente</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="puzzle-container">
-            <div class="puzzle-board">
-                <div
-                    *ngFor="let pezzo of puzzlePezzi"
-                    class="puzzle-piece"
-                    [ngStyle]="{'background-image': 'url(' + pezzo.img + ')'}"
-                    (dragstart)="iniziaTrascinamento($event, pezzo)"
-                    draggable="true"
-                ></div>
-            </div>
-            <div
-                class="puzzle-target"
-                *ngFor="let slot of slotpezzi"
-                (drop)="completaSlot($event, slot)"
-                (dragover)="permessiTrascinamento($event)"
-            ></div>
-        </div>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="verificaCompletamento()">Verifica</button>
-    </mat-card-actions>
-</mat-card>
-
-<mat-card *ngIf="step === 2">
-    <mat-card-content>
-        <p>Complimenti! Hai completato il puzzle!</p>
-    </mat-card-content>
-</mat-card>
-
+<mat-card>
+    <mat-card-title>
+        <h2 style="text-align: center;">"completa il puzzle"</h2>
+    </mat-card-title>
+<div class="grid">
+    <button
+      *ngFor="let button of buttons; let i = index"
+      (click)="onButtonClick(i)"
+      class="grid-button"
+    >
+      {{ button.label }}
+    </button>
+  </div>
+  <div class="image-row">
+    <div
+      *ngFor="let image of firstRowImages; let i = index"
+      class="image-slot"
+    >
+      <img [src]="image" alt="Slot {{ i + 1 }}" />
+    </div>
+  </div>
+  <mat-card-actions>
+    <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+</mat-card-actions>
+  <mat-card>
