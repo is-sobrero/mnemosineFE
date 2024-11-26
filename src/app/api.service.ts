@@ -10,7 +10,7 @@ export class ApiService {
     private http: HttpClient
   ) {}
 
-  baseUrl = 'http://localhost:3000/';
+  baseUrl = 'https://mnemosineapi.sobrero.dev/';
   get(url: string) {
     const req = this.http.get(this.baseUrl + url);
     return req;
