@@ -1,70 +1,46 @@
 import { NgFor, NgStyle, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
+import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { MatGridListModule } from '@angular/material/grid-list';
 @Component({
   selector: 'app-es504',
   standalone: true,
   imports: [
     NgFor,
-    NgStyle,
     NgIf,
     MatCard,
-    MatCardActions,
     MatCardHeader,
+    MatCardActions,
     MatCardTitle,
-    MatCardSubtitle,
     MatCardContent,
+    MatGridListModule,
     CommonModule
   ],
   templateUrl: './es504.component.html',
   styleUrl: './es504.component.scss'
 })
 export class Es504Component {
-  step = 0;
-  livello = 0;
-  puzzlePezzi: any[] = [];
-  slotpezzi: any[] = [];
-  completati = 0;
+    timeMillis: number = 0;
+    buttons: { label: string }[] = [];
+    firstRowImages: string[] = [];
 
-  puzzles = [
-      {
-          pezzi: [
-              { img: 'assets/images_es504/lvl_1/mucca_01.jpg', id: 1 },
-              { img: 'assets/images_es504/lvl_1/mucca_02.jpg', id: 2 },
-              { img: 'assets/images_es504/lvl_1/mucca_03.jpg', id: 3 }
-          ]
-      },
-  ];
 
-  selezionaLivello(livello: number) {
-      this.livello = livello;
-      this.step = 1;
-      this.puzzlePezzi = this.puzzles[livello].pezzi;
-      this.slotpezzi = this.puzzles[livello].pezzi.map((pezzo) => ({ id: pezzo.id, completato: false }));
-  }
-
-  iniziaTrascinamento(event: DragEvent, pezzo: any) {
-      event.dataTransfer?.setData('text', pezzo.id);
-  }
-
-  completaSlot(event: DragEvent, slot: any) {
-      const id = event.dataTransfer?.getData('text');
-      if (id && slot.id === +id) {
-          slot.completato = true;
-          this.completati++;
+    ngOnInit(): void {
+        setInterval(() => {
+            this.timeMillis += 100;
+        }, 100);
+    }
+    constructor() {
+      for (let i = 1; i <= 25; i++) {
+        this.buttons.push({ label: `B${i}` });
       }
-  }
-
-  permessiTrascinamento(event: DragEvent) {
-      event.preventDefault();
-  }
-
-  verificaCompletamento() {
-      if (this.completati === this.slotpezzi.length) {
-          this.step = 2;
-      } else {
-          alert('Completa il puzzle prima di procedere!');
+      for (let i = 1; i <= 25; i++) {
+        this.firstRowImages.push(`assets/images_es504/lvl_1/mucca_0${i}.jpg`);
       }
+    }
+  
+    onButtonClick(index: number): void {
+      alert(`Hai cliccato sul bottone ${index + 1}!`);
+    }
   }
-}
