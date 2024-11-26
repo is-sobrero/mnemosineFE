@@ -23,7 +23,6 @@ import { Es408Component } from './es408/es408.component';
 import { Es403Component } from './es403/es403.component';
 import { Es405Component } from './es405/es405.component';
 import { Es410Component } from './es410/es410.component';
-import { Es205Component } from './es205/es205.component';
 import { Es504Component } from './es504/es504.component';
 
 
@@ -113,18 +112,10 @@ const routes: Routes = [
     path: "410",
     component: Es410Component,
   },
-  {  
-    path: '205',
-    component: Es205Component,
-  },
-  { 
-    path: '106',
-    component: Es106Component,
-  },
   {
     path: "504",
     component: Es504Component,
-  },
+  }
 ];
 
 @NgModule({
