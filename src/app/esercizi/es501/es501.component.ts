@@ -45,7 +45,6 @@ export class Es501Component implements OnInit{
   errors:number = 0;
   points:number = 0;
   current_obj:any;
-  automatic:boolean = true;
 
   debug:boolean = true; // debug flag: enable it to show debug info on console
 
@@ -217,6 +216,7 @@ export class Es501Component implements OnInit{
     this.difficulty.push(this.medium_random);
     this.difficulty.push(this.hard_random);
     this.mouse_points = [];
+    this.object_status = [];
 
     this.canvas_background = document.getElementById("canvas_bg");
     this.canvas_foreground = document.getElementById("canvas_fg");
@@ -299,11 +299,6 @@ export class Es501Component implements OnInit{
       object_variable:JSON.parse(object_status),
     };
     if(this.debug) console.log(es501_state_json);
-
-    /*
-     *  TODO: Send status and wait for response
-     *
-     * */
 
     return status;
   }
