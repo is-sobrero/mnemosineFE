@@ -10,21 +10,22 @@ import { __await } from 'tslib';
 import { start } from 'repl';
 import { waitForAsync } from '@angular/core/testing';
 import { rejects } from 'assert';
+import {ExerciseService} from "../../exercise.service";
 
 
 @Component({
   selector: 'app-es410',
   standalone: true,
   imports: [
-    MatCard, 
-    MatCardActions, 
-    MatCardHeader, 
-    MatCardTitle, 
-    MatCardSubtitle, 
+    MatCard,
+    MatCardActions,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
     MatCardContent,
     MatCardFooter,
     NgFor,
-    MatButton, 
+    MatButton,
     HttpClientModule,
     MatInputModule,
     MatFormFieldModule,
@@ -44,35 +45,38 @@ export class Es410Component implements OnInit{
   private placeholder:string = "_"
   public consigli:string[] = [];
   private dictionary:string[] = [];
-  
+
+  constructor(private ES: ExerciseService){}
 
   /*
   *
   *   Current state variable.
-  *   This variable control the state of the application 
+  *   This variable control the state of the application
   *
-  * 
+  *
   */
 
   current_state = 0;
 
-  /* 
+  /*
    *  variable used to manage the I/O system
    *
   */
-  
+
 
   errors:number = 0;
   display:string = "";
   word_typed = "";
-
+  timeMillis:number = 0;
  /*
   *  Level: varable used to set the difficulty
   *  Default state: 0 ( easier );
   *
   */
 
-  level = 0;
+
+  level = this.ES.currentInfo().difficulty;
+
 
   private list_of_words:any[] = [];
 
@@ -113,6 +117,9 @@ export class Es410Component implements OnInit{
   }
 
   ngOnInit(){
+    setInterval(()=>{
+      this.timeMillis += 500;
+    }, 500);
     this.resolvePromise();
 
     setTimeout(()=>{
@@ -121,7 +128,7 @@ export class Es410Component implements OnInit{
       this.list_of_words.push(this.hard);
       //console.log(this.simple);
       //console.log(this.medium);
-      //console.log(this.hard); 
+      //console.log(this.hard);
       this.setWord();
     }, 1000);
   }
@@ -131,10 +138,10 @@ export class Es410Component implements OnInit{
     var cache_word:string[] = []
     cache_word = this.list_of_words.at(this.level).at(random).split(" ");
     let random_string:number = Math.floor(Math.random()* cache_word.length);
-    
+
     let random_trap:any[] = [];
 
-    for(let i=0;i<this.level+2;i++){
+    for(let i=0;i<this.level-1+2;i++){
       random_trap.push(Math.floor(Math.random()*this.dictionary.length));
     }
 
@@ -176,30 +183,17 @@ export class Es410Component implements OnInit{
     if(this.word_typed == "") return;
     if(this.word_typed.toLocaleLowerCase() === this.missing_word.toLowerCase()){
       this.current_state = 1;
+      this.ES.nextExercise(410, { errors: this.errors , time: this.timeMillis });
     }else{
       this.errors+=1;
     }
-    if(this.errors>= 10){
-      this.current_state = 2;
-    }
+
   }
 
-  changeState(newState:number){
-      this.level = newState;
-      this.word_typed = "";
-      this.display = "";
-      this.errors = 0;
-      this.complete_string = "";
-      this.missing_word = ""
-      this.consigli = [];
-      this.setWord();
-  
-}
-
-  shuffleArray(array: string[]){ 
+  shuffleArray(array: string[]){
     return array.map((a) => ({ sort: Math.random(), value: a }))
         .sort((a, b) => a.sort - b.sort)
-        .map((a) => a.value); 
+        .map((a) => a.value);
   };
   onKey(event:any){
     this.word_typed = event.target.value;

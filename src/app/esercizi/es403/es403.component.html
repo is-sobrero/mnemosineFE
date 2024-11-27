@@ -1,7 +1,7 @@
-<mat-card>
+<mat-card class="main_content">
     <mat-card-header>
         <h2>Indovina l'oggetto</h2>
-    </mat-card-header>  
+    </mat-card-header>
     <mat-card-content *ngIf="current_state == 0">
         <p *ngIf="errors>0">errori: {{errors}}</p>
         <div class="image_container">
@@ -17,14 +17,6 @@
     <mat-card-footer class="footer" *ngIf="current_state == 0">
         <mat-card-actions>
             <button (click)="checkContent()" mat-button>Controlla</button>
-        <mat-form-field class="dif-selection" *ngIf="current_state == 0">
-            <mat-label>Difficolta'</mat-label>
-            <mat-select [(value)]="level">
-                <mat-option value="0" (click)="setWord()">Facile</mat-option>
-                <mat-option value="1" (click)="setWord()">Medio</mat-option>
-                <mat-option value="2" (click)="setWord()">Difficile</mat-option>
-        </mat-select>
-        </mat-form-field>
     </mat-card-actions>
     </mat-card-footer>
 

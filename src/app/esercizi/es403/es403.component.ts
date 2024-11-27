@@ -15,15 +15,15 @@ import { ExerciseService } from '../../exercise.service';
   selector: 'app-es403',
   standalone: true,
   imports: [
-    MatCard, 
-    MatCardActions, 
-    MatCardHeader, 
-    MatCardTitle, 
-    MatCardSubtitle, 
+    MatCard,
+    MatCardActions,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
     MatCardContent,
     MatCardFooter,
     NgFor,
-    MatButton, 
+    MatButton,
     HttpClientModule,
     MatInputModule,
     MatFormFieldModule,
@@ -35,29 +35,31 @@ import { ExerciseService } from '../../exercise.service';
 })
 export class Es403Component implements OnInit{
   constructor(private ES: ExerciseService) { }
+
   private connection = inject(HttpClient);
   private dictionary:any[] = [];
   private inputSection:any;
   /*
   *
   *   Current state variable.
-  *   This variable control the state of the application 
+  *   This variable control the state of the application
   *
-  * 
+  *
   */
 
   current_state = 0;
 
-  /* 
+  /*
    *  variable used to manage the I/O system
    *
   */
-  
+
 
   errors:number = 0;
   display:string = "";
   word_typed = "";
   image_link:string = "";
+  timeMillis:number = 0;
 
  /*
   *  Level: varable used to set the difficulty
@@ -65,43 +67,61 @@ export class Es403Component implements OnInit{
   *
   */
 
-  level = 0;
 
- /*
-  * List of word used for the selection. The index of 
+  level = this.ES.currentInfo().difficulty;
+  /*
+  * List of word used for the selection. The index of
   * the array rappresent the difficulty selected.
-  * 
+  *
   *   index 0: easier;
   *   index 1: medium;
-  *   index 3: harder; 
-  * 
+  *   index 3: harder;
+  *
   */
 
   private list_of_words:any[] = [];
   ngOnInit(){
-    this.connection.get("assets/exAssets/dizionario_immagini/dizionario_semplice.txt", {responseType: "text"}).subscribe(data =>{
-      this.dictionary = data.split("\n");
-      this.getWord();
+    this.inputSection = document.querySelector(".input");
+    setInterval(()=>{
+      this.timeMillis += 500;
+    }, 500);
 
-      this.connection.get("assets/exAssets/dizionario_immagini/dizionario_normale.txt", {responseType: "text"}).subscribe(data =>{
-        this.dictionary = data.split("\n");
-        this.getWord();
 
+    switch(this.level){
+      case 1:
+        this.connection.get("assets/exAssets/dizionario_immagini/dizionario_semplice.txt", {responseType: "text"}).subscribe(data =>{
+          this.dictionary = data.split("\n");
+          this.getWord();
+          this.setWord();
+
+        });
+        break;
+
+      case 2:
+        this.connection.get("assets/exAssets/dizionario_immagini/dizionario_medio.txt", {responseType: "text"}).subscribe(data =>{
+          this.dictionary = data.split("\n");
+          this.getWord();
+          this.setWord();
+        });
+        break;
+      case 3:
         this.connection.get("assets/exAssets/dizionario_immagini/dizionario_difficile.txt", {responseType: "text"}).subscribe(data =>{
           this.dictionary = data.split("\n");
           this.getWord();
+        this.setWord();
         });
-        this.inputSection = document.querySelector(".input");
-      });
-      this.setWord();
-    });
+        break;
+      default:
+        console.log("Undefinded level");
+        break;
+    }
 
   }
 
   checkContent(){
     if(this.display.toLowerCase() == this.word_typed.toLowerCase()){
       this.current_state = 1;
-      this.ES.nextExercise(403, {errors: this.errors});
+      this.ES.nextExercise(403, {errors: this.errors, time: this.timeMillis});
     }else{
       this.errors += 1;
       this.inputSection.value = "";
@@ -109,7 +129,8 @@ export class Es403Component implements OnInit{
   }
 
   setWord():void{
-    var parse = JSON.parse(this.list_of_words.at(this.level));
+    console.log(this.list_of_words.at(0));
+    var parse = JSON.parse(this.list_of_words.at(0));
     this.display = parse.word;
     this.image_link = parse.link;
     console.log(this.display);

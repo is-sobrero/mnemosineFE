@@ -1,14 +1,14 @@
-<mat-card *ngIf="current_state == 0">
+<mat-card *ngIf="current_state == 0" class="main_content">
     <mat-card-header class="header">
         <h2 class="title">Trova la parola</h2>
         <p class="stats" *ngIf="points>0">Parole indovinate {{points}}</p>
         <p class="stats" *ngIf="errors>0">errori: {{errors}}</p>
-    </mat-card-header>  
+    </mat-card-header>
     <mat-card-header>
 
     </mat-card-header>
     <mat-card-content>
-        <p class="text_above_input">Indovina una parola che inizia per:</p>
+        <h3 class="text_above_input">Indovina 3 parole che iniziano per:</h3>
         <h2 class="word_to_reorder">{{display}}</h2>
         <form class="check_word">
             <mat-form-field>
@@ -20,14 +20,6 @@
     <mat-card-footer class="footer">
         <mat-card-actions>
             <button (click)="checkContent()" mat-button>Avanti</button>
-        <mat-form-field class="dif-selection">
-            <mat-label>Difficolta'</mat-label>
-            <mat-select [(value)]="level">
-                <mat-option value="0" (click)="setWord()">Facile</mat-option>
-                <mat-option value="1" (click)="setWord()">Medio</mat-option>
-                <mat-option value="2" (click)="setWord()">Difficile</mat-option>
-        </mat-select>
-        </mat-form-field>
     </mat-card-actions>
     </mat-card-footer>
 </mat-card>
@@ -37,7 +29,7 @@
     </mat-card-header>
     <mat-card-content>
         <h2>Parole con iniziale "{{display}}"</h2>
-    </mat-card-content>  
+    </mat-card-content>
     <mat-card-footer class="footer">
         <p>Hai completato l'esercizio con errori pari a: {{errors}} </p>
     </mat-card-footer>
