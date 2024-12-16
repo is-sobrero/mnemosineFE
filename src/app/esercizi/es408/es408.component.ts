@@ -6,20 +6,21 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {ExerciseService} from "../../exercise.service";
 
 @Component({
   selector: 'app-es408',
   standalone: true,
   imports: [
-    MatCard, 
-    MatCardActions, 
-    MatCardHeader, 
-    MatCardTitle, 
-    MatCardSubtitle, 
+    MatCard,
+    MatCardActions,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
     MatCardContent,
     MatCardFooter,
     NgFor,
-    MatButton, 
+    MatButton,
     HttpClientModule,
     MatInputModule,
     MatFormFieldModule,
@@ -36,17 +37,18 @@ export class Es408Component implements OnInit{
   private sinHeader:string[] = [];
   private sinHeaderMedium:string[] = [];
   private sinHeaderHarder:string[] = [];
-  private inputSection:any; 
+  private inputSection:any;
   private totalArray:any[] = [];
   private inputCache:string[] = [];
   selectedArray:any[] = [];
 
+  constructor(private ES: ExerciseService){}
   /*
   *
   *   Current state variable.
-  *   This variable control the state of the application 
-  *   
-  * 
+  *   This variable control the state of the application
+  *
+  *
   */
 
   current_state = 0;
@@ -54,25 +56,25 @@ export class Es408Component implements OnInit{
   /*
   *
   *   Current point tracker.
-  *   Usefull to keep track of guessed words from the user 
-  *   
-  * 
+  *   Usefull to keep track of guessed words from the user
+  *
+  *
   */
 
   points = 0;
 
 
-  /* 
+  /*
    *  variable used to manage the I/O system
    *
   */
-  
+
 
   errors:number = 0;
   display:string = "";
   blend:string = "";
   word_typed = "";
-
+  timeMillis:number = 0;
 
  /*
   *  Level: varable used to set the difficulty
@@ -80,22 +82,25 @@ export class Es408Component implements OnInit{
   *
   */
 
-  level = 0;
+  level = this.ES.currentInfo().dificulty;
 
  /*
-  * List of word used for the selection. The index of 
+  * List of word used for the selection. The index of
   * the array rappresent the difficulty selected.
-  * 
+  *
   *   index 0: easier;
   *   index 1: medium;
-  *   index 3: harder; 
-  * 
+  *   index 3: harder;
+  *
   */
 
   private list_of_words:any[] = [];
 
 
   ngOnInit(){
+    setInterval(()=>{
+      this.timeMillis += 500;
+    }, 500);
     this.connection.get("assets/exAssets/sinonimi.txt", {responseType: "text"}).subscribe(data =>{
       data = data.toLowerCase();
       this.dictionary = data.split("\n") as string[];
@@ -126,11 +131,11 @@ export class Es408Component implements OnInit{
           result = subString.split(":");
           subString = ""+result.at(1);
           this.totalArray.push(subString);
-          
+
         }
         this.setWord();
       });
-     
+
       this.inputSection = document.querySelector(".input");
 
     });
@@ -138,8 +143,8 @@ export class Es408Component implements OnInit{
   }
 
   setWord():void{
-    var rand:number = Math.floor(Math.random()*this.list_of_words.at(this.level).length);
-    this.display = ""+this.list_of_words.at(this.level).at(rand);
+    var rand:number = Math.floor(Math.random()*this.list_of_words.at(this.level-1).length);
+    this.display = ""+this.list_of_words.at(this.level-1).at(rand);
     this.selectedArray = this.totalArray.at(rand).split(", ");
     this.inputCache = [];
     this.errors = 0;
@@ -148,16 +153,14 @@ export class Es408Component implements OnInit{
   }
 
   checkContent(){
-    if(this.word_typed.toLowerCase() != this.display.toLowerCase() && this.selectedArray.includes(this.word_typed.toLowerCase()) && !this.inputCache.includes(this.word_typed.toLowerCase()) && this.errors < 10){
+    if(this.word_typed.toLowerCase() != this.display.toLowerCase() && this.selectedArray.includes(this.word_typed.toLowerCase()) && !this.inputCache.includes(this.word_typed.toLowerCase())){
       this.points += 1;
     }else{
       this.errors += 1;
     }
-    if(this.errors>=10){
-      this.current_state = -1;
-    }
-    if(this.points == 3){
+    if(this.points >= 3){
       this.current_state = 1;
+      this.ES.nextExercise(408, { errors: this.errors , time: this.timeMillis });
     }
     this.inputCache.push(this.word_typed);
     this.inputSection.value = "";

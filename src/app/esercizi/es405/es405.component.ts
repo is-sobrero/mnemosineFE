@@ -7,21 +7,21 @@ import {MatSelectModule} from "@angular/material/select";
 import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { __await } from 'tslib';
-import { ExerciseService } from '../../exercise.service';
 import { start } from 'repl';
+import {ExerciseService} from "../../exercise.service";
 
 @Component({
   selector: 'app-es405',
   standalone: true,
-  imports: [    MatCard, 
-    MatCardActions, 
-    MatCardHeader, 
-    MatCardTitle, 
-    MatCardSubtitle, 
+  imports: [    MatCard,
+    MatCardActions,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
     MatCardContent,
     MatCardFooter,
     NgFor,
-    MatButton, 
+    MatButton,
     HttpClientModule,
     MatInputModule,
     MatFormFieldModule,
@@ -44,25 +44,25 @@ export class Es405Component implements OnInit{
   /*
   *
   *   Current state variable.
-  *   This variable control the state of the application 
+  *   This variable control the state of the application
   *
-  * 
+  *
   */
 
   current_state = 0;
 
-  /* 
+  /*
    *  variable used to manage the I/O system
    *
   */
-  
+
 
   errors:number = 0;
   display:string = "";
   blend:string = "";
   word_typed = "";
   points:number = 0;
-
+  timeMillis = 0;
 
  /*
   *  Level: varable used to set the difficulty
@@ -70,12 +70,15 @@ export class Es405Component implements OnInit{
   *
   */
 
-  level = 0;
+  level = this.ES.currentInfo().difficulty;
 
   private list_of_words:any[] = [];
 
-
   ngOnInit(){
+    setInterval(()=>{
+      this.timeMillis += 500;
+    }, 500);
+
     this.connection.get("assets/exAssets/60000_parole_italiane.txt", {responseType: "text"}).subscribe(data =>{
       this.dictionary = data.split("\n");
       for(var i=0;i<3;i++){
@@ -87,13 +90,13 @@ export class Es405Component implements OnInit{
   }
 
   setWord():void{
-    let random:number = Math.floor(Math.random() * this.difficulty[this.level].length);
-    this.display = ""+this.difficulty[this.level][random];
+    let random:number = Math.floor(Math.random() * this.difficulty[this.level-1].length);
+    this.display = ""+this.difficulty[this.level-1][random];
     console.log(this.display);
   }
 
   checkContent(){
- 
+
     if(this.word_typed == "") return;
 
     if(this.list_of_words.includes(this.word_typed.toLocaleLowerCase()) && !this.word_cache.includes(this.word_typed.toLocaleLowerCase())){
@@ -102,16 +105,9 @@ export class Es405Component implements OnInit{
     }else{
       this.errors += 1;
     }
-    if(this.points >= 5){
+    if(this.points >= 3){
       this.current_state = 1;
-      this.ES.nextExercise(405, {errors: this.errors});
-    }
-  }
-
-  changeState(newState:number){
-    if(newState != this.level){
-      this.level = newState;
-      this.setWord();
+      this.ES.nextExercise(405, { errors: this.errors , time: this.timeMillis });
     }
   }
 
