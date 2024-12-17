@@ -17,7 +17,7 @@ export class ExerciseService {
     localStorage.removeItem('SessionInfo');
     localStorage.removeItem('ExerciseInfo');
     //right here will go and api call to start the session
-    this.apiService.get('activeSessions').subscribe( (apiResponses: any) => {
+    this.apiService.get('user/activeSessions').subscribe( (apiResponses: any) => {
       console.log(apiResponses);
       console.log(sessionId);
     //find the session with the id that was passed
@@ -56,7 +56,10 @@ export class ExerciseService {
     if( nextExerciseIndex < sessionInfo.exercises.length ) {
       this.router.navigate(['/esercizio/' + sessionInfo.exercises[nextExerciseIndex].id]);
     } else {
-      //if there are no more exercises in the session navigate to the results page
+      //communicate with the backend and tell them that the session is over and the results are ready
+      this.apiService.post('user/endSession', { sessionID: sessionInfo._id, results: exerciseInfo }).subscribe( (apiResponse: any) => {
+        console.log(apiResponse);
+      });
       localStorage.removeItem('SessionInfo');
       localStorage.removeItem('ExerciseInfo');
       this.router.navigate(['/risultati']);
