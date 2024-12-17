@@ -10,7 +10,7 @@
                 Sessione {{session.sessionName}}
               </mat-panel-title>
               <mat-panel-description>
-                Assegnata a {{session.assignedTo}}
+                Assegnata a {{session.userDetails.username}}
                 <p *ngIf="session.status == 'active'" style="color: blue;">Assegnata</p>
                 <p *ngIf="session.status == 'inactive'" style="color: red;">Non assegnata</p>
                 <!--ENDED-->

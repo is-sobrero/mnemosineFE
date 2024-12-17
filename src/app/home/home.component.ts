@@ -24,9 +24,13 @@ export class HomeComponent implements OnInit {
 
   sessionPresent = true;
   sessions:any = [];
+  userInfos: any;
 
   ngOnInit() {
-    this.api.get('activeSessions').subscribe((res: any) => {
+    //get userInfos from localStorage
+    //@ts-ignore
+    this.userInfos = JSON.parse(localStorage.getItem('userInfos'));
+    this.api.get('user/activeSessions').subscribe((res: any) => {
       this.sessions = res;
       if (res.length === 0) {
         this.sessionPresent = false;

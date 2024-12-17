@@ -42,7 +42,7 @@ export class SessionmanagerComponent implements OnInit {
   sessions:any = [];
   displayedColumns: string[] = ['number', 'esercizio', 'errori', 'tempo'];
   ngOnInit(): void {
-    this.api.get('getAdminSessions').subscribe((res: any) => {
+    this.api.get('admin/getSessions').subscribe((res: any) => {
       this.sessions = res;
     });
   }

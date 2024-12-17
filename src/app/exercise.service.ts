@@ -17,7 +17,7 @@ export class ExerciseService {
     localStorage.removeItem('SessionInfo');
     localStorage.removeItem('ExerciseInfo');
     //right here will go and api call to start the session
-    this.apiService.get('activeSessions').subscribe( (apiResponses: any) => {
+    this.apiService.get('user/activeSessions').subscribe( (apiResponses: any) => {
       console.log(apiResponses);
       console.log(sessionId);
     //find the session with the id that was passed
@@ -57,7 +57,7 @@ export class ExerciseService {
       this.router.navigate(['/esercizio/' + sessionInfo.exercises[nextExerciseIndex].id]);
     } else {
       //communicate with the backend and tell them that the session is over and the results are ready
-      this.apiService.post('endSession', { sessionID: sessionInfo._id, results: exerciseInfo }).subscribe( (apiResponse: any) => {
+      this.apiService.post('user/endSession', { sessionID: sessionInfo._id, results: exerciseInfo }).subscribe( (apiResponse: any) => {
         console.log(apiResponse);
       });
       localStorage.removeItem('SessionInfo');

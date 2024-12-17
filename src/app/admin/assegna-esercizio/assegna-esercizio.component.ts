@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ApiService } from '../../api.service';
 import { MatButton } from '@angular/material/button';
 import { NgFor } from '@angular/common';
+
 
 @Component({
   selector: 'app-assegna-esercizio',
@@ -24,17 +25,22 @@ import { NgFor } from '@angular/common';
   templateUrl: './assegna-esercizio.component.html',
   styleUrl: './assegna-esercizio.component.scss'
 })
-export class AssegnaEsercizioComponent {
+export class AssegnaEsercizioComponent implements OnInit {
 
     constructor(
       private api: ApiService
     ) { }
+
+
+    users: any = [];
+
+    ngOnInit(): void {
+      this.api.get('admin/getUsers').subscribe((res: any) => {
+        this.users = res;
+      });
+    }
   
-    users = [
-      { id: 1, name: 'Alice' },
-      { id: 2, name: 'Bob' },
-      { id: 3, name: 'Charlie' }
-    ];
+
   
     selectedUser = this.users[0];
   
@@ -49,7 +55,7 @@ export class AssegnaEsercizioComponent {
       console.log(this.esercizi);
       //create a session name based on the current date
       var sessionName = "del " + new Date().toLocaleDateString() + " alle " + new Date().toLocaleTimeString();
-      this.api.post('addSession', { userId: 1, exercises: this.esercizi, sessionName: sessionName}).subscribe((res: any) => {
+      this.api.post('admin/addSession', { userId: 1, exercises: this.esercizi, sessionName: sessionName, assignedTo: this.selectedUser}).subscribe((res: any) => {
         console.log(res);
         if(res.message === 'Sessione salvata') {
           alert('Session assigned successfully');

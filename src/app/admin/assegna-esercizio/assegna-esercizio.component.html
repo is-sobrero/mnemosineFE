@@ -7,8 +7,8 @@
         <mat-label>Seleziona un utente
         </mat-label>
         <mat-select [(value)]="selectedUser">
-            <mat-option value=1>
-            Test
+            <mat-option *ngFor="let user of users" [value]="user._id">
+              {{user.username}}
             </mat-option>
         </mat-select>
     </mat-form-field>
