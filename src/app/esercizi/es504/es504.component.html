@@ -13,21 +13,21 @@
         </div>
     </mat-card-content>
 
-    <mat-card-content *ngIf="(step === 2 && livello === 1)" style="width: 1008px; height: 508px;">
+    <mat-card-content *ngIf="(step === 2 && livello === 1)">
         <div class="allElements">
-            <button class="image" *ngFor="let i of puzzle" [disabled]="i.active == false"><img class="lvl1-image"
+            <button class="image" *ngFor="let i of puzzle" [disabled]="i.active == false" style="width: 25%; height: 25%;"><img class="lvl1-image"
                     src="{{i.src}}" alt=""></button>
         </div>
     </mat-card-content>
-    <mat-card-content *ngIf="(step === 2 && livello === 2)" style="width: 1010px; height: 510px;">
+    <mat-card-content *ngIf="(step === 2 && livello === 2)">
         <div class="allElements">
-            <button class="image" *ngFor="let i of puzzle" [disabled]="i.active == false"><img class="lvl2-image"
+            <button class="image" *ngFor="let i of puzzle" [disabled]="i.active == false" style="width: 20%; height: 20%;"><img class="lvl2-image"
                     src="{{i.src}}" alt=""></button>
         </div>
     </mat-card-content>
-    <mat-card-content *ngIf="(step === 2 && livello === 3)" style="width: 1008px; height: 510px;">
+    <mat-card-content *ngIf="(step === 2 && livello === 3)">
         <div class="allElements">
-            <button class="image" *ngFor="let i of puzzle" [disabled]="i.active == false"><img class="lvl3-image"
+            <button class="image" *ngFor="let i of puzzle" [disabled]="i.active == false" style="width: 16.667%; height: 16.66%;"><img class="lvl3-image"
                     src="{{i.src}}" alt=""></button>
         </div>
     </mat-card-content>
