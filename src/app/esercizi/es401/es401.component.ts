@@ -68,8 +68,7 @@ export class Es401Component implements OnInit{
   *  Default state: 0 ( easier );
   *
   */
-
-  level = this.ES.currentInfo().difficulty;
+  level = 1;
 
  /*
   * List of word used for the selection. The index of
@@ -97,6 +96,8 @@ export class Es401Component implements OnInit{
       this.inputSection = document.querySelector(".input");
       this.setWord();
     });
+  this.level = this.ES.currentInfo().difficulty;
+
 
   }
 

@@ -83,8 +83,7 @@ export class Es407Component implements OnInit{
   *  Default state: 0 ( easier );
   *
   */
-
-  level = this.ES.currentInfo().difficulty;
+  level = 1;
 
  /*
   * List of word used for the selection. The index of
@@ -129,7 +128,7 @@ export class Es407Component implements OnInit{
 
       this.setWord();
     });
-
+  this.level = this.ES.currentInfo().difficulty;
   }
 
   setWord():void{
