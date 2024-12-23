@@ -26,7 +26,6 @@ span
 .image_container{
     width:300px;
     height:300px;
-    padding:0px;
     margin-top:10px;
     margin-bottom:20px;
 }
@@ -88,4 +87,12 @@ span
   overflow:hidden;
 }
 
+
+.cover{
+  position:absolute;
+  background-color:black;
+  width:150px;
+  height:150px;
+  transform: translate(0%,0%);
+}
 
