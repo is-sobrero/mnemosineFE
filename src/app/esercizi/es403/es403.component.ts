@@ -84,6 +84,10 @@ export class Es403Component implements OnInit{
       this.timeMillis += 500;
     }, 500);
 
+    this.level = this.ES.currentInfo().difficulty;
+    if(this.level < 1 || this.level > 3){
+      this.level = 1;
+    }
 
     switch(this.level){
       case 1:
@@ -116,7 +120,6 @@ export class Es403Component implements OnInit{
         console.log("Undefinded level");
         break;
     }
-  this.level = this.ES.currentInfo().difficulty;
 
   }
 
