@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Es504Component } from './es504.component';
+import { Es305Component } from './es305.component';
 
-describe('Es504Component', () => {
-  let component: Es504Component;
-  let fixture: ComponentFixture<Es504Component>;
+describe('Es305Component', () => {
+  let component: Es305Component;
+  let fixture: ComponentFixture<Es305Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Es504Component]
+      imports: [Es305Component]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Es504Component);
+    fixture = TestBed.createComponent(Es305Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
