@@ -18,6 +18,7 @@ import { range } from 'rxjs';
 interface PuzzleElement {
   id: any;
   src: string;
+  active: boolean;
 }
 
 @Component({
@@ -53,89 +54,89 @@ export class Es504Component implements OnInit {
   erroriTotali = 0;
 
   elementiLivello1 = [
-    { id: 1, src: '../../../assets/image_es504/lvl1/1.png' },
-    { id: 2, src: '../../../assets/image_es504/lvl1/2.png' },
-    { id: 3, src: '../../../assets/image_es504/lvl1/3.png' },
-    { id: 4, src: '../../../assets/image_es504/lvl1/4.png' },
-    { id: 5, src: '../../../assets/image_es504/lvl1/5.png' },
-    { id: 6, src: '../../../assets/image_es504/lvl1/6.png' },
-    { id: 7, src: '../../../assets/image_es504/lvl1/7.png' },
-    { id: 8, src: '../../../assets/image_es504/lvl1/8.png' },
-    { id: 9, src: '../../../assets/image_es504/lvl1/9.png' },
-    { id: 10, src: '../../../assets/image_es504/lvl1/10.png' },
-    { id: 11, src: '../../../assets/image_es504/lvl1/11.png' },
-    { id: 12, src: '../../../assets/image_es504/lvl1/12.png' },
-    { id: 13, src: '../../../assets/image_es504/lvl1/13.png' },
-    { id: 14, src: '../../../assets/image_es504/lvl1/14.png' },
-    { id: 15, src: '../../../assets/image_es504/lvl1/15.png' },
-    { id: 16, src: '../../../assets/image_es504/lvl1/16.png' },
+    { id: 1, src: '../../../assets/image_es504/lvl1/1.png', active: false },
+    { id: 2, src: '../../../assets/image_es504/lvl1/2.png', active: false },
+    { id: 3, src: '../../../assets/image_es504/lvl1/3.png', active: false },
+    { id: 4, src: '../../../assets/image_es504/lvl1/4.png', active: false },
+    { id: 5, src: '../../../assets/image_es504/lvl1/5.png', active: false },
+    { id: 6, src: '../../../assets/image_es504/lvl1/6.png', active: false },
+    { id: 7, src: '../../../assets/image_es504/lvl1/7.png', active: false },
+    { id: 8, src: '../../../assets/image_es504/lvl1/8.png', active: false },
+    { id: 9, src: '../../../assets/image_es504/lvl1/9.png', active: false },
+    { id: 10, src: '../../../assets/image_es504/lvl1/10.png', active: false },
+    { id: 11, src: '../../../assets/image_es504/lvl1/11.png', active: false },
+    { id: 12, src: '../../../assets/image_es504/lvl1/12.png', active: false },
+    { id: 13, src: '../../../assets/image_es504/lvl1/13.png', active: false },
+    { id: 14, src: '../../../assets/image_es504/lvl1/14.png', active: false },
+    { id: 15, src: '../../../assets/image_es504/lvl1/15.png', active: false },
+    { id: 16, src: '../../../assets/image_es504/lvl1/16.png', active: false },
   ];
 
   elementiLivello2 = [
-    { id: 1, src: '../../../assets/image_es504/lvl2/1.png' },
-    { id: 2, src: '../../../assets/image_es504/lvl2/2.png' },
-    { id: 3, src: '../../../assets/image_es504/lvl2/3.png' },
-    { id: 4, src: '../../../assets/image_es504/lvl2/4.png' },
-    { id: 5, src: '../../../assets/image_es504/lvl2/5.png' },
-    { id: 6, src: '../../../assets/image_es504/lvl2/6.png' },
-    { id: 7, src: '../../../assets/image_es504/lvl2/7.png' },
-    { id: 8, src: '../../../assets/image_es504/lvl2/8.png' },
-    { id: 9, src: '../../../assets/image_es504/lvl2/9.png' },
-    { id: 10, src: '../../../assets/image_es504/lvl2/10.png' },
-    { id: 11, src: '../../../assets/image_es504/lvl2/11.png' },
-    { id: 12, src: '../../../assets/image_es504/lvl2/12.png' },
-    { id: 13, src: '../../../assets/image_es504/lvl2/13.png' },
-    { id: 14, src: '../../../assets/image_es504/lvl2/14.png' },
-    { id: 15, src: '../../../assets/image_es504/lvl2/15.png' },
-    { id: 16, src: '../../../assets/image_es504/lvl2/16.png' },
-    { id: 17, src: '../../../assets/image_es504/lvl2/17.png' },
-    { id: 18, src: '../../../assets/image_es504/lvl2/18.png' },
-    { id: 19, src: '../../../assets/image_es504/lvl2/19.png' },
-    { id: 20, src: '../../../assets/image_es504/lvl2/20.png' },
-    { id: 21, src: '../../../assets/image_es504/lvl2/21.png' },
-    { id: 22, src: '../../../assets/image_es504/lvl2/22.png' },
-    { id: 23, src: '../../../assets/image_es504/lvl2/23.png' },
-    { id: 24, src: '../../../assets/image_es504/lvl2/24.png' },
-    { id: 25, src: '../../../assets/image_es504/lvl2/25.png' },
+    { id: 1, src: '../../../assets/image_es504/lvl2/1.png', active: false },
+    { id: 2, src: '../../../assets/image_es504/lvl2/2.png', active: false },
+    { id: 3, src: '../../../assets/image_es504/lvl2/3.png', active: false },
+    { id: 4, src: '../../../assets/image_es504/lvl2/4.png', active: false },
+    { id: 5, src: '../../../assets/image_es504/lvl2/5.png', active: false },
+    { id: 6, src: '../../../assets/image_es504/lvl2/6.png', active: false },
+    { id: 7, src: '../../../assets/image_es504/lvl2/7.png', active: false },
+    { id: 8, src: '../../../assets/image_es504/lvl2/8.png', active: false },
+    { id: 9, src: '../../../assets/image_es504/lvl2/9.png', active: false },
+    { id: 10, src: '../../../assets/image_es504/lvl2/10.png', active: false },
+    { id: 11, src: '../../../assets/image_es504/lvl2/11.png', active: false },
+    { id: 12, src: '../../../assets/image_es504/lvl2/12.png', active: false },
+    { id: 13, src: '../../../assets/image_es504/lvl2/13.png', active: false },
+    { id: 14, src: '../../../assets/image_es504/lvl2/14.png', active: false },
+    { id: 15, src: '../../../assets/image_es504/lvl2/15.png', active: false },
+    { id: 16, src: '../../../assets/image_es504/lvl2/16.png', active: false },
+    { id: 17, src: '../../../assets/image_es504/lvl2/17.png', active: false },
+    { id: 18, src: '../../../assets/image_es504/lvl2/18.png', active: false },
+    { id: 19, src: '../../../assets/image_es504/lvl2/19.png', active: false },
+    { id: 20, src: '../../../assets/image_es504/lvl2/20.png', active: false },
+    { id: 21, src: '../../../assets/image_es504/lvl2/21.png', active: false },
+    { id: 22, src: '../../../assets/image_es504/lvl2/22.png', active: false },
+    { id: 23, src: '../../../assets/image_es504/lvl2/23.png', active: false },
+    { id: 24, src: '../../../assets/image_es504/lvl2/24.png', active: false },
+    { id: 25, src: '../../../assets/image_es504/lvl2/25.png', active: false },
   ];
 
   elementiLivello3 = [
-    { id: 1, src: '../../../assets/image_es504/lvl3/1.png' },
-    { id: 2, src: '../../../assets/image_es504/lvl3/2.png' },
-    { id: 3, src: '../../../assets/image_es504/lvl3/3.png' },
-    { id: 4, src: '../../../assets/image_es504/lvl3/4.png' },
-    { id: 5, src: '../../../assets/image_es504/lvl3/5.png' },
-    { id: 6, src: '../../../assets/image_es504/lvl3/6.png' },
-    { id: 7, src: '../../../assets/image_es504/lvl3/7.png' },
-    { id: 8, src: '../../../assets/image_es504/lvl3/8.png' },
-    { id: 9, src: '../../../assets/image_es504/lvl3/9.png' },
-    { id: 10, src: '../../../assets/image_es504/lvl3/10.png' },
-    { id: 11, src: '../../../assets/image_es504/lvl3/11.png' },
-    { id: 12, src: '../../../assets/image_es504/lvl3/12.png' },
-    { id: 13, src: '../../../assets/image_es504/lvl3/13.png' },
-    { id: 14, src: '../../../assets/image_es504/lvl3/14.png' },
-    { id: 15, src: '../../../assets/image_es504/lvl3/15.png' },
-    { id: 16, src: '../../../assets/image_es504/lvl3/16.png' },
-    { id: 17, src: '../../../assets/image_es504/lvl3/17.png' },
-    { id: 18, src: '../../../assets/image_es504/lvl3/18.png' },
-    { id: 19, src: '../../../assets/image_es504/lvl3/19.png' },
-    { id: 20, src: '../../../assets/image_es504/lvl3/20.png' },
-    { id: 21, src: '../../../assets/image_es504/lvl3/21.png' },
-    { id: 22, src: '../../../assets/image_es504/lvl3/22.png' },
-    { id: 23, src: '../../../assets/image_es504/lvl3/23.png' },
-    { id: 24, src: '../../../assets/image_es504/lvl3/24.png' },
-    { id: 25, src: '../../../assets/image_es504/lvl3/25.png' },
-    { id: 26, src: '../../../assets/image_es504/lvl3/26.png' },
-    { id: 27, src: '../../../assets/image_es504/lvl3/27.png' },
-    { id: 28, src: '../../../assets/image_es504/lvl3/28.png' },
-    { id: 29, src: '../../../assets/image_es504/lvl3/29.png' },
-    { id: 30, src: '../../../assets/image_es504/lvl3/30.png' },
-    { id: 31, src: '../../../assets/image_es504/lvl3/31.png' },
-    { id: 32, src: '../../../assets/image_es504/lvl3/32.png' },
-    { id: 33, src: '../../../assets/image_es504/lvl3/33.png' },
-    { id: 34, src: '../../../assets/image_es504/lvl3/34.png' },
-    { id: 35, src: '../../../assets/image_es504/lvl3/35.png' },
-    { id: 36, src: '../../../assets/image_es504/lvl3/36.png' },
+    { id: 1, src: '../../../assets/image_es504/lvl3/1.png', active: false },
+    { id: 2, src: '../../../assets/image_es504/lvl3/2.png', active: false },
+    { id: 3, src: '../../../assets/image_es504/lvl3/3.png', active: false },
+    { id: 4, src: '../../../assets/image_es504/lvl3/4.png', active: false },
+    { id: 5, src: '../../../assets/image_es504/lvl3/5.png', active: false },
+    { id: 6, src: '../../../assets/image_es504/lvl3/6.png', active: false },
+    { id: 7, src: '../../../assets/image_es504/lvl3/7.png', active: false },
+    { id: 8, src: '../../../assets/image_es504/lvl3/8.png', active: false },
+    { id: 9, src: '../../../assets/image_es504/lvl3/9.png', active: false },
+    { id: 10, src: '../../../assets/image_es504/lvl3/10.png', active: false },
+    { id: 11, src: '../../../assets/image_es504/lvl3/11.png', active: false },
+    { id: 12, src: '../../../assets/image_es504/lvl3/12.png', active: false },
+    { id: 13, src: '../../../assets/image_es504/lvl3/13.png', active: false },
+    { id: 14, src: '../../../assets/image_es504/lvl3/14.png', active: false },
+    { id: 15, src: '../../../assets/image_es504/lvl3/15.png', active: false },
+    { id: 16, src: '../../../assets/image_es504/lvl3/16.png', active: false },
+    { id: 17, src: '../../../assets/image_es504/lvl3/17.png', active: false },
+    { id: 18, src: '../../../assets/image_es504/lvl3/18.png', active: false },
+    { id: 19, src: '../../../assets/image_es504/lvl3/19.png', active: false },
+    { id: 20, src: '../../../assets/image_es504/lvl3/20.png', active: false },
+    { id: 21, src: '../../../assets/image_es504/lvl3/21.png', active: false },
+    { id: 22, src: '../../../assets/image_es504/lvl3/22.png', active: false },
+    { id: 23, src: '../../../assets/image_es504/lvl3/23.png', active: false },
+    { id: 24, src: '../../../assets/image_es504/lvl3/24.png', active: false },
+    { id: 25, src: '../../../assets/image_es504/lvl3/25.png', active: false },
+    { id: 26, src: '../../../assets/image_es504/lvl3/26.png', active: false },
+    { id: 27, src: '../../../assets/image_es504/lvl3/27.png', active: false },
+    { id: 28, src: '../../../assets/image_es504/lvl3/28.png', active: false },
+    { id: 29, src: '../../../assets/image_es504/lvl3/29.png', active: false },
+    { id: 30, src: '../../../assets/image_es504/lvl3/30.png', active: false },
+    { id: 31, src: '../../../assets/image_es504/lvl3/31.png', active: false },
+    { id: 32, src: '../../../assets/image_es504/lvl3/32.png', active: false },
+    { id: 33, src: '../../../assets/image_es504/lvl3/33.png', active: false },
+    { id: 34, src: '../../../assets/image_es504/lvl3/34.png', active: false },
+    { id: 35, src: '../../../assets/image_es504/lvl3/35.png', active: false },
+    { id: 36, src: '../../../assets/image_es504/lvl3/36.png', active: false },
   ];
   nColonne!: number;
 
@@ -215,26 +216,25 @@ export class Es504Component implements OnInit {
   selezionaCelle(index: number): void {
     // Controlla se la cella è selezionabile
     if (!this.puzzle[index].active) {
-      console.error('Cella non selezionabile!');
+      console.error("Cella non selezionabile!");
       return;
     }
 
-    console.log('Cella selezionata:', index);
-
+    console.log("Cella selezionata:", index);
+  
     // Recupera l'indice corretto della prossima cella da selezionare
-    const indexCorretto =
-      this.arrIndici[this.nCovered - this.selezionabili.length];
-
-    console.log('Indice corretto:', indexCorretto);
-
+    const indexCorretto = this.arrIndici[this.nCovered - this.selezionabili.length];
+ 
+    console.log("Indice corretto:", indexCorretto);
+    
     // Verifica se l'indice selezionato è corretto
     if (this.puzzle[index].id === this.selezionabili[0].id) {
       this.puzzle[index].active = false; // Disattiva la cella selezionata
       this.puzzle[index].src = this.selezionabili[0].src; // Mostra l'immagine corretta
       this.selezionabili.shift(); // Rimuovi la cella dai selezionabili
 
-      console.log('Cella corretta selezionata!');
-
+      console.log("Cella corretta selezionata!");
+  
       // Passa allo step successivo se tutte le selezioni sono completate
       if (this.selezionabili.length === 0) {
         this.step++;
@@ -246,4 +246,5 @@ export class Es504Component implements OnInit {
       console.warn("Errore! Hai selezionato l'indice sbagliato.");
     }
   }
+  
 }
