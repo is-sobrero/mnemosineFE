@@ -8,10 +8,9 @@ describe('Es504Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Es504Component]
-    })
-    .compileComponents();
-    
+      imports: [Es504Component],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(Es504Component);
     component = fixture.componentInstance;
     fixture.detectChanges();

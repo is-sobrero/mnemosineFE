@@ -4,7 +4,7 @@
     <mat-card-subtitle>Memorizza la sequenza di immagini</mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content *ngIf="step === 1" style="height: 350px">
+  <mat-card-content *ngIf="step === 1">
     <p>Inserire il livello di difficoltà</p>
     <button class="livello" (click)="step = 2; setLevel(1)" mat-raised-button>
       1
@@ -17,36 +17,31 @@
     </button>
   </mat-card-content>
 
-  <mat-card-content *ngIf="step === 2 && livello === 1">
-    <div class="allElements">
+  <mat-card-content *ngIf="step === 2">
+    <div
+      class="allElements"
+      [style.display]="'grid'"
+      [style.gridTemplateColumns]="'repeat(' + nColonne + ', 1fr)'"
+    >
       <button
         class="image"
-        *ngFor="let i of puzzle"
-        [disabled]="i.active == false"
+        *ngFor="let i of puzzle; let index = index"
+        [disabled]="!i.active"
+        (click)="selezionaCelle(index)"
       >
-        <img class="lvl1-image" src="{{ i.src }}" alt="" />
+        <img
+          [class]="'lvl' + livello + '-image'"
+          [src]="i.src"
+          alt="pezzo di puzzle"
+        />
       </button>
     </div>
-  </mat-card-content>
-  <mat-card-content *ngIf="step === 2 && livello === 2">
-    <div class="allElements">
-      <button
-        class="image"
-        *ngFor="let i of puzzle"
-        [disabled]="i.active == false"
-      >
-        <img class="lvl2-image" src="{{ i.src }}" alt="" />
-      </button>
-    </div>
-  </mat-card-content>
-  <mat-card-content *ngIf="step === 2 && livello === 3">
-    <div class="allElements">
-      <button
-        class="image"
-        *ngFor="let i of puzzle"
-        [disabled]="i.active == false"
-      >
-        <img class="lvl3-image" src="{{ i.src }}" alt="" />
+    <p style="color: red">
+      Seleziona le immagini in ordine da sinistra verso destra, per favore
+    </p>
+    <div class="selezionabili">
+      <button class="image" *ngFor="let i of selezionabili">
+        <img [src]="i.src" alt="pezzo di puzzle selezionabile" />
       </button>
     </div>
   </mat-card-content>
