@@ -37,7 +37,7 @@ export class Es504Component implements OnInit {
   step = 1;
   puzzle: any = []; // Array di riferimento per le immagini
   coveredImages: any; // Immagine di copertura
-  selectionableImages: any = []; // Array di immagini selezionabili
+  selectionableImages: any[] = []; // Array di immagini selezionabili
   listCovered: any = []; // Array di indici delle immagini coperte
   nCovered: any; // Numero di immagini coperte
   timer: any;
@@ -159,19 +159,6 @@ export class Es504Component implements OnInit {
         this.coveredImages = "../../../assets/image_es504/coveredImages/lvl3.png";
         break;
     }
-
-    for (let i = 0; i < this.nImages; i++) {
-      this.listCovered.push(i);
-      this.selectionableImages.push(this.puzzle[i]);
-    }
-
-    this.listCovered = this.shuffleArray(this.listCovered);
-    console.log(this.puzzle.src);
-    console.log(this.elementiLivello1);
-
-    this.listCovered = this.listCovered.slice(0, this.nCovered + 1);
-    this.selectionableImages = this.selectionableImages.slice(0, this.nCovered + 1);
-    this.startGame();
   }
 
   shuffleArray(array: any[]): any[] {
@@ -180,25 +167,5 @@ export class Es504Component implements OnInit {
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-  }
-
-  startGame() {
-    for (let i = 0; i < this.nImages; i++) {
-      for (let j = 0; j < this.nCovered; j++) {
-        if (i == this.listCovered[j]) {
-          this.puzzle[i].src = this.coveredImages;
-          this.puzzle[i].active = true;
-        }
-      }
-    }
-
-    this.selectionableImages = this.shuffleArray(this.selectionableImages);
-  }
-
-  resetGame() {
-    for (let i = 0; i < this.nImages; i++) {
-      this.listCovered.pop();
-      this.selectionableImages.pop();
-    }
   }
 }
