@@ -57,8 +57,8 @@ export class AssegnaEsercizioComponent implements OnInit {
       var sessionName = "del " + new Date().toLocaleDateString() + " alle " + new Date().toLocaleTimeString();
       this.api.post('admin/addSession', { userId: 1, exercises: this.esercizi, sessionName: sessionName, assignedTo: this.selectedUser}).subscribe((res: any) => {
         console.log(res);
-        if(res.message === 'Sessione salvata') {
-          alert('Session assigned successfully');
+        if(res.message === 'Session added successfully') {
+          alert('Sessione salvata e inviata!');
         }
       });
     }
