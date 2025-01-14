@@ -42,6 +42,7 @@ export class Es410Component implements OnInit{
   private hard:any[] = [];
   private missing_word:string = "";
   public complete_string = "";
+  private inputSection:any;
   private placeholder:string = "_"
   public consigli:string[] = [];
   private dictionary:string[] = [];
@@ -74,8 +75,7 @@ export class Es410Component implements OnInit{
   *
   */
 
-
-  level = this.ES.currentInfo().difficulty;
+  level = 1;
 
 
   private list_of_words:any[] = [];
@@ -129,8 +129,11 @@ export class Es410Component implements OnInit{
       //console.log(this.simple);
       //console.log(this.medium);
       //console.log(this.hard);
+      this.inputSection = document.querySelector(".input");
       this.setWord();
     }, 1000);
+    this.level = this.ES.currentInfo().difficulty;
+
   }
 
   setWord(){
@@ -187,6 +190,7 @@ export class Es410Component implements OnInit{
     }else{
       this.errors+=1;
     }
+    this.inputSection.value = "";
 
   }
 
