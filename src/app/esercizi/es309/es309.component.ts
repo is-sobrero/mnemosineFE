@@ -27,11 +27,10 @@ interface forma {
 export class Es309Component{
   constructor(private ES: ExerciseService) { }
 
-  livello = 0;
+  livello:any = 0;
   corrette = 0;
   errore = 0;
   step = 1;
-  tempo = 0;
   regolaCorrente: any;
   displayedforme: forma[] = [];
   intervalloRegola: any;
@@ -50,6 +49,7 @@ export class Es309Component{
   };
 
   ngOnInit() {
+    this.livello=this.ES.currentInfo().difficulty-1;
     this.timerInterval = setInterval(() => {
       if (this.step==2) {
         this.timeMillis += 100;
@@ -135,13 +135,8 @@ export class Es309Component{
 
   stopgioco(){
     if (this.corrette>=20){
-      this.step=3
-      this.tempo = this.timeMillis;
+      this.ES.nextExercise(309, {errors: this.errore, time: this.timeMillis});
     }
-  }
-  
-  prossimoEs(){
-    this.ES.nextExercise(309, {errors: this.errore, time: this.tempo});
   }
 }
 
