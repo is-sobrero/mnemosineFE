@@ -144,7 +144,7 @@ export class Es504Component implements OnInit {
   nColonne!: number;
 
   ngOnInit() {
-    this.livello = this.ES.currentInfo().difficulty-1;
+    this.livello = this.ES.currentInfo().difficulty;
 
     setInterval(() => {
       this.timeMillis += 100;
