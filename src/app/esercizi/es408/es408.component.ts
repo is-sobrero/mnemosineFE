@@ -81,8 +81,7 @@ export class Es408Component implements OnInit{
   *  Default state: 0 ( easier );
   *
   */
-
-  level = this.ES.currentInfo().dificulty;
+  level = 1;
 
  /*
   * List of word used for the selection. The index of
@@ -139,6 +138,7 @@ export class Es408Component implements OnInit{
       this.inputSection = document.querySelector(".input");
 
     });
+  this.level = this.ES.currentInfo().dificulty;
 
   }
 
