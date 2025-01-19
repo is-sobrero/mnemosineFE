@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es305',
@@ -15,10 +16,12 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './es305.component.scss'
 })
 export class Es305Component {
+  constructor(private ES: ExerciseService) { }
   step = 1;
   problema: string = '';
   opzioni: number[] = [];
   corretta: number = 0;
+  errori: number = 0;
   punteggio: number = 0;
   domandeTot: number = 5;
   risposte: number = 0;
@@ -28,6 +31,7 @@ export class Es305Component {
   livello: number = 0;
 
   ngOnInit() {
+    this.livello=this.ES.currentInfo().difficulty-1;
     this.startTimer();
     this.CreaProblema();
   }
@@ -101,15 +105,19 @@ export class Es305Component {
   }
 
   controllaRisposta(selectedAnswer: number) {
-    if (selectedAnswer === this.corretta) {
+    console.log(selectedAnswer);
+    console.log(this.corretta);
+        if (selectedAnswer == this.corretta) {
       this.punteggio++;
-    }
+      }
+      else{
+      this.errori++;
+      }
     
     this.risposte++;
     
     if (this.risposte >= this.domandeTot) {
-      this.step = 2;
-      clearInterval(this.timer);
+      this.ES.nextExercise(305, {errors: this.errori, time: this.timeMillis});
     } else {
       this.CreaProblema();
     }

@@ -20,10 +20,3 @@
     <p class="timer">Time: {{(timeMillis/1000).toFixed(1)}}s</p>
   </mat-card-actions>
 </mat-card>
-
-<mat-card *ngIf="step === 2" class="risultato">
-  <mat-card-content>
-    <h2>Complimenti hai completato tutti i problemi!</h2>
-    <p>Punteggio finale: {{punteggio}} / {{domandeTot}}</p>
-  </mat-card-content>
-</mat-card>
