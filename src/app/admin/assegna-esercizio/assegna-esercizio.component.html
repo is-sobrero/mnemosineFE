@@ -40,25 +40,28 @@
             </mat-option>
             <mat-option value="201">
               Esercizio 201
-            </mat-option> 
+            </mat-option>
             <mat-option value="202">
               Esercizio 202
-            </mat-option> 
+            </mat-option>
             <mat-option value="203">
               Esercizio 203
-            </mat-option>   
+            </mat-option>
             <mat-option value="204">
               Esercizio 204
-            </mat-option> 
+            </mat-option>
             <mat-option value="303">
               Esercizio 303
-            </mat-option> 
+            </mat-option>
             <mat-option value="405">
               Esercizio 405
-            </mat-option> 
+            </mat-option>
+            <mat-option value="505">
+              Esercizio 505
+            </mat-option>
         </mat-select>
-  
-        
+
+
     </mat-form-field>
     <mat-form-field>
       <mat-label>
@@ -67,25 +70,25 @@
       <mat-select [(value)]="esercizio.difficulty">
         <mat-option value="1">
           1 - Facile
-        </mat-option> 
+        </mat-option>
         <mat-option value="2">
           2 - Intermedio
-        </mat-option> 
+        </mat-option>
         <mat-option value="3">
           3 - Avanzato
-        </mat-option> 
+        </mat-option>
     </mat-select>
     </mat-form-field>
-      
+
     </div>
-  
+
     <br>
     <!--Round plus button -->
     <button style="margin-right: 10px;" mat-raised-button (click)="addexe()">Aggiungi Esercizio</button>
     <button style="margin-right: 10px;" color="accent" mat-raised-button (click)="remexe()">Rimuovi Esercizio</button>
     <button (click)="assign()"  mat-raised-button color="primary">Assegna</button>
     </mat-card-content>
-  
+
   </mat-card>
-  
-  
+
+

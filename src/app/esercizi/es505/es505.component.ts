@@ -87,10 +87,8 @@ export class Es505Component {
       this.timeMillis += 500;
     }, 500);
 
-    //this.level = this.ES.currentInfo().difficulty;
-
-    // ATTENZIONE: quando dara' disponibile rimuovere il commento per ottenere il livello in automatico
-
+    this.level = this.ES.currentInfo().difficulty;
+    console.log(this.level);
     if(this.level < 1 || this.level > 3){
       this.level = 1;
     }
@@ -169,24 +167,26 @@ export class Es505Component {
     }
 
     var rand = Math.floor(Math.random()*4);
-    this.image_link = this.dummy_container[rand]?.link;
     this.quarter = this.dummy_container[rand]?.quarter
 
     var cover:any = document.querySelector(".cover");
     switch(this.quarter){
       case 1:
-            cover.style = "display:block; transform: translate(0px, -304px);";
+            cover.style = "display:block; transform: translate(0px, -304px); width:150px;height:150px; background-color:black;";
             break;
       case 2:
-            cover.style = "display:block; transform:translate(150px,-304px)";
+            cover.style = "display:block; transform:translate(150px,-304px); width:150px;height:150px; background-color:black;";
             break;
       case 3:
-            cover.style = "display:block; transform:translate(0px,-154px)";
+            cover.style = "display:block; transform:translate(0px,-154px); width:150px;height:150px; background-color:black;";
             break;
       case 4:
-            cover.style = "display:block; transform:translate(150px,-154px)";
+            cover.style = "display:block; transform:translate(150px,-154px); width:150px;height:150px; background-color:black;";
             break;
     }
+
+    this.image_link = this.dummy_container[rand]?.link;
+
     /*
      *
      * 1st quarter: top-left
