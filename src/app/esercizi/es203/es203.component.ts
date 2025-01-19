@@ -69,22 +69,40 @@ export class Es203Component implements OnInit {
         numeroPunti = 5;
     }
 
-    // Genera i punti in base al livello scelto
-    for (let i = 1; i <= numeroPunti; i++) {
-      const labelNum = i.toString(); // Converte il numero in stringa
-      const labelAlpha = String.fromCharCode(64 + i); // Converte il numero in lettera (1 -> 'A', 2 -> 'B', ecc.)
-      this.punti.push({
-        x: Math.random() * 90, // Genera una posizione casuale su x
-        y: Math.random() * 90, // Genera una posizione casuale su y
-        label: labelNum, // Assegna il label numerico
-      });
-      this.punti.push({
-        x: Math.random() * 90, // Genera una posizione casuale su x
-        y: Math.random() * 90, // Genera una posizione casuale su y
-        label: labelAlpha, // Assegna il label lettera
-      });
+    // Helper function to check if a point is at least 10 pixels away from all existing points
+function isFarEnough(newPoint:any, points:any) {
+  for (const point of points) {
+    const distance = Math.sqrt(Math.pow(newPoint.x - point.x, 2) + Math.pow(newPoint.y - point.y, 2));
+    if (distance < 10) {
+      return false;
     }
+  }
+  return true;
+}
 
+for (let i = 1; i <= numeroPunti; i++) {
+  const labelNum = i.toString(); // Converte il numero in stringa
+  const labelAlpha = String.fromCharCode(64 + i); // Converte il numero in lettera (1 -> 'A', 2 -> 'B', ecc.)
+
+  let newPoint;
+  do {
+    newPoint = {
+      x: Math.random() * 90, // Genera una posizione casuale su x
+      y: Math.random() * 90, // Genera una posizione casuale su y
+      label: labelNum, // Assegna il label numerico
+    };
+  } while (!isFarEnough(newPoint, this.punti));
+  this.punti.push(newPoint);
+
+  do {
+    newPoint = {
+      x: Math.random() * 90, // Genera una posizione casuale su x
+      y: Math.random() * 90, // Genera una posizione casuale su y
+      label: labelAlpha, // Assegna il label lettera
+    };
+  } while (!isFarEnough(newPoint, this.punti));
+  this.punti.push(newPoint);
+}
     // Ordina i punti alternando numeri e lettere
     this.punti.sort((a, b) => a.label.localeCompare(b.label));
   }

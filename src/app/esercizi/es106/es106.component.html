@@ -6,7 +6,7 @@
     <mat-card-content *ngIf="step === 1" style="height: 350px;">
       <p>Inserire il livello di difficoltà</p>
       <div class="livello">
-        <button class="livello" (click)="setLivello(4); stepIncrease(); cliccato = true; nCliccati = 0" mat-raised-button>1</button>
+        <button class="livello" (click)="setLivello(4); stepIncrease(); " mat-raised-button>1</button>
         <button class="livello" (click)="setLivello(6); stepIncrease(); cliccato = true; nCliccati = 0" mat-raised-button>2</button>
         <button class="livello" (click)="setLivello(8); stepIncrease(); cliccato = true; nCliccati = 0" mat-raised-button>3</button>
       </div>

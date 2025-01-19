@@ -37,6 +37,8 @@ export class Es205Component {
     totaleDifferenze: number = 0;
     generaBtns: any[] = [];
 
+    constructor(private ES: ExerciseService) { }
+
     // Array di oggetti immagine per i tre livelli
     immagini = [
         {
@@ -78,12 +80,13 @@ export class Es205Component {
 
     ];
 
-    constructor() { }
-
     ngOnInit(): void {
         setInterval(() => {
             this.timeMillis += 100;
         }, 100);
+
+        this.livello = this.ES.currentInfo().difficulty;
+        this.iniziaGioco();
     }
 
     selezionaLivello(livello: number) {
@@ -110,6 +113,7 @@ export class Es205Component {
         ele.style.cursor = 'not-allowed';
         if (this.differenzeTrovate === this.totaleDifferenze) {
             this.step = 2; // Fine del gioco
+            this.ES.nextExercise(this.ES.currentInfo().id, { errori: this.errori, time: this.timeMillis });
     }
 }
 }
