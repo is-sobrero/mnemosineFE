@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ExerciseService } from '../../exercise.service';
 
 import {
   MatCard,
@@ -41,17 +42,19 @@ interface PuzzleElement {
   styleUrls: ['./es504.component.scss'], // Corretto da "styleUrl"
 })
 export class Es504Component implements OnInit {
+  constructor(private ES: ExerciseService) { }
   step = 1;
   puzzle: PuzzleElement[] = []; // Array di riferimento per le immagini
   coveredImages: string = ''; // Immagine di copertura
   arrIndici: number[] = []; // Array contenente gli indici
   selezionabili: any = []; // Array contenente gli indici delle immagini selezionabili
   nCovered: number = 0; // Numero di immagini coperte
-  timer: any;
   nImages: number = 0; // Numero totale di immagini nel puzzle
-  livello: number = 0;
+  livello: number = 1;
   errori = 0;
   erroriTotali = 0;
+  timeMillis: any = 0;
+  timer: any = 0;
 
   elementiLivello1 = [
     { id: 1, src: '../../../assets/image_es504/lvl1/1.png', active: false },
@@ -140,12 +143,15 @@ export class Es504Component implements OnInit {
   ];
   nColonne!: number;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.livello = this.ES.currentInfo().difficulty-1;
 
-  setLevel(n: number): void {
-    this.livello = n;
+    setInterval(() => {
+      this.timeMillis += 100;
+    }
+    , 100);
 
-    switch (n) {
+    switch (this.livello) {
       case 1:
         this.puzzle = JSON.parse(JSON.stringify(this.elementiLivello1));
         this.nImages = 16;
@@ -178,8 +184,7 @@ export class Es504Component implements OnInit {
 
       default:
         console.error('Livello non valido');
-        return;
-    }
+  }
 
     // Genera array di indici e mischialo
     this.arrIndici = Array.from({ length: this.nImages }, (_, i) => i);
@@ -237,14 +242,18 @@ export class Es504Component implements OnInit {
   
       // Passa allo step successivo se tutte le selezioni sono completate
       if (this.selezionabili.length === 0) {
+        this.timer = this.timeMillis;
         this.step++;
         this.erroriTotali += this.errori; // Aggiungi gli errori al totale
         this.errori = 0; // Resetta gli errori per il prossimo livello
       }
     } else {
       this.errori++; // Incrementa il contatore degli errori
-      console.warn("Errore! Hai selezionato l'indice sbagliato.");
+      alert("Errore! Hai selezionato l'indice sbagliato.");
     }
+    
+    if(this.step == 2)
+      this.ES.nextExercise(504, {errors: this.erroriTotali, time: this.timeMillis});
   }
   
 }
