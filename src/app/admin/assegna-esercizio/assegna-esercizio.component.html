@@ -40,49 +40,46 @@
             </mat-option>
             <mat-option value="201">
               201 - Barrage
-            </mat-option> 
+            </mat-option>
             <mat-option value="202">
               202 - Unisci i punti numerici
-            </mat-option> 
+            </mat-option>
             <mat-option value="203">
               203 - Unisci i punti alfanumerici
-            </mat-option>   
+            </mat-option>
             <mat-option value="204">
               204 - Ricerca visiva
-            </mat-option> 
+            </mat-option>
             <mat-option value="205">
               205 - Trova la differenza
-            </mat-option> 
+            </mat-option>
             <mat-option value="303">
               303 - Ordina le parole in ordine alfabetico
-            </mat-option> 
+            </mat-option>
             <mat-option value="401">
               401 - Anagramma
-            </mat-option> 
+            </mat-option>
             <mat-option value="402">
               402 - Completa la parola ascoltata
-            </mat-option> 
+            </mat-option>
             <mat-option value="403">
               403 - Come si chiama?
-            </mat-option> 
+            </mat-option>
             <mat-option value="405">
               405 - Fluenza fonemica
-            </mat-option> 
-            <mat-option value="406">
-              406 - Completa le frasi
-            </mat-option> 
+            </mat-option>
             <mat-option value="407">
               407 - Trova il sinonimo
-            </mat-option> 
+            </mat-option>
             <mat-option value="408">
               408 - Trova il contrario
-            </mat-option> 
+            </mat-option>
             <mat-option value="410">
               410 - Completa il dialogo
-            </mat-option> 
+            </mat-option>
         </mat-select>
-  
-        
+
+
     </mat-form-field>
     <mat-form-field>
       <mat-label>
@@ -91,25 +88,25 @@
       <mat-select [(value)]="esercizio.difficulty">
         <mat-option value="1">
           1 - Facile
-        </mat-option> 
+        </mat-option>
         <mat-option value="2">
           2 - Intermedio
-        </mat-option> 
+        </mat-option>
         <mat-option value="3">
           3 - Avanzato
-        </mat-option> 
+        </mat-option>
     </mat-select>
     </mat-form-field>
-      
+
     </div>
-  
+
     <br>
     <!--Round plus button -->
     <button style="margin-right: 10px;" mat-raised-button (click)="addexe()">Aggiungi Esercizio</button>
     <button style="margin-right: 10px;" color="accent" mat-raised-button (click)="remexe()">Rimuovi Esercizio</button>
     <button (click)="assign()"  mat-raised-button color="primary">Assegna</button>
     </mat-card-content>
-  
+
   </mat-card>
-  
-  
+
+
