@@ -121,6 +121,10 @@ const routes: Routes = [
     component: Es410Component,
   },
   {
+    path: "205",
+    component: Es205Component,
+  },
+  {
     path: "504",
     component: Es504Component,
   }
