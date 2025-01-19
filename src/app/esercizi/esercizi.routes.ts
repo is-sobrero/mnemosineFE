@@ -23,8 +23,7 @@ import { Es403Component } from './es403/es403.component';
 import { Es405Component } from './es405/es405.component';
 import { Es410Component } from './es410/es410.component';
 import { Es205Component } from './es205/es205.component';
-
-
+import { Es304Component } from './es304/es304.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -77,39 +76,39 @@ const routes: Routes = [
     component: Es204Component,
   },
   {
-     path: '110',
-     component: Es109Component,
+    path: '110',
+    component: Es109Component,
   },
   {
     path: '303',
     component: Es303Component,
   },
   {
-    path: "401",
+    path: '401',
     component: Es401Component,
   },
   {
-    path: "407",
+    path: '407',
     component: Es407Component,
   },
   {
-    path: "408",
+    path: '408',
     component: Es408Component,
   },
   {
-    path: "402",
+    path: '402',
     component: Es402Component,
   },
   {
-    path: "403",
+    path: '403',
     component: Es403Component,
   },
   {
-    path: "405",
+    path: '405',
     component: Es405Component,
   },
   {
-    path: "410",
+    path: '410',
     component: Es410Component,
   },
   {
@@ -119,6 +118,10 @@ const routes: Routes = [
   {
     path: '106',
     component: Es106Component,
+  },
+  {
+    path: '304',
+    component: Es304Component,
   },
 ];
 
