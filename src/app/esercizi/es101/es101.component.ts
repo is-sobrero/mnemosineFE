@@ -19,6 +19,8 @@ import {signal} from '@angular/core';
 import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import { ExerciseService } from '../../exercise.service';
+import { constrainedMemory } from 'process';
 
 
 
@@ -73,10 +75,12 @@ export class Es101Component implements OnInit {
   randomWord: string = '';
   fullList: string[] = [];
   wordList: string[] = [];
-  numParole: number[] = [4,6,8];
-  step: number = 0;
+  numParole: number[] = [0,3,5,8];
+  step: number = 1;
   difficulty: number = 0;
   errors = 0;
+
+  constructor(private EX: ExerciseService) { }
   
 
   private http = inject(HttpClient);
@@ -90,6 +94,8 @@ export class Es101Component implements OnInit {
     setInterval(() => {
       this.timeMillis += 100;
     }, 100);
+
+    this.start();
 
   }
 
@@ -124,6 +130,7 @@ export class Es101Component implements OnInit {
   // funzione che inizializza il gioco
   start() {
     this.step = 1;
+    this.difficulty = this.EX.currentInfo().difficulty;
     console.log("Difficolta: " + this.difficulty);
     this.generateWords(this.numParole[this.difficulty]);
     this.errors = this.numParole[this.difficulty];
@@ -194,7 +201,7 @@ export class Es101Component implements OnInit {
       }
       return words;
     });
-    console.log(this.errors);
+    this.EX.nextExercise(101, {errors: this.errors, time: this.timeMillis});
   }
   
 

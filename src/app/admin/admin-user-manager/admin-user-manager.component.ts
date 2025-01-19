@@ -59,28 +59,29 @@ export class AdminUserManagerComponent implements OnInit {
   displayedColumns: string[] = ['number', 'esercizio', 'errori', 'tempo'];
 
   ngOnInit(): void {
+    this.refresh();
+  }
+
+  refresh() {
     this.api.get('admin/getUsers').subscribe((res: any) => {
       console.log(res);
       this.sessions = res;
     });
-
-    //do the above every 2 seconds
-    setInterval(() => {
-      this.api.get('admin/getUsers').subscribe((res: any) => {
-        console.log(res);
-        this.sessions = res;
-      });
-    }, 5000);
-
   }
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(DialogAnimationsExampleDialog, {
+    const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
+  
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh();
+    });
   }
+
+
 
 
 }
