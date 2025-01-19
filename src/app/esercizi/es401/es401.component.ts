@@ -96,7 +96,7 @@ export class Es401Component implements OnInit{
       this.inputSection = document.querySelector(".input");
       this.setWord();
     });
-  this.level = this.ES.currentInfo().difficulty;
+    this.level = this.ES.currentInfo().difficulty();
 
 
   }

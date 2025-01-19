@@ -80,14 +80,12 @@ export class Es403Component implements OnInit{
 
   private list_of_words:any[] = [];
   ngOnInit(){
+    console.log("initialize")
     setInterval(()=>{
       this.timeMillis += 500;
     }, 500);
 
     this.level = this.ES.currentInfo().difficulty;
-    if(this.level < 1 || this.level > 3){
-      this.level = 1;
-    }
 
     switch(this.level){
       case 1:
@@ -96,6 +94,7 @@ export class Es403Component implements OnInit{
           this.getWord();
           this.inputSection = document.querySelector(".input");
           this.setWord();
+          console.log("query di immagini eseguita per livello 1");
 
         });
         break;
@@ -106,6 +105,7 @@ export class Es403Component implements OnInit{
           this.getWord();
           this.inputSection = document.querySelector(".input");
           this.setWord();
+          console.log("query di immagini eseguita per livello 1");
         });
         break;
       case 3:
@@ -114,6 +114,7 @@ export class Es403Component implements OnInit{
           this.getWord();
           this.inputSection = document.querySelector(".input");
           this.setWord();
+          console.log("query di immagini eseguita per livello 1");
         });
         break;
       default:

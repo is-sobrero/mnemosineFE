@@ -87,8 +87,8 @@ export class Es405Component implements OnInit{
       this.inputSection = document.querySelector(".input");
       this.setWord();
     });
-  this.level = this.ES.currentInfo().difficulty;
-
+    this.level = this.ES.currentInfo().difficulty;
+    console.log("current level: "+this.level);
   }
 
   setWord():void{

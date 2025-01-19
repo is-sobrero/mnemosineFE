@@ -135,10 +135,10 @@ export class Es407Component implements OnInit{
     var rand:number = Math.floor(Math.random()*this.list_of_words.at(this.level-1).length);
     this.display = ""+this.list_of_words.at(this.level-1).at(rand);
     this.selectedArray = this.totalArray.at(rand).split(", ");
+    console.log(this.totalArray.at(rand));
     this.inputCache = [];
     this.errors = 0;
     this.points = 0;
-    console.log(this.selectedArray.toString());
   }
 
   checkContent(){
