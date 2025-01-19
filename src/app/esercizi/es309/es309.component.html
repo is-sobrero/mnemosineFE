@@ -28,13 +28,3 @@
             </button>
       <p class="timer" *ngIf="step==2">Time: {{(timeMillis/1000).toFixed(0)}}s</p>
     </mat-card-actions>
-
-    <mat-card-content *ngIf="step==3">
-      <p>Complimenti hai completato l'esercizio</p>
-      <p>premi il bottone sottostante per passare al prossimo esercizio</p>
-    <button mat-raised-button   
-    (click)="prossimoEs()">
-    avanti
-    </button>
-  </mat-card-content>
-  </mat-card>
