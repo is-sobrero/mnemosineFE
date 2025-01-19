@@ -5,6 +5,19 @@
   </mat-card-header>
 
   <mat-card-content *ngIf="step === 1">
+    <p>Inserire il livello di difficoltà</p>
+    <button class="livello" (click)="step = 2; setLevel(1)" mat-raised-button>
+      1
+    </button>
+    <button class="livello" (click)="step = 2; setLevel(2)" mat-raised-button>
+      2
+    </button>
+    <button class="livello" (click)="step = 2; setLevel(3)" mat-raised-button>
+      3
+    </button>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="step === 2">
     <div
       class="allElements"
       [style.display]="'grid'"
@@ -32,9 +45,10 @@
       </button>
     </div>
   </mat-card-content>
-  <mat-card-actions>
-    <p style="color: gray; font-size: 10px; float: left;">
-      {{(timeMillis / 1000).toFixed(0)}} s
+  <mat-card-actions *ngIf="livello === 4">
+    <p>
+      Hai completato il gioco! Ben fatto! <br />Hai fatto
+      {{ erroriTotali }} errore/i
     </p>
   </mat-card-actions>
 </mat-card>

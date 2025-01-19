@@ -112,19 +112,7 @@ const routes: Routes = [
   {
     path: "410",
     component: Es410Component,
-  },
-  {  
-    path: '205',
-    component: Es205Component,
-  },
-  { 
-    path: '106',
-    component: Es106Component,
-  },
-  {
-    path: "504",
-    component: Es504Component,
-  },
+  }
 ];
 
 @NgModule({
