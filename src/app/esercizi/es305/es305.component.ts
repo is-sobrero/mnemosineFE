@@ -107,7 +107,7 @@ export class Es305Component {
     
     this.risposte++;
     
-    if (this.risposte >= this.domandeTot) {
+    if (this.risposte >= 5) {
       this.step = 2;
       clearInterval(this.timer);
     } else {
