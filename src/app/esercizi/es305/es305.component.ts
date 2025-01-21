@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es305',
@@ -15,28 +16,32 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './es305.component.scss'
 })
 export class Es305Component {
-  step = 1;
+  constructor(private ES: ExerciseService) { }
+
   problema: string = '';
   opzioni: number[] = [];
   corretta: number = 0;
+  errori: number = 0;
   punteggio: number = 0;
   domandeTot: number = 5;
   risposte: number = 0;
   timeMillis: number = 0;
   timer: any;
+  generando: boolean = false;
   // seleziona il livello 0=facile, 1=medio, 2=difficile
   livello: number = 0;
 
   ngOnInit() {
-    this.startTimer();
+    this.punteggio = 0;
+    this.risposte = 0;
+    this.timeMillis = 0;
+    this.generando = false;
     this.CreaProblema();
-  }
-
-  startTimer() {
+    this.livello=this.ES.currentInfo().difficulty-1;
     this.timer = setInterval(() => {
       this.timeMillis += 100;
     }, 100);
-  }
+  }    
 
   CreaProblema() {
     let num1: number, num2: number, operazione: string;
@@ -56,8 +61,8 @@ export class Es305Component {
         }
         break;
       case 2: // difficile: tutte le operazioni con numeri più grandi
-        num1 = Math.floor(Math.random() * 50) + 1;
-        num2 = Math.floor(Math.random() * 50) + 1;
+        num1 = Math.floor(Math.random() * 25) + 1;
+        num2 = Math.floor(Math.random() * 25  ) + 1;
         const operazioni = ['+', '-', '×'];
         operazione = operazioni[Math.floor(Math.random() * operazioni.length)];
         break;
@@ -88,30 +93,67 @@ export class Es305Component {
   }
 
   generaOpzioni() {
-    const opzione = [this.corretta];
-    while (opzione.length < 4) {
-      // genera risposte sbagliate
-      let rispostaSbagliata = this.corretta + (Math.floor(Math.random() * 10) - 5);
-      if (!opzione.includes(rispostaSbagliata) && rispostaSbagliata >= 0) {
+    const opzione: number[] = [this.corretta];
+    let attempt = 0;
+    const maxattempt = 100;
+    
+    while (opzione.length < 4 && attempt < maxattempt) {
+      attempt++;
+      const min = Math.max(0, this.corretta - 10);
+      const max = this.corretta + 10;
+      const range = max - min;
+      
+      let rispostaSbagliata = Math.floor(Math.random() * range) + min;
+      
+      // assicura che la risposta sbagliata sia diversa da quella vera
+      if (rispostaSbagliata === this.corretta) {
+        continue;
+      }
+      
+      if (!opzione.includes(rispostaSbagliata)) {
         opzione.push(rispostaSbagliata);
       }
     }
-    // Shuffle
-    this.opzioni = opzione.sort(() => Math.random() - 0.5);
-  }
+      // se non riesce a generare risposte aggiunge numeri sequenziali
+    while (opzione.length < 4) {
+      const riempimento = this.corretta + opzione.length;
+      if (!opzione.includes(riempimento)) {
+        opzione.push(riempimento);
+      }
+    }
 
-  controllaRisposta(selectedAnswer: number) {
-    if (selectedAnswer === this.corretta) {
-      this.punteggio++;
+    // shuffle
+    for (let i = opzione.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [opzione[i], opzione[j]] = [opzione[j], opzione[i]];
     }
     
-    this.risposte++;
+    this.opzioni = opzione;
+  }
+
+  async controllaRisposta(rispostaselezionata: number) {
+    if (this.generando) return; // previene molteplici click
     
-    if (this.risposte >= 5) {
-      this.step = 2;
-      clearInterval(this.timer);
-    } else {
-      this.CreaProblema();
+    try {
+      this.generando = true;
+      
+      if (rispostaselezionata === this.corretta) {
+        this.punteggio++;
+      }
+      else {
+        this.errori++;
+      }
+      
+      this.risposte++;
+      
+      if (this.risposte >= this.domandeTot) {
+        this.ES.nextExercise(305, {errors: this.errori, time: this.timeMillis})
+      } else {
+        await new Promise(resolve => setTimeout(resolve, 100)); // ritardo per aggionare la UI
+        this.CreaProblema();
+      }
+    } finally {
+      this.generando = false;
     }
   }
 }
