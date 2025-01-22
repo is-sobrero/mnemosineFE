@@ -50,9 +50,8 @@ export class Es504Component implements OnInit {
   selezionabili: any = []; // Array contenente gli indici delle immagini selezionabili
   nCovered: number = 0; // Numero di immagini coperte
   nImages: number = 0; // Numero totale di immagini nel puzzle
-  livello: number = 1;
+  livello: any;
   errori = 0;
-  erroriTotali = 0;
   timeMillis: any = 0;
   timer: any = 0;
 
@@ -144,7 +143,7 @@ export class Es504Component implements OnInit {
   nColonne!: number;
 
   ngOnInit() {
-    this.livello = this.ES.currentInfo().difficulty-1;
+    this.livello = this.ES.currentInfo().difficulty;
 
     setInterval(() => {
       this.timeMillis += 100;
@@ -243,17 +242,13 @@ export class Es504Component implements OnInit {
       // Passa allo step successivo se tutte le selezioni sono completate
       if (this.selezionabili.length === 0) {
         this.timer = this.timeMillis;
-        this.step++;
-        this.erroriTotali += this.errori; // Aggiungi gli errori al totale
-        this.errori = 0; // Resetta gli errori per il prossimo livello
+        this.ES.nextExercise(504, {errors: this.errori, time: this.timer});
       }
     } else {
       this.errori++; // Incrementa il contatore degli errori
       alert("Errore! Hai selezionato l'indice sbagliato.");
     }
-    
-    if(this.step == 2)
-      this.ES.nextExercise(504, {errors: this.erroriTotali, time: this.timeMillis});
+      
   }
   
 }
