@@ -62,12 +62,6 @@ export class Es106Component implements OnInit {
 
   private http = inject(HttpClient);
 
-  resetVariabile() {
-    this.arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    this.nCliccati = 0;
-    this.errori = 0;
-  }
-
   /**
    * Imposta il livello di difficolt  dell'esercizio, n  il numero di accensioni
    * della sequenza di luci da memorizzare.
@@ -99,7 +93,7 @@ export class Es106Component implements OnInit {
 
     if (this.step == 4) {
       this.crossCheck();
-      this.EX.nextExercise(106, { errori: this.errori, time: this.timer});
+      this.EX.nextExercise(106, {errors: this.errori, time: this.timer});
     }
   }
 
