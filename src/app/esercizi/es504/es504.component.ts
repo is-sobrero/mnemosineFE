@@ -244,15 +244,12 @@ export class Es504Component implements OnInit {
       if (this.selezionabili.length === 0) {
         this.timer = this.timeMillis;
         this.step++;
+        this.ES.nextExercise(504, {errors: this.errori, time: this.timer});
       }
     } else {
       this.errori++; // Incrementa il contatore degli errori
       alert("Errore! Hai selezionato l'indice sbagliato.");
     }
-  }
-
-  nextExercise(){
-    this.ES.nextExercise(504, {errors: this.errori, time: this.timer});
   }
   
 }
