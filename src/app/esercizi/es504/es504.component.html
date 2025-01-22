@@ -32,7 +32,13 @@
       </button>
     </div>
   </mat-card-content>
+  <mat-card-content *ngIf="step === 2;" style="height: 150px;">
+    <p>Esercizio completato! Errori commessi: {{errori}}</p>
+  </mat-card-content>
   <mat-card-actions>
+    <button [disabled]="step != 2" (click)="nextExercise()" mat-button>
+      Avanti
+    </button>
     <p style="color: gray; font-size: 10px; float: left;">
       {{(timeMillis / 1000).toFixed(0)}} s
     </p>
