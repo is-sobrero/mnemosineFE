@@ -30,10 +30,6 @@
       <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[11] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[11] = arrayCliccato[11] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[11]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[11] }}</h2></button>    
     </div>
   </mat-card-content>
-  <!-- step 3 -->
-  <mat-card-content *ngIf="step === 3;" style="height: 110px;">
-    <p style="margin-top: 40px;">Esercizio completato. Errori commessi: {{errori}}</p>
-  </mat-card-content>
   <!-- Footer -->
   <mat-card-actions>
     <button [disabled]="(step === 2 && this.nCliccati != this.nCitta) || cittaCorrente != nCitta" (click)="nextStep()" mat-button>

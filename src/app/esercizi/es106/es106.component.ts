@@ -99,7 +99,7 @@ export class Es106Component implements OnInit {
 
     if (this.step == 4) {
       this.crossCheck();
-      this.EX.nextExercise(this.EX.currentInfo().id, { errori: this.errori });
+      this.EX.nextExercise(106, { errori: this.errori, time: this.timer});
     }
   }
 
