@@ -45,6 +45,7 @@ export class Es106Component implements OnInit {
   nAccensioni = 0;
   nCliccati = 0;
   step = 1;
+  timeMillis: any = 0;
   timer: any;
   seed = 'abracadabra';
   constructor(private EX: ExerciseService) { }
@@ -91,8 +92,16 @@ export class Es106Component implements OnInit {
       this.avvioSequenza();
     }
 
+    if(this.step == 3){
+      setInterval(() => {
+        this.timeMillis += 100;
+      }
+      , 100);
+    }
+
     if (this.step == 4) {
       this.crossCheck();
+      this.timer = this.timeMillis;
       this.EX.nextExercise(106, {errors: this.errori, time: this.timer});
     }
   }
