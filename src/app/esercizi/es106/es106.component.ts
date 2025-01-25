@@ -13,6 +13,7 @@ import {
   MatCardContent,
 } from '@angular/material/card';
 import { __values } from 'tslib';
+import { time } from 'console';
 
 @Component({
   selector: 'app-es106',
@@ -50,6 +51,11 @@ export class Es106Component implements OnInit {
   seed = 'abracadabra';
   constructor(private EX: ExerciseService) { }
   ngOnInit(): void {
+    setInterval(() => {
+      this.timeMillis += 100;
+    }
+    , 100);
+
     var dif = this.EX.currentInfo().difficulty;
     if (dif == 1) {
       this.setLivello(4);
