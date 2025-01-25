@@ -32,5 +32,6 @@
       <button [disabled]="step === 4 || step == 1 || step == 3 || step == 2 || cliccato == false" (click)="stepIncrease()" mat-button>
         Avanti
       </button>
+      <p *ngIf="step === 3" style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
     </mat-card-actions>
   </mat-card>
