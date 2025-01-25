@@ -54,13 +54,7 @@
                     [src]="sequenzaFissa[5].src" alt="Immagine da selezionare"></button>
         </div>
     </mat-card-content>
-    <mat-card-content *ngIf="step === 3">
-        <p *ngIf="errori === 0">Nessun errore</p>
-        <p *ngIf="errori === 1">Hai fatto un solo errore</p>
-        <p *ngIf="errori > 1">Hai fatto {{ errori }} errori</p>
-        <button (click)="nextLevel()">Avanti</button>
-    </mat-card-content>
-    <mat-card-actions *ngIf="livello === 4">
-        <p>Hai completato il gioco! Ben fatto! <br>Hai fatto {{ erroriTotali }} errore/i</p>
-    </mat-card-actions>
+    <mat-card-actions *ngIf="step === 2">
+        <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+</mat-card-actions>
 </mat-card>
