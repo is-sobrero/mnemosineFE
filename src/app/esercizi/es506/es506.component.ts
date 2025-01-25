@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import {ExerciseService} from "../../exercise.service";
 
 import {
   MatCard,
@@ -36,6 +37,7 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './es506.component.scss'
 })
 export class Es506Component implements OnInit {
+  constructor(private ES: ExerciseService){}
   step = 1;
   disattivaImmagine: any = [0, 0, 0, 0, 0, 0];
   sequenzaImmagini: any = [];
@@ -46,6 +48,7 @@ export class Es506Component implements OnInit {
   livello = 1;
   errori = 0;
   erroriTotali = 0;
+  timeMillis: any = 0;
 
   elementiLivello1 = [
     { id: 0, src: '../../assets/es506_images/lvl1/albero.png' },
@@ -94,6 +97,7 @@ export class Es506Component implements OnInit {
   }
 
   creaSequenza() {
+    this.livello = this.ES.currentInfo().difficulty;
     switch (this.livello) {
       case 1:
         this.sequenzaImmagini = this.elementiLivello1;
@@ -133,6 +137,16 @@ export class Es506Component implements OnInit {
 
   nextStep() {
     this.step += 1;
+
+    if(this.step == 2){
+      setInterval(() => {
+        this.timeMillis += 100;
+      }
+      , 100);
+    }
+
+    if(this.step == 3)
+      this.ES.nextExercise(506, { errors: this.errori, time: this.timeMillis });
   }
 
   nextLevel() {
@@ -156,7 +170,6 @@ export class Es506Component implements OnInit {
     for (let i = 0; i < 6; i++) {
       if (this.sequenzaSelezionata[i] != this.sequenzaImmagini[i].id) {
         this.errori += 1;
-        this.erroriTotali += 1;
       }
     }
   }
