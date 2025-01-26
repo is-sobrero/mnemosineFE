@@ -13,6 +13,7 @@ import {
   MatCardContent,
 } from '@angular/material/card';
 import { __values } from 'tslib';
+import { time } from 'console';
 
 @Component({
   selector: 'app-es106',
@@ -45,6 +46,7 @@ export class Es106Component implements OnInit {
   nAccensioni = 0;
   nCliccati = 0;
   step = 1;
+  timeMillis: any = 0;
   timer: any;
   seed = 'abracadabra';
   constructor(private EX: ExerciseService) { }
@@ -61,12 +63,6 @@ export class Es106Component implements OnInit {
   }
 
   private http = inject(HttpClient);
-
-  resetVariabile() {
-    this.arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    this.nCliccati = 0;
-    this.errori = 0;
-  }
 
   /**
    * Imposta il livello di difficolt  dell'esercizio, n  il numero di accensioni
@@ -97,9 +93,17 @@ export class Es106Component implements OnInit {
       this.avvioSequenza();
     }
 
+    if(this.step == 3){
+      setInterval(() => {
+        this.timeMillis += 100;
+      }
+      , 100);
+    }
+
     if (this.step == 4) {
       this.crossCheck();
-      this.EX.nextExercise(this.EX.currentInfo().id, { errori: this.errori });
+      this.timer = this.timeMillis;
+      this.EX.nextExercise(106, {errors: this.errori, time: this.timer});
     }
   }
 
@@ -121,7 +125,7 @@ export class Es106Component implements OnInit {
         clearInterval(this.timer);
         this.stepIncrease();
       }
-    }, 1000);
+    }, 1500);
   }
 
   sequenzaSelezionata(valore: number) {

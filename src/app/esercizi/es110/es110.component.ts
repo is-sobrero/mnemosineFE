@@ -105,8 +105,9 @@ export class Es110Component implements OnInit {
 
   nextStep() {
     this.step++;
-    if(this.step == 4){
-      this.ES.nextExercise(110, {time: this.timeMillis, errors: this.errori});
+    if(this.step == 3){
+      this.timer = this.timeMillis;
+      this.ES.nextExercise(110, {errors: this.errori, time: this.timer});
     }
   
   }
