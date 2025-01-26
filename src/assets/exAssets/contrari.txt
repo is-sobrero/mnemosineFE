@@ -1,30 +1,30 @@
-Felice:triste, infelice, malinconico, depresso, abbattuto
-Bello:brutto, sgradevole, orribile, ripugnante, deforme
-Grande:piccolo, minuto, ridotto, esiguo, microscopico
-Veloce:lento, pigro, tardivo, macchinoso, indolente
-Facile:difficile, complesso, complicato, arduo, ostico
-Forte:debole, fragile, esile, gracile, fiacco
-Buono:cattivo, malvagio, pessimo, perfido, crudele
-Giovane:vecchio, anziano, maturo, decrepito, vetusto
-Caldo:freddo, gelido, glaciale, ghiacciato, rigido
-Ricco:povero, indigente, misero, bisognoso, squattrinato
-Intelligente:stupido, ottuso, sciocco, ignorante, imbecille
-Coraggioso:codardo, timoroso, vigliacco, pavido, pusillanime
-Lungo:corto, breve, ridotto, conciso, succinto
-Alto:basso, diminuto, corto, piccolo, esiguo
-Nuovo:vecchio, antiquato, datato, obsoleto, decrepito
-Duro:molle, soffice, morbido, cedevole, flessibile
-Pulito:sporco, sudicio, lurido, contaminato, impuro
-Chiaro:oscuro, scuro, torbido, ambiguo, nebuloso
-Leggero:pesante, massiccio, robusto, greve, ingombrante
-Gentile:scortese, maleducato, sgarbato, brusco, rude
-Forte:debole, fragile, esile, fiacco, gracile
-Ricco:povero, indigente, misero, bisognoso, squattrinato
-Allegro:triste, malinconico, depresso, abbattuto, sconsolato
-Caldo:freddo, gelido, glaciale, ghiacciato, rigido
-Dolce:amaro, aspro, acre, pungente, acidulo
-Tranquillo:agitato, nervoso, turbolento, irrequieto, frenetico
-Generoso:avaro, egoista, tirchio, meschino, gretto
-Sincero:falso, ipocrita, menzognero, bugiardo, ingannevole
-Vivace:apatico, pigro, indolente, fiacco, svogliato
-Onesto:disonesto, corrotto, fraudolento, infido, truffaldino
+Felice: triste, infelice, malinconico, depresso, cupo, disperato, sconfortato, abbattuto, desolato, amareggiato, scontento, angosciato, demoralizzato, rattristato, afflitto, deluso, sofferente, insoddisfatto, inquieto, malinconico
+Bello: brutto, sgradevole, orrendo, ripugnante, deforme, scialbo, insignificante, banale, deturpato, mediocre, spoglio, sgraziato, malfatto, grottesco, trascurato, disarmonico, poco attraente, inguardabile, repellente, scomposto
+Grande: piccolo, minuscolo, ridotto, breve, ristretto, basso, limitato, esiguo, minimo, microscopico, umile, contenuto, compatto, inferiore, debole, circoscritto, ristretto, mediocre, modesto, semplice
+Veloce: lento, pigro, fermo, statico, calmo, indolente, inerte, tardivo, tranquillo, rilassato, paziente, esitante, riflessivo, graduale, placido, statico, immobile, ponderato, macchinoso, stagnante
+Facile: difficile, complesso, complicato, arduo, gravoso, impegnativo, pesante, tortuoso, impossibile, ostico, sfidante, problematico, insidioso, intricato, irto, improbo, macchinoso, confuso, ostacolato, sfavorevole
+Forte:debole, fragile, vulnerabile, delicato, gracile, tenue, inconsistente, instabile, inefficace, insicuro, insulso, sottile, morbido, inerte, smorzato, molle, flessibile, insignificante, sottomesso, cedevole
+Buono:cattivo, malvagio, crudele, perfido, maligno, ostile, malevolo, egoista, insensibile, invidioso, scortese, antipatico, spregevole, sgradevole, falso, peccaminoso, colpevole, vizioso, immorale, spietato
+Giovane:vecchio, anziano, maturo, attempato, decrepito, antiquato, obsoleto, antiquato, antiquario, stagionato, consumato, logoro, appassito, datato, superato, antiquato, logorato, stanco, antiquario, vecchietto
+Caldo:freddo, gelido, glaciale, ghiacciato, fresco, frizzante, rigido, invernale, polare, artico, congelato, raffreddato, tiepido, temperato, distaccato, apatico, insensibile, distante, anaffettivo, distante
+Ricco:povero, indigente, misero, miserabile, squattrinato, nullatenente, spiantato, depauperato, bisognoso, disagiato, parsimonioso, modesto, semplice, frugale, spoglio, scarso, insufficiente, limitato, privo, essenziale
+Intelligente:stupido, ottuso, sciocco, ignorante, ingenuo, imbecille, superficiale, incompetente, inetto, ritardato, limitato, svogliato, confuso, sbadato, distratto, incapace, incosciente, sprovveduto, avventato, banale
+Coraggioso:codardo, pauroso, vigliacco, timido, insicuro, titubante, esitante, pavido, tremebondo, intimorito, debole, cauto, pusillanime, pavido, tremante, incerto, diffidente, nervoso, riluttante, irresoluto
+Lungo:corto, breve, conciso, ridotto, sintetico, piccolo, ristretto, limitato, esiguo, contenuto, succinto, istantaneo, istantaneo, immediato, troncato, minuto, sottile, fugace, frammentario, accorciato
+Alto:basso, piccolo, sottile, limitato, umile, ridotto, accorciato, minore, schiacciato, debole, corto, infimo, depresso, modesto, raso, minuto, ristretto, insignificante, nano, contenuto
+Nuovo:vecchio, antiquato, usato, logoro, datato, superato, obsoleto, stantio, consumato, tradizionale, usurato, vecchiotto, attempato, stagionato, stanco, classico, antiquato, eroso, noioso, passato
+Duro:morbido, soffice, tenero, flessibile, elastico, cedevole, molle, delicato, fragile, pieghevole, friabile, docile, debole, ammorbidito, malleabile, remissivo, arrendevole, tenue, docile, fragile
+Pulito:sporco, sudicio, contaminato, macchiato, unto, puzzolente, impuro, fangoso, lercio, inquinato, trasandato, grezzo, sudicio, opaco, negligenza, corrotto, trascurato, sporchevole, arrugginito, caotico
+Chiaro:scuro, oscuro, opaco, nero, buio, cupo, torbido, offuscato, nebuloso, ombroso, indistinto, confuso, incerto, fumoso, ambiguo, tetro, tenebroso, problematico, misterioso, offuscato
+Leggero:pesante, massiccio, robusto, grave, opprimente, consistente, solido, pressante, faticoso, ingombrante, greve, impegnativo, denso, intenso, impegnativo, gravoso, concreto, ponderoso, impegnativo, corposo
+Gentile:scortese, rude, maleducato, arrogante, antipatico, grossolano, insensibile, sgarbato, burbero, freddo, ostile, scontroso, brusco, indisponente, arrogante, secco, aggressivo, aspro, scorretto, ruvido
+Dolce:amaro, acido, aspro, salato, acre, pungente, insipido, disgustoso, fastidioso, irritante, sgradevole, brusco, aggressivo, duro, ruvido, spigoloso, tagliente, pungente, piccante, irritante
+Tranquillo:agitato, irrequieto, nervoso, frenetico, inquieto, teso, rumoroso, chiassoso, tumultuoso, turbolento, confuso, caotico, insicuro, instabile, movimentato, disturbato, indisciplinato, acceso, affollato, vibrante
+Generoso:avaro, egoista, meschino, tirchio, gretto, taccagno, parsimonioso, avido, calcolatore, ingrato, scaltro, interessato, venale, arido, insensibile, limitato, avarizia, riservato, tenace, cupido
+Sincero:falso, bugiardo, ipocrita, ingannevole, menzognero, insincero, ambiguo, infido, subdolo, disonesto, manipolatore, calcolatore, interessato, doppio, strategico, diplomatico, riservato, cinico, scorretto, artefatto
+Vivace:pigro, lento, apatico, spento, debole, monotono, stanco, malinconico, annoiato, flemmatico, insensibile, indolente, fiacco, smorto, silenzioso, statico, calmo, sereno, pacifico, passivo
+Onesto:disonesto, corrotto, infedele, fraudolento, ipocrita, falso, menzognero, scorretto, losco, ambiguo, immorale, ingannevole, sleale, subdolo, calcolatore, strategico, spregiudicato, infido, meschino, inaffidabile
+Luminoso:oscuro, buio, tenebroso, opaco, velato, spento, scuro, dim, oscurato, cupo, nublado, scuro, grigio, offuscato, tenebroso, indefinito, privo di luce, opaco, nebuloso, ombroso
+Curioso:indifferente, apatico, disinteressato, insensibile, imperturbabile, soddisfatto, annoiato, stanco, disimpegnato, svogliato, incosciente, distratto, disinteressato, indolente, poco attento, passivo, ignorante, poco sveglio, disinteressato, insensato.
+Elegante:goffo, trasandato, volgare, rustico, sgargiante, indecoroso, squallido, sciatto, brutto, malvestito, rozzo, informe, misero, stonato, mal curato, scadente, malfatto, poco raffinato, informale, trascurato
+Misterioso:chiaro, evidente, trasparente, ovvio, noto, comprensibile, semplice, limpido, comprensibile, chiaro, visibile, svelato, conosciuto, semplice, aperto, esplicito, chiaro come il giorno, riconoscibile, diretto, dichiarato

@@ -83,8 +83,7 @@ export class Es407Component implements OnInit{
   *  Default state: 0 ( easier );
   *
   */
-
-  level = this.ES.currentInfo().difficulty;
+  level = 1;
 
  /*
   * List of word used for the selection. The index of
@@ -129,17 +128,17 @@ export class Es407Component implements OnInit{
 
       this.setWord();
     });
-
+  this.level = this.ES.currentInfo().difficulty;
   }
 
   setWord():void{
     var rand:number = Math.floor(Math.random()*this.list_of_words.at(this.level-1).length);
     this.display = ""+this.list_of_words.at(this.level-1).at(rand);
     this.selectedArray = this.totalArray.at(rand).split(", ");
+    console.log(this.totalArray.at(rand));
     this.inputCache = [];
     this.errors = 0;
     this.points = 0;
-    console.log(this.selectedArray.toString());
   }
 
   checkContent(){

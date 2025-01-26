@@ -34,6 +34,7 @@ import {ExerciseService} from "../../exercise.service";
 export class Es405Component implements OnInit{
   constructor(private ES: ExerciseService) { }
   private connection = inject(HttpClient);
+  private inputSection:any;
   private dictionary:string[] = [];
   private word_cache:string[] = [];
   private difficulty:any[][] = [
@@ -69,8 +70,7 @@ export class Es405Component implements OnInit{
   *  Default state: 0 ( easier );
   *
   */
-
-  level = this.ES.currentInfo().difficulty;
+  level = 1;
 
   private list_of_words:any[] = [];
 
@@ -84,9 +84,11 @@ export class Es405Component implements OnInit{
       for(var i=0;i<3;i++){
         this.getWord(this.dictionary,this.list_of_words);
       }
+      this.inputSection = document.querySelector(".input");
       this.setWord();
     });
-
+    this.level = this.ES.currentInfo().difficulty;
+    console.log("current level: "+this.level);
   }
 
   setWord():void{
@@ -109,6 +111,8 @@ export class Es405Component implements OnInit{
       this.current_state = 1;
       this.ES.nextExercise(405, { errors: this.errors , time: this.timeMillis });
     }
+    this.inputSection.value = "";
+
   }
 
   private getWord(dictionary:string[], list_of_words:string[]):void{
