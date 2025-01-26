@@ -1,30 +1,30 @@
-Felice:gioioso, allegro, contento, lieto, spensierato
-Bello:grazioso, attraente, affascinante, splendido, incantevole
-Grande:enorme, vasto, gigantesco, immenso, colossale
-Veloce:rapido, celere, spedito, fulmineo, svelto
-Facile:semplice, agevole, chiaro, intuitivo, elementare
-Forte:robusto, potente, vigoroso, energico, saldo
-Buono:gentile, bravo, ottimo, eccellente, benevolo
-Giovane:fresco, adolescente, immaturo, giovanile, fanciullo
-Caldo:bollente, rovente, afoso, torrido, surriscaldato
-Ricco:abbiente, facoltoso, benestante, opulento, agiato
-Intelligente:brillante, astuto, perspicace, sagace, arguto
-Coraggioso:audace, temerario, valoroso, ardito, impavido
-Lungo:esteso, prolungato, interminabile, infinito, vasto
-Alto:elevato, altissimo, imponente, svettante, colossale
-Nuovo:recente, moderno, fresco, innovativo, novello
-Duro:rigido, resistente, solido, inflessibile, coriaceo
-Pulito:lindo, immacolato, brillante, igienico, nitido
-Chiaro:limpido, evidente, trasparente, manifesto, nitido
-Leggero:lieve, esile, sottile, etereo, evanescente
-Gentile:cortese, educato, garbato, affabile, amabile
-Forte:robusto, possente, resistente, solido, vigoroso
-Ricco:benestante, facoltoso, opulento, abbiente, agiato
-Allegro:gioioso, contento, felice, spensierato, esuberante
-Caldo:bollente, rovente, torrido, afoso, surriscaldato
-Dolce:zuccherato, mielato, soave, delicato, tenero
-Tranquillo:sereno, calmo, pacifico, placido, quieto
-Generoso:altruista, magnanimo, prodigo, liberale, munifico
-Sincero:onesto, franco, leale, schietto, genuino
-Vivace:energico, esuberante, dinamico, frizzante, brioso
-Onesto:integerrimo, retto, leale, corretto, probo
+Felice:Contento, Allegro, Gioioso, Sereno, Soddisfatto, Entusiasta, Raggiante, Euforico, Beato, Lieto, Radioso, Appagato, Sorridente, Estasiato, Compiaciuto, Gratificato, Esultante, Esuberante, Trionfante, In estasi
+Bello:Affascinante, Attraente, Splendido, Meraviglioso, Incantevole, Stupendo, Elegante, Gradevole, Delizioso, Affettuoso, Seducente, Fagocitante, Piacevole, Raffinato, Luminoso, Incantevole, Magnifico, Straordinario, Superbo, Favoloso
+Grande:Enorme, Immenso, Vastissimo, Gigantesco, Colossale, Massiccio, Monumentale, Straordinario, Imponente, Maestoso, Eccezionale, Monumentale, Sostanzioso, Ampio, Potente, Esteso, Significativo, Magnifico, Incommensurabile, Rilevante, Gargantuesco
+Veloce:Rapido, Celere, Presto, Fulmineo, Agilissimo, Svelto, Velocissimo, Impetuoso, Lampo, Accelerato, Frizzante, Bruciante, Scattante, Vivace, Esuberante, Immediate, Irruento, Espeditivo, Turbinante, Scorrente
+Facile:Semplice, Leggero, Comodo, Facile, Accessibile, Intuitivo, Pratico, Agevole, Rilievo, Elementare, Senza sforzo, Elementare, Spontaneo, Scorrevole, Senza difficoltà, Senza impegno, Liscio, Comodo, Confortevole, Abituale
+Forte:Potente, Robusto, Vigore, Intenso, Resistente, Energetico, Solido, Tenace, Stabile, Massiccio, Strenuo, Deciso, Inflessibile, Solenne, Ferme, Audace, Inossidabile, Imponente, Caparbio, Energico
+Buono:Gentile, Onesto, Affettuoso, Eccellente, Bravo, Positivo, Caritatevole, Dolce, Generoso, Affidabile, Rispettoso, Corretto, Leale, Meritevole, Valido, Equo, Benefico, Sano, Amichevole, Giusto
+Giovane:Nuovo, Fresco, In erba, In gioventù, Infantile, Esuberante, Giovanile, Promettente, Immature, Fanciullo, Alle prime armi, Puerile, Adolescente, In crescita, Spensierato, Vivace, Emergente, Radiante, Attivo, Dinamico
+Caldo:Tiepido, Bollente, Afoso, Soffocante, Torbido, Ardente, Incandescente, Ustionante, Caloroso, Fervente, Ristretto, Vaporeggiante, Pronto, Appassionato, Entusiasta, Scaldante, Surriscaldato, Temperato, Bruciante, Equilibrato
+Ricco:Abbondante, Opulento, Lussuoso, Vasto, Prolifico, Prosperoso, Fertile, Sostanzioso, Elevato, Copioso, Eccedente, Ample, Florido, Grasso, Ristretto, Robusto, Sfarzoso, Raffinato, Imponente, Inflazionato
+Intelligente:Saggio, Acuto, Perspicace, Sagace, Astuto, Geniale, Luminoso, Abile, Brillante, Acuto, Ingenioso, Razonato, Riflessione, Attento, Capace, Intuitivo, Percepente, Istruito, Cauto, Arguto
+Coraggioso:Audace, Valoroso, Intrepido, Temerario, Determinato, Audace, Tenace, Impavido, Fiero, Risoluto, Ardito, Indomito, Impavido, Brillante, Invincibile, Vigoroso, Fiero, Intrepido, Eroico, Invulnerabile
+Lungo:Esteso, Vasto, Prolungato, Sinuoso, Ampio, Infinitamente, Perpetuo, Espanso, Imponente, Infinito, Immenso, Gigante, Perpetuo, Incessante, Continuo, Duraturo, Spazioso, Continuativo, Lontano, Duraturo
+Alto:Elevato, Imponente, Maestoso, Superiore, Altissimo, Torreggiante, Straordinario, Verticale, Sostenuto, Aereo, Rilevante, Enorme, Lungo, Robusto, Vasto, Solido, Inarrivabile, Espandibile, Imponibile, Alto livello
+Nuovo:Fresco, Innovativo, Originale, Inedito, Inatteso, Moderno, Rinnovato, Rilanciato, Scopribile, Rigenerato, Sperimentale, Precedente, Novello, Uscito, Giovanile, Rinfrescato, Recentemente, Oggi, Futuro, Risolutivo
+Duro:Solido, Robusto, Resistente, Ferreo, Intenso, Rigoroso, Implacabile, Acciaioso, Compatto, Intransigente, Severamente, Indurito, Resistente, Irremovibile, Tenace, Sodo, Ristretto, Impassibile, Fermo, Forte
+Pulito:Igienico, Ordinato, Immacolato, Puro, Fresco, Semplice, Splendente, Senza macchie, Intatto, Incontaminato, Pristino, Morbido, Limpido, Fresco, Purezza, Trasparente, Purgato, Stereile, Nitido, Nuovo
+Chiaro:Luminoso, Trasparente, Limpido, Visibile, Lucente, Evidente, Esplicito, Palese, Manifesto, Nitido, Distinto, Radioso, Perspicuo, Comprensibile, Cristallino, Fluido, Semplice, Trasparente, Acceso, Lineare
+Leggero:Morbido, Soffice, Sottile, Aereo, Piuma, Facile, Delicato, Evaporato, Veloce, Lieve, Flessibile, Raro, Leggiadro, Adatto, Minuto, Leggiadro, Agilissimo, Sfiorato, Essenziale, Piacevole
+Gentile:Cortese, Affettuoso, Rispettoso, Amabile, Elegante, Complice, Affabile, Semplice, Morbido, Empatico, Cortese, Civilizzato, Benevolo, Indulgente, Educato, Amichevole, Duttile, Simpatico, Tollerante, Grazioso
+Allegro:Gioioso, Felice, Spensierato, Vivace, Sorridente, Raggiante, Euforico, Gaio, Serene, Risoluto, Emozionante, Risplendente, Encomiabile, Esultante, Scattante, Estatico, Appagante, Entusiasta, Ridente, Brillante
+Dolce:Mite, Amabile, Gentile, Morbido, Affettuoso, Soave, Delizioso, Tenero, Fragrante, Piacevole, Lusinghiero, Simpatico, Semplice, Rassicurante, Ameno, Carino, Lieve, Sereno, Incantevole, Emotivo, Buono
+Tranquillo:Sereno, Calmo, Pacato, Quieto, Rilassato, Placido, Riposato, Leggero, Semplice, Riposante, Silenzioso, Pacifico, Ponderato, Moderato, Appagato, Pacato, Rilassante, Imperturbabile, Placato, Posato
+Generoso:Altruista, Benevolo, Caritatevole, Prodigo, Magnanimo, Etereo, Offensivo, Elevato, Ristretto, Pieno, Abbondante, Superbo, Solare, Riconoscente, Solidale, Donatore, Infinitamente, Emozionante, Piacevole, Tollerante
+Sincero:Onesto, Autentico, Veritiero, Genuino, Reale, Semplice, Trasparente, Leale, Puro, Vero, Innocente, Spontaneo, Serio, Affidabile, Senza finzioni, Genuino, Chiarissimo, Veritativo, Impulsivo, Innocuo
+Vivace:Energico, Spontaneo, Giovanile, Flessibile, Esuberante, Spumeggiante, Vivido, Brillante, Euforico, Impulsivo, Gioioso, Sorridente, Luminosa, Spigliato, Attivo, Entusiasta, Zampillante, Radioso, Esuberante, Pieno di vita
+Onesto:Integrale, Retto, Leale, Giusto, Sincero, Trasparente, Virtuoso, Reale, Semplice, Pulito, Veritiero, Puro, Rettamente, Completamente, Corretto, Genuino, Legittimo, Solido, Impeccabile, Serio
+Luminoso:raggiante, brillante, luminiscente, splendente, chiaro, sfolgorante, scintillante, fosforescente, lucente, radiante, illuminato, alogeno, di luce, ardente, trasparente, candido, chiarore, iridescente, lampante, irradiante
+Curioso:inquisitivo, interessato, esplorativo, attento, scopritore, indagatore, desideroso di sapere, ricercatore, avidi di conoscenza, sperimentatore, affascinato, domandante, perplesso, fermo nel voler sapere, investigatore, pronto a scoprire, attivo, esigente, perspicace, osservatore
+Elegante:raffinato, sobrio, chic, distinto, sfarzoso, raffinato, pregevole, lussuoso, fine, aristocratico, sontuoso, decoro, signorile, classe, di classe, esclusivo, galante, stiloso, inappuntabile, dignitoso
