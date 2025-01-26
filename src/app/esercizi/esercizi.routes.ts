@@ -15,7 +15,10 @@ import { Es202Component } from './es202/es202.component';
 import { Es203Component } from './es203/es203.component';
 import { Es204Component } from './es204/es204.component';
 import { Es110Component } from './es110/es110.component';
+import { Es301Component } from './es301/es301.component';
+import { Es302Component } from './es302/es302.component';
 import { Es303Component } from './es303/es303.component';
+import { Es307Component } from './es307/es307.component';
 import { Es401Component } from './es401/es401.component';
 import { Es407Component } from './es407/es407.component';
 import { Es408Component } from './es408/es408.component';
@@ -81,11 +84,23 @@ const routes: Routes = [
     component: Es109Component,
   },
   {
+    path: '301',
+    component: Es301Component,
+  },
+  {
+    path: '302',
+    component: Es302Component,
+  },
+  {
     path: '303',
     component: Es303Component,
   },
   {
-    path: '401',
+    path: '307',
+    component: Es307Component,
+  },
+  {
+    path: "401",
     component: Es401Component,
   },
   {
