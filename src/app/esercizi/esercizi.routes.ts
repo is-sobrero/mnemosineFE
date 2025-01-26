@@ -16,7 +16,10 @@ import { Es203Component } from './es203/es203.component';
 import { Es204Component } from './es204/es204.component';
 import { Es205Component } from './es205/es205.component';
 import { Es110Component } from './es110/es110.component';
+import { Es301Component } from './es301/es301.component';
+import { Es302Component } from './es302/es302.component';
 import { Es303Component } from './es303/es303.component';
+import { Es307Component } from './es307/es307.component';
 import { Es401Component } from './es401/es401.component';
 import { Es407Component } from './es407/es407.component';
 import { Es408Component } from './es408/es408.component';
@@ -24,7 +27,8 @@ import { Es403Component } from './es403/es403.component';
 import { Es405Component } from './es405/es405.component';
 import { Es410Component } from './es410/es410.component';
 import { Es504Component } from './es504/es504.component';
-
+import { Es505Component } from './es505/es505.component';
+import { Es304Component } from './es304/es304.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -89,35 +93,47 @@ const routes: Routes = [
      component: Es109Component,
   },
   {
+    path: '301',
+    component: Es301Component,
+  },
+  {
+    path: '302',
+    component: Es302Component,
+  },
+  {
     path: '303',
     component: Es303Component,
+  },
+  {
+    path: '307',
+    component: Es307Component,
   },
   {
     path: "401",
     component: Es401Component,
   },
   {
-    path: "407",
+    path: '407',
     component: Es407Component,
   },
   {
-    path: "408",
+    path: '408',
     component: Es408Component,
   },
   {
-    path: "402",
+    path: '402',
     component: Es402Component,
   },
   {
-    path: "403",
+    path: '403',
     component: Es403Component,
   },
   {
-    path: "405",
+    path: '405',
     component: Es405Component,
   },
   {
-    path: "410",
+    path: '410',
     component: Es410Component,
   },
   {
@@ -127,7 +143,20 @@ const routes: Routes = [
   {
     path: "504",
     component: Es504Component,
-  }
+  },
+  {
+    path: '106',
+    component: Es106Component,
+  },
+  {
+    path: '304',
+    component: Es304Component,
+  },
+  {
+    path: '505',
+    component: Es505Component,
+  },
+
 ];
 
 @NgModule({
