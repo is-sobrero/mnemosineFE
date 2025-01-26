@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ExerciseService } from '../../exercise.service';
 
 import {
   MatCard,
@@ -32,7 +33,7 @@ import { __values } from 'tslib';
   styleUrls: ['./es106.component.scss'],
 })
 
-export class Es106Component {
+export class Es106Component implements OnInit {
   cliccato = false;
   arraySequenza = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -46,6 +47,18 @@ export class Es106Component {
   step = 1;
   timer: any;
   seed = 'abracadabra';
+  constructor(private EX: ExerciseService) { }
+  ngOnInit(): void {
+    var dif = this.EX.currentInfo().difficulty;
+    if (dif == 1) {
+      this.setLivello(4);
+    } else if (dif == 2) {
+      this.setLivello(6);
+    } else if (dif == 3) {
+      this.setLivello(8);
+    }
+    this.stepIncrease();
+  }
 
   private http = inject(HttpClient);
 
@@ -86,6 +99,7 @@ export class Es106Component {
 
     if (this.step == 4) {
       this.crossCheck();
+      this.EX.nextExercise(this.EX.currentInfo().id, { errori: this.errori });
     }
   }
 

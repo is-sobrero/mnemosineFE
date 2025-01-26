@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   baseUrl = 'https://mnemosineapi.sobrero.dev/'; // Change this URL as needed
+  //baseUrl = 'http://localhost:3000/'; // Change this URL as needed
   tokenKey = 'token'; // Local Storage key for token
 
   constructor(private http: HttpClient) {}

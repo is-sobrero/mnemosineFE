@@ -45,5 +45,18 @@ export class SessionmanagerComponent implements OnInit {
     this.api.get('admin/getSessions').subscribe((res: any) => {
       this.sessions = res;
     });
+    //every 1s refresh
+    setInterval(() => {
+      this.refresh();
+    }, 1000);
   }
+  refresh() {
+    this.api.get('admin/getSessions').subscribe((res: any) => {
+      if (res.length != this.sessions.length) {
+        this.sessions = res;
+      }
+    });
+  }
+
+  
 }

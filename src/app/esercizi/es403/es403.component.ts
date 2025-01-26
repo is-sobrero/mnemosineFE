@@ -67,8 +67,7 @@ export class Es403Component implements OnInit{
   *
   */
 
-
-  level = this.ES.currentInfo().difficulty;
+  level = 1;
   /*
   * List of word used for the selection. The index of
   * the array rappresent the difficulty selected.
@@ -81,18 +80,21 @@ export class Es403Component implements OnInit{
 
   private list_of_words:any[] = [];
   ngOnInit(){
-    this.inputSection = document.querySelector(".input");
+    console.log("initialize")
     setInterval(()=>{
       this.timeMillis += 500;
     }, 500);
 
+    this.level = this.ES.currentInfo().difficulty;
 
     switch(this.level){
       case 1:
         this.connection.get("assets/exAssets/dizionario_immagini/dizionario_semplice.txt", {responseType: "text"}).subscribe(data =>{
           this.dictionary = data.split("\n");
           this.getWord();
+          this.inputSection = document.querySelector(".input");
           this.setWord();
+          console.log("query di immagini eseguita per livello 1");
 
         });
         break;
@@ -101,14 +103,18 @@ export class Es403Component implements OnInit{
         this.connection.get("assets/exAssets/dizionario_immagini/dizionario_medio.txt", {responseType: "text"}).subscribe(data =>{
           this.dictionary = data.split("\n");
           this.getWord();
+          this.inputSection = document.querySelector(".input");
           this.setWord();
+          console.log("query di immagini eseguita per livello 1");
         });
         break;
       case 3:
         this.connection.get("assets/exAssets/dizionario_immagini/dizionario_difficile.txt", {responseType: "text"}).subscribe(data =>{
           this.dictionary = data.split("\n");
           this.getWord();
-        this.setWord();
+          this.inputSection = document.querySelector(".input");
+          this.setWord();
+          console.log("query di immagini eseguita per livello 1");
         });
         break;
       default:
@@ -124,8 +130,8 @@ export class Es403Component implements OnInit{
       this.ES.nextExercise(403, {errors: this.errors, time: this.timeMillis});
     }else{
       this.errors += 1;
-      this.inputSection.value = "";
     }
+    this.inputSection.value = "";
   }
 
   setWord():void{

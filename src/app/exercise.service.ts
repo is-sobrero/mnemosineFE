@@ -42,27 +42,48 @@ export class ExerciseService {
     const currentExerciseObject = sessionInfo.exercises[currentExerciseIndex];
     return currentExerciseObject;
   }
-  nextExercise( currentExerciseID: number, currentExerciseResultData: any ) {
+  nextExercise(currentExerciseID: number, currentExerciseResultData: any) {
     //@ts-ignore
     const sessionInfo = JSON.parse(localStorage.getItem('SessionInfo'));
-    //add the result of the current exercise to the ExerciseInfo
-    //@ts-ignore  
+    //@ts-ignore
     var exerciseInfo = JSON.parse(localStorage.getItem('ExerciseInfo'));
+  
+    // Add the result of the current exercise to the ExerciseInfo
     exerciseInfo.push(currentExerciseResultData);
     localStorage.setItem('ExerciseInfo', JSON.stringify(exerciseInfo));
-    //find the next exercise in the sessionInfo
-    const nextExerciseIndex = sessionInfo.exercises.findIndex( (exercise:any) => exercise.id === currentExerciseID ) + 1;
-    //if there is a next exercise navigate to it
-    if( nextExerciseIndex < sessionInfo.exercises.length ) {
-      this.router.navigate(['/esercizio/' + sessionInfo.exercises[nextExerciseIndex].id]);
+  
+    // Find the current exercise index based on the currentExerciseID and the length of exerciseInfo
+    const currentExerciseIndex = exerciseInfo.length - 1;
+  
+    // Find the next exercise index by searching for the next occurrence of the currentExerciseID after the current index
+    let nextExerciseIndex = -1;
+    for (let i = currentExerciseIndex + 1; i < sessionInfo.exercises.length; i++) {
+      if (sessionInfo.exercises[i].id === currentExerciseID) {
+        nextExerciseIndex = i;
+        break;
+      }
+    }
+  
+    // If no next exercise with the same ID is found, move to the next exercise in the list
+    if (nextExerciseIndex === -1) {
+      nextExerciseIndex = currentExerciseIndex + 1;
+    }
+  
+    // Check if there are more exercises to complete
+    if (nextExerciseIndex < sessionInfo.exercises.length) {
+      if (sessionInfo.exercises[nextExerciseIndex].id === currentExerciseID) {
+        window.location.reload();
+      } else {
+        this.router.navigate(['/esercizio/' + sessionInfo.exercises[nextExerciseIndex].id]);
+      }
     } else {
-      //communicate with the backend and tell them that the session is over and the results are ready
-      this.apiService.post('user/endSession', { sessionID: sessionInfo._id, results: exerciseInfo }).subscribe( (apiResponse: any) => {
+      // Communicate with the backend and tell them that the session is over and the results are ready
+      this.apiService.post('user/endSession', { sessionID: sessionInfo._id, results: exerciseInfo }).subscribe((apiResponse: any) => {
         console.log(apiResponse);
       });
       localStorage.removeItem('SessionInfo');
       localStorage.removeItem('ExerciseInfo');
       this.router.navigate(['/risultati']);
     }
-  } 
+  }
 }
