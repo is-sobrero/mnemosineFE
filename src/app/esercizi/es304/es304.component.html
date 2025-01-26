@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Porca troia non ho voglia</mat-card-title>
+    <mat-card-subtitle
+      >Seleziona la parola che più si avvicina alla parola
+      visualizzata</mat-card-subtitle
+    >
+  </mat-card-header>
+
+  <mat-card-content>
+    <h2>{{ parola }}</h2>
+    <button *ngFor="let parola of wordlist" mat-button (click)="check(parola)">
+      {{ parola }}
+    </button>
+    <p style="color: gray; font-size: 14px">{{ timeMillis / 1000 }}s</p>
+  </mat-card-content>
+</mat-card>
