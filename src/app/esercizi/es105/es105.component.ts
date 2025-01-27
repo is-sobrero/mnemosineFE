@@ -58,8 +58,8 @@ export class Es105Component implements OnInit {
             immagine: 'assets/images_es105/livello3.png',
             domande: [
                 { domanda: 'Chi tiene la zamba sulla palla?', risposta: 'gatto' },
-                { domanda: 'Di che colore è lo sfondo?', risposta: 'rosso' },
-                { domanda: 'Quante zampe in totale hai visto?', risposta: '7' }
+                { domanda: 'Di che colore è lo sfondo?', risposta: 'rosa' },
+                { domanda: 'Quante zampe in totale hai visto?', risposta: '6' }
             ]
         }
     ];
@@ -94,10 +94,10 @@ export class Es105Component implements OnInit {
         this.immagine = immagineCorrente.immagine;
         this.rispostaCorretta = immagineCorrente.domande[this.domandaCorrenteIndex].risposta;
 
-        // Mostra l'immagine per 3 secondi
+        // Mostra l'immagine per 10 secondi
         this.timerImmagine = setTimeout(() => {
             this.step = 2;
-        }, 3000);
+        }, 10000);
     }
 
     stepSuccessivo() {

@@ -1,8 +1,10 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Unisci i punti alfanumeri</mat-card-title>
+        <mat-card-title>Unisci i punti alfanumerici</mat-card-title>
         <mat-card-subtitle>Attenzione divisa e flessibilità cognitiva</mat-card-subtitle>
     </mat-card-header>
+    <p style="color: blue;">Connetti i punti a partire dal numero 1 e poi la lettera A, e così via</p>
+
     <div class="grid-container">
         <div *ngFor="let punto of punti" class="grid-item" [ngClass]="{'selected': puntiUniti.includes(punto.label)}"
             (click)="selezionaPunto(punto)" [style.top.%]="punto.y" [style.left.%]="punto.x">
