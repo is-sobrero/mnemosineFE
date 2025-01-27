@@ -24,30 +24,3 @@
       <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
     </mat-card-actions>
   </mat-card>
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Ordina i numeri
-        in ordine
-        decrescente </mat-card-title>
-      <mat-card-subtitle>Ragionamento e
-        calcolo </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content *ngIf="step === 1">
-        <h2 *ngFor="let numero of numList">{{numero}}</h2>
-    </mat-card-content>
-    <mat-card-content *ngIf="step === 2">
-        <mat-form-field *ngFor="let i of seqNumeri">
-            <mat-label>Inserisci il n. {{i}}</mat-label>
-            <input matInput (change)="aggiornaRisposte($event.target, i)"/>
-        </mat-form-field>
-    </mat-card-content>
-    <mat-card-content *ngIf="step === 3">
-      <p *ngIf="errori == 0 ">Bravo! Hai memorizzato correttamente la sequenza con 0 errori</p>
-      <p *ngIf="errori == 1 ">Hai commesso un errore</p>
-      <p *ngIf="errori > 1 ">Hai commesso {{errori}} errori</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button [disabled]="step==4" (click)="stepIncrease()" mat-button>Avanti</button>
-      <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
-    </mat-card-actions>
-  </mat-card>
