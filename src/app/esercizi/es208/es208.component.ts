@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
-import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { NgClass, NgFor, NgIf } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardSubtitle,
+  MatCardContent,
+} from '@angular/material/card';
 import { MatInputModule, MatLabel } from '@angular/material/input';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es208',
@@ -20,99 +27,78 @@ import { MatInputModule, MatLabel } from '@angular/material/input';
     NgIf,
     MatInputModule,
     MatLabel,
-    HttpClientModule
+    NgClass,
   ],
   templateUrl: './es208.component.html',
-  styleUrl: './es208.component.scss'
+  styleUrl: './es208.component.scss',
 })
 export class Es208Component {
-  //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
-  numList: any[] = [];        // Numeri casuali pushati
-  colorList: any[] = [];      // Collettore di nomi di classe (blu o red)
-  numNumeri = 3;
-  seqNumeri: any[] = [];      // Array che va da 1 a numNumeri
-  listaRisposte: any[] = [];
-
+  numList: number[] = []; // Numeri casuali
+  colorList: string[] = []; // Collettore di colori (blu o rosso)
+  risultato: number = 0; // Risultato finale
   step: number = 1;
+  timeMillis: number = 0;
+  risultatoVerificato: boolean | null = null; // Per verificare se il risultato dell'utente è corretto
   errori: number = 0;
-  index = -1;
 
+  constructor(private ES: ExerciseService) {}
+
+  diff = this.ES.currentInfo().difficulty;
+  numNumeri: number = this.diff === 1 ? 3 : this.diff === 2 ? 5 : 7; // Numero di numeri da generare
+
+  // Incremento dello step
   stepIncrease() {
     this.step++;
-    // se step = 3, dobbiamo cross check
-    if (this.step == 3) {
-      for (var i = 0; i < this.numNumeri; i++) {
-        if (this.numList[i] != this.listaRisposte[i]) {
-          this.errori++;
-        }
-      }
+    if (this.step === 2) {
+      this.calcolaRisultato(); // Calcola il risultato quando si passa al secondo step
     }
   }
 
-  timeMillis = 0;
+  // Funzione che calcola il risultato finale
+  calcolaRisultato() {
+    let tempRisultato = 0;
+    for (let i = 0; i < this.numNumeri; i++) {
+      const num = this.numList[i];
+      if (this.colorList[i] === 'color-blue') {
+        tempRisultato += num; // Somma se il numero è blu
+      } else {
+        tempRisultato -= num; // Sottrai se il numero è rosso
+      }
+    }
+    this.risultato = tempRisultato; // Assegno il risultato finale
+  }
+
+  // Verifica il risultato inserito dall'utente
+  verificaRisultato(risultatoUtente: string) {
+    const utenteRisultato = Number(risultatoUtente);
+    if (utenteRisultato === this.risultato) {
+      this.risultatoVerificato = true; // Risultato corretto
+      this.ES.nextExercise(208, { errors: this.errori, time: this.timeMillis });
+    } else {
+      this.risultatoVerificato = false; // Risultato errato
+      this.errori++;
+    }
+  }
 
   ngOnInit(): void {
-    this.step = 1;
-
+    // Inizializzazione
     setInterval(() => {
       this.timeMillis += 100;
     }, 100);
 
-    /**
-     * faccio un ciclo for su numNumeri volte, e pusha ogni volta un
-     * numero randomico tra 1 e 10, assicurandomi che non ci siano
-     * duplicati.
-     */
-    for (var i = 0; i < this.numNumeri; i++) {
-      this.seqNumeri.push(i + 1);
-      if (this.numNumeri > 10) {
-        alert("Il numero di numeri deve essere minore di 10");
-        break;
-      }
-      var random = Math.floor(Math.random() * 10) + 1;
+    for (let i = 0; i < this.numNumeri; i++) {
+      let random = Math.floor(Math.random() * 10) + 1;
       while (this.numList.includes(random)) {
         random = Math.floor(Math.random() * 10) + 1;
       }
       this.numList.push(random);
 
-    }
-
-    console.log(this.numList);
-
-    var risultato = 0;
-    var colore;
-
-    for (i = 0; i < this.numNumeri; i++) {
-      colore = Math.floor(Math.random() * 2); //cosi va da 0 a 1
-      if (colore == 0) {
-        risultato += this.numList[i]
-        this.colorList.push("class=\"color-blue\"");
-        console.log(this.colorList)
+      const colore = Math.floor(Math.random() * 2); // 0 o 1
+      if (colore === 0) {
+        this.colorList.push('color-blue'); // Blu
+      } else {
+        this.colorList.push('color-red'); // Rosso
       }
-      else {
-        risultato -= this.numList[i];
-        this.colorList.push("class=\"color-red\"");
-        console.log(this.colorList)
-      }
-    }
-    this.selectColor()
-  }
-
-  selectColor() {
-    this.index = 0;
-    const blkNums = document.querySelector("#blknums");
-    if (blkNums) {
-      let content = '';
-      while (this.index < this.numList.length) {
-        const num = this.numList[this.index];
-        const colorClass = this.colorList[this.index];  // "class=\"color-blue\"" or "class=\"color-red\""
-
-        // Append the number with the appropriate color class
-        content += `<span class="${colorClass}">${num}</span> `;
-        this.index++;
-      }
-      blkNums.innerHTML = content; // Set the final content once
     }
   }
-  // Il colore dei numeri non si vede
 }
