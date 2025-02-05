@@ -1,0 +1,148 @@
+\documentclass[a4paper,12pt]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptername\ \thechapter}{20pt}{\Huge}
+
+\begin{document}
+	
+	\begin{titlepage}
+		\centering
+		\vspace*{3cm}
+		
+		{\Huge \textbf{Manuale Utente di Mnemosine}\par}
+		
+		\vspace{2cm}
+		
+		{\Large\itshape {\href{https://github.com/Ornitorink0}{Matteo Gurrieri (Ornitorink0)}}\par}
+		
+		\vfill
+		
+		\textsc{\href{https://github.com/is-sobrero/mnemosineFE}{is-sobrero/mnemosineFE}}
+		
+		\vspace{1cm}
+		
+		{\large Sobreweb\par}
+	\end{titlepage}
+	
+	\tableofcontents % Genera automaticamente l'indice dei contenuti
+	
+	\chapter*{Introduzione}
+	Il \textbf{morbo di Alzheimer} è una malattia neurodegenerativa progressiva che colpisce milioni di persone in tutto il mondo, deteriorando la memoria, il linguaggio, il pensiero e la capacità di svolgere le attività quotidiane. La diagnosi precoce e il monitoraggio continuo della sua evoluzione sono fondamentali per migliorare la qualità della vita dei pazienti e per consentire ai professionisti sanitari di offrire un supporto tempestivo ed efficace. Mnemosine è stato sviluppato proprio con questi obiettivi: fornire uno strumento digitale avanzato e intuitivo, capace di supportare la diagnosi e il monitoraggio continuo del morbo di Alzheimer, mettendo a disposizione informazioni cruciali per medici, familiari e ricercatori.
+	
+	Questo manuale si propone come una guida completa e dettagliata sull’utilizzo di Mnemosine. Ogni funzionalità del sistema è illustrata con chiarezza, accompagnata da esempi pratici e spiegazioni passo-passo. Che tu sia un medico specialista, un operatore sanitario, un familiare o un paziente, troverai in queste pagine tutte le informazioni necessarie per utilizzare al meglio la piattaforma e ottimizzare l’assistenza ai pazienti.
+	
+	\textbf{Mnemosine} è progettato per raccogliere, analizzare e visualizzare i dati cognitivi dell'utente nel tempo. Tramite test interattivi, strumenti di valutazione specifici e un’interfaccia utente semplice e accessibile, la piattaforma consente di monitorare in modo preciso e continuo le variazioni delle capacità cognitive. L’obiettivo non è solo facilitare il processo diagnostico, ma anche fornire un valido strumento di follow-up per i medici, consentendo loro di personalizzare le terapie in base all’evoluzione della malattia. Allo stesso tempo, i familiari possono avere una visione chiara e aggiornata dello stato del paziente, contribuendo a migliorare la gestione quotidiana della malattia.
+	
+	Nel corso di questo manuale, esploreremo temi fondamentali come:
+	\begin{itemize}
+		\item La registrazione e l'accesso al sistema
+		\item La gestione degli utenti e dei dati
+		\item L’uso dei test cognitivi per monitorare il progresso della malattia
+		\item L’interpretazione dei dati raccolti e l’analisi dei risultati
+		\item Le funzionalità avanzate e come sfruttarle per una gestione più efficiente
+	\end{itemize}
+	
+	Ciascuna sezione è progettata per essere chiara e immediatamente comprensibile, con l’ausilio di immagini, schemi esplicativi e suggerimenti pratici per ottimizzare l'uso della piattaforma. Ogni capitolo si concentrerà su aspetti specifici di Mnemosine, con l’obiettivo di offrirti una guida completa e facilmente consultabile.
+	
+	Mnemosine non è solo un software: è un potente strumento di supporto per migliorare la qualità della vita delle persone affette da Alzheimer e dei loro caregiver. La tecnologia può fare la differenza nella cura e nella gestione di malattie complesse come il morbo di Alzheimer, e Mnemosine si inserisce perfettamente in questo contesto, offrendo un sistema che raccoglie e presenta i dati in modo chiaro, riducendo l’incertezza e migliorando l’assistenza. Grazie alla sua capacità di monitorare l’evoluzione della malattia, Mnemosine aiuta a prendere decisioni terapeutiche più informate e tempestive, migliorando l’intero processo di cura.
+	
+	Concludendo, ti invitiamo a esplorare le funzionalità di Mnemosine con attenzione. La tecnologia e l'innovazione possono cambiare il modo in cui affrontiamo le malattie neurodegenerative, e con Mnemosine vogliamo contribuire a migliorare la diagnosi, il monitoraggio e la cura del morbo di Alzheimer, rendendo il percorso di assistenza più chiaro, personalizzato e accessibile a tutti.
+	
+	\chapter{L'Interfaccia Utente di Mnemosine}
+	L'\textbf{interfaccia utente} (\textbf{UI}) di Mnemosine è stata progettata per essere semplice, intuitiva e accessibile a tutti gli utenti, indipendentemente dal loro livello di esperienza con la tecnologia. La piattaforma è costruita con l'obiettivo di rendere l'interazione con il sistema il più fluida possibile, permettendo a medici, caregiver e pazienti di concentrarsi sugli aspetti più importanti del monitoraggio e della diagnosi del morbo di Alzheimer.
+	
+	In questo capitolo, esploreremo le principali sezioni dell'interfaccia, descrivendo ogni parte in dettaglio e fornendo istruzioni pratiche per un uso ottimale.
+	
+	\subsection{Login}
+	Il punto di partenza per ogni sessione di utilizzo di Mnemosine è il pannello di accesso. Quando accedi al sistema, verrai accolto da una schermata di login sicura che ti consente di inserire le tue credenziali. Se sei un nuovo utente, puoi registrarti facilmente attraverso un link dedicato nella stessa schermata.
+	
+	Il sistema Mnemosine è stato progettato per semplificare l'accesso e la gestione degli utenti, tenendo conto delle esigenze specifiche di medici, operatori sanitari e pazienti. In particolare, il processo di login e registrazione è pensato per evitare che i pazienti debbano creare un proprio account, in quanto il medico o l'operatore sanitario si occupa di registrare e gestire gli account degli utenti.
+	
+	La creazione di un account per il paziente viene effettuata esclusivamente dal medico o dall'operatore sanitario autorizzato, principalmente la \textbf{neurologa} o il \textbf{caregiver}. L'operatore sanitario è l'unico responsabile della registrazione e della gestione dell'account del paziente. Questa modalità garantisce una gestione centralizzata e sicura degli utenti, semplificando l'accesso per i pazienti e prevenendo errori o confusioni nel processo di registrazione.
+
+	Quando una neurologa o un operatore sanitario vuole aggiungere un nuovo paziente al sistema, accede alla pagina di registrazione. Qui, l'operatore dovrà compilare un modulo con i seguenti dati necessari per creare l'account:
+	\begin{itemize}
+		\item \textbf{Nome completo del paziente}
+		\item \textbf{Data di nascita}
+		\item \textbf{Contatto telefonico o email (se necessario per comunicazioni importanti)}
+		\item \textbf{Sessione programmata}: l'orario stabilito dal medico per la sessione di valutazione.
+	\end{itemize}newline
+	
+	Una volta completato il modulo con le informazioni richieste, l'operatore sanitario può cliccare su "\textit{Crea Account}". Il sistema genererà automaticamente un account per il paziente, senza che quest'ultimo debba intervenire in alcun modo.
+	
+	\section{Dashboard Principale}
+	Una volta effettuato il login, verrai indirizzato alla \textbf{Dashboard}, la quale fornisce una panoramica generale delle informazioni più rilevanti. La dashboard è progettata per essere il punto di riferimento principale, con un layout pulito e facilmente navigabile.
+	
+	\subsection{Panoramica del Paziente: Cliente}
+	Nella parte superiore della dashboard, troverai un riepilogo delle informazioni principali relative al paziente che stai monitorando. Qui sono visibili:
+	\begin{itemize}
+		\item Il nome del paziente
+		\item La data dell'ultimo aggiornamento
+		\item Un'icona che indica lo stato attuale (ad esempio, se il paziente è stabile o necessita di attenzione)
+		\item Un link per visualizzare la cronologia completa dei test
+	\end{itemize}
+	
+	\subsection{Navigazione e Sezioni}
+	Sulla sinistra, trovi il menu di navigazione che ti permette di accedere a diverse sezioni del sistema, come:
+	\begin{itemize}
+		\item \textbf{Test Cognitivi}: accedi ai test interattivi per monitorare le capacità cognitive.
+		\item \textbf{Storico Dati}: visualizza i risultati dei test precedenti e le analisi temporali.
+		\item \textbf{Gestione Pazienti}: per medici e caregiver, questa sezione permette di aggiungere o modificare pazienti.
+		\item \textbf{Impostazioni}: configura le preferenze dell'utente e le notifiche.
+	\end{itemize}
+	
+	Ogni sezione è progettata per essere facilmente navigabile, con un chiaro sistema di etichette e descrizioni.
+	
+	\section{Test Cognitivi}
+	Una delle funzionalità principali di Mnemosine è la sezione dedicata ai test cognitivi. Questa sezione consente di somministrare una serie di test per monitorare le capacità cognitive del paziente, come la memoria a breve termine, la logica e la percezione spaziale.
+	
+	\subsection{Sommario dei Test}
+	I test sono divisi in categorie, ognuna focalizzata su un aspetto diverso delle capacità cognitive:
+	\begin{itemize}
+		\item \textbf{Memoria}: test che misurano la capacità di memorizzare informazioni e ricordarle.
+		\item \textbf{Linguaggio}: test che valutano la comprensione e l’espressione verbale.
+		\item \textbf{Ragionamento Logico}: esercizi per misurare la capacità di risolvere problemi e pensare in modo astratto.
+		\item \textbf{Percezione Spaziale}: test che analizzano la capacità di orientamento e riconoscimento visivo.
+	\end{itemize}
+	
+	Ogni test è strutturato in modo interattivo, con domande o esercizi che il paziente deve completare. Il sistema fornisce un feedback immediato, segnalando eventuali difficoltà.
+	
+	\subsection{Avvio di un Test}
+	Per iniziare un test, basta cliccare sulla categoria di interesse e scegliere il test desiderato. Dopo aver selezionato un test, verrai guidato attraverso una serie di schermate che spiegano cosa fare. Durante il test, puoi monitorare i progressi e fare delle pause se necessario.
+	
+	\subsection{Risultati e Analisi}
+	Una volta completato un test, i risultati vengono automaticamente registrati e visualizzati nel \textbf{Grafico di Performance}, che ti permette di confrontare i risultati attuali con quelli precedenti. I dati sono presentati in modo chiaro, con linee temporali e tabelle che mostrano le variazioni nel tempo.
+	
+	\section{Storico Dati}
+	La sezione dello \textbf{Storico Dati} è fondamentale per monitorare l'evoluzione del paziente. In questa area, puoi visualizzare tutti i risultati dei test precedenti, analizzarli e identificare eventuali tendenze o segnali di deterioramento.
+	
+	\subsection{Visualizzazione dei Dati}
+	I dati sono presentati in formato grafico e tabellare. Puoi scegliere di visualizzare i risultati per singolo test o in aggregato per periodo di tempo (ad esempio, settimanale, mensile, annuale). Inoltre, puoi applicare filtri per visualizzare specifici test o categorie di dati.
+	
+	\subsection{Esportazione dei Dati}
+	Per supportare l'analisi e la documentazione, Mnemosine permette di esportare i dati in formato PDF o CSV. Questo ti consente di condividere facilmente i risultati con altri professionisti sanitari o di archiviare i dati per ulteriori analisi.
+	
+	\section{Impostazioni Utente}
+	Mnemosine offre una sezione di \textbf{Impostazioni} che consente di personalizzare l’esperienza utente. In questa sezione puoi:
+	\begin{itemize}
+		\item Aggiornare i dati personali e le credenziali.
+		\item Configurare le notifiche per essere avvisato sui test da completare o sui cambiamenti nei dati.
+		\item Personalizzare l’interfaccia grafica, scegliendo tra diversi temi di visualizzazione.
+	\end{itemize}
+	
+	Ogni modifica nelle impostazioni viene salvata automaticamente, e l’interfaccia si adatta subito alle preferenze selezionate.
+	
+	\section{Conclusioni sull'Interfaccia}
+	L’interfaccia utente di Mnemosine è progettata per essere non solo funzionale, ma anche facile da usare. Con un layout chiaro e intuitivo, e una navigazione semplice, Mnemosine si adatta a diverse tipologie di utenti, rendendo il processo di monitoraggio e diagnosi del morbo di Alzheimer più efficace e senza stress. Ogni sezione è progettata per essere accessibile, e l’intero sistema è stato pensato per ottimizzare il tempo dei medici e dei caregiver, offrendo al contempo una grande facilità d'uso.
+	
+	L'interfaccia di Mnemosine ha come obiettivo quello di ridurre al minimo il carico cognitivo per gli utenti, lasciando che il sistema si occupi di raccogliere e organizzare i dati in modo efficiente. Questo permette a medici e familiari di concentrarsi sugli aspetti clinici e pratici della cura del paziente.
+	
+\end{document}

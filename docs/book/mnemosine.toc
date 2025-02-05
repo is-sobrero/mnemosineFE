@@ -1,0 +1,14 @@
+\contentsline {chapter}{\numberline {1}L'Interfaccia Utente di Mnemosine}{7}{chapter.1}%
+\contentsline {subsection}{\numberline {1.0.1}Login}{7}{subsection.1.0.1}%
+\contentsline {section}{\numberline {1.1}Dashboard Principale}{8}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Panoramica del Paziente: Cliente}{8}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Navigazione e Sezioni}{8}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Test Cognitivi}{8}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Sommario dei Test}{9}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Avvio di un Test}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Risultati e Analisi}{9}{subsection.1.2.3}%
+\contentsline {section}{\numberline {1.3}Storico Dati}{9}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Visualizzazione dei Dati}{9}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Esportazione dei Dati}{9}{subsection.1.3.2}%
+\contentsline {section}{\numberline {1.4}Impostazioni Utente}{10}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Conclusioni sull'Interfaccia}{10}{section.1.5}%
