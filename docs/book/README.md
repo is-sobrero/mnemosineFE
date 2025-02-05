@@ -19,6 +19,12 @@ Questo documento è da intendere come se fosse una `Todo List`, quindi bisognere
 
 Per le modifiche al manuale, si prega di contattare l'autore, in quanto potrebbe influire sulla struttura generale.
 
+## Informazioni specifiche sullo sviluppo
+
+I documenti sono scritti in Latex con LiveTeX in un sistema Arch Linux. Per chi è pratico di Linux, non dovrebbe aver problemi a setuppare il progetto. Se non funziona, è consigliato seguire dei forum online su come installare i packages necessari per Latex in un sistema operativo differente.
+
+> NB: è consigliato usare un ambiente di sviluppo integrato a parte, come `TexStudio`. Indirizza la cartella del progetto a `mnemosineFE/docs/book/`, per evitare problemi con il codice sorgente e migliorare la leggibilità e lo sviluppo senza dover utilizzare ulteriori estensioni VSC o pacchetti esterni.
+
 ## Autori
 
 - [Matteo Gurrieri](matteogurri1@gmail.com)
