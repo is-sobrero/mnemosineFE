@@ -8,10 +8,9 @@ describe('Es102Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Es102Component]
-    })
-    .compileComponents();
-    
+      imports: [Es102Component],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(Es102Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +19,4 @@ describe('Es102Component', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-})
+});

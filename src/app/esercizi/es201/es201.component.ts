@@ -100,7 +100,7 @@ export class Es201Component implements OnInit {
     for (let i = 0; i < this.altezzaGriglia; i++) {
       const riga = elementi.slice(
         i * this.larghezzaGriglia,
-        (i + 1) * this.larghezzaGriglia
+        (i + 1) * this.larghezzaGriglia,
       );
       this.griglia.push(riga);
     }
@@ -136,12 +136,11 @@ export class Es201Component implements OnInit {
 
   nextStep() {
     this.step++;
-    if(this.step == 3) {
+    if (this.step == 3) {
       this.ES.nextExercise(201, {
         time: this.timeMillis,
         errors: this.errori,
       });
     }
   }
-
 }

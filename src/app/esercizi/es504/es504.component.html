@@ -1,7 +1,9 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>Puzzle</mat-card-title>
-    <mat-card-subtitle>Completa il puzzle con le immagini sottostanti</mat-card-subtitle>
+    <mat-card-subtitle
+      >Completa il puzzle con le immagini sottostanti</mat-card-subtitle
+    >
   </mat-card-header>
 
   <mat-card-content *ngIf="step === 1">
@@ -33,8 +35,8 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <p style="color: gray; font-size: 10px; float: left;">
-      {{(timeMillis / 1000).toFixed(0)}} s
+    <p style="color: gray; font-size: 10px; float: left">
+      {{ (timeMillis / 1000).toFixed(0) }} s
     </p>
   </mat-card-actions>
 </mat-card>

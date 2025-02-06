@@ -1,31 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardHeader,
-  MatCardTitle,
-  MatCardSubtitle,
-  MatCardContent,
-} from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
+import { MatCard, MatCardActions, MatCardTitle } from '@angular/material/card';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { ExerciseService } from '../../exercise.service';
 
 @Component({
   selector: 'app-es204',
   standalone: true,
-  imports: [
-    MatCard,
-    MatCardActions,
-    MatCardHeader,
-    MatCardTitle,
-    MatCardSubtitle,
-    MatCardContent,
-    MatButton,
-    NgFor,
-    NgIf,
-    CommonModule,
-  ],
+  imports: [MatCard, MatCardActions, MatCardTitle, NgFor, NgIf, CommonModule],
   templateUrl: './es204.component.html',
   styleUrls: ['./es204.component.scss'],
 })
@@ -34,7 +15,7 @@ export class Es204Component implements OnInit {
   timeMillis = 0;
   errori = 0;
 
-  constructor(private ES: ExerciseService) { }
+  constructor(private ES: ExerciseService) {}
 
   // Liste di elementi per ciascun livello
   elementiLivelloUno = [
@@ -70,19 +51,18 @@ export class Es204Component implements OnInit {
     this.livelloCorrente = this.ES.currentInfo().difficulty;
 
     this.targetLivelloUno = this.selezionaBersaglioCasuale(
-      this.elementiLivelloUno
+      this.elementiLivelloUno,
     );
     this.targetLivelloDue = this.selezionaBersaglioCasuale(
-      this.elementiLivelloDue
+      this.elementiLivelloDue,
     );
     this.targetLivelloTre = this.selezionaBersaglioCasuale(
-      this.elementiLivelloTre
+      this.elementiLivelloTre,
     );
 
     setInterval(() => {
       this.timeMillis += 100;
-    }
-    , 100);
+    }, 100);
   }
 
   // Metodo per selezionare il livello
@@ -105,7 +85,7 @@ export class Es204Component implements OnInit {
   }) {
     if (elemento.eBersaglio) {
       alert('Hai trovato il bersaglio!');
-      this.ES.nextExercise(204, {errors: this.errori, time: this.timeMillis});
+      this.ES.nextExercise(204, { errors: this.errori, time: this.timeMillis });
     } else {
       alert('Questo non è il bersaglio. Riprova!');
       this.errori++;

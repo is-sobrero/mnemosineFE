@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardSubtitle,
+  MatCardContent,
+} from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -21,13 +28,13 @@ import { ExerciseService } from '../../exercise.service';
     NgIf,
     CommonModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './es108.component.html',
-  styleUrls: ['./es108.component.scss']
+  styleUrls: ['./es108.component.scss'],
 })
 export class Es108Component implements OnInit {
-  constructor(private ES: ExerciseService) { }
+  constructor(private ES: ExerciseService) {}
   livello = 0;
   sequenzaNumeri: string[] = []; // Sequenza di numeri da memorizzare
   inputUtente: string[] = []; // Sequenza di numeri inseriti dall'utente
@@ -43,8 +50,7 @@ export class Es108Component implements OnInit {
 
     setInterval(() => {
       this.timeMillis += 100;
-    }
-    , 100);
+    }, 100);
   }
 
   // Inizia il gioco
@@ -58,10 +64,18 @@ export class Es108Component implements OnInit {
 
   // Genera una sequenza di numeri casuali in base al livello di difficoltà
   generaSequenza() {
-    const lunghezza = this.livello === 1 ? 3 : this.livello === 2 ? 4 : this.livello === 3 ? 6 : 3;
+    const lunghezza =
+      this.livello === 1
+        ? 3
+        : this.livello === 2
+        ? 4
+        : this.livello === 3
+        ? 6
+        : 3;
     this.sequenzaNumeri = [];
     for (let i = 0; i < lunghezza; i++) {
-      const numeroCasuale = this.numeri[Math.floor(Math.random() * this.numeri.length)];
+      const numeroCasuale =
+        this.numeri[Math.floor(Math.random() * this.numeri.length)];
       this.sequenzaNumeri.push(numeroCasuale);
     }
   }

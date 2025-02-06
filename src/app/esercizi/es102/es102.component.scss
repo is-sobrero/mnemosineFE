@@ -1,12 +1,12 @@
-.frutto{
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    margin-right: 10px;
-    margin-top: 10px;
+.frutto {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
-mat-card-content{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+mat-card-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
 }

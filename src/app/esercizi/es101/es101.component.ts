@@ -10,20 +10,18 @@ import {
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel, MatOption, MatSelect } from '@angular/material/select';
-import {LiveAnnouncer} from '@angular/cdk/a11y';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {signal} from '@angular/core';
-import {MatChipEditedEvent, MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
+import { MatFormField } from '@angular/material/select';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { signal } from '@angular/core';
+import {
+  MatChipEditedEvent,
+  MatChipInputEvent,
+  MatChipsModule,
+} from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { ExerciseService } from '../../exercise.service';
-import { constrainedMemory } from 'process';
-
-
-
 
 /* 
 Il modulo component, che rappresenta il componente, è decorato con il decoratore @Component.
@@ -57,16 +55,14 @@ export interface Word {
     NgFor,
     NgIf,
     HttpClientModule,
-    MatSelect,
-    MatOption,
-    MatLabel,
     MatFormField,
-    MatInput, MatFormFieldModule, MatChipsModule, MatIconModule
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
   ],
   templateUrl: './es101.component.html',
   styleUrls: ['./es101.component.scss'],
 })
-
 export class Es101Component implements OnInit {
   readonly addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -75,13 +71,12 @@ export class Es101Component implements OnInit {
   randomWord: string = '';
   fullList: string[] = [];
   wordList: string[] = [];
-  numParole: number[] = [0,3,5,8];
+  numParole: number[] = [0, 3, 5, 8];
   step: number = 1;
   difficulty: number = 0;
   errors = 0;
 
-  constructor(private EX: ExerciseService) { }
-  
+  constructor(private EX: ExerciseService) {}
 
   private http = inject(HttpClient);
 
@@ -96,13 +91,12 @@ export class Es101Component implements OnInit {
     }, 100);
 
     this.start();
-
   }
 
   // funzione che incrementa lo step e controlla se è arrivato al terzo step (nel caso controlla gli errori)
   nextStep() {
     this.step++;
-    if(this.step == 3) {
+    if (this.step == 3) {
       this.timeMillis = 0;
       this.checkErrors();
     }
@@ -110,17 +104,27 @@ export class Es101Component implements OnInit {
 
   // scarica il file txt e lo divide in un array di stringhe, le assegna random a randomWord e ne sceglie 5 a caso per la lista di parole
   generateWords(nWords: number) {
-    this.http.get('assets/exAssets/dizionarioitaliano1000.txt', {
+    this.http
+      .get('assets/exAssets/dizionarioitaliano1000.txt', {
         responseType: 'text',
-      }).subscribe((data) => {
+      })
+      .subscribe((data) => {
         this.fullList = data.split('\n');
-        this.randomWord = this.fullList[Math.floor(Math.random() * this.fullList.length)];
+        this.randomWord =
+          this.fullList[Math.floor(Math.random() * this.fullList.length)];
         for (var i = 0; i < nWords; i++) {
-          var word = this.fullList[Math.floor(Math.random() * this.fullList.length)];
+          var word =
+            this.fullList[Math.floor(Math.random() * this.fullList.length)];
           //QUESTO WHILE SERVE A FAR SI CHE LE PAROLE SIANO LUNGHE ALMENO 3 LETTERE E NON CONTENGANO LA LETTERA "À"
           //filter è ò à ù
-          while (word.length < 3 || word.includes('ò') || word.includes('à') || word.includes('ù')) {
-            word = this.fullList[Math.floor(Math.random() * this.fullList.length)];
+          while (
+            word.length < 3 ||
+            word.includes('ò') ||
+            word.includes('à') ||
+            word.includes('ù')
+          ) {
+            word =
+              this.fullList[Math.floor(Math.random() * this.fullList.length)];
           }
           this.wordList.push(word.toLocaleUpperCase());
         }
@@ -131,19 +135,19 @@ export class Es101Component implements OnInit {
   start() {
     this.step = 1;
     this.difficulty = this.EX.currentInfo().difficulty;
-    console.log("Difficolta: " + this.difficulty);
+    console.log('Difficolta: ' + this.difficulty);
     this.generateWords(this.numParole[this.difficulty]);
     this.errors = this.numParole[this.difficulty];
     console.log(this.wordList);
   }
-  
+
   // funzione che aggiunge una parola alla lista di chip
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
     // aggiunge il valore solo se non è vuoto e lo trasforma in maiuscolo
     if (value) {
-      this.words.update(words => [...words, {name: value.toUpperCase()}]);
+      this.words.update((words) => [...words, { name: value.toUpperCase() }]);
     }
 
     // Cancella il valore inserito
@@ -152,7 +156,7 @@ export class Es101Component implements OnInit {
 
   // funzione che rimuove una parola dalla lista di chip
   remove(fruit: Word): void {
-    this.words.update(words => {
+    this.words.update((words) => {
       const index = words.indexOf(fruit);
       if (index < 0) {
         return words;
@@ -175,7 +179,7 @@ export class Es101Component implements OnInit {
     }
 
     // modifica il valore della chip
-    this.words.update(words => {
+    this.words.update((words) => {
       const index = words.indexOf(word);
       if (index >= 0) {
         words[index].name = value;
@@ -187,12 +191,12 @@ export class Es101Component implements OnInit {
 
   // controlla gli errori e termina il gioco
   checkErrors() {
-    this.words.update(words => {
-      const paroleInserite = words.map(word => word.name);
+    this.words.update((words) => {
+      const paroleInserite = words.map((word) => word.name);
       console.log(paroleInserite);
       for (var i = 0; i < paroleInserite.length; i++) {
-        for(var j = 0; j < this.wordList.length; j++) {
-          console.log(paroleInserite[i], this.wordList[j]); 
+        for (var j = 0; j < this.wordList.length; j++) {
+          console.log(paroleInserite[i], this.wordList[j]);
           if (paroleInserite[i].trim() === this.wordList[j].trim()) {
             this.errors--;
             break;
@@ -201,8 +205,6 @@ export class Es101Component implements OnInit {
       }
       return words;
     });
-    this.EX.nextExercise(101, {errors: this.errors, time: this.timeMillis});
+    this.EX.nextExercise(101, { errors: this.errors, time: this.timeMillis });
   }
-  
-
 }

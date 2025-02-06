@@ -5,12 +5,9 @@ import {
   MatCardHeader,
   MatCardTitle,
   MatCardSubtitle,
-  MatCardContent,
 } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { ExerciseService } from '../../exercise.service';
-import { error } from 'console';
 
 @Component({
   selector: 'app-es203',
@@ -21,8 +18,6 @@ import { error } from 'console';
     MatCardHeader,
     MatCardTitle,
     MatCardSubtitle,
-    MatCardContent,
-    MatButton,
     NgFor,
     NgIf,
     CommonModule,
@@ -70,39 +65,41 @@ export class Es203Component implements OnInit {
     }
 
     // Helper function to check if a point is at least 10 pixels away from all existing points
-function isFarEnough(newPoint:any, points:any) {
-  for (const point of points) {
-    const distance = Math.sqrt(Math.pow(newPoint.x - point.x, 2) + Math.pow(newPoint.y - point.y, 2));
-    if (distance < 10) {
-      return false;
+    function isFarEnough(newPoint: any, points: any) {
+      for (const point of points) {
+        const distance = Math.sqrt(
+          Math.pow(newPoint.x - point.x, 2) + Math.pow(newPoint.y - point.y, 2),
+        );
+        if (distance < 10) {
+          return false;
+        }
+      }
+      return true;
     }
-  }
-  return true;
-}
 
-for (let i = 1; i <= numeroPunti; i++) {
-  const labelNum = i.toString(); // Converte il numero in stringa
-  const labelAlpha = String.fromCharCode(64 + i); // Converte il numero in lettera (1 -> 'A', 2 -> 'B', ecc.)
+    for (let i = 1; i <= numeroPunti; i++) {
+      const labelNum = i.toString(); // Converte il numero in stringa
+      const labelAlpha = String.fromCharCode(64 + i); // Converte il numero in lettera (1 -> 'A', 2 -> 'B', ecc.)
 
-  let newPoint;
-  do {
-    newPoint = {
-      x: Math.random() * 90, // Genera una posizione casuale su x
-      y: Math.random() * 90, // Genera una posizione casuale su y
-      label: labelNum, // Assegna il label numerico
-    };
-  } while (!isFarEnough(newPoint, this.punti));
-  this.punti.push(newPoint);
+      let newPoint;
+      do {
+        newPoint = {
+          x: Math.random() * 90, // Genera una posizione casuale su x
+          y: Math.random() * 90, // Genera una posizione casuale su y
+          label: labelNum, // Assegna il label numerico
+        };
+      } while (!isFarEnough(newPoint, this.punti));
+      this.punti.push(newPoint);
 
-  do {
-    newPoint = {
-      x: Math.random() * 90, // Genera una posizione casuale su x
-      y: Math.random() * 90, // Genera una posizione casuale su y
-      label: labelAlpha, // Assegna il label lettera
-    };
-  } while (!isFarEnough(newPoint, this.punti));
-  this.punti.push(newPoint);
-}
+      do {
+        newPoint = {
+          x: Math.random() * 90, // Genera una posizione casuale su x
+          y: Math.random() * 90, // Genera una posizione casuale su y
+          label: labelAlpha, // Assegna il label lettera
+        };
+      } while (!isFarEnough(newPoint, this.punti));
+      this.punti.push(newPoint);
+    }
     // Ordina i punti alternando numeri e lettere
     this.punti.sort((a, b) => a.label.localeCompare(b.label));
   }
@@ -116,7 +113,10 @@ for (let i = 1; i <= numeroPunti; i++) {
       // Controlla se tutti i punti sono stati uniti
       if (this.puntiUniti.length === this.punti.length) {
         this.livello++;
-        this.ES.nextExercise(203, {errors: this.errors, time: this.timeMillis});
+        this.ES.nextExercise(203, {
+          errors: this.errors,
+          time: this.timeMillis,
+        });
       }
     } else {
       this.messaggio = `Hai selezionato ${punto.label} invece di ${prossimoLabel}. Riprova!`;

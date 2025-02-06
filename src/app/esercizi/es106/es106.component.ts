@@ -13,7 +13,6 @@ import {
   MatCardContent,
 } from '@angular/material/card';
 import { __values } from 'tslib';
-import { time } from 'console';
 
 @Component({
   selector: 'app-es106',
@@ -33,15 +32,14 @@ import { time } from 'console';
   templateUrl: './es106.component.html',
   styleUrls: ['./es106.component.scss'],
 })
-
 export class Es106Component implements OnInit {
   cliccato = false;
   arraySequenza = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   arrayCliccato = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   arrayluci: string[] = [];
   buttonClicked: any[] = [];
-  spenta = "off";
-  accesa = "on";
+  spenta = 'off';
+  accesa = 'on';
   errori = 0;
   nAccensioni = 0;
   nCliccati = 0;
@@ -49,7 +47,7 @@ export class Es106Component implements OnInit {
   timeMillis: any = 0;
   timer: any;
   seed = 'abracadabra';
-  constructor(private EX: ExerciseService) { }
+  constructor(private EX: ExerciseService) {}
   ngOnInit(): void {
     var dif = this.EX.currentInfo().difficulty;
     if (dif == 1) {
@@ -93,35 +91,33 @@ export class Es106Component implements OnInit {
       this.avvioSequenza();
     }
 
-    if(this.step == 3){
+    if (this.step == 3) {
       setInterval(() => {
         this.timeMillis += 100;
-      }
-      , 100);
+      }, 100);
     }
 
     if (this.step == 4) {
       this.crossCheck();
       this.timer = this.timeMillis;
-      this.EX.nextExercise(106, {errors: this.errori, time: this.timer});
+      this.EX.nextExercise(106, { errors: this.errori, time: this.timer });
     }
   }
 
   avvioSequenza() {
     let index = 0;
     this.timer = setInterval(() => {
-
-      if(index < this.nAccensioni+ 1){
+      if (index < this.nAccensioni + 1) {
         for (let i = 0; i < 9; i++) {
           this.arrayluci[i] = this.spenta;
         }
-  
+
         this.arrayluci[this.arraySequenza[index]] = this.accesa;
       }
 
       index++;
 
-      if(index == this.nAccensioni + 1){
+      if (index == this.nAccensioni + 1) {
         clearInterval(this.timer);
         this.stepIncrease();
       }
