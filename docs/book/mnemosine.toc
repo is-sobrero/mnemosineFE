@@ -1,0 +1,23 @@
+\contentsline {chapter}{\numberline {1}Introduzione}{5}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Termini e Condizioni di Utilizzo}{7}{chapter.2}%
+\contentsline {subsection}{\numberline {2.0.1}Scopo della Piattaforma}{7}{subsection.2.0.1}%
+\contentsline {subsection}{\numberline {2.0.2}Accesso e Utilizzo del Servizio}{7}{subsection.2.0.2}%
+\contentsline {subsection}{\numberline {2.0.3}Responsabilità dell'Utente}{7}{subsection.2.0.3}%
+\contentsline {subsection}{\numberline {2.0.4}Protezione dei Dati e Privacy}{7}{subsection.2.0.4}%
+\contentsline {subsection}{\numberline {2.0.5}Limitazioni di Responsabilit`a}{7}{subsection.2.0.5}%
+\contentsline {subsection}{\numberline {2.0.6}Modifiche ai Termini e Condizioni}{8}{subsection.2.0.6}%
+\contentsline {subsection}{\numberline {2.0.7}Contatti}{8}{subsection.2.0.7}%
+\contentsline {chapter}{\numberline {3}L'Interfaccia Utente di Mnemosine}{9}{chapter.3}%
+\contentsline {subsection}{\numberline {3.0.1}Login e registrazione}{9}{subsection.3.0.1}%
+\contentsline {section}{\numberline {3.1}Dashboard Principale}{10}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Panoramica del Paziente}{10}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Navigazione e Sezioni}{11}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Test Cognitivi}{12}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Sommario dei Test}{12}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Avvio di un Test}{13}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Risultati e Analisi}{13}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Storico Dati}{13}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Visualizzazione dei Dati}{13}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Esportazione dei Dati}{13}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Impostazioni Utente}{13}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Conclusioni sull'Interfaccia}{14}{section.3.5}%
