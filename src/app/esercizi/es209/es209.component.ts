@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardSubtitle,
+  MatCardContent,
+} from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { NgFor, NgIf, CommonModule } from '@angular/common';
+import { NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ExerciseService } from '../../exercise.service';
@@ -16,20 +23,19 @@ import { ExerciseService } from '../../exercise.service';
     MatCardSubtitle,
     MatCardContent,
     MatButton,
-    NgFor,
     NgIf,
     CommonModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './es209.component.html',
-  styleUrl: './es209.component.scss'
+  styleUrl: './es209.component.scss',
 })
 export class Es209Component implements OnInit {
-  constructor(private ES: ExerciseService) { }
+  constructor(private ES: ExerciseService) {}
   livello = 0;
   sequenzaNumeri: string[] = []; // Sequenza di numeri da memorizzare
-  inputUtente: number = 0; // Sequenza di numeri inseriti dall'utente
+  inputUtente: number[] = []; // Sequenza di numeri inseriti dall'utente
   step = 1; // Step del gioco (1: mostra sequenza, 2: inserimento, 3: risultato)
   errori = 0; // Numero di errori commessi
   timeMillis = 0;
@@ -43,8 +49,7 @@ export class Es209Component implements OnInit {
 
     setInterval(() => {
       this.timeMillis += 100;
-    }
-    , 100);
+    }, 100);
   }
 
   // Inizia il gioco
@@ -52,18 +57,29 @@ export class Es209Component implements OnInit {
     this.step = 1;
     this.errori = 0;
     this.timeMillis = 0;
-    this.inputUtente = 0;
+    this.inputUtente = [];
     this.generaSequenza();
   }
 
   // Genera una sequenza di numeri casuali in base al livello di difficoltà
   generaSequenza() {
-    const lunghezza = this.livello === 1 ? 5 : this.livello === 2 ? 8 : this.livello === 3 ? 12 : 3;
+    const lunghezza =
+      this.livello === 1
+        ? 5
+        : this.livello === 2
+        ? 8
+        : this.livello === 3
+        ? 12
+        : 3;
     this.sequenzaNumeri = [];
     for (let i = 0; i < lunghezza; i++) {
-      var numeroCasuale:any = this.numeri[Math.floor(Math.random() * this.numeri.length)];
+      var numeroCasuale: any =
+        this.numeri[Math.floor(Math.random() * this.numeri.length)];
       //randomly multiply by -1 to make it negative, but keeping sum count positive
-      if (Math.random() < 0.5 && this.expectedResult - parseInt(numeroCasuale) >= 0) {
+      if (
+        Math.random() < 0.5 &&
+        this.expectedResult - parseInt(numeroCasuale) >= 0
+      ) {
         this.expectedResult -= parseInt(numeroCasuale);
         numeroCasuale = parseInt(numeroCasuale) * -1;
       } else {
@@ -84,7 +100,7 @@ export class Es209Component implements OnInit {
   // Aggiorna la risposta dell'utente
   aggiornaRisposta(indice: number, evento: Event) {
     const inputElement = evento.target as HTMLInputElement;
-    this.inputUtente[indice] = inputElement.value;
+    this.inputUtente[indice] = parseInt(inputElement.value, 10);
   }
 
   // Verifica la risposta dell'utente confrontandola con la sequenza corretta (al contrario)
@@ -92,7 +108,7 @@ export class Es209Component implements OnInit {
     const sequenzaCorretta = [...this.sequenzaNumeri].reverse();
     this.errori = 0;
     for (let i = 0; i < sequenzaCorretta.length; i++) {
-      if (sequenzaCorretta[i] !== this.inputUtente[i]) {
+      if (parseInt(sequenzaCorretta[i], 10) !== this.inputUtente[i]) {
         this.errori++;
       }
     }

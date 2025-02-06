@@ -1,28 +1,39 @@
+<!-- /********** * NON VA * **********/ -->
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>Attenzione alternata</mat-card-title>
-        <mat-card-subtitle>Somma i numeri scritti in <strong style="color:blue;">BLU</strong>, sottrai se scritti in <strong style="color:red;">ROSSO</strong></mat-card-subtitle>
-    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>Attenzione alternata</mat-card-title>
+    <mat-card-subtitle
+      >Somma i numeri scritti in <strong style="color: blue">BLU</strong>,
+      sottrai se scritti in
+      <strong style="color: red">ROSSO</strong></mat-card-subtitle
+    >
+  </mat-card-header>
 
-    <mat-card-content *ngIf="step === 1">
-        <h2 *ngFor=""></h2>
-    </mat-card-content>
+  <mat-card-content *ngIf="step === 1">
+    <!-- ??? -->
+  </mat-card-content>
 
-    <mat-card-content *ngIf="step === 2">
-        <h2>Inserisci il risultato</h2>
-        <mat-form-field>
-            <input matInput maxlength="1" (input)="">
-        </mat-form-field>
-    </mat-card-content>
+  <mat-card-content *ngIf="step === 2">
+    <h2>Inserisci il risultato</h2>
+    <mat-form-field>
+      <input matInput maxlength="1" />
+    </mat-form-field>
+  </mat-card-content>
 
-    <mat-card-content *ngIf="step === 3">
-        <p *ngIf="errori === 0">Bravo! Hai memorizzato correttamente la sequenza con 0 errori</p>
-        <p *ngIf="errori === 1">Hai commesso 1 errore</p>
-        <p *ngIf="errori > 1">Hai commesso {{ errori }} errori</p>
-    </mat-card-content>
+  <mat-card-content *ngIf="step === 3">
+    <p *ngIf="errori === 0">
+      Bravo! Hai memorizzato correttamente la sequenza con 0 errori
+    </p>
+    <p *ngIf="errori === 1">Hai commesso 1 errore</p>
+    <p *ngIf="errori > 1">Hai commesso {{ errori }} errori</p>
+  </mat-card-content>
 
-    <mat-card-actions>
-        <button mat-button (click)="stepSuccessivo()" [disabled]="step === 3">Avanti</button>
-        <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
-    </mat-card-actions>
+  <mat-card-actions>
+    <button mat-button (click)="stepSuccessivo()" [disabled]="step === 3">
+      Avanti
+    </button>
+    <p style="color: gray; font-size: 10px">
+      {{ (timeMillis / 1000).toFixed(0) }} s
+    </p>
+  </mat-card-actions>
 </mat-card>
