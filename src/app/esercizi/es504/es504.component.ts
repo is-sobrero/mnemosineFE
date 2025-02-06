@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ExerciseService } from '../../exercise.service';
-
 import {
   MatCard,
   MatCardActions,
@@ -12,9 +10,7 @@ import {
   MatCardSubtitle,
   MatCardContent,
 } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { range } from 'rxjs';
 
 interface PuzzleElement {
   id: any;
@@ -32,7 +28,6 @@ interface PuzzleElement {
     MatCardTitle,
     MatCardSubtitle,
     MatCardContent,
-    MatButton,
     MatInputModule,
     NgFor,
     NgIf,
@@ -42,7 +37,7 @@ interface PuzzleElement {
   styleUrls: ['./es504.component.scss'], // Corretto da "styleUrl"
 })
 export class Es504Component implements OnInit {
-  constructor(private ES: ExerciseService) { }
+  constructor(private ES: ExerciseService) {}
   step = 1;
   puzzle: PuzzleElement[] = []; // Array di riferimento per le immagini
   coveredImages: string = ''; // Immagine di copertura
@@ -147,8 +142,7 @@ export class Es504Component implements OnInit {
 
     setInterval(() => {
       this.timeMillis += 100;
-    }
-    , 100);
+    }, 100);
 
     switch (this.livello) {
       case 1:
@@ -183,7 +177,7 @@ export class Es504Component implements OnInit {
 
       default:
         console.error('Livello non valido');
-  }
+    }
 
     // Genera array di indici e mischialo
     this.arrIndici = Array.from({ length: this.nImages }, (_, i) => i);
@@ -220,35 +214,34 @@ export class Es504Component implements OnInit {
   selezionaCelle(index: number): void {
     // Controlla se la cella è selezionabile
     if (!this.puzzle[index].active) {
-      console.error("Cella non selezionabile!");
+      console.error('Cella non selezionabile!');
       return;
     }
 
-    console.log("Cella selezionata:", index);
-  
+    console.log('Cella selezionata:', index);
+
     // Recupera l'indice corretto della prossima cella da selezionare
-    const indexCorretto = this.arrIndici[this.nCovered - this.selezionabili.length];
- 
-    console.log("Indice corretto:", indexCorretto);
-    
+    const indexCorretto =
+      this.arrIndici[this.nCovered - this.selezionabili.length];
+
+    console.log('Indice corretto:', indexCorretto);
+
     // Verifica se l'indice selezionato è corretto
     if (this.puzzle[index].id === this.selezionabili[0].id) {
       this.puzzle[index].active = false; // Disattiva la cella selezionata
       this.puzzle[index].src = this.selezionabili[0].src; // Mostra l'immagine corretta
       this.selezionabili.shift(); // Rimuovi la cella dai selezionabili
 
-      console.log("Cella corretta selezionata!");
-  
+      console.log('Cella corretta selezionata!');
+
       // Passa allo step successivo se tutte le selezioni sono completate
       if (this.selezionabili.length === 0) {
         this.timer = this.timeMillis;
-        this.ES.nextExercise(504, {errors: this.errori, time: this.timer});
+        this.ES.nextExercise(504, { errors: this.errori, time: this.timer });
       }
     } else {
       this.errori++; // Incrementa il contatore degli errori
       alert("Errore! Hai selezionato l'indice sbagliato.");
     }
-      
   }
-  
 }

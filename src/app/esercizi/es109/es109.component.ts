@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCard, MatCardActions, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardContent } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardSubtitle,
+  MatCardContent,
+} from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -21,10 +28,10 @@ import { ExerciseService } from '../../exercise.service';
     NgIf,
     CommonModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './es109.component.html',
-  styleUrls: ['./es109.component.scss']
+  styleUrls: ['./es109.component.scss'],
 })
 export class Es109Component implements OnInit {
   livello = 1; // Livello di difficoltà (1, 2, o 3)
@@ -36,7 +43,7 @@ export class Es109Component implements OnInit {
 
   lettere = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Lettere
 
-  constructor(private ES: ExerciseService) { }
+  constructor(private ES: ExerciseService) {}
 
   ngOnInit(): void {
     this.iniziaGioco();
@@ -57,10 +64,18 @@ export class Es109Component implements OnInit {
 
   // Genera una sequenza di lettere casuali in base al livello di difficoltà
   generaSequenza() {
-    const lunghezza = this.livello === 1 ? 3 : this.livello === 2 ? 4 : this.livello === 3 ? 6 : 3;
+    const lunghezza =
+      this.livello === 1
+        ? 3
+        : this.livello === 2
+        ? 4
+        : this.livello === 3
+        ? 6
+        : 3;
     this.sequenzaLettere = [];
     for (let i = 0; i < lunghezza; i++) {
-      const numeroCasuale = this.lettere[Math.floor(Math.random() * this.lettere.length)];
+      const numeroCasuale =
+        this.lettere[Math.floor(Math.random() * this.lettere.length)];
       this.sequenzaLettere.push(numeroCasuale);
     }
   }

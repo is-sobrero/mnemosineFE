@@ -55,11 +55,11 @@ Il campo styleUrl: './es101.component.scss' è il percorso del file SCSS del com
 export class Es303Component implements OnInit {
   //il set di variaibli + "l'iniezione" di HttpClient, che ci consente di scaricare il file txt
   cliccato = false;
-  listaParole: string [] = [];
-  parola: string [] = [];
-  nNumeri: any [] = [];
-  arrayParole: string [] = [];
-  paroleInserite: string [] = [];
+  listaParole: string[] = [];
+  parola: string[] = [];
+  nNumeri: any[] = [];
+  arrayParole: string[] = [];
+  paroleInserite: string[] = [];
   nParole = 0;
   step = 1;
   errori = 0;
@@ -69,34 +69,34 @@ export class Es303Component implements OnInit {
 
   private http = inject(HttpClient);
 
-  constructor( private ES: ExerciseService) {}
+  constructor(private ES: ExerciseService) {}
 
   timeMillis = 0;
 
-  resetVariabili(){
+  resetVariabili() {
     this.errori = 0;
     this.step = 1;
-    for(let i=0; i<this.nParole; i++){
+    for (let i = 0; i < this.nParole; i++) {
       this.nNumeri.pop();
     }
   }
 
   ngOnInit(): void {
-    this.setParole(this.ES.currentInfo().difficulty*3);
+    this.setParole(this.ES.currentInfo().difficulty * 3);
     setInterval(() => {
       this.timeMillis += 100;
     }, 100);
   }
 
-  setParole( n: number){
+  setParole(n: number) {
     this.nParole = n;
-    this.step=2;
+    this.step = 2;
     this.iniziaEsercizio();
   }
 
-  iniziaEsercizio(){
-    for(let i=0; i<this.nParole; i++){
-      this.nNumeri.push(i+1);
+  iniziaEsercizio() {
+    for (let i = 0; i < this.nParole; i++) {
+      this.nNumeri.push(i + 1);
     }
 
     this.http
@@ -109,48 +109,48 @@ export class Es303Component implements OnInit {
           .map((parola) => parola.trim())
           .filter((parola) => parola.length > 0);
 
-          this.visualizzaParole();
+        this.visualizzaParole();
       });
   }
 
-  visualizzaParole(){
+  visualizzaParole() {
     this.arrayParole = this.listaParole;
-    this.arrayParole.sort(() =>  Math.random() - 0.5);
+    this.arrayParole.sort(() => Math.random() - 0.5);
     this.arrayParole = this.arrayParole.slice(0, this.nParole);
-    
-    for(let i=0; i<this.nParole; i++){
+
+    for (let i = 0; i < this.nParole; i++) {
       this.arrayParole[i] = this.arrayParole[i].toLocaleUpperCase();
     }
   }
 
-  aggiornaArray(parola:any, i:any){
-    this.paroleInserite[i-1] = parola.value;
+  aggiornaArray(parola: any, i: any) {
+    this.paroleInserite[i - 1] = parola.value;
   }
 
-  controlloParole(i:number){
+  controlloParole(i: number) {}
 
-  }
-
-  nextStep(){
+  nextStep() {
     this.step++;
-    if(this.step === 5) {
-      this.ES.nextExercise(303, {time: this.timeMillis, errors: this.errori});
+    if (this.step === 5) {
+      this.ES.nextExercise(303, { time: this.timeMillis, errors: this.errori });
     }
-    if(this.step == 4){
+    if (this.step == 4) {
       this.arrayParole.sort();
-      for(let i=0; i<this.nParole; i++){
-        if(this.paroleInserite[i] == null || this.paroleInserite[i] == "" || this.paroleInserite[i] == "undefined"){ 
+      for (let i = 0; i < this.nParole; i++) {
+        if (
+          this.paroleInserite[i] == null ||
+          this.paroleInserite[i] == '' ||
+          this.paroleInserite[i] == 'undefined'
+        ) {
           this.errori++;
           continue;
         }
-        this.paroleInserite[i] = this.paroleInserite[i].toLocaleUpperCase()
+        this.paroleInserite[i] = this.paroleInserite[i].toLocaleUpperCase();
         console.log(this.paroleInserite[i]);
-        if(this.paroleInserite[i] != this.arrayParole[i]){
+        if (this.paroleInserite[i] != this.arrayParole[i]) {
           this.errori++;
         }
-     }
+      }
     }
-
   }
-  
 }

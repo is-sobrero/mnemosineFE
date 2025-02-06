@@ -1,18 +1,30 @@
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>Unisci i punti alfanumerici</mat-card-title>
-        <mat-card-subtitle>Attenzione divisa e flessibilità cognitiva</mat-card-subtitle>
-    </mat-card-header>
-    <p style="color: blue;">Connetti i punti a partire dal numero 1 e poi la lettera A, e così via</p>
+  <mat-card-header>
+    <mat-card-title>Unisci i punti alfanumerici</mat-card-title>
+    <mat-card-subtitle
+      >Attenzione divisa e flessibilità cognitiva</mat-card-subtitle
+    >
+  </mat-card-header>
+  <p style="color: blue">
+    Connetti i punti a partire dal numero 1 e poi la lettera A, e così via
+  </p>
 
-    <div class="grid-container">
-        <div *ngFor="let punto of punti" class="grid-item" [ngClass]="{'selected': puntiUniti.includes(punto.label)}"
-            (click)="selezionaPunto(punto)" [style.top.%]="punto.y" [style.left.%]="punto.x">
-            {{ punto.label }}
-        </div>
+  <div class="grid-container">
+    <div
+      *ngFor="let punto of punti"
+      class="grid-item"
+      [ngClass]="{ selected: puntiUniti.includes(punto.label) }"
+      (click)="selezionaPunto(punto)"
+      [style.top.%]="punto.y"
+      [style.left.%]="punto.x"
+    >
+      {{ punto.label }}
     </div>
-    <mat-card-actions>
-        <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
-    </mat-card-actions>
-    <div *ngIf="messaggio">{{ messaggio }}</div>
+  </div>
+  <mat-card-actions>
+    <p style="color: gray; font-size: 10px">
+      {{ (timeMillis / 1000).toFixed(0) }} s
+    </p>
+  </mat-card-actions>
+  <div *ngIf="messaggio">{{ messaggio }}</div>
 </mat-card>

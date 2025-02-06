@@ -8,10 +8,9 @@ describe('Es205Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Es205Component]
-    })
-    .compileComponents();
-    
+      imports: [Es205Component],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(Es205Component);
     component = fixture.componentInstance;
     fixture.detectChanges();

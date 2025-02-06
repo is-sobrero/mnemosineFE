@@ -10,7 +10,7 @@ describe('Es106Component', () => {
     await TestBed.configureTestingModule({
       imports: [Es106Component],
     }).compileComponents();
-    
+
     fixture = TestBed.createComponent(Es106Component);
     component = fixture.componentInstance;
     fixture.detectChanges();

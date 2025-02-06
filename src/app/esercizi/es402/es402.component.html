@@ -1,30 +1,34 @@
 <mat-card class="main_content">
-    <mat-card-header>
-        <h2>Completa la parola ascoltata</h2>
-    </mat-card-header>
+  <mat-card-header>
+    <h2>Completa la parola ascoltata</h2>
+  </mat-card-header>
+  <mat-card-content>
     <mat-card-content>
-        <mat-card-content>
-            <p *ngIf="errors > 0">errori {{errors}}</p>
-            <audio src={{speech}} controls="controls" autoplay="autoplay">Il tuo browser non supporta questa funzione</audio>
-        </mat-card-content>
-
-        <mat-card-content *ngIf="current_state == 0" class="word_container">
-        </mat-card-content>
-        <mat-card-content class="word_container_full" style="display: none; flex-direction: column;">
-            <h2>Congratulazioni, hai completato la parola</h2>
-        </mat-card-content>
-
-        <form class="check_word" *ngIf="current_state == 0">
-            <mat-form-field>
-                <mat-label>Inserisci la parola giusta</mat-label>
-                <input matInput placeholder="" (keyup)="onKey($event)" class="input">
-            </mat-form-field>
-        </form>
+      <p *ngIf="errors > 0">errori {{ errors }}</p>
+      <audio src="{{ speech }}" controls="controls" autoplay="autoplay">
+        Il tuo browser non supporta questa funzione
+      </audio>
     </mat-card-content>
-    <mat-card-footer class="footer" *ngIf="current_state == 0">
-        <mat-card-actions>
-            <button (click)="checkContent()" mat-button>Controlla</button>
-    </mat-card-actions>
-    </mat-card-footer>
-</mat-card>
 
+    <mat-card-content *ngIf="current_state == 0" class="word_container">
+    </mat-card-content>
+    <mat-card-content
+      class="word_container_full"
+      style="display: none; flex-direction: column"
+    >
+      <h2>Congratulazioni, hai completato la parola</h2>
+    </mat-card-content>
+
+    <form class="check_word" *ngIf="current_state == 0">
+      <mat-form-field>
+        <mat-label>Inserisci la parola giusta</mat-label>
+        <input matInput placeholder="" (keyup)="onKey($event)" class="input" />
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-footer class="footer" *ngIf="current_state == 0">
+    <mat-card-actions>
+      <button (click)="checkContent()" mat-button>Controlla</button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>

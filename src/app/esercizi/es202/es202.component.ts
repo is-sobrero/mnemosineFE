@@ -5,9 +5,7 @@ import {
   MatCardHeader,
   MatCardTitle,
   MatCardSubtitle,
-  MatCardContent,
 } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { ExerciseService } from '../../exercise.service';
 
@@ -20,8 +18,6 @@ import { ExerciseService } from '../../exercise.service';
     MatCardHeader,
     MatCardTitle,
     MatCardSubtitle,
-    MatCardContent,
-    MatButton,
     NgFor,
     NgIf,
     CommonModule,
@@ -37,7 +33,7 @@ export class Es202Component implements OnInit {
   puntiUniti: number[] = [];
   messaggio = '';
 
-  constructor(private ES: ExerciseService) { }
+  constructor(private ES: ExerciseService) {}
 
   ngOnInit(): void {
     this.livello = this.ES.currentInfo().difficulty;
@@ -48,8 +44,7 @@ export class Es202Component implements OnInit {
 
     setInterval(() => {
       this.timeMillis += 100;
-    }
-    , 100);
+    }, 100);
   }
 
   generaPunti() {
@@ -98,13 +93,17 @@ export class Es202Component implements OnInit {
    */
   selezionaPunto(punto: { x: number; y: number; numero: number }) {
     const prossimoNumero = this.puntiUniti.length + 1; // Calcola il prossimo numero da unire
-    if (punto.numero === prossimoNumero) { // Verifica se il punto selezionato è il prossimo da unire
+    if (punto.numero === prossimoNumero) {
+      // Verifica se il punto selezionato è il prossimo da unire
       this.puntiUniti.push(punto.numero); // Aggiunge il numero al gruppo di punti uniti
 
       // Controlla se tutti i punti sono stati uniti
       if (this.puntiUniti.length === this.punti.length) {
         alert('Hai completato il livello!'); // Mostra un messaggio di conferma
-        this.ES.nextExercise(202, {errors: this.errori, time: this.timeMillis});
+        this.ES.nextExercise(202, {
+          errors: this.errori,
+          time: this.timeMillis,
+        });
       }
     } else {
       this.messaggio = `Hai selezionato il numero ${punto.numero} invece di ${prossimoNumero}. Riprova!`; // Mostra un messaggio di errore
