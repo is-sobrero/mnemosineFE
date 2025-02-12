@@ -1,10 +1,16 @@
-import { Component ,OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { MatRipple } from '@angular/material/core';
 import { ExerciseService } from '../exercise.service';
-import { N } from '@angular/cdk/keycodes';
 import { NgFor, NgIf } from '@angular/common';
 import { ApiService } from '../api.service';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle,
+} from '@angular/material/card';
 
 @Component({
   selector: 'app-home',
@@ -12,18 +18,22 @@ import { ApiService } from '../api.service';
   imports: [
     MatButton,
     NgIf,
-    NgFor
+    NgFor,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
+    MatCardActions,
+    MatCardContent,
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  constructor(private ES: ExerciseService,
-    private api: ApiService,
-  ) { }
+  constructor(private ES: ExerciseService, private api: ApiService) {}
 
   sessionPresent = true;
-  sessions:any = [];
+  sessions: any = [];
   userInfos: any;
 
   ngOnInit() {
@@ -42,7 +52,4 @@ export class HomeComponent implements OnInit {
   startSession(sessionId: string) {
     this.ES.startSession(sessionId);
   }
-  
-
-
 }

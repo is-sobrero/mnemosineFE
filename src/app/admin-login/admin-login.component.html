@@ -1,25 +1,39 @@
 <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-subtitle>Login per operatori</mat-card-subtitle>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Effettua il login con le tue credenziali</p>
-        <div>
-            <mat-form-field>
-                <input matInput [(ngModel)]="username" id="username" placeholder="Username"> 
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                <input matInput [(ngModel)]="password" id="password" placeholder="Password" type="password">
-            </mat-form-field>
-        </div>
-      <mat-divider></mat-divider>
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)="login()" mat-button>LOGIN</button>
-    </mat-card-actions>
-    <mat-card-footer>
-      <mat-progress-bar  *ngIf="false" mode="indeterminate"></mat-progress-bar>
-    </mat-card-footer>
-  </mat-card>
+  <mat-card-header class="login-header">
+    <mat-card-subtitle class="login-subtitle"
+      >OPERATORI</mat-card-subtitle
+    >
+    <mat-card-title class="login-title">Login</mat-card-title>
+    <mat-card-subtitle class="login-text">Effettua il login con le tue credenziali</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="login-content">
+    <div class="login-form">
+      <mat-form-field class="login-input">
+        <input
+          matInput
+          [(ngModel)]="username"
+          id="username"
+          placeholder="Username"
+          required
+        />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="login-input">
+        <input
+          matInput
+          [(ngModel)]="password"
+          id="password"
+          placeholder="Password"
+          type="password"
+          required
+        />
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="login-actions">
+    <button (click)="login()" mat-button class="login-button">Login</button>
+  </mat-card-actions>
+  <mat-card-footer class="login-footer">
+    <mat-progress-bar *ngIf="false" mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

@@ -1,28 +1,61 @@
-.card-container {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+.header {
+  margin: 4em 0;
+  font-size: 1.5em;
+  text-align: center;
 }
 
-.card {
-  flex: 0 0 auto;
-  width: 200px;
-  margin: 10px;
-  padding: 10px;
-  min-width: 320px;
-  border: 1px solid #ccc;
-  background-color: #fff;
+.title {
+  font-weight: 500;
+}
+
+.username {
+  background-color: #ffea00;
+  font-weight: 700;
+  padding: 5px 10px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.session-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2em;
+  padding: 20px;
+}
+
+.session-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 10px 10px 0 0 rgba(0, 0, 0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #000;
 }
 
 .card-no {
-    flex: 0 0 auto;
-    width: 200px;
-    margin: 10px;
-    padding: 10px;
-    min-width: 320px;
-    border: 3px dotted #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 3px dotted #000;
+}
+
+.session-card:hover {
+  box-shadow: 12px 12px 0px 0px black;
+  transform: translate(-2px, -2px);
+}
+
+.session-button {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 1.2em;
+  font-weight: 600;
+  border: 2px solid black;
+  border-radius: 2em;
+  padding: 10px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+}
+
+.session-button:hover {
+  background-color: #ffea00;
+  transform: scale(1.05);
 }
