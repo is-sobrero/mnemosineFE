@@ -17,5 +17,6 @@ export const routes: Routes = [
     {path: 'picker', component: PickerComponent, canActivate: [AuthGuard] },
     {path: 'esercizio',canActivate: [AuthGuard] , loadChildren: () => import('./esercizi/esercizi.routes').then(m => m.EsercizioRoutes)},
     {path: 'risultati',canActivate: [AuthGuard] , component: RisultatiComponent},
-    {path: 'dashboard',canActivate: [authAdminGuard] , component: AdminDashboardComponent}
+    {path: 'dashboard',canActivate: [authAdminGuard] , component: AdminDashboardComponent},
+    {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
