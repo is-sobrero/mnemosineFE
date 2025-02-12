@@ -1,18 +1,70 @@
-.route{
-    width: 100%;
-    margin: 0;
-    //center childs
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+:root {
+  --primary-color: #333;
+  --secondary-color: #666;
+  --tertiary-color: #999;
+  --background-color: #f0f0f0;
+  --font-family: 'Roboto', sans-serif;
+  --font-size: 16px;
+  --line-height: 1.5;
 }
 
-body{
-    background-color: #f0f0f0;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #f0f0f0;
+    --secondary-color: #ccc;
+    --tertiary-color: #999;
+    --background-color: #333;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.main-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  color: #333;
+  box-shadow: 0 1px 0 rgba(0, 0, 0);
+  padding: 0 8rem;
+  background-color: #fff;
 }
 
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+@media (min-width: 768px) {
+  .route {
+    max-width: 1000px;
+    margin: 0 auto;
   }
-  
+}
+
+@media screen and (max-width: 768px) {
+  .main-toolbar {
+    padding: 0 1rem;
+  }
+}

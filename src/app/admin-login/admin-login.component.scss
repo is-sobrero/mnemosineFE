@@ -1,0 +1,88 @@
+.example-card {
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 3em;
+  background-color: whitesmoke;
+  border-radius: 2em;
+  box-shadow: 8px 8px 0px black;
+  border: 2px solid black;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.example-card:hover {
+  box-shadow: 12px 12px 0px black;
+  transform: translate(-3px, -3px);
+}
+
+.login-header {
+  all: unset;
+  margin-bottom: 0.8rem;
+  padding: 0.5em;
+}
+
+.login-title {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 2em;
+  margin: 0.8rem 0 0.6rem 0;
+  text-align: start;
+}
+
+.login-subtitle {
+  background-color: #121212;
+  color: #fafafa;
+  width: fit-content;
+  height: fit-content;
+  padding: 0 0.5em 0 0.5em;
+}
+
+.login-input {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
+
+.login-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-link {
+  margin-top: 1em;
+  color: #0088ff;
+}
+
+.login-button {
+  width: 100%;
+  color: black;
+  margin-top: 1em;
+  font-size: 1.2em;
+  font-weight: 600;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 2em;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.login-button:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 768px) {
+  .example-card {
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    padding: 2em;
+    max-width: 90%;
+  }
+
+  .login-button {
+    border: 1px solid black;
+  }
+}

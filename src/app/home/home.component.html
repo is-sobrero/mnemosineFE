@@ -1,19 +1,41 @@
-<h1>Benvenuto, {{userInfos.username}}</h1>
-<p>Accedi ora alla tua sessione pianificata di esercizi</p>
+<header class="header">
+  <h1 class="title">
+    Sessioni di <span class="username">{{ userInfos.username }}</span>
+  </h1>
+</header>
 
-<div class="card-container" *ngFor="let session of sessions">
-  <div class="card" >
-    <!--first 3 chars-->
-    <h3>Sessione {{session.sessionName}}</h3>
-    <p *ngIf="session.exercises.length > 2" style="color: gray;">Include {{session.exercises.length}} esercizi</p>
-    <p *ngIf="session.exercises.length == 1" style="color: gray;">Include un solo esercizio.</p>
-    <button mat-raised-button (click)="startSession(session._id)">Inizia</button>
+<div class="session-container" *ngIf="sessions.length > 0">
+  <div class="session" *ngFor="let session of sessions">
+    <mat-card class="session-card">
+      <mat-card-header>
+        <mat-card-title>Sessione {{ session.sessionName }}</mat-card-title>
+        <mat-card-subtitle *ngIf="session.exercises.length > 2">
+          Include {{ session.exercises.length }} esercizi
+        </mat-card-subtitle>
+        <mat-card-subtitle *ngIf="session.exercises.length === 1">
+          Include un solo esercizio.
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          (click)="startSession(session._id)"
+          class="session-button"
+        >
+          Inizia
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>
 
-<div class="card-container" *ngIf="!sessionPresent">
-    <div class="card-no" >
-      <h3>Nessuna sessione disponibile</h3>
+<div class="session-container" *ngIf="sessions.length === 0">
+  <mat-card class="session-card card-no">
+    <mat-card-header>
+      <mat-card-title>Nessuna sessione disponibile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       <p>Ritorna più tardi o attendi informazioni dal tuo caregiver.</p>
-    </div>
+    </mat-card-content>
+  </mat-card>
 </div>
