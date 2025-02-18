@@ -1,0 +1,10 @@
+Mela Zuccherina,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871154/mnemosine/general_assets/fruits/jvbsr01xxhodbguwfqwt.jpg
+Banana,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871153/mnemosine/general_assets/fruits/fdfrtqcwndzdeujb4q3h.jpg
+Arancia,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871153/mnemosine/general_assets/fruits/aigbhgc3ssewunb84uqr.jpg
+Ciliegia,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871152/mnemosine/general_assets/fruits/augppnlq44z7yf36lymx.jpg
+Uva,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871152/mnemosine/general_assets/fruits/laf1ngcf5rx93kzllteq.jpg
+Ananas,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871151/mnemosine/general_assets/fruits/kxdfgbii7zxcutuaqax5.jpg
+Uva,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871151/mnemosine/general_assets/fruits/vticf14g58b9cmofwfnv.jpg
+Arancia,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871151/mnemosine/general_assets/fruits/eogkzskjt3uyxcqvyqpo.jpg
+Mela,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871151/mnemosine/general_assets/fruits/wxgi6q4z48aynjyij28a.jpg
+Berretta del Prete,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871152/mnemosine/general_assets/fruits/sblirzvbbai5fayrx1uc.jpg

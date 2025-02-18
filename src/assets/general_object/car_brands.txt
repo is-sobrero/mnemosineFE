@@ -1,0 +1,10 @@
+Mercedes,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871137/mnemosine/general_assets/car_brands/ndkuoggashlgfxgzvm59.jpg
+BMW,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871136/mnemosine/general_assets/car_brands/stxebgh8h4n4zijndzhp.jpg
+BMW,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871136/mnemosine/general_assets/car_brands/pgbfqpbcf3uekfzethhw.jpg
+Jaguar,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871136/mnemosine/general_assets/car_brands/j87clpqoapymdozhta0e.jpg
+Maserati,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871135/mnemosine/general_assets/car_brands/hyheojiya7hm5inqxcbj.jpg
+Porche,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871135/mnemosine/general_assets/car_brands/rowba5u4pz9fi6knmldx.jpg
+Maserati,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871135/mnemosine/general_assets/car_brands/eutdz89nphibrgj7giiu.jpg
+Volkswagen,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871135/mnemosine/general_assets/car_brands/loufrtu347e0e7tdsr9u.jpg
+Mercedes,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871134/mnemosine/general_assets/car_brands/o3qsv7pzsm8bmbub9ik4.jpg
+Audi,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871134/mnemosine/general_assets/car_brands/umu2ca9mawwbtcly0klw.jpg

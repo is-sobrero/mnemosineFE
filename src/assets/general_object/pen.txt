@@ -1,0 +1,10 @@
+Penna stilografica,Penna,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871210/mnemosine/general_assets/pens/f2djzfiayngoxbzzaowb.jpg
+Penna stilografica,Penna,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871209/mnemosine/general_assets/pens/pnzulo98wd4lexdyso6i.jpg
+Penna stilografica,Penna,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871209/mnemosine/general_assets/pens/tnxzmjm5bixurrstpu0k.jpg
+Penna stilografica,Penna,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871208/mnemosine/general_assets/pens/f3n0g4uq5gkjdtr4vg8q.jpg
+Penna stilografica,Penna,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871208/mnemosine/general_assets/pens/rmdmmuuvedtdca9jujzg.jpg
+Penna stilografica,Penna,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871207/mnemosine/general_assets/pens/kjzxonauu3kil3x8j4i4.jpg
+Penna,Piuma,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871207/mnemosine/general_assets/pens/hjjz388b7ip3xwlctoj8.jpg
+Penna stilografica,Penna,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871207/mnemosine/general_assets/pens/teoo5bpkdrghmi0vkqgs.jpg
+Penna,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871206/mnemosine/general_assets/pens/cqwrcukg5j4tlg9j1zbu.jpg
+Penna,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871206/mnemosine/general_assets/pens/ztusu98yf0milldbxn5t.jpg

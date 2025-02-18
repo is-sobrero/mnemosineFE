@@ -1,0 +1,10 @@
+Donnet Zedel Cl 6 torpedo,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871133/mnemosine/general_assets/car/ylrq6ts1h4tkkhtubbli.jpg
+Chevrolet Camaro SS,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871132/mnemosine/general_assets/car/qg91gef8nkjobuhyhlxm.png
+Ferrari F430,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871132/mnemosine/general_assets/car/qs2rxqr90alat6pbtvvu.jpg
+Pontiac GTO,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871131/mnemosine/general_assets/car/zd5vsgdsx6ilygn9scgm.jpg
+Dodge Challenger,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871131/mnemosine/general_assets/car/gyv8dugjxwnvnb4qyjwj.jpg
+DKW 1000 sp coupe,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871131/mnemosine/general_assets/car/to1wiuxehbtktaqlyr26.jpg
+Alfa Romeo Z8,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871131/mnemosine/general_assets/car/ev7nmisf76yvhcrexpp8.jpg
+Mercedes classe A,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871130/mnemosine/general_assets/car/xaltkh1xv9qojp19fom0.jpg
+Ford GT40,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871130/mnemosine/general_assets/car/e7zusjizgiuuljpj4dfs.jpg
+Mercedes AMG GT,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871130/mnemosine/general_assets/car/hbmqg8nrq6ohoirt2x6j.jpg

@@ -29,6 +29,7 @@ import { Es410Component } from './es410/es410.component';
 import { Es504Component } from './es504/es504.component';
 import { Es505Component } from './es505/es505.component';
 import { Es304Component } from './es304/es304.component';
+import { Es404Component } from './es404/es404.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -156,7 +157,10 @@ const routes: Routes = [
     path: '505',
     component: Es505Component,
   },
-
+  {
+    path: '404',
+    component: Es404Component,
+  },
 ];
 
 @NgModule({

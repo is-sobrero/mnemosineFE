@@ -1,0 +1,10 @@
+Casa moderna,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871149/mnemosine/general_assets/house/x1an8izweqauyhwlpzos.jpg
+Casa in pietra,Casa Rurale,Baita,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871149/mnemosine/general_assets/house/bsbtucuh65bgyboluxto.jpg
+Casa sul Lago,Baita di Legno,Casa di Legno,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871149/mnemosine/general_assets/house/plomngh6pjy8d8fensrp.jpg
+Casa,Casetta,Capanna,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871148/mnemosine/general_assets/house/anis6zpg5r5ltpx4x3kg.jpg
+Casa,Casetta,Fattoria,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871148/mnemosine/general_assets/house/dg6owbdm0cm7rtwtmqzc.jpg
+Casa,Villetta,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871147/mnemosine/general_assets/house/a2c4vvdy8sxom0asntsj.jpg
+Casa,Casa antica,Casa in pietra,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871147/mnemosine/general_assets/house/klcpfvglj0hjxocnzaod.jpg
+Casa,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871147/mnemosine/general_assets/house/fbxbxcrfehpegroc5s17.jpg
+Casa sul Lago,Palafitta,Casa in legno,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871147/mnemosine/general_assets/house/hon8ficd0yipie4cekdo.jpg
+Casa,Villa,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871147/mnemosine/general_assets/house/qnimv8hrfwg69kdmjuoq.jpg

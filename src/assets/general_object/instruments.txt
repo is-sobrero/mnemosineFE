@@ -1,0 +1,11 @@
+Chitarra,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871165/mnemosine/general_assets/instruments/dtddarjzkexqe844njh7.jpg
+Violino,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871163/mnemosine/general_assets/instruments/cbshykeshj32l53c7qzk.jpg
+Pianoforte,tastiera,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871163/mnemosine/general_assets/instruments/adzblfy9eqojdjenuvtb.jpg
+Chitarra Elettrica,Chitarra,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871163/mnemosine/general_assets/instruments/vdtmwwtafs9fqpq8eakk.jpg
+Sassofono,saxophone,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871162/mnemosine/general_assets/instruments/v9r7fwpsw4h9r0wfkrre.jpg
+Sassofono,saxophone,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871162/mnemosine/general_assets/instruments/blevhv8tpfirtl1rjbel.jpg
+Chitarra Elettrica,Chitarra,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871161/mnemosine/general_assets/instruments/urx7f7ot2w4di3tnm0kn.jpg
+Fisarmonica,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871161/mnemosine/general_assets/instruments/quunvzevnsxql5p11z4n.jpg
+Tromba,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871161/mnemosine/general_assets/instruments/dtpms9khhhn3qsgkwxoy.jpg
+Organo,Tastiera,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871161/mnemosine/general_assets/instruments/aphczqxyxqzwk8kz41am.jpg
+
