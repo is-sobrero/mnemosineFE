@@ -49,9 +49,9 @@ export class Es404Component {
   assets_path:string = "/assets/general_object/"
   show_image:number = 6;
 
-  low_fetch:number = 2;
-  mid_fetch:number = 4;
-  high_fetch:number = 6;
+  low_fetch:number = 3;
+  mid_fetch:number = 5;
+  high_fetch:number = 7;
 
   list_of_assets_name:string[] = [
     "clothes.txt",
@@ -69,8 +69,11 @@ export class Es404Component {
 
   display_link:string[] = [];
   display_obj:any[] = [];
-
+  display_obj_index:any[] = [];
   level = 1;
+  list_of_categories:any[] = [];
+  list_of_categories_tr:any[] = [];
+
 
   private list_of_assets:any[] = [];
 
@@ -92,11 +95,12 @@ export class Es404Component {
       case 3:
           this.fetch_high_level_array();
           break;
-
       default:
         console.log("Undefined level");
+        break;
     }
     this.load_assets();
+    this.prepare_class_ref();
   }
 
 
@@ -108,257 +112,156 @@ export class Es404Component {
      * */
   }
 
+  prepare_class_ref(){
+    let int = setInterval(()=>{
+      if(this.list_of_categories.length > 0){
+        for(let i=0;i<this.list_of_categories.length;i++){
+          switch(this.list_of_categories[i]){
+            case "car":
+              this.list_of_categories_tr.push("Automobili");
+              break;
+            case "car_brands":
+              this.list_of_categories_tr.push("Marche d'auto");
+              break;
+            case "clothes":
+              this.list_of_categories_tr.push("Abiti");
+              break;
+            case "flowers":
+              this.list_of_categories_tr.push("Fiori e Natura");
+              break;
+            case "fruits":
+              this.list_of_categories_tr.push("Frutti");
+              break;
+            case "glasses":
+              this.list_of_categories_tr.push("Occhiali");
+              break;
+            case "house":
+              this.list_of_categories_tr.push("Case");
+              break;
+            case "instruments":
+              this.list_of_categories_tr.push("Strumenti Musicali");
+              break;
+            case "keys":
+              this.list_of_categories_tr.push("Chiavi");
+              break;
+            case "pen":
+              this.list_of_categories_tr.push("Penne");
+              break;
+            case "tools":
+              this.list_of_categories_tr.push("Attrezzi");
+              break;
+            default:
+              console.log("Undefined reference");
+              break;
+          }
+        }
+        clearInterval(int);
+      }
+    }, 1);
+  }
+
+
   load_assets(){
-    let i=0;
-    let random_cursor;
-    let link;
-    let list_of_fetched_object:any[] = [];
     switch (this.level) {
       case 1:
-        let int1 = setInterval(()=>{
-          if(this.list_of_assets.length == this.low_fetch){
-            while(i<this.show_image){
-              random_cursor = Math.floor(Math.random()*this.low_fetch);
-              let d:Assets = this.list_of_assets.at(random_cursor);
-              let random_object = Math.floor(Math.random()*d.list.length);
-              if(!list_of_fetched_object.includes(random_object)){
-                link = d.list.at(random_object)?.split(",")?.at(3);
-                this.display_link[i] = link;
-                this.display_obj[i] = random_object;
-                i++;
-                list_of_fetched_object.push(random_object);
-              }
-            }
-            console.log("Display links: "+this.display_link);
-            console.log("Display relations: "+this.display_obj);
-            clearInterval(int1);
-          }
-        },1);
+        this.set_assets(this.low_fetch);
         break;
       case 2:
-          let int2 = setInterval(()=>{
-          if(this.list_of_assets.length == this.mid_fetch){
-            while(i<this.show_image){
-              random_cursor = Math.floor(Math.random()*this.mid_fetch);
-              let d:Assets = this.list_of_assets.at(random_cursor);
-              let random_object = Math.floor(Math.random()*d.list.length);
-              if(!list_of_fetched_object.includes(random_object)){
-                link = d.list.at(random_object)?.split(",")?.at(3);
-                this.display_link[i] = link;
-                this.display_obj[i] = random_object;
-                i++;
-                list_of_fetched_object.push(random_object);
-              }
-            }
-            console.log("Display links: "+this.display_link);
-            console.log("Display relations: "+this.display_obj);
-            clearInterval(int2);
-          }
-        },1);
-
+        this.set_assets(this.mid_fetch);
         break;
       case 3:
-        let int3 = setInterval(()=>{
-          if(this.list_of_assets.length == this.high_fetch){
-            while(i<this.show_image){
-              random_cursor = Math.floor(Math.random()*this.high_fetch);
-              let d:Assets = this.list_of_assets.at(random_cursor);
-              let random_object = Math.floor(Math.random()*d.list.length);
-              if(!list_of_fetched_object.includes(random_object)){
-                link = d.list.at(random_object)?.split(",")?.at(3);
-                this.display_link[i] = link;
-                this.display_obj[i] = random_object;
-                i++;
-                list_of_fetched_object.push(random_object);
-              }
-            }
-            console.log("Display links: "+this.display_link);
-            console.log("Display relations: "+this.display_obj);
-            clearInterval(int3);
-          }
-        },1);
-
+        this.set_assets(this.high_fetch);
         break;
       default:
         console.log("Undefined Level");
         break;
     }
-
   }
 
+  set_assets(n:number){
+    let i=0;
+    let random_cursor;
+    let list_of_fetched_object:any[] = [];
+    let int1 = setInterval(()=>{
+      if(this.list_of_assets.length == n){
+        while(i<this.show_image){
+          random_cursor = Math.floor(Math.random()*n);
+          let d:Assets = this.list_of_assets.at(random_cursor);
+          let category = d.name;
+          if(!this.list_of_categories.includes(category)){
+            this.list_of_categories.push(category)
+          }
+          let random_object = Math.floor(Math.random()*d.list.length);
+          if(!list_of_fetched_object.includes(random_object)){
+            let end:boolean = false;
+            let link:string = "nothing";
+            while(!end){
+              link = d.list.at(random_object).split(",").at(3);
+              if(link.length > 0){
+                end = true;
+              }
+            }
+            this.display_link[i] = link;
+            this.display_obj[i] = random_cursor;
+            this.display_obj_index[i] = random_object;
+            i++;
+            console.log("image: "+link);
+            list_of_fetched_object.push(random_object);
+          }
+        }
+        for(i=0;i<this.show_image;i++){
+          if(this.display_link){
+          }
+        }
+        console.log("Display links: "+this.display_link);
+        console.log("Display relations: "+this.display_obj);
+        console.log("Display relations index: "+this.display_obj_index);
+        console.log("List of fetched categories: "+this.list_of_categories);
+        clearInterval(int1);
+      }
+    },1);
+  }
 
   fetch_low_level_array() {
     let list_of_names:string[] = this.get_names(this.low_fetch);
-
-    let query1:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[0], {responseType: "text"}).subscribe(data =>{
-      query1 = data;
-    });
-    let check_ass1 = setInterval(()=>{
-      if(query1?.length > 0){
-        let assets_name:string = ""+ list_of_names[0].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query1.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass1);
+    if(list_of_names.length > 0){
+      for(let i=0;i<this.low_fetch;i++){
+        this.get_assets(list_of_names[i]);
       }
-    },1);
-
-    let query2:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[1], {responseType: "text"}).subscribe(data =>{
-      query2 = data;
-    });
-    let check_ass2 = setInterval(()=>{
-      if(query2?.length > 0){
-        let assets_name:string = ""+ list_of_names[1].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query2.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass2);
-      }
-    },1);
-
+    }
   }
   fetch_mid_level_array(){
     let list_of_names:string[] = this.get_names(this.mid_fetch);
-
-    let query1:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[0], {responseType: "text"}).subscribe(data =>{
-      query1 = data;
-    });
-    let check_ass1 = setInterval(()=>{
-      if(query1?.length > 0){
-        let assets_name:string = ""+ list_of_names[0].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query1.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass1);
+    if(list_of_names.length > 0){
+      for(let i=0;i<this.mid_fetch;i++){
+        this.get_assets(list_of_names[i]);
       }
-    },1);
-
-    let query2:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[1], {responseType: "text"}).subscribe(data =>{
-      query2 = data;
-    });
-    let check_ass2 = setInterval(()=>{
-      if(query2?.length > 0){
-        let assets_name:string = ""+ list_of_names[1].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query2.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass2);
-      }
-    },1);
-
-    let query3:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[2], {responseType: "text"}).subscribe(data =>{
-      query3 = data;
-    });
-    let check_ass3 = setInterval(()=>{
-      if(query3?.length > 0){
-        let assets_name:string = ""+ list_of_names[2].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query3.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass3);
-      }
-    },1);
-
-
-    let query4:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[3], {responseType: "text"}).subscribe(data =>{
-      query4 = data;
-    });
-    let check_ass4 = setInterval(()=>{
-      if(query4?.length > 0){
-        let assets_name:string = ""+ list_of_names[3].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query4.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass4);
-      }
-    },1);
+    }
   }
 
   fetch_high_level_array(){
     let list_of_names:string[] = this.get_names(this.high_fetch);
+    if(list_of_names.length > 0){
+      for(let i=0;i<this.high_fetch;i++){
+        this.get_assets(list_of_names[i]);
+      }
+    }
+  }
 
+  get_assets(name:string){
     let query1:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[0], {responseType: "text"}).subscribe(data =>{
+    this.connection.get(this.assets_path+name, {responseType: "text"}).subscribe(data =>{
       query1 = data;
     });
     let check_ass1 = setInterval(()=>{
       if(query1?.length > 0){
-        let assets_name:string = ""+ list_of_names[0].split('.')?.at(0) as string ;
+        let assets_name:string = ""+ name.split('.')?.at(0) as string ;
         let as:Assets = new Assets(assets_name, query1.split('\n'));
         this.list_of_assets.push(as);
         clearInterval(check_ass1);
       }
     },1);
-
-
-    let query2:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[1], {responseType: "text"}).subscribe(data =>{
-      query2 = data;
-    });
-    let check_ass2 = setInterval(()=>{
-      if(query2?.length > 0){
-        let assets_name:string = ""+ list_of_names[1].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query2.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass2);
-      }
-    },1);
-
-
-    let query3:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[2], {responseType: "text"}).subscribe(data =>{
-      query3 = data;
-    });
-    let check_ass3 = setInterval(()=>{
-      if(query3?.length > 0){
-        let assets_name:string = ""+ list_of_names[2].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query3.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass3);
-      }
-    },1);
-
-    let query4:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[3], {responseType: "text"}).subscribe(data =>{
-      query4 = data;
-    });
-    let check_ass4 = setInterval(()=>{
-      if(query4?.length > 0){
-        let assets_name:string = ""+ list_of_names[3].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query4.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass4);
-      }
-    },1);
-
-
-    let query5:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[4], {responseType: "text"}).subscribe(data =>{
-      query5 = data;
-    });
-    let check_ass5 = setInterval(()=>{
-      if(query5?.length > 0){
-        let assets_name:string = ""+ list_of_names[4].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query5.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass5);
-      }
-    },1);
-
-    let query6:string = "";
-    if(list_of_names.length > 0) this.connection.get(this.assets_path+list_of_names[5], {responseType: "text"}).subscribe(data =>{
-      query6 = data;
-    });
-    let check_ass6 = setInterval(()=>{
-      if(query6?.length > 0){
-        let assets_name:string = ""+ list_of_names[5].split('.')?.at(0) as string ;
-        let as:Assets = new Assets(assets_name, query6.split('\n'));
-        this.list_of_assets.push(as);
-        clearInterval(check_ass6);
-      }
-    },1);
   }
-
 
   get_names(n:number):string[]{
     let list_of_names:string[] = [];
@@ -378,6 +281,23 @@ export class Es404Component {
     }
     return list_of_names;
   }
+
+
+  drag(ev:any){
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  drop(ev:any){
+    ev.preventDefault();
+    let data = ev.dataTransfer.getData("text");
+    console.log(ev.target.innerHTML);
+    console.log("dragging element: "+data);
+  }
+
+  allowDrop(ev:any){
+    ev.preventDefault();
+  }
+
 }
 
 class Assets{
