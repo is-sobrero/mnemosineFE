@@ -27,15 +27,20 @@
         </div>
         <div class="drop_container">
           <div *ngIf="level == 1">
-            <p *ngFor="let c of list_of_categories_tr" class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)">{{c}}</p>
+            <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
           </div>
           <div *ngIf="level == 2">
-
+            <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
           </div>
           <div *ngIf="level == 3">
-
+            <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
           </div>
         </div>
+        <mat-card-footer class="footer" *ngIf="current_state == 0">
+          <mat-card-actions>
+            <button (click)="checkContent()" mat-button>Controlla</button>
+          </mat-card-actions>
+        </mat-card-footer>
     </mat-card-content>
 
     <mat-card-content *ngIf="current_state == 1">

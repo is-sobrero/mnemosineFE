@@ -53,6 +53,8 @@ export class Es404Component {
   mid_fetch:number = 5;
   high_fetch:number = 7;
 
+  DEBUG:boolean = true;
+
   list_of_assets_name:string[] = [
     "clothes.txt",
     "car.txt",
@@ -74,26 +76,25 @@ export class Es404Component {
   list_of_categories:any[] = [];
   list_of_categories_tr:any[] = [];
 
-
   private list_of_assets:any[] = [];
 
   ngOnInit(){
     setInterval(()=>{
       this.timeMillis += 500;
     }, 500);
-    this.level = this.ES.currentInfo().difficulty;
+    //this.level = this.ES.currentInfo().difficulty;
     console.log("Current level: "+this.level);
     if(this.level < 1 || this.level > 3 ) this.level = 1;
 
     switch(this.level){
       case 1:
-          this.fetch_low_level_array();
+          this.fetch_array(this.low_fetch);
           break;
       case 2:
-          this.fetch_mid_level_array();
+          this.fetch_array(this.mid_fetch);
           break;
       case 3:
-          this.fetch_high_level_array();
+          this.fetch_array(this.high_fetch);
           break;
       default:
         console.log("Undefined level");
@@ -103,52 +104,82 @@ export class Es404Component {
     this.prepare_class_ref();
   }
 
+  checkContent(){
+    let check:number = 0;
+    let not_passed:boolean = false;
+    for(let i=0;i<this.list_of_categories_tr.length;i++){
+      check += this.list_of_categories_tr[i].length - 1;
+    }
+    if(check != 6){
+      not_passed = true;
+      if(this.DEBUG) console.log("too many items");
+    }else{
+      for(let i=0;i<this.display_link.length;i++){
+        /*
+         *
+         *  check for the right things in the right place: check if the images is in the right container
+         *
+         *
+         * */
+      }
+    }
 
-  checkContent(dummy_index:number){
-    /*
-     *
-     *  create check content function
-     *
-     * */
+    if(not_passed){
+      this.errors+=1;
+    }else{
+      this.ES.nextExercise(404, { errors: this.errors , time: this.timeMillis });
+    }
   }
 
   prepare_class_ref(){
     let int = setInterval(()=>{
-      if(this.list_of_categories.length > 0){
+      if(this.list_of_categories?.length > 0){
         for(let i=0;i<this.list_of_categories.length;i++){
+          let s:string[] = [];
           switch(this.list_of_categories[i]){
             case "car":
-              this.list_of_categories_tr.push("Automobili");
+              s.push("Automobili");
+              this.list_of_categories_tr.push(s);
               break;
             case "car_brands":
-              this.list_of_categories_tr.push("Marche d'auto");
+              s.push("Marche d'auto");
+              this.list_of_categories_tr.push(s);
               break;
             case "clothes":
-              this.list_of_categories_tr.push("Abiti");
+              s.push("Abiti");
+              this.list_of_categories_tr.push(s);
               break;
             case "flowers":
-              this.list_of_categories_tr.push("Fiori e Natura");
+              s.push("Fiori e Natura");
+              this.list_of_categories_tr.push(s);
               break;
             case "fruits":
-              this.list_of_categories_tr.push("Frutti");
+              s.push("Frutti");
+              this.list_of_categories_tr.push(s);
               break;
             case "glasses":
-              this.list_of_categories_tr.push("Occhiali");
+              s.push("Occhiali");
+              this.list_of_categories_tr.push(s);
               break;
             case "house":
-              this.list_of_categories_tr.push("Case");
+              s.push("Case");
+              this.list_of_categories_tr.push(s);
               break;
             case "instruments":
-              this.list_of_categories_tr.push("Strumenti Musicali");
+              s.push("Strumenti Musicali");
+              this.list_of_categories_tr.push(s);
               break;
             case "keys":
-              this.list_of_categories_tr.push("Chiavi");
+              s.push("Chiavi");
+              this.list_of_categories_tr.push(s);
               break;
             case "pen":
-              this.list_of_categories_tr.push("Penne");
+              s.push("Penne");
+              this.list_of_categories_tr.push(s);
               break;
             case "tools":
-              this.list_of_categories_tr.push("Attrezzi");
+              s.push("Attrezzi");
+              this.list_of_categories_tr.push(s);
               break;
             default:
               console.log("Undefined reference");
@@ -157,7 +188,7 @@ export class Es404Component {
         }
         clearInterval(int);
       }
-    }, 1);
+    }, 500);
   }
 
 
@@ -183,7 +214,7 @@ export class Es404Component {
     let random_cursor;
     let list_of_fetched_object:any[] = [];
     let int1 = setInterval(()=>{
-      if(this.list_of_assets.length == n){
+      if(this.list_of_assets?.length > 0){
         while(i<this.show_image){
           random_cursor = Math.floor(Math.random()*n);
           let d:Assets = this.list_of_assets.at(random_cursor);
@@ -205,7 +236,7 @@ export class Es404Component {
             this.display_obj[i] = random_cursor;
             this.display_obj_index[i] = random_object;
             i++;
-            console.log("image: "+link);
+            if(this.DEBUG) console.log("image: "+link);
             list_of_fetched_object.push(random_object);
           }
         }
@@ -213,36 +244,21 @@ export class Es404Component {
           if(this.display_link){
           }
         }
-        console.log("Display links: "+this.display_link);
-        console.log("Display relations: "+this.display_obj);
-        console.log("Display relations index: "+this.display_obj_index);
-        console.log("List of fetched categories: "+this.list_of_categories);
+        if(this.DEBUG){
+          console.log("Display links: "+this.display_link);
+          console.log("Display relations: "+this.display_obj);
+          console.log("Display relations index: "+this.display_obj_index);
+          console.log("List of fetched categories: "+this.list_of_categories);
+        }
         clearInterval(int1);
       }
-    },1);
+    },500);
   }
 
-  fetch_low_level_array() {
-    let list_of_names:string[] = this.get_names(this.low_fetch);
+  fetch_array(n:number){
+    let list_of_names:string[] = this.get_names(n);
     if(list_of_names.length > 0){
-      for(let i=0;i<this.low_fetch;i++){
-        this.get_assets(list_of_names[i]);
-      }
-    }
-  }
-  fetch_mid_level_array(){
-    let list_of_names:string[] = this.get_names(this.mid_fetch);
-    if(list_of_names.length > 0){
-      for(let i=0;i<this.mid_fetch;i++){
-        this.get_assets(list_of_names[i]);
-      }
-    }
-  }
-
-  fetch_high_level_array(){
-    let list_of_names:string[] = this.get_names(this.high_fetch);
-    if(list_of_names.length > 0){
-      for(let i=0;i<this.high_fetch;i++){
+      for(let i=0;i<n;i++){
         this.get_assets(list_of_names[i]);
       }
     }
@@ -260,7 +276,7 @@ export class Es404Component {
         this.list_of_assets.push(as);
         clearInterval(check_ass1);
       }
-    },1);
+    },500);
   }
 
   get_names(n:number):string[]{
@@ -284,14 +300,32 @@ export class Es404Component {
 
 
   drag(ev:any){
-    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.setData("text/html", ev.target.id);
   }
 
   drop(ev:any){
     ev.preventDefault();
-    let data = ev.dataTransfer.getData("text");
-    console.log(ev.target.innerHTML);
-    console.log("dragging element: "+data);
+    let data = ev.dataTransfer.getData("text/html");
+    let p = data.indexOf(' src="');
+    let link:string = "";
+    let end:boolean = false;
+    for(let i=p+6;i<data.length && !end;i++){
+      if(data[i] != '"'){
+      link += data[i];
+      }else{
+        end = true;
+      }
+    }
+
+    for(let i=0;i<this.list_of_categories_tr.length;i++){
+      if(ev.target.innerHTML == this.list_of_categories_tr[i][0]){
+        this.list_of_categories_tr[i].push(link);
+        let len = this.list_of_categories_tr.length-1;
+      }
+    }
+    if(this.DEBUG){
+      console.log("link of dragged element: "+link);
+    }
   }
 
   allowDrop(ev:any){
