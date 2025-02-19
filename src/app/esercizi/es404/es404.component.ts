@@ -75,6 +75,7 @@ export class Es404Component {
   level = 1;
   list_of_categories:any[] = [];
   list_of_categories_tr:any[] = [];
+  list_of_counters:any[] = [];
 
   private list_of_assets:any[] = [];
 
@@ -101,7 +102,6 @@ export class Es404Component {
         break;
     }
     this.load_assets();
-    this.prepare_class_ref();
   }
 
   checkContent(){
@@ -114,81 +114,123 @@ export class Es404Component {
       not_passed = true;
       if(this.DEBUG) console.log("too many items");
     }else{
-      for(let i=0;i<this.display_link.length;i++){
-        /*
-         *
-         *  check for the right things in the right place: check if the images is in the right container
-         *
-         *
-         * */
+      let gen_counter:number = 0;
+      switch(this.level){
+        case 1:
+        case 2:
+          for(let i=0;i<this.display_link.length;i++){
+            for(let j=0;j<this.list_of_categories_tr.length;j++){
+              if(this.list_of_categories_tr[j].includes(this.display_link[i])){
+                let cname:string = this.list_of_categories[j];
+                let obj:Assets = this.list_of_assets[this.display_obj[i]];
+                if(cname == obj.name){
+                  if(this.DEBUG) console.log("Object is in the right position");
+                  gen_counter+=1;
+                }
+              }
+            }
+          }
+          if(gen_counter != 6){
+            not_passed = true;
+          }
+          break;
+        case 3:
+
+          break;
+        default:
+          console.log("Undefined check function related to the current level");
+          break;
       }
     }
 
     if(not_passed){
+      let cat_len:number = this.list_of_categories_tr.length;
+      let sc:any[] = [];
       this.errors+=1;
+      for(let i=0;i<cat_len;i++){
+        let s:string[] = [];
+        s.push(this.list_of_categories_tr[i][0]);
+        sc.push(s);
+      }
+      this.list_of_categories_tr = sc;
+      for(let i=0;i<this.list_of_categories.length;i++){
+          this.list_of_counters[i] = 0;
+      }
+      if(this.DEBUG) {
+        console.log("Clear 'list_of_categories_tr' and reconstuct container logic");
+        console.log("New container logic length: "+this.list_of_categories_tr.length);
+      }
     }else{
+      if(this.DEBUG) console.log("Congratulation you completed the exercise");
       this.ES.nextExercise(404, { errors: this.errors , time: this.timeMillis });
     }
   }
 
+  skip_exercise(){
+      /* this is a arbitrary number to indicate a skip case, this is not usable to track errors and such*/
+      this.errors = -1;
+      this.ES.nextExercise(404, { errors: this.errors , time: this.timeMillis });
+  }
+
   prepare_class_ref(){
-    let int = setInterval(()=>{
-      if(this.list_of_categories?.length > 0){
-        for(let i=0;i<this.list_of_categories.length;i++){
-          let s:string[] = [];
-          switch(this.list_of_categories[i]){
-            case "car":
-              s.push("Automobili");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "car_brands":
-              s.push("Marche d'auto");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "clothes":
-              s.push("Abiti");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "flowers":
-              s.push("Fiori e Natura");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "fruits":
-              s.push("Frutti");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "glasses":
-              s.push("Occhiali");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "house":
-              s.push("Case");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "instruments":
-              s.push("Strumenti Musicali");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "keys":
-              s.push("Chiavi");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "pen":
-              s.push("Penne");
-              this.list_of_categories_tr.push(s);
-              break;
-            case "tools":
-              s.push("Attrezzi");
-              this.list_of_categories_tr.push(s);
-              break;
-            default:
-              console.log("Undefined reference");
-              break;
-          }
-        }
-        clearInterval(int);
+    if(this.list_of_categories?.length > 0){
+      for(let i=0;i<this.list_of_categories.length;i++){
+        this.list_of_counters[i] = 0;
       }
-    }, 500);
+      for(let i=0;i<this.list_of_categories.length;i++){
+        let s:string[] = [];
+        switch(this.list_of_categories[i]){
+          case "car":
+            s.push("Automobili");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "car_brands":
+            s.push("Marche d'auto");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "clothes":
+            s.push("Abiti");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "flowers":
+            s.push("Fiori e Natura");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "fruits":
+            s.push("Frutti");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "glasses":
+            s.push("Occhiali");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "house":
+            s.push("Case");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "instruments":
+            s.push("Strumenti Musicali");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "keys":
+            s.push("Chiavi");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "pen":
+            s.push("Penne");
+            this.list_of_categories_tr.push(s);
+            break;
+          case "tools":
+            s.push("Attrezzi");
+            this.list_of_categories_tr.push(s);
+            break;
+          default:
+            console.log("Undefined reference");
+            break;
+        }
+      }
+    }
+
   }
 
 
@@ -251,8 +293,9 @@ export class Es404Component {
           console.log("List of fetched categories: "+this.list_of_categories);
         }
         clearInterval(int1);
+        this.prepare_class_ref();
       }
-    },500);
+    },50);
   }
 
   fetch_array(n:number){
@@ -276,7 +319,7 @@ export class Es404Component {
         this.list_of_assets.push(as);
         clearInterval(check_ass1);
       }
-    },500);
+    },50);
   }
 
   get_names(n:number):string[]{
@@ -320,7 +363,7 @@ export class Es404Component {
     for(let i=0;i<this.list_of_categories_tr.length;i++){
       if(ev.target.innerHTML == this.list_of_categories_tr[i][0]){
         this.list_of_categories_tr[i].push(link);
-        let len = this.list_of_categories_tr.length-1;
+        this.list_of_counters[i] += 1;
       }
     }
     if(this.DEBUG){

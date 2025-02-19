@@ -26,19 +26,33 @@
           </div>
         </div>
         <div class="drop_container">
-          <div *ngIf="level == 1">
+          <div *ngIf="level == 1 && list_of_categories_tr?.length == low_fetch">
             <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
           </div>
-          <div *ngIf="level == 2">
+          <div *ngIf="level == 2 && list_of_categories_tr?.length == mid_fetch">
             <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
           </div>
-          <div *ngIf="level == 3">
+          <div *ngIf="level == 3 && list_of_categories_tr?.length == high_fetch">
             <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
+          </div>
+        </div>
+        <div class="counter_container">
+          <div *ngIf="level == 1 && list_of_categories_tr?.length == low_fetch">
+            <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
+          </div>
+          <div *ngIf="level == 2 && list_of_categories_tr?.length == mid_fetch">
+            <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
+          </div>
+          <div *ngIf="level == 3 && list_of_categories_tr?.length == high_fetch">
+            <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
           </div>
         </div>
         <mat-card-footer class="footer" *ngIf="current_state == 0">
           <mat-card-actions>
-            <button (click)="checkContent()" mat-button>Controlla</button>
+            <button class="int_btn" (click)="checkContent()" mat-button>Controlla</button>
+          </mat-card-actions>
+          <mat-card-actions *ngIf="errors > 6">
+            <button class="int_btn" (click)="skip_exercise()" mat-button>Salta esercizio</button>
           </mat-card-actions>
         </mat-card-footer>
     </mat-card-content>
