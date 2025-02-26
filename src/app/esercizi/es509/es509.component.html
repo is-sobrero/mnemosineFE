@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Riconosci la sagoma</mat-card-title>
+      <mat-card-subtitle>Abilità visuo-percettive</mat-card-subtitle>
+    </mat-card-header>
+    <div class="immagine" *ngIf="step == 1 || step == 2"><img [src]="percorso"></div>
+    <mat-card-actions *ngIf="livello != 3 && step == 2">
+      <button *ngFor="let button of pulsanti;index as i" mat-button (click)="rispostapulsanti(pulsanti[i])">{{pulsanti[i]}}</button>
+    </mat-card-actions>
+    <mat-card-content *ngIf="step === 2 && livello == 3">
+      <mat-form-field>
+        <mat-label>Inserisci il soggetto dell'immagine</mat-label>
+        <input matInput (change)="aggiornaRisposte($event.target)" />
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-content *ngIf="step === 3">
+      <p *ngIf="errori == 0">Bravo! Hai scelto la risposta corretta</p>
+      <p *ngIf="errori == 1">Hai sbagliato!</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="step==2 && livello!=3" (click)="stepIncrease()" mat-button>Avanti</button>
+      <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
+      </mat-card-actions>
+  </mat-card>
