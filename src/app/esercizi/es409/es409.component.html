@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Associazione di
+        parole</mat-card-title>
+    <mat-card-subtitle>Seleziona tutte parole
+        associate al campo mostrato</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content *ngIf="step === 1">
+    <h2>{{this.campo}}</h2>
+
+    <button *ngFor="let i of listParole" mat-button>{{listParole[i].word}}</button>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <p style="color: gray; font-size: 10px; float: left;">
+      {{(timeMillis / 1000).toFixed(0)}} s
+    </p>
+  </mat-card-actions>
+</mat-card>
