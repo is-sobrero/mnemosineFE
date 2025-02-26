@@ -31,6 +31,7 @@ import { Es504Component } from './es504/es504.component';
 import { Es505Component } from './es505/es505.component';
 import { Es506Component } from './es506/es506.component';
 import { Es304Component } from './es304/es304.component';
+import { Es208Component } from './es208/es208.component';
 import { Es509Component } from './es509/es509.component';
 
 const routes: Routes = [
@@ -162,6 +163,10 @@ const routes: Routes = [
   {
     path: '505',
     component: Es505Component,
+  },
+  {
+    path: '208',
+    component: Es208Component,
   },
   {
     path: '506',
