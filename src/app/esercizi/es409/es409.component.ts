@@ -64,67 +64,67 @@ export class Es409Component implements OnInit {
     switch(this.level){
       case 1:
         this.nParole = 3;
-        this.listCampi = ["scuola", "natura", "musica"];
+        this.listCampi = ["SCUOLA", "NATURA", "MUSICA"];
         this.listParole = [
-          {word: "matita", field: "scuola", active: true},
-          {word: "quaderno", field: "scuola", active: true},
-          {word: "lavagna", field: "scuola", active: true},
-          {word: "banco", field: "scuola", active: true},
-          {word: "lezione", field: "scuola", active: true},
-          {word: "albero", field: "natura", active: true},
-          {word: "fiore", field: "natura", active: true},
-          {word: "fiume", field: "natura", active: true},
-          {word: "montagna", field: "natura", active: true},
-          {word: "foglia", field: "natura", active: true},
-          {word: "nota", field: "musica", active: true},
-          {word: "strumento", field: "musica", active: true},
-          {word: "melodia", field: "musica", active: true},
-          {word: "ritmo", field: "musica"},
-          {word: "canzone", field: "musica", active: true},
+          {word: "MATITA", field: "SCUOLA", active: true},
+          {word: "QUADERNO", field: "SCUOLA", active: true},
+          {word: "LAVAGNA", field: "SCUOLA", active: true},
+          {word: "BANCO", field: "SCUOLA", active: true},
+          {word: "LEZIONE", field: "SCUOLA", active: true},
+          {word: "ALBERO", field: "NATURA", active: true},
+          {word: "FIORE", field: "NATURA", active: true},
+          {word: "FIUME", field: "NATURA", active: true},
+          {word: "MONTAGNA", field: "NATURA", active: true},
+          {word: "FOGLIA", field: "NATURA", active: true},
+          {word: "NOTA", field: "MUSICA", active: true},
+          {word: "STRUMENTO", field: "MUSICA", active: true},
+          {word: "MELODIA", field: "MUSICA", active: true},
+          {word: "RITMO", field: "MUSICA"},
+          {word: "CANZONE", field: "MUSICA", active: true},
         ];
       break;
 
       case 2:
         this.nParole = 3;
-        this.listCampi = ["mare", "astronomia", "cibo"];
+        this.listCampi = ["MARE", "ASTRONOMIA", "CIBO"];
         this.listParole = [
-          {word: "litorale", field: "mare", active: true},
-          {word: "marea", field: "mare", active: true},
-          {word: "scogliera", field: "mare", active: true},
-          {word: "onda", field: "mare", active: true},
-          {word: "battigia", field: "mare", active: true},
-          {word: "costellazione", field: "astronomia", active: true},
-          {word: "nebulosa", field: "astronomia", active: true},
-          {word: "orbita", field: "astronomia", active: true},
-          {word: "supernova", field: "astronomia", active: true},
-          {word: "eclissi", field: "astronomia", active: true},
-          {word: "sapore", field: "cibo", active: true},
-          {word: "aromi", field: "cibo", active: true},
-          {word: "condimento", field: "cibo", active: true},
-          {word: "pasto", field: "cibo", active: true},
-          {word: "digestione", field: "cibo", active: true},
+          {word: "LITORALE", field: "MARE", active: true},
+          {word: "MAREA", field: "MARE", active: true},
+          {word: "SCOGLIERA", field: "MARE", active: true},
+          {word: "ONDA", field: "MARE", active: true},
+          {word: "BATTIPAGLIA", field: "MARE", active: true},
+          {word: "COSTELLAZIONE", field: "ASTRONOMIA", active: true},
+          {word: "NEBULOSA", field: "ASTRONOMIA", active: true},
+          {word: "ORBITA", field: "ASTRONOMIA", active: true},
+          {word: "SUPERNOVA", field: "ASTRONOMIA", active: true},
+          {word: "ECLISSI", field: "ASTRONOMIA", active: true},
+          {word: "SAPORE", field: "CIBO", active: true},
+          {word: "AROMI", field: "CIBO", active: true},
+          {word: "CONDIMENTO", field: "CIBO", active: true},
+          {word: "PASTO", field: "CIBO", active: true},
+          {word: "DIGESTIONE", field: "CIBO", active: true},
         ];
       break;
 
       case 3:
         this.nParole = 5;
-        this.listCampi = ["medicina", "tecnologia", "geografia"];
+        this.listCampi = ["MEDICINA", "TECNOLOGIA", "GEOGRAFIA"];
         this.listParole = [
-          {word: "febbre", field: "medicina", active: true},
-          {word: "sintomo", field: "medicina", active: true},
-          {word: "cura", field: "medicina", active: true},
-          {word: "infezione", field: "medicina", active: true},
-          {word: "guarigione", field: "medicina", active: true},
-          {word: "rete", field: "tecnologia", active: true},
-          {word: "software", field: "tecnologia", active: true},
-          {word: "algoritmo", field: "tecnologia", active: true},
-          {word: "connessione", field: "tecnologia", active: true},
-          {word: "dispositivo", field: "tecnologia", active: true},
-          {word: "estuario", field: "geografia", active: true},
-          {word: "altopiano", field: "geografia", active: true},
-          {word: "canyon", field: "geografia", active: true},
-          {word: "montagna", field: "geografia", active: true},
-          {word: "tundra", field: "geografia", active: true},
+          {word: "FEBBRE", field: "MEDICINA", active: true},
+          {word: "SINTOMO", field: "MEDICINA", active: true},
+          {word: "CURA", field: "MEDICINA", active: true},
+          {word: "INFEZIONE", field: "MEDICINA", active: true},
+          {word: "GUARIGIONE", field: "MEDICINA", active: true},
+          {word: "RETE", field: "TECNOLOGIA", active: true},
+          {word: "SOFTWARE", field: "TECNOLOGIA", active: true},
+          {word: "ALGORITMO", field: "TECNOLOGIA", active: true},
+          {word: "CONNESSIONE", field: "TECNOLOGIA", active: true},
+          {word: "DISPOSITIVO", field: "TECNOLOGIA", active: true},
+          {word: "ESTUARIO", field: "GEOGRAFIA", active: true},
+          {word: "ALTOPIANO", field: "GEOGRAFIA", active: true},
+          {word: "CANYON", field: "GEOGRAFIA", active: true},
+          {word: "MONTAGNA", field: "GEOGRAFIA", active: true},
+          {word: "TUNDRA", field: "GEOGRAFIA", active: true},
         ];
       break;
     }
