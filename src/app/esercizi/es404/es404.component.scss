@@ -1,5 +1,6 @@
 *{
     text-align: center;
+    transition: all 0.3s ease;
 }
 
 p,
@@ -27,7 +28,7 @@ span
 
 .main_content{
   padding:3px;
-  size: 1.0;
+  size: 0.9;
 }
 
 
@@ -38,15 +39,15 @@ span
   width:400px;
   height:200px;
   border-radius: 5px;
-  padding:10px;
+  padding:0px;
   margin:10px;
+  overflow:hidden!important;
 }
 
 
 .drag_image{
   width:auto!important;
   height:100%;
-  overflow:hidden;
   border-radius:5px!important;
   box-shadow: 0 9px 7px rgb(0 0 0 / 0.1);
 }
@@ -59,6 +60,10 @@ span
   justify-content:center;
   align-content:center;
   flex-wrap:wrap;
+}
+
+.actived{
+  background-color: #38c238a0!important;
 }
 
 .counter_container{
@@ -75,36 +80,49 @@ span
   flex-direction:row;
   justify-content:center;
   flex-wrap:wrap;
-  margin-top:50px;
+  margin-top:25px;
 }
 
 
 .counter_container div{
-  margin:0px;
+  margin-top:0px;
 }
 
 
 .cat{
   margin:10px;
-  width: 200px;
-  height: 50px;
+  width: 150px;
+  height: auto;
   padding: 10px;
+
   border-radius:5px;
   box-shadow: 0 9px 7px rgb(0 0 0 / 0.1);
-  font-size:20px;
+  font-size:15px;
   text-align:center;
-  line-height:50px;
   border:2px solid #18181830;
+  background-color: #00000000
 }
 
 
+.draggable{
+  background-color: #00000060
+}
+
+
+.drag_container:hover,
+.drag_container:active{
+  opacity:0.6;
+}
+
+
+
 .counter{
-  margin:10px;
-  width: 200px;
+  width: 150px;
   height: auto;
   padding: 10px;
-  line-height:50px;
   font-size:15px;
+  margin: 10px;
+  border: 2px solid #00000000;
 }
 
 .footer{

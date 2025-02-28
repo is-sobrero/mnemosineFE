@@ -76,32 +76,42 @@ export class Es404Component {
   list_of_categories:any[] = [];
   list_of_categories_tr:any[] = [];
   list_of_counters:any[] = [];
-
+  gen_fetch_state:number = 0;
   private list_of_assets:any[] = [];
 
   ngOnInit(){
     setInterval(()=>{
       this.timeMillis += 500;
     }, 500);
-    //this.level = this.ES.currentInfo().difficulty;
+    this.level = this.ES.currentInfo().difficulty;
     console.log("Current level: "+this.level);
     if(this.level < 1 || this.level > 3 ) this.level = 1;
-
+    let clev = 0;
     switch(this.level){
       case 1:
-          this.fetch_array(this.low_fetch);
+          clev = this.low_fetch;
           break;
       case 2:
-          this.fetch_array(this.mid_fetch);
+          clev = this.mid_fetch;
           break;
       case 3:
-          this.fetch_array(this.high_fetch);
+          clev = this.high_fetch;
           break;
       default:
         console.log("Undefined level");
         break;
     }
-    this.load_assets();
+    const fetch: Promise<any> = new Promise((res,rej) => {
+        res(this.fetch_array(clev));
+    }).then((res) => {
+      let await_for_fetch = setInterval(()=>{
+        if(this.gen_fetch_state == clev){
+          this.load_assets(clev);
+          console.log("done");
+          clearInterval(await_for_fetch);
+        }
+      }, 1);
+    });
   }
 
   checkContent(){
@@ -118,6 +128,7 @@ export class Es404Component {
       switch(this.level){
         case 1:
         case 2:
+        case 3:
           for(let i=0;i<this.display_link.length;i++){
             for(let j=0;j<this.list_of_categories_tr.length;j++){
               if(this.list_of_categories_tr[j].includes(this.display_link[i])){
@@ -134,9 +145,6 @@ export class Es404Component {
             not_passed = true;
           }
           break;
-        case 3:
-
-          break;
         default:
           console.log("Undefined check function related to the current level");
           break;
@@ -144,9 +152,14 @@ export class Es404Component {
     }
 
     if(not_passed){
+      let cont = document.querySelectorAll(".counter");
+      cont.forEach((c) => {
+        c.classList.remove("actived");
+      });
       let cat_len:number = this.list_of_categories_tr.length;
       let sc:any[] = [];
       this.errors+=1;
+
       for(let i=0;i<cat_len;i++){
         let s:string[] = [];
         s.push(this.list_of_categories_tr[i][0]);
@@ -172,8 +185,9 @@ export class Es404Component {
       this.ES.nextExercise(404, { errors: this.errors , time: this.timeMillis });
   }
 
-  prepare_class_ref(){
-    if(this.list_of_categories?.length > 0){
+  prepare_class_ref(clev:number){
+    console.log("Preparing class translation reference");
+    if(this.list_of_categories.length == clev){
       for(let i=0;i<this.list_of_categories.length;i++){
         this.list_of_counters[i] = 0;
       }
@@ -230,11 +244,11 @@ export class Es404Component {
         }
       }
     }
-
   }
 
 
-  load_assets(){
+  load_assets(clev: number){
+    console.log("Loading assets");
     switch (this.level) {
       case 1:
         this.set_assets(this.low_fetch);
@@ -249,53 +263,48 @@ export class Es404Component {
         console.log("Undefined Level");
         break;
     }
+    this.prepare_class_ref(clev);
   }
 
   set_assets(n:number){
     let i=0;
     let random_cursor;
     let list_of_fetched_object:any[] = [];
-    let int1 = setInterval(()=>{
-      if(this.list_of_assets?.length > 0){
-        while(i<this.show_image){
-          random_cursor = Math.floor(Math.random()*n);
-          let d:Assets = this.list_of_assets.at(random_cursor);
-          let category = d.name;
-          if(!this.list_of_categories.includes(category)){
-            this.list_of_categories.push(category)
-          }
-          let random_object = Math.floor(Math.random()*d.list.length);
-          if(!list_of_fetched_object.includes(random_object)){
-            let end:boolean = false;
-            let link:string = "nothing";
-            while(!end){
-              link = d.list.at(random_object).split(",").at(3);
-              if(link.length > 0){
-                end = true;
-              }
-            }
-            this.display_link[i] = link;
-            this.display_obj[i] = random_cursor;
-            this.display_obj_index[i] = random_object;
-            i++;
-            if(this.DEBUG) console.log("image: "+link);
-            list_of_fetched_object.push(random_object);
-          }
-        }
-        for(i=0;i<this.show_image;i++){
-          if(this.display_link){
-          }
-        }
-        if(this.DEBUG){
-          console.log("Display links: "+this.display_link);
-          console.log("Display relations: "+this.display_obj);
-          console.log("Display relations index: "+this.display_obj_index);
-          console.log("List of fetched categories: "+this.list_of_categories);
-        }
-        clearInterval(int1);
-        this.prepare_class_ref();
+    while(i<this.show_image){
+      random_cursor = Math.floor(Math.random()*n);
+      let d:Assets = this.list_of_assets.at(random_cursor);
+      let category = d.name;
+      if(!this.list_of_categories.includes(category)){
+        this.list_of_categories.push(category)
       }
-    },50);
+      let random_object = Math.floor(Math.random()*d.list.length);
+      if(!list_of_fetched_object.includes(random_object)){
+        let end:boolean = false;
+        let link:string = "nothing";
+        while(!end){
+          link = d.list.at(random_object).split(",").at(3);
+          if(link.length > 0){
+            end = true;
+          }
+        }
+        this.display_link[i] = link;
+        this.display_obj[i] = random_cursor;
+        this.display_obj_index[i] = random_object;
+        i++;
+        if(this.DEBUG) console.log("image: "+link);
+        list_of_fetched_object.push(random_object);
+      }
+    }
+    for(i=0;i<this.show_image;i++){
+      if(this.display_link){
+      }
+    }
+    if(this.DEBUG){
+      console.log("Display links: "+this.display_link);
+      console.log("Display relations: "+this.display_obj);
+      console.log("Display relations index: "+this.display_obj_index);
+      console.log("List of fetched categories: "+this.list_of_categories);
+    }
   }
 
   fetch_array(n:number){
@@ -307,19 +316,27 @@ export class Es404Component {
     }
   }
 
+
+  updateState(){
+    this.gen_fetch_state += 1;
+  }
+
   get_assets(name:string){
     let query1:string = "";
-    this.connection.get(this.assets_path+name, {responseType: "text"}).subscribe(data =>{
-      query1 = data;
-    });
-    let check_ass1 = setInterval(()=>{
-      if(query1?.length > 0){
+    const connect_status:Promise<any> = new Promise((res,rej) => {
+      this.connection.get(this.assets_path+name, {responseType: "text"}).subscribe(data =>{
+        query1 = data;
+        res(true);
+      });
+    }).then((res)=>{
+      if(res){
         let assets_name:string = ""+ name.split('.')?.at(0) as string ;
+        console.log("fetching complete for the asset named: ", assets_name);
         let as:Assets = new Assets(assets_name, query1.split('\n'));
         this.list_of_assets.push(as);
-        clearInterval(check_ass1);
+        this.updateState();
       }
-    },50);
+    });
   }
 
   get_names(n:number):string[]{
@@ -348,6 +365,7 @@ export class Es404Component {
 
   drop(ev:any){
     ev.preventDefault();
+    ev.target.classList.add("actived");
     let data = ev.dataTransfer.getData("text/html");
     let p = data.indexOf(' src="');
     let link:string = "";
