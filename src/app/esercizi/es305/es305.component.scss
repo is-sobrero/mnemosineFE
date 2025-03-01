@@ -1,0 +1,48 @@
+.card {
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .risultato {
+    width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .problema-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .problema {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .opzioni-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .opzioni-btn {
+    padding: 15px;
+    font-size: 18px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+  }
+  
+  .option-btn:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .timer {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-top: 20px;
+  }
