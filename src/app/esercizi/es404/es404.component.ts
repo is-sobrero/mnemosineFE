@@ -54,6 +54,7 @@ export class Es404Component {
   high_fetch:number = 7;
 
   DEBUG:boolean = true;
+  show_options:boolean = false;
 
   list_of_assets_name:string[] = [
     "clothes.txt",
@@ -76,7 +77,7 @@ export class Es404Component {
   list_of_categories:any[] = [];
   list_of_categories_tr:any[] = [];
   list_of_counters:any[] = [];
-  gen_fetch_state:number = 0;
+  current_fetched = 0;
   private list_of_assets:any[] = [];
 
   ngOnInit(){
@@ -84,6 +85,7 @@ export class Es404Component {
       this.timeMillis += 500;
     }, 500);
     this.level = this.ES.currentInfo().difficulty;
+    //this.level = 1;
     console.log("Current level: "+this.level);
     if(this.level < 1 || this.level > 3 ) this.level = 1;
     let clev = 0;
@@ -101,16 +103,17 @@ export class Es404Component {
         console.log("Undefined level");
         break;
     }
+
     const fetch: Promise<any> = new Promise((res,rej) => {
-        res(this.fetch_array(clev));
-    }).then((res) => {
-      let await_for_fetch = setInterval(()=>{
-        if(this.gen_fetch_state == clev){
-          this.load_assets(clev);
-          console.log("done");
-          clearInterval(await_for_fetch);
-        }
-      }, 1);
+      res(this.fetch_array(clev));
+    }).then((res:any) => {
+        let cicle = setInterval(()=>{
+          if(this.current_fetched == clev){
+            this.load_assets();
+            this.prepare_class_ref(clev);
+            clearInterval(cicle);
+          }
+        }, 10);
     });
   }
 
@@ -180,14 +183,12 @@ export class Es404Component {
   }
 
   skip_exercise(){
-      /* this is a arbitrary number to indicate a skip case, this is not usable to track errors and such*/
+      /* this is a arbitrary number to indicate a skip case, this is not usable to track errors and such and may change in future backend architecture update */
       this.errors = -1;
       this.ES.nextExercise(404, { errors: this.errors , time: this.timeMillis });
   }
 
   prepare_class_ref(clev:number){
-    console.log("Preparing class translation reference");
-    if(this.list_of_categories.length == clev){
       for(let i=0;i<this.list_of_categories.length;i++){
         this.list_of_counters[i] = 0;
       }
@@ -243,12 +244,11 @@ export class Es404Component {
             break;
         }
       }
-    }
+    this.show_options = true;
   }
 
 
-  load_assets(clev: number){
-    console.log("Loading assets");
+  load_assets(){
     switch (this.level) {
       case 1:
         this.set_assets(this.low_fetch);
@@ -263,7 +263,6 @@ export class Es404Component {
         console.log("Undefined Level");
         break;
     }
-    this.prepare_class_ref(clev);
   }
 
   set_assets(n:number){
@@ -317,25 +316,17 @@ export class Es404Component {
   }
 
 
-  updateState(){
-    this.gen_fetch_state += 1;
-  }
-
   get_assets(name:string){
-    let query1:string = "";
     const connect_status:Promise<any> = new Promise((res,rej) => {
       this.connection.get(this.assets_path+name, {responseType: "text"}).subscribe(data =>{
-        query1 = data;
-        res(true);
+        res(data);
       });
     }).then((res)=>{
-      if(res){
         let assets_name:string = ""+ name.split('.')?.at(0) as string ;
-        console.log("fetching complete for the asset named: ", assets_name);
-        let as:Assets = new Assets(assets_name, query1.split('\n'));
+        var splitted_array:string[] = new String(res).split('\n');
+        let as:Assets = new Assets(assets_name, splitted_array);
+        this.current_fetched += 1;
         this.list_of_assets.push(as);
-        this.updateState();
-      }
     });
   }
 

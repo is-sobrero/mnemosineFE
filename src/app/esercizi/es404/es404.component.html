@@ -26,24 +26,24 @@
           </div>
         </div>
         <div class="drop_container">
-          <div *ngIf="level == 1 && list_of_categories_tr.length == low_fetch">
+          <div *ngIf="level == 1 && show_options">
             <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
           </div>
-          <div *ngIf="level == 2 && list_of_categories_tr.length == mid_fetch">
+          <div *ngIf="level == 2 && show_options">
             <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
           </div>
-          <div *ngIf="level == 3 && list_of_categories_tr.length == high_fetch">
+          <div *ngIf="level == 3 && show_options">
             <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
           </div>
         </div>
         <div class="counter_container">
-          <div *ngIf="level == 1 && list_of_categories_tr.length == low_fetch">
+          <div *ngIf="level == 1 && show_options">
             <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
           </div>
-          <div *ngIf="level == 2 && list_of_categories_tr.length == mid_fetch">
+          <div *ngIf="level == 2 && show_options">
             <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
           </div>
-          <div *ngIf="level == 3 && list_of_categories_tr.length == high_fetch">
+          <div *ngIf="level == 3 && show_options">
             <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
           </div>
         </div>
