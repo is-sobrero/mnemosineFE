@@ -1,0 +1,23 @@
+<mat-card class="main_content">
+    <mat-card-header>
+        <h1>Reazione visiva</h1>
+    </mat-card-header>
+    <mat-card-content *ngIf="current_state == 0">
+      <h2>
+        Premi la barra spaziatrice quando la barra in movimento si trova sopra la linea rossa
+      </h2>
+      <p *ngIf="errors > 0">errori: {{errors}}</p>
+
+
+      <div class="main_game_bar">
+
+      </div>
+
+
+      <mat-card-actions *ngIf="allow_skip == true">
+            <button class="int_btn" (click)="skip_exercise()" mat-button>Salta esercizio</button>
+      </mat-card-actions>
+    </mat-card-content>
+
+</mat-card>
+
