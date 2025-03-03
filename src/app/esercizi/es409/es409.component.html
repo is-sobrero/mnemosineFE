@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Associazione di
+        parole</mat-card-title>
+    <mat-card-subtitle>Seleziona tutte parole
+        associate al campo mostrato</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content *ngIf="step === 1 && (level === 1 || level === 2)">
+    <h2>{{this.campo}}</h2>
+
+    <div id="Buttons">
+      <button *ngFor="let i of listParole" mat-button [disabled]="i.active == false" (click)="i.active = false; checkErrors(i.field)">{{i.word}}</button>
+    </div>
+    <p><b>Parole selezionate: {{this.counter}} / {{this.temp}}</b></p>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="step === 1 && level === 3" style="width: 600px;">
+    <h2>{{this.campo}}</h2>
+
+    <div id="Buttons">
+      <button *ngFor="let i of listParole" mat-button [disabled]="i.active == false" (click)="i.active = false; checkErrors(i.field)">{{i.word}}</button>
+    </div>
+    <p><b>Parole selezionate: {{this.counter}} / {{this.temp}}</b></p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <p style="color: gray; font-size: 10px; float: left;">
+      {{(this.timeMillis / 1000).toFixed(0)}} s
+    </p>
+  </mat-card-actions>
+</mat-card>

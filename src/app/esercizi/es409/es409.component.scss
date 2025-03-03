@@ -1,0 +1,24 @@
+mat-card-content{
+    height: 200px;
+}
+
+button{
+    box-shadow: 0px 0px 5px black;
+}
+
+button:disabled{
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#Buttons{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+
