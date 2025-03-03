@@ -1,0 +1,10 @@
+Dahlia Pinnata,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871144/mnemosine/general_assets/flower/wejms5msdnzwleazgzxm.jpg
+Hepatica nobilis,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871145/mnemosine/general_assets/flower/l7205o2rlzahmlpjfehh.jpg
+Piombaggine,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871144/mnemosine/general_assets/flower/hzggfrcyrvdvhy2xbeec.jpg
+Anemone,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871144/mnemosine/general_assets/flower/tgm9wyyzpetl3ikpptl0.jpg
+Margherita,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871143/mnemosine/general_assets/flower/hjkkvf93rhzumikxcwzm.jpg
+Crocus,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871143/mnemosine/general_assets/flower/jwrdkwep7nuwonuniakm.jpg
+Ortensia,Ortensia dei Fioristi,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871143/mnemosine/general_assets/flower/nzqew4ljimh3sp2itccg.jpg
+Ranuncolo Asiatico,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871142/mnemosine/general_assets/flower/pv2krar7mkyuk4ojsitl.jpg
+Ortensia,Ortensia dei Fioristi,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871142/mnemosine/general_assets/flower/jzsouopyayotf5lpuzro.jpg
+Bellis Perennis,Pratolina,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871142/mnemosine/general_assets/flower/ienjctno1ewgy9c3rvpa.jpg

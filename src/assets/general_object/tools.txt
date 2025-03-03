@@ -1,0 +1,10 @@
+Punta Trapano,Trapano,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871215/mnemosine/general_assets/tools/z4gmke8zjkzznfgs11gg.jpg
+Utensili,Attrezzi,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871215/mnemosine/general_assets/tools/iv7d6hwgpkvgm3oe3ysy.jpg
+Smerigliatrice,flessibile,levigatrice,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871214/mnemosine/general_assets/tools/e15j9y5py5qenvh0rezg.jpg
+trapano,Avvitatore,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871214/mnemosine/general_assets/tools/gv5xbwqz2pzd1qjgvr2w.jpg
+Ascia,Accetta,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871213/mnemosine/general_assets/tools/ln3nefgaa6dsxmysgka4.jpg
+Tridente,Rastrello,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871213/mnemosine/general_assets/tools/kkbetyzech8q6dwmjqdi.jpg
+Cesoia,Tenaglia,Pinza,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871212/mnemosine/general_assets/tools/put7jlslbpsmvzamfu1b.jpg
+Martello,Mazza,Mazzetta,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871212/mnemosine/general_assets/tools/jjvkcrrj7ofqhb6kwzaa.jpg
+Pennello,Pennelli,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871212/mnemosine/general_assets/tools/b1sgcykjiqsk1vuapdm2.jpg
+Cacciaviti,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871211/mnemosine/general_assets/tools/q2razc5rb6kqvly1yehj.jpg

@@ -1,0 +1,10 @@
+Camicia,maglia,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871141/mnemosine/general_assets/clothes/ovaakvty1e6rmt83yhex.jpg
+Maglietta,Maglia,Tshirt,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871140/mnemosine/general_assets/clothes/jkrqhs7nif4nowlpsmic.jpg
+Camicia,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871140/mnemosine/general_assets/clothes/tmtqu1vwqombo59iwoph.jpg
+Maglione,Felpa,Maglia,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871139/mnemosine/general_assets/clothes/rny9npt8dhqsjarqqnus.jpg
+Completo,Giacca,Vestito,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871139/mnemosine/general_assets/clothes/g3faf9r5ckmf2nefdwuj.jpg
+Giubotto,Giacca,Cappotto,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871139/mnemosine/general_assets/clothes/kxeochubffvalij8jccc.jpg
+Camicia,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871139/mnemosine/general_assets/clothes/obad4u9e28zglsxi7dok.jpg
+Giubotto,Giacca,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871138/mnemosine/general_assets/clothes/mamssd9jrodyecxswsho.jpg
+Pantaloni,Jeans,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871138/mnemosine/general_assets/clothes/dloxr9zfsebwvgyupnqh.jpg
+Cintura,__,__,https://res.cloudinary.com/djjwizrmr/image/upload/v1739871138/mnemosine/general_assets/clothes/zhpge7jjbiivcftwgpcx.jpg

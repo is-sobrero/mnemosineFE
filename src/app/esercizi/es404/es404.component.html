@@ -1,0 +1,66 @@
+<mat-card class="main_content card">
+    <mat-card-header>
+        <h2>Che tipo di oggetto e'?</h2>
+    </mat-card-header>
+    <mat-card-content *ngIf="current_state == 0" class="main_content">
+        <p>Trascina con il tuo cursore l'oggetto nella posizione corretta</p>
+        <p *ngIf="errors>0">errori: {{errors}}</p>
+        <div class="container" *ngIf="display_link.length == 6">
+          <div class="drag_container">
+            <img class="drag_image" src={{display_link[0]}} id="img_0" draggable="true" (ondragstart)="drag($event)">
+          </div>
+          <div class="drag_container">
+            <img class="drag_image" src={{display_link[1]}} id="img_1" draggable="true" (ondragstart)="drag($event)">
+          </div>
+          <div class="drag_container">
+            <img class="drag_image" src={{display_link[2]}} id="img_2" draggable="true" (ondragstart)="drag($event)">
+          </div>
+          <div class="drag_container">
+            <img class="drag_image" src={{display_link[3]}} id="img_3" draggable="true" (ondragstart)="drag($event)">
+          </div>
+          <div class="drag_container">
+            <img class="drag_image" src={{display_link[4]}} id="img_4" draggable="true" (ondragstart)="drag($event)">
+          </div>
+          <div class="drag_container">
+            <img class="drag_image" src={{display_link[5]}} id="img_5" draggable="true" (ondragstart)="drag($event)">
+          </div>
+        </div>
+        <div class="drop_container">
+          <div *ngIf="level == 1 && show_options">
+            <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
+          </div>
+          <div *ngIf="level == 2 && show_options">
+            <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
+          </div>
+          <div *ngIf="level == 3 && show_options">
+            <p class="cat" (drop)="drop($event)" (dragover)="allowDrop($event)" *ngFor="let c of list_of_categories_tr">{{c[0]}}</p>
+          </div>
+        </div>
+        <div class="counter_container">
+          <div *ngIf="level == 1 && show_options">
+            <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
+          </div>
+          <div *ngIf="level == 2 && show_options">
+            <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
+          </div>
+          <div *ngIf="level == 3 && show_options">
+            <p class="counter" *ngFor="let c of list_of_counters">{{c}}</p>
+          </div>
+        </div>
+        <mat-card-footer class="footer" *ngIf="current_state == 0">
+          <mat-card-actions>
+            <button class="int_btn" (click)="checkContent()" mat-button>Controlla</button>
+          </mat-card-actions>
+          <mat-card-actions *ngIf="errors > 6">
+            <button class="int_btn" (click)="skip_exercise()" mat-button>Salta esercizio</button>
+          </mat-card-actions>
+        </mat-card-footer>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="current_state == 1">
+        <h1>Hai indovinato l'oggetto</h1>
+    </mat-card-content>
+    <mat-card-footer *ngIf="current_state == 1">
+        <h3>Hai commesso {{errors}} errori</h3>
+    </mat-card-footer>
+</mat-card>
