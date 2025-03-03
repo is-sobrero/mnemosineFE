@@ -20,6 +20,7 @@ import { Es301Component } from './es301/es301.component';
 import { Es302Component } from './es302/es302.component';
 import { Es303Component } from './es303/es303.component';
 import { Es307Component } from './es307/es307.component';
+import { Es308Component } from './es308/es308.component';
 import { Es401Component } from './es401/es401.component';
 import { Es407Component } from './es407/es407.component';
 import { Es408Component } from './es408/es408.component';
@@ -28,8 +29,11 @@ import { Es405Component } from './es405/es405.component';
 import { Es410Component } from './es410/es410.component';
 import { Es504Component } from './es504/es504.component';
 import { Es505Component } from './es505/es505.component';
+import { Es506Component } from './es506/es506.component';
 import { Es304Component } from './es304/es304.component';
 import { Es404Component } from './es404/es404.component';
+import { Es208Component } from './es208/es208.component';
+import { Es509Component } from './es509/es509.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -110,6 +114,10 @@ const routes: Routes = [
     component: Es307Component,
   },
   {
+    path: '308',
+    component: Es308Component,
+  },
+  {
     path: "401",
     component: Es401Component,
   },
@@ -160,6 +168,18 @@ const routes: Routes = [
   {
     path: '404',
     component: Es404Component,
+  },
+  {
+    path: '208',
+    component: Es208Component,
+  },
+  {
+    path: '506',
+    component: Es506Component,
+  },
+  {
+    path: '509',
+    component: Es509Component,
   },
 ];
 

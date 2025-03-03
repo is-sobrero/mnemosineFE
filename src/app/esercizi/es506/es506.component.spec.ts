@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Es209Component } from './es209.component';
+import { Es506Component } from './es506.component';
 
-describe('Es209Component', () => {
-  let component: Es209Component;
-  let fixture: ComponentFixture<Es209Component>;
+describe('Es506Component', () => {
+  let component: Es506Component;
+  let fixture: ComponentFixture<Es506Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Es209Component]
+      imports: [Es506Component]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Es209Component);
+    fixture = TestBed.createComponent(Es506Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
