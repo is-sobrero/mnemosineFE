@@ -1,24 +1,12 @@
-<mat-card *ngIf="step === 0" style="width: 300px; height: 400px;">
-    <mat-card-header>
-        <mat-card-title>Seleziona il Livello di Difficoltà</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <p style="text-align: center;">Scegli un livello:</p>
-        <div class="livelli-container">
-            <button class="livello" mat-button (click)="selezionaLivello(0)">Livello 1</button>
-            <button class="livello" mat-button (click)="selezionaLivello(1)">Livello 2</button>
-            <button class="livello" mat-button (click)="selezionaLivello(2)">Livello 3</button>
-        </div>
-    </mat-card-content>
-</mat-card>
-<mat-card *ngIf="step === 1">
+<mat-card>
     <mat-card-header>
         <mat-card-title>Trova le differenze</mat-card-title>
         <mat-card-subtitle>Attenzione e abilità visuo-percettive</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <p>Trova le differenze tra le due immagini:</p>
-        <p>Differenza: {{differenzeTrovate}} / {{totaleDifferenze}} </p>
+        <mat-card-subtitle>Cliccare sull'immagine di destra</mat-card-subtitle>
+        <p>Differenze: {{differenzeTrovate}} / {{totaleDifferenze}} </p>
         <div class="immagini-container">
             <img [src]="immagineSinistra" alt="Immagine sinistra">
             <button class="overlay-button" (click)="contaErrori()"></button>
@@ -37,9 +25,3 @@
     <mat-card-actions>
         <p style="color:gray; font-size: 10px">{{(timeMillis/1000).toFixed(0)}} s</p>
     </mat-card-actions>
-</mat-card>
-    <mat-card *ngIf="step === 2" style="width: 400px; height: 120px;">
-        <mat-card-content>
-        <p style="font-size: 20px; text-align: center;">Hai trovato tutte le differenze!<br> Ben fatto!</p>
-        </mat-card-content>
-    </mat-card>
