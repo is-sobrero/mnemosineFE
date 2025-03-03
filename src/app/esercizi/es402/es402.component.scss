@@ -1,0 +1,43 @@
+*{
+    text-align: center;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+a,
+span
+{
+    width: 100%;
+}
+
+
+.main_content{
+  transform:translateY(30%);
+}
+
+
+.word_to_reorder{
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.dif-selection{
+    margin-left: 7px!important;
+    scale: 0.8!important;
+}
+.win{
+    padding: 10px!important;
+}
+
+.footer{
+    margin-top:10px!important;
+}
+
+
+.main_content{
+  padding:20px;
+  size: 1.1;
+}

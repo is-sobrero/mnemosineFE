@@ -1,0 +1,67 @@
+mat-card {
+    margin: 10px;
+    padding: 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  mat-card-content {
+    text-align: center;
+  }
+  
+  div.livello{
+    height: 300px;
+    width: 50px;
+    margin: 0 auto;
+  }
+  
+  button.livello{
+    margin: 0 auto;
+    height: 50px;
+    width: 50px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 0px;
+    background-color: white;
+    font-size: 20px;
+  }
+
+  #contenitore{
+    padding: 0;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 210px;
+    height: 210px;
+  }
+
+  .luce-off, .luce{
+    border: 1px solid lightgray;
+    float: left;
+    border-radius: 5px;
+    margin: 10px;
+    height: 48px;
+    width: 48px;
+    background-color: white;
+  }
+
+  .luce-on{
+    border: 1px solid lightgray;
+    float: left;
+    border-radius: 5px;
+    margin: 10px;
+    height: 48px;
+    width: 48px;
+    background-color: #FF0;
+  }
+
+  button.luce:hover{
+    background-color: #FFFF00;
+    cursor: pointer;
+  }
+
+  button.luce:disabled{
+    background-color: #FFFF00;
+    cursor: not-allowed;
+  }

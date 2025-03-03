@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Ricorda le città</mat-card-title>
+    <mat-card-subtitle>Apprendimento e memorizzazione</mat-card-subtitle>
+  </mat-card-header>
+  <!-- step 1 -->
+  <mat-card-content *ngIf="(step === 1)" style="height: 150px;">
+    <div style="margin-top: 40px;">
+      <h2>{{ cittaMostrate[cittaCorrente-1] }}</h2>
+    </div>
+    <button style="margin: 0px;"  [disabled]="cittaCorrente == nCitta" (click)="cittaCorrente = cittaCorrente + 1" mat-raised-button>
+      Prossima città {{cittaCorrente}}/{{nCitta}}
+    </button>
+  </mat-card-content>
+  <!-- step 2 -->
+  <mat-card-content *ngIf="step === 2" style="height: 640px;">
+    <p>Selezione le città che hai memorizzato</p>
+    <div style="margin: 0 auto; width: 200px;">
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[0] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[0] = arrayCliccato[0] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[0]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[0] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[1] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[1] = arrayCliccato[1] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[1]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[1] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[2] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[2] = arrayCliccato[2] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[2]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[2] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[3] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[3] = arrayCliccato[3] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[3]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[3] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[4] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[4] = arrayCliccato[4] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[4]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[4] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[5] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[5] = arrayCliccato[5] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[5]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[5] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[6] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[6] = arrayCliccato[6] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[6]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[6] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[7] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[7] = arrayCliccato[7] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[7]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[7] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[8] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[8] = arrayCliccato[8] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[8]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[8] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[9] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[9] = arrayCliccato[9] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[9]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[9] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[10] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[10] = arrayCliccato[10] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[10]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[10] }}</h2></button>
+      <button class="selezione" [disabled]="nCliccati == nCitta || arrayCliccato[11] == 1" (click)="nCliccati = nCliccati + 1; arrayCliccato[11] = arrayCliccato[11] + 1; cittaScelta[nCliccati-1] = cittaSelezionate[11]; this.controlloCitta()" mat-button><h2>{{ cittaSelezionate[11] }}</h2></button>    
+    </div>
+  </mat-card-content>
+  <!-- Footer -->
+  <mat-card-actions>
+    <button [disabled]="(step === 2 && this.nCliccati != this.nCitta) || cittaCorrente != nCitta" (click)="nextStep()" mat-button>
+      Avanti
+    </button>
+    <p style="color: gray; font-size: 10px">
+      {{ (timeMillis / 1000).toFixed(0) }} s
+    </p>
+  </mat-card-actions>
+</mat-card>
