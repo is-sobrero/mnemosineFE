@@ -1,0 +1,64 @@
+*{
+    text-align: center;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+a,
+span
+{
+    width: 100%;
+}
+
+.main_content{
+  transform:translateY(20%);
+
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.win{
+    padding: 10px!important;
+}
+
+.footer{
+    margin-top:10px!important;
+}
+
+
+.possible_word{
+    padding:10px;
+    margin:7px;
+    border:1px solid #393939;
+    width: 120px;
+    border-radius: 5px;
+    filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+
+}
+
+.list_of_words{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.dif-selection{
+    scale: 0.8;
+}
+
+
+
+.main_content{
+  padding:20px;
+  size: 1.1;
+}
+
+
+
