@@ -35,6 +35,7 @@ import { Es304Component } from './es304/es304.component';
 import { Es404Component } from './es404/es404.component';
 import { Es208Component } from './es208/es208.component';
 import { Es509Component } from './es509/es509.component';
+import { Es206Component } from './es206/es206.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/esercizi', pathMatch: 'full' },
@@ -186,6 +187,10 @@ const routes: Routes = [
     path: '509',
     component: Es509Component,
   },
+  {
+    path: '206',
+    component: Es206Component,
+  }
 ];
 
 @NgModule({
