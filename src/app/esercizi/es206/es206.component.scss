@@ -1,0 +1,32 @@
+*{
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+a,
+span
+{
+    width: 100%;
+}
+
+
+.main_content{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  align-content:center;
+  width:1600px;
+  min-width:auto;
+}
+
+
+.main_content{
+  padding:3px;
+  size: 0.9;
+}
