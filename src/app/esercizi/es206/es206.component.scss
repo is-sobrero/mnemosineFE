@@ -30,3 +30,12 @@ span
   padding:3px;
   size: 0.9;
 }
+
+
+#game-ctx{
+  width:800px;
+  height:300px;
+  border-radius: 5px;
+  border: 2px solid #00000020;
+  box-shadow: 0 3px 3px rgb(0 0 0 / 0.12)
+}

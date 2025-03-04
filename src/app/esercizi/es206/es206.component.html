@@ -2,15 +2,18 @@
     <mat-card-header>
         <h1>Reazione visiva</h1>
     </mat-card-header>
-    <mat-card-content *ngIf="current_state == 0">
-      <h2>
+    <mat-card-content>
+      <h2 *ngIf="current_state == 0">
         Premi la barra spaziatrice quando la barra in movimento si trova sopra la linea rossa
+      </h2>
+      <h2 *ngIf="current_state != 0">
+        Complimenti, sei riuscito a completare l'esercizio
       </h2>
       <p *ngIf="errors > 0">errori: {{errors}}</p>
 
 
       <div class="main_game_bar">
-
+        <canvas id="game-ctx" width="300px" height="300px"></canvas>
       </div>
 
 
