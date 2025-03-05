@@ -1,9 +1,13 @@
-<div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-    <ngx-confetti-explosion></ngx-confetti-explosion>
-    <h1>Complimenti!</h1>
-    <p>Abbiamo registrato i tuoi esercizi e li abbiamo mandati al tuo Operatore</p>
-    <p>Se vuoi fare altri esercizi, clicca sul bottone qui sotto</p>
-    <a [routerLink]="['/home']">
-        <button mat-raised-button>Home</button>
-    </a>
+<div class="res-div">
+  <ngx-confetti-explosion
+    [colors]="['#e74c3c', '#e67e73', '#8e44ad']"
+  ></ngx-confetti-explosion>
+  <h1 class="res-title">Complimenti!</h1>
+  <p class="res-text">
+    Abbiamo registrato i tuoi esercizi e li abbiamo mandati al tuo Operatore.
+    Torna alla home per scegliere un altra sessione o chiudi questa finestra.
+  </p>
+  <a [routerLink]="['/home']">
+    <button class="res-button" color="primary">Home</button>
+  </a>
 </div>

@@ -1,24 +1,24 @@
-<mat-card style="width: 43vw;">
-    <mat-card-header>
-      <mat-card-title>Gestione Utenti</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Gestione Utenti</mat-card-title>
+    <button class="button-crea-utente" (click)="openDialog('100ms', '100ms')">
+      Crea utente
+    </button>
+  </mat-card-header>
+  <mat-card-content>
     <mat-accordion class="example-headers-align" multi>
-        <mat-expansion-panel *ngFor="let session of sessions">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Utente: {{session.username}}
-              </mat-panel-title>
-              <mat-panel-description>
-                ID = {{session._id}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <button disabled mat-raised-button>Cambia password</button>
-            <button disabled mat-raised-button>Visualizza sessioni</button>
-            <button disabled mat-raised-button>Cancella utente</button>
-
-          </mat-expansion-panel>
+      <mat-expansion-panel *ngFor="let session of sessions">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Utente: {{ session.username }} </mat-panel-title>
+          <mat-panel-description>
+            ID = {{ session._id }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <button disabled mat-raised-button>Cambia password</button>
+        <button disabled mat-raised-button>Visualizza sessioni</button>
+        <button disabled mat-raised-button>Cancella utente</button>
+      </mat-expansion-panel>
     </mat-accordion>
-    <button (click)="openDialog('100ms', '100ms')" style="margin-top: 1rem;" mat-raised-button >Crea utente</button>
-    </mat-card-content>
+  </mat-card-content>
+  <span class="fill-remaining-space"></span>
 </mat-card>

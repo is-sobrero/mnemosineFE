@@ -1,11 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardHeader,
+  MatCardTitle,
+} from '@angular/material/card';
+import {
+  MatFormField,
+  MatFormFieldModule,
+  MatLabel,
+} from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ApiService } from '../../api.service';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatRow, MatTableModule } from '@angular/material/table';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,7 +30,6 @@ import {
 } from '@angular/material/dialog';
 import { MatInput, MatInputModule } from '@angular/material/input';
 
-
 @Component({
   selector: 'app-admin-user-manager',
   standalone: true,
@@ -30,7 +38,7 @@ import { MatInput, MatInputModule } from '@angular/material/input';
     MatCardHeader,
     MatCardTitle,
     MatIconModule,
-    MatExpansionModule, 
+    MatExpansionModule,
     MatLabel,
     MatFormField,
     MatTableModule,
@@ -41,21 +49,19 @@ import { MatInput, MatInputModule } from '@angular/material/input';
     MatButton,
     ReactiveFormsModule,
     NgFor,
-    NgIf
+    NgIf,
   ],
   templateUrl: './admin-user-manager.component.html',
-  styleUrl: './admin-user-manager.component.scss'
+  styleUrl: './admin-user-manager.component.scss',
 })
 export class AdminUserManagerComponent implements OnInit {
   constructor(
     private api: ApiService,
     public dialog: MatDialog,
-    private fb: FormBuilder
-  ) {
+    private fb: FormBuilder,
+  ) {}
 
-   }
-
-  sessions:any = [];
+  sessions: any = [];
   displayedColumns: string[] = ['number', 'esercizio', 'errori', 'tempo'];
 
   ngOnInit(): void {
@@ -69,36 +75,46 @@ export class AdminUserManagerComponent implements OnInit {
     });
   }
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+  ): void {
     const dialogRef = this.dialog.open(DialogAnimationsExampleDialog, {
       width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
-  
+
     dialogRef.afterClosed().subscribe(() => {
       this.refresh();
     });
   }
-
-
-
-
 }
-
 
 @Component({
   selector: 'dialog-animations-example-dialog',
   templateUrl: 'dialog-add-user.html',
   standalone: true,
-  imports: [MatButtonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatFormField, MatLabel, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
+  imports: [
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatFormField,
+    MatLabel,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+  ],
 })
 export class DialogAnimationsExampleDialog {
   userForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
+  constructor(
+    public dialogRef: MatDialogRef<DialogAnimationsExampleDialog>,
     private fb: FormBuilder,
-    private api: ApiService
+    private api: ApiService,
   ) {
     this.userForm = this.fb.group({
       username: ['', Validators.required],
@@ -109,12 +125,14 @@ export class DialogAnimationsExampleDialog {
   }
 
   onUserFormSubmit() {
-    this.api.post('admin/createUser', this.userForm.value).subscribe((res: any) => {
-      console.log(res);
-      if (res.message === 'User created successfully') {
-        alert('Utente salvato e inviato!');
-        this.dialogRef.close();
-      }
-    });
+    this.api
+      .post('admin/createUser', this.userForm.value)
+      .subscribe((res: any) => {
+        console.log(res);
+        if (res.message === 'User created successfully') {
+          alert('Utente salvato e inviato!');
+          this.dialogRef.close();
+        }
+      });
   }
 }

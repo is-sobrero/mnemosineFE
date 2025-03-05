@@ -1,3 +1,30 @@
-mat-card{
-    min-width: 300px;
+* {
+    box-sizing: border-box;
+    all:unset;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    display: flex;
+}
+
+.container {
+    background-color: #f0f0f0;
+    display: flex;
+    width: calc(100vw - 15px);
+    height: calc(100vh - 66px);
+    margin-top: 16px;
+    justify-content: space-between;
+}
+
+.left-panel {
+    width: 100%;
+}
+
+.right-panel {
+    display: grid;
+    flex-direction: column;
+    width: 100%;
 }

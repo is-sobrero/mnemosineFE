@@ -1,58 +1,73 @@
-<mat-card style="width: 43vw;">
-    <mat-card-header>
-      <mat-card-title>Gestione sessioni</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-    <mat-accordion class="example-headers-align" multi>
-        <mat-expansion-panel *ngFor="let session of sessions">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Sessione {{session.sessionName}}
-              </mat-panel-title>
-              <mat-panel-description>
-                Assegnata a {{session.userDetails.username}}
-                <p *ngIf="session.status == 'active'" style="color: blue;">Assegnata</p>
-                <p *ngIf="session.status == 'inactive'" style="color: red;">Non assegnata</p>
-                <!--ENDED-->
-                <p *ngIf="session.status == 'ended'" style="color: red;">Terminata, risultati pronti</p>
-                <mat-icon>date_range</mat-icon>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div *ngIf="session.status == 'ended'">
-                <strong>Risultati sessione</strong>
-                <!-- Same as the div up here but with mat table, number, esecizio, errori, tempo -->
-                <table mat-table [dataSource]="session.results" class="mat-elevation-z8">
-                
-                  <!-- Number Column -->
-                  <ng-container matColumnDef="number">
-                    <th mat-header-cell *matHeaderCellDef> Number </th>
-                    <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
-                  </ng-container>
-                
-                  <!-- Esercizio Column -->
-                  <ng-container matColumnDef="esercizio">
-                    <th mat-header-cell *matHeaderCellDef> Esercizio </th>
-                    <td mat-cell *matCellDef="let element; let i = index"> {{session.exercises[i].id}} </td>
-                  </ng-container>
-                
-                  <!-- Errori Column -->
-                  <ng-container matColumnDef="errori">
-                    <th mat-header-cell *matHeaderCellDef> Errori </th>
-                    <td mat-cell *matCellDef="let element"> {{element.errors}} </td>
-                  </ng-container>
-                
-                  <!-- Tempo Column -->
-                  <ng-container matColumnDef="tempo">
-                    <th mat-header-cell *matHeaderCellDef> Tempo </th>
-                    <td mat-cell *matCellDef="let element"> {{element.time / 1000}} s </td>
-                  </ng-container>
-                
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
+<mat-card class="session-card">
+  <mat-card-header>
+    <mat-card-title>Gestione sessioni</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-accordion class="session-accordion" multi>
+      <mat-expansion-panel *ngFor="let session of sessions">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ session.sessionName }}
+          </mat-panel-title>
+          <mat-panel-description class="session-info">
+            <!-- Verifica se session.userDetails è definito prima di accedere a username -->
+            <ng-container
+              *ngIf="session.userDetails?.username; else noUsername"
+            >
+              Assegnata a <strong>{{ session.userDetails.username }}</strong>
+              <span [ngClass]="getSessionStatusClass(session.status)">
+                {{ getSessionStatusText(session.status) }}
+              </span>
+            </ng-container>
+            <ng-template #noUsername>
+              <span>Sconosciuto</span>
+            </ng-template>
+            <mat-icon>date_range</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
 
-            </div>
-          </mat-expansion-panel>
+        <div *ngIf="session.status === 'ended'">
+          <strong>Risultati sessione</strong>
+          <table
+            mat-table
+            [dataSource]="session.results"
+            class="mat-elevation-z8 result-table"
+          >
+            <!-- Numero Progressivo -->
+            <ng-container matColumnDef="number">
+              <th mat-header-cell *matHeaderCellDef>#</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ i + 1 }}
+              </td>
+            </ng-container>
+
+            <!-- Esercizio -->
+            <ng-container matColumnDef="esercizio">
+              <th mat-header-cell *matHeaderCellDef>Esercizio</th>
+              <td mat-cell *matCellDef="let element; let i = index">
+                {{ session.exercises[i]?.id || '-' }}
+              </td>
+            </ng-container>
+
+            <!-- Errori -->
+            <ng-container matColumnDef="errori">
+              <th mat-header-cell *matHeaderCellDef>Errori</th>
+              <td mat-cell *matCellDef="let element">{{ element.errors }}</td>
+            </ng-container>
+
+            <!-- Tempo -->
+            <ng-container matColumnDef="tempo">
+              <th mat-header-cell *matHeaderCellDef>Tempo (s)</th>
+              <td mat-cell *matCellDef="let element">
+                {{ (element.time / 1000).toFixed(2) }}
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </mat-expansion-panel>
     </mat-accordion>
-    </mat-card-content>
+  </mat-card-content>
 </mat-card>

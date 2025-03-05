@@ -1,15 +1,16 @@
+<link rel="stylesheet" href="../es.style.scss" />
 <mat-card class="main_content">
   <mat-card-header>
     <h2>Completa l'oggetto con la parte mancante giusta</h2>
   </mat-card-header>
-  <mat-card-content *ngIf="current_state == 0" class="main_content">
+  <mat-card-content *ngIf="current_state == 0">
     <p *ngIf="errors > 0">errori: {{ errors }}</p>
     <div class="image_container">
       <img src="{{ image_link }}" class="show_image" />
       <div class="cover"></div>
     </div>
+    <h2 class="dummy_container_title">Trova la parte mancante</h2>
     <div class="quarter_container">
-      <h2 class="dummy_container_title">Trova la parte mancante</h2>
       <div class="quarter_part">
         <img
           class="dummy_0 dummy_image"

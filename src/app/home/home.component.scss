@@ -10,9 +10,11 @@
 
 .username {
   background-color: #ffea00;
-  font-weight: 700;
+  font-weight: bold;
   padding: 5px 10px;
   border-radius: 5px;
+  font-stretch: expanded;
+  text-transform: uppercase;
 }
 
 .session-container {
