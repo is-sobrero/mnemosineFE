@@ -1,0 +1,51 @@
+html,
+body {
+  overflow: hidden !important;
+  margin: 0;
+  padding: 0;
+}
+
+.res-div {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden !important;
+}
+
+.res-title {
+  margin: 0 20px;
+  font-size: 40px;
+}
+
+.res-text {
+  font-size: 20px;
+  max-width: 600px;
+  color: #555;
+}
+
+.res-button {
+  width: 100%;
+  margin: 0 auto;
+  font-size: 1.2em;
+  font-weight: 600;
+  border: 2px solid black;
+  border-radius: 2em;
+  padding: 0.5em 1em;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+}
+.res-button:hover {
+  background-color: #ffea00;
+  transform: scale(1.05);
+}
+
+ngx-confetti-explosion {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}

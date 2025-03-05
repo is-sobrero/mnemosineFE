@@ -1,13 +1,8 @@
 <mat-toolbar class="main-toolbar">
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Home"
-    [routerLink]="['/home']"
-  >
-    <mat-icon>home</mat-icon>
-  </button>
-  <span>Mnemosine</span>
+  <a mat-a class="example-home" aria-label="Home" [routerLink]="['/home']">
+    <img src="/assets/mnemosine-logo-dark.svg" alt="Return to home" />
+    <div class="example-title">Mnemosine</div>
+  </a>
   <span class="example-spacer"></span>
   <a
     mat-icon-button

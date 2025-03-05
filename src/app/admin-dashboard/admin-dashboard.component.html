@@ -1,12 +1,9 @@
-<!-- padding beetween elements 2 rem-->
-<div style="padding: 2rem;"> 
-  <app-assegna-esercizio></app-assegna-esercizio>
-  <div style="height: 2rem;"></div>
-  <!-- this two should be side by side -->
-  <div style="display: flex; justify-content: space-between;">
+<div class="container">
+  <div class="left-panel">
     <app-sessionmanager></app-sessionmanager>
+  </div>
+  <div class="right-panel">
+    <app-assegna-esercizio></app-assegna-esercizio>
     <app-admin-user-manager></app-admin-user-manager>
   </div>
-
-
 </div>

@@ -18,6 +18,7 @@
 }
 
 .selezionabili {
+  display: flex;
   button {
     all: unset;
     cursor: pointer;

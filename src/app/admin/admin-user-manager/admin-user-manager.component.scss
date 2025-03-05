@@ -1,0 +1,79 @@
+$primary-color: #6200ea;
+$secondary-color: #03dac6;
+$background-color: #f5f5f5;
+$card-background: #ffffff;
+$text-color: #333;
+$border-radius: 8px;
+
+mat-card {
+  height: calc(48vh - 66px);
+  border-radius: none;
+  box-shadow: none;
+  border: none;
+  overflow: hidden;
+
+  mat-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+
+    mat-card-title {
+      all: unset;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+
+  mat-card-content {
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    mat-expansion-panel {
+      margin-top: 10px;
+      padding: 1em;
+      background-color: whitesmoke;
+      box-shadow: 4px 4px 0px black;
+      border: 2px solid black;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+
+      &:hover {
+        box-shadow: 8px 8px 0px black;
+        transform: translate(-3px, -3px);
+      }
+    }
+  }
+
+  .fill-remaining-space {
+    flex: 1 1 auto;
+  }
+
+  button {
+    font-weight: 500;
+    border-radius: $border-radius;
+    width: 100%;
+    color: black;
+    margin-top: 1em;
+    font-size: 0.8em;
+    font-weight: 600;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 2em;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}
+
+.button-crea-utente {
+  width: 140px !important;
+}
