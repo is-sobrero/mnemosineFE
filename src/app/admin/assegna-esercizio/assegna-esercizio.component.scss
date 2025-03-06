@@ -26,6 +26,19 @@ mat-card {
     }
   }
 
+  .no-exercises {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $text-color;
+    background-color: #eee;
+    border-radius: 2em;
+    margin: 0.5em 1em 1em 1em;
+  }
+
   .fill-remaining-space {
     flex: 1 1 auto;
   }
@@ -37,16 +50,16 @@ mat-card {
     flex-direction: column;
     justify-content: space-between;
     gap: 15px;
-    
+
     mat-form-field {
       width: 100%;
     }
-    
+
     .exercise-container {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      
+
       .exercise-group {
         color: #888;
         display: flex;

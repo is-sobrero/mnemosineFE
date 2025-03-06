@@ -5,6 +5,9 @@
       Crea utente
     </button>
   </mat-card-header>
+  <div class="no-users" *ngIf="sessions.length === 0">
+    <p>Crea un nuovo utente!</p>
+  </div>
   <mat-card-content>
     <mat-accordion class="example-headers-align" multi>
       <mat-expansion-panel *ngFor="let session of sessions">
