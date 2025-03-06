@@ -48,6 +48,19 @@ mat-card {
     }
   }
 
+  .no-users {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $text-color;
+    background-color: #eee;
+    border-radius: 2em;
+    margin: 0.5em 1em 1em 1em;
+  }
+
   .fill-remaining-space {
     flex: 1 1 auto;
   }

@@ -2,6 +2,9 @@
   <mat-card-header>
     <mat-card-title>Gestione sessioni</mat-card-title>
   </mat-card-header>
+  <div class="no-sessions" *ngIf="sessions.length === 0">
+    <p>Assegna un esercizio per iniziare!</p>
+  </div>
   <mat-card-content>
     <mat-accordion class="session-accordion" multi>
       <mat-expansion-panel *ngFor="let session of sessions">

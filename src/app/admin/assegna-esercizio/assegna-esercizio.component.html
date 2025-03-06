@@ -10,7 +10,7 @@
       </mat-select>
     </mat-form-field>
   </mat-card-header>
-  <div style="text-align: center; height: 100%;" *ngIf="esercizi.length === 0">
+  <div class="no-exercises" *ngIf="esercizi.length === 0">
     <p>Aggiungi un esercizio per iniziare</p>
   </div>
   <mat-card-content>
@@ -132,9 +132,9 @@
         <button (click)="remexe(i)">Rimuovi Esercizio</button>
       </div>
     </div>
-    
+
     <div class="fill-remaining-space"></div>
-    
+
     <div class="button-group">
       <button color="accent" (click)="addexe()">Aggiungi Esercizio</button>
       <button color="primary" (click)="assign()">Assegna</button>
