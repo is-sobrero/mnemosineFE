@@ -41,9 +41,6 @@
             <mat-option value="204"> 204 - Ricerca visiva </mat-option>
             <mat-option value="205"> 205 - Trova la differenza </mat-option>
             <mat-option value="209"> 206 - Riflessi </mat-option>
-            <mat-option value="208">
-              208 - Attenzione alternata
-            </mat-option>
             <mat-option value="301">
               301 - Ordina i numeri in ordine crescente
             </mat-option>
@@ -57,77 +54,29 @@
             <mat-option value="307">
               307 - Alternanza di operazioni
             </mat-option>
-            <mat-option value="308">
-              308 - Calcoli veloci
-            </mat-option>
-            <mat-option value="304">
-              304 - Completa la sequenza
-            </mat-option>
-            <mat-option value="401">
-              401 - Anagramma
-            </mat-option>
+            <mat-option value="401"> 401 - Anagramma </mat-option>
             <mat-option value="402">
               402 - Completa la parola ascoltata
             </mat-option>
-            <mat-option value="403">
-              403 - Come si chiama?
-            </mat-option>
-            <mat-option value="404">
-              404 - Che Oggetto e'?
-            </mat-option>
-            <mat-option value="405">
-              405 - Fluenza fonemica
-            </mat-option>
-            <mat-option value="406">
-              406 - Completa le frasi
-            </mat-option>
-            <mat-option value="407">
-              407 - Trova il sinonimo
-            </mat-option>
-            <mat-option value="408">
-              408 - Trova il contrario
-            </mat-option>
-            <mat-option value="409">
-              409 - Associa le parole
-            </mat-option>
-            <mat-option value="410">
-              410 - Completa il dialogo
-            </mat-option>
-            <mat-option value="504">
-              504 - Puzzle
-            </mat-option>
-            <mat-option value="505">
-              505 - Completa l'immagine
-            </mat-option>
-            <mat-option value="506">
-              506 - Sequenza di immagini
-            </mat-option>
-            <mat-option value="506">
-              506 - Sequenza di immagini
-            </mat-option>
-            <mat-option value="509">
-              509 - Riconosci la sagoma
-            </mat-option>
-        </mat-select>
+            <mat-option value="403"> 403 - Come si chiama? </mat-option>
+            <mat-option value="405"> 405 - Fluenza fonemica </mat-option>
+            <mat-option value="406"> 406 - Completa le frasi </mat-option>
+            <mat-option value="407"> 407 - Trova il sinonimo </mat-option>
+            <mat-option value="408"> 408 - Trova il contrario </mat-option>
+            <mat-option value="410"> 410 - Completa il dialogo </mat-option>
+            <mat-option value="504"> 504 - Puzzle </mat-option>
+            <mat-option value="505"> 505 - Completa l'immagine </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>
-        Difficoltà {{i+1}}
-      </mat-label>
-      <mat-select [(value)]="esercizio.difficulty">
-        <mat-option value="1">
-          1 - Facile
-        </mat-option>
-        <mat-option value="2">
-          2 - Intermedio
-        </mat-option>
-        <mat-option value="3">
-          3 - Avanzato
-        </mat-option>
-    </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+          <mat-label>Difficoltà</mat-label>
+          <mat-select [(value)]="esercizio.difficulty">
+            <mat-option value="1">1 - Facile</mat-option>
+            <mat-option value="2">2 - Intermedio</mat-option>
+            <mat-option value="3">3 - Avanzato</mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <button (click)="remexe(i)">Rimuovi Esercizio</button>
       </div>
