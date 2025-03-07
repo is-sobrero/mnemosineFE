@@ -52,6 +52,7 @@ export class SessionmanagerComponent implements OnInit {
   }
   refresh() {
     this.api.get('admin/getSessions').subscribe((res: any) => {
+    console.log(res);
       if (res.length != this.sessions.length) {
         this.sessions = res;
       }
