@@ -61,7 +61,6 @@ export class Es103Component implements OnInit {
           this.errori++;
         }
       }
-    } else if (this.step == 4) {
       this.ES.nextExercise(103, { errors: this.errori, time: this.timeMillis });
     }
   }

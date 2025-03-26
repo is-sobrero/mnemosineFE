@@ -75,12 +75,13 @@ export class Es101Component implements OnInit {
   step: number = 1;
   difficulty: number = 0;
   errors = 0;
+  timeMillis = 0;
 
   constructor(private EX: ExerciseService) {}
 
   private http = inject(HttpClient);
 
-  timeMillis = 0;
+
 
   //funzione che viene eseguita all'avvio del componente
   ngOnInit(): void {
@@ -97,7 +98,6 @@ export class Es101Component implements OnInit {
   nextStep() {
     this.step++;
     if (this.step == 3) {
-      this.timeMillis = 0;
       this.checkErrors();
     }
   }
