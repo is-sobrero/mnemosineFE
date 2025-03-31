@@ -59,4 +59,31 @@ span
   size: 1.1;
 }
 
+.select_word{
+  border-radius:3px;
+  border:1px solid black;
+  margin:8px;
+  padding:8px;
+  width:auto;
+  height:auto;
+  font-size:18px;
+}
 
+
+.check_word{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-content:center;
+  align-items:center;
+}
+
+
+.red{
+  background-color: #fa3c3ca0;
+}
+
+.green{
+  background-color:#6bed71a0;
+}
