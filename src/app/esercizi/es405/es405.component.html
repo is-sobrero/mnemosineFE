@@ -7,15 +7,16 @@
     <mat-card-header>
 
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="main">
         <h3 class="text_above_input">Indovina 3 parole che iniziano per:</h3>
         <h2 class="word_to_reorder">{{display}}</h2>
         <form class="check_word">
             <mat-form-field>
-                <mat-label>Inserisci una parola giusta</mat-label>
+                <mat-label>Inserisci una parola</mat-label>
                 <input class="input" matInput placeholder="" (keyup)="onKey($event)">
             </mat-form-field>
         </form>
+    <p class="helper">Clicca il pulsante "Controlla" per verificare che la parola inserita inizi per "{{display}}"</p>
     </mat-card-content>
     <mat-card-footer class="footer">
         <mat-card-actions>
@@ -31,6 +32,6 @@
         <h2>Parole con iniziale "{{display}}"</h2>
     </mat-card-content>
     <mat-card-footer class="footer">
-        <p>Hai completato l'esercizio con errori pari a: {{errors}} </p>
+        <p>Errori commessi: {{errors}} </p>
     </mat-card-footer>
 </mat-card>

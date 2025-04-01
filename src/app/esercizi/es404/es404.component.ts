@@ -370,13 +370,15 @@ export class Es404Component {
     }
 
     for(let i=0;i<this.list_of_categories_tr.length;i++){
-      if(ev.target.innerHTML == this.list_of_categories_tr[i][0]){
+      if(ev.target.innerHTML == this.list_of_categories_tr[i][0] && !this.list_of_categories_tr[i].includes(link)){
         this.list_of_categories_tr[i].push(link);
         this.list_of_counters[i] += 1;
+        console.log(ev.target.innerHTML);
+        if(this.DEBUG){
+          console.log("link of dragged element: "+link);
+          console.log("Current element counter: "+this.list_of_counters[i]);
+        }
       }
-    }
-    if(this.DEBUG){
-      console.log("link of dragged element: "+link);
     }
   }
 

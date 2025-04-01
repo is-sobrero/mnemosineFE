@@ -42,21 +42,8 @@ export class Es405Component implements OnInit{
     ["h", "k", "w", "z", "b", "q", "h"],
     ["sc", "av", "pr", "st","si", "sm", "tr", "vi","at", "la", "mi","me"]
   ];
-  /*
-  *
-  *   Current state variable.
-  *   This variable control the state of the application
-  *
-  *
-  */
 
   current_state = 0;
-
-  /*
-   *  variable used to manage the I/O system
-   *
-  */
-
 
   errors:number = 0;
   display:string = "";
@@ -65,11 +52,6 @@ export class Es405Component implements OnInit{
   points:number = 0;
   timeMillis = 0;
 
- /*
-  *  Level: varable used to set the difficulty
-  *  Default state: 0 ( easier );
-  *
-  */
   level = 1;
 
   private list_of_words:any[] = [];
@@ -79,7 +61,7 @@ export class Es405Component implements OnInit{
       this.timeMillis += 500;
     }, 500);
 
-    this.connection.get("assets/exAssets/60000_parole_italiane.txt", {responseType: "text"}).subscribe(data =>{
+    this.connection.get("assets/exAssets/660000_parole_italiane.txt", {responseType: "text"}).subscribe(data =>{
       this.dictionary = data.split("\n");
       for(var i=0;i<3;i++){
         this.getWord(this.dictionary,this.list_of_words);
@@ -93,7 +75,7 @@ export class Es405Component implements OnInit{
 
   setWord():void{
     let random:number = Math.floor(Math.random() * this.difficulty[this.level-1].length);
-    this.display = ""+this.difficulty[this.level-1][random];
+    this.display = ""+this.difficulty[this.level-1][random].toUpperCase();
     console.log(this.display);
   }
 
