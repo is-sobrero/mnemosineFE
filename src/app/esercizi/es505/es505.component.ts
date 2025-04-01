@@ -39,21 +39,9 @@ export class Es505Component {
   private connection = inject(HttpClient);
   private dictionary:any[] = [];
   public dummy_container:any[] = [];
-  /*
-  *
-  *   Current state variable.
-  *   This variable control the state of the application
-  *
-  *
-  */
+
 
   current_state = 0;
-
-  /*
-   *  variable used to manage the I/O system
-   *
-  */
-
 
   errors:number = 0;
   image_link:string = "";
@@ -64,22 +52,8 @@ export class Es505Component {
   dummy_1:any = null;
   dummy_2:any = null;
   dummy_3:any = null;
- /*
-  *  Level: varable used to set the difficulty
-  *  Default state: 0 ( easier );
-  *
-  */
 
   level = 1;
-  /*
-  * List of word used for the selection. The index of
-  * the array rappresent the difficulty selected.
-  *
-  *   index 0: easier;
-  *   index 1: medium;
-  *   index 3: harder;
-  *
-  */
 
   private list_of_words:any[] = [];
   ngOnInit(){
@@ -87,44 +61,62 @@ export class Es505Component {
       this.timeMillis += 500;
     }, 500);
 
-    this.level = this.ES.currentInfo().difficulty;
-    console.log(this.level);
+    try{
+      this.level = this.ES.currentInfo().difficulty;
+    }catch(Error){
+      console.error("unable to define a level by calling the backend service, assign level 1");
+      this.level = 1;
+    }
     if(this.level < 1 || this.level > 3){
       this.level = 1;
     }
 
-    switch(this.level){
-      case 1:
-        this.connection.get("assets/exAssets/dizionario_immagini/dizionario_semplice.txt", {responseType: "text"}).subscribe(data =>{
-          this.dictionary = data.split("\n");
-          this.getWord();
-          this.setImage();
-
-        });
-        break;
-
-      case 2:
-        this.connection.get("assets/exAssets/dizionario_immagini/dizionario_medio.txt", {responseType: "text"}).subscribe(data =>{
-          this.dictionary = data.split("\n");
-          this.getWord();
-          this.setImage();
-        });
-        break;
-      case 3:
-        this.connection.get("assets/exAssets/dizionario_immagini/dizionario_difficile.txt", {responseType: "text"}).subscribe(data =>{
-          this.dictionary = data.split("\n");
-          this.getWord();
-        this.setImage();
-        });
-        break;
-      default:
-        console.log("Undefinded level");
-        break;
-    }
     this.dummy_container.push(this.dummy_0);
     this.dummy_container.push(this.dummy_1);
     this.dummy_container.push(this.dummy_2);
     this.dummy_container.push(this.dummy_3);
+
+    const prom:Promise<any> = new Promise<any>((res:any) => {
+      //console.log("fetching");
+      let tm = setInterval(()=>{
+        //console.log("Try fetching");
+        switch(this.level){
+          case 1:
+            this.connection.get("assets/exAssets/dizionario_immagini/dizionario_semplice.txt", {responseType: "text"}).subscribe(data =>{
+              this.dictionary = data.split("\n");
+            });
+            break;
+
+          case 2:
+            this.connection.get("assets/exAssets/dizionario_immagini/dizionario_normale.txt", {responseType: "text"}).subscribe(data =>{
+              this.dictionary = data.split("\n");
+            });
+            break;
+          case 3:
+            this.connection.get("assets/exAssets/dizionario_immagini/dizionario_difficile.txt", {responseType: "text"}).subscribe(data =>{
+              this.dictionary = data.split("\n");
+            });
+            break;
+          default:
+            console.log("Undefinded level");
+            break;
+        }
+        if(this.dictionary.length > 0){
+          //console.log("fetching completed");
+          clearInterval(tm);
+          res(null);
+        }
+      },50);
+    }).then((res:any) => { new Promise<any>((res:any)=>{
+        //console.log("loading word");
+        this.getWord();
+        res(null);
+    }).then((res:any)=>{
+        //console.log("loading images");
+        this.setImage();
+        res(null);
+      });
+    });
   }
 
   checkContent(dummy_index:number){
@@ -140,8 +132,6 @@ export class Es505Component {
 
 
   setImage(){
-
-
     var dummy_classes:string[] = [
       ".dummy_0",
       ".dummy_1",
@@ -151,7 +141,6 @@ export class Es505Component {
 
     var dummy_quarter;
     var cached_dummy:any;
-    console.log("here");
 
     for(var i=0;i<this.dummy_container.length;i+=1){
         dummy_quarter = 1+Math.floor(Math.random()*3);
@@ -199,7 +188,6 @@ export class Es505Component {
 
 
   private getWord():void{
-
     var index:number = 0;
     var line:any[] = [];
     var obj = {};
