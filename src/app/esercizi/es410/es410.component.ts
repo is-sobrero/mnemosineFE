@@ -80,66 +80,58 @@ export class Es410Component implements OnInit{
 
   private list_of_words:any[] = [];
 
-  resolvePromise(){
-    const result_0 = new Promise<string[]>((resolve,reject)=>{
-      this.connection.get("assets/exAssets/es410_dialoghi/es410_semplice.txt", {responseType: "text"}).subscribe(data =>{
-        resolve(data.split("\n"));
-      });
-    });
-    const result_1 = new Promise<string[]>((resolve,reject)=>{
-      this.connection.get("assets/exAssets/es410_dialoghi/es410_medio.txt", {responseType: "text"}).subscribe(data =>{
-        resolve(data.split("\n"));
-      })
-    });
-    const result_2 = new Promise<string[]>((resolve,reject)=>{
-      this.connection.get("assets/exAssets/es410_dialoghi/es410_difficile.txt", {responseType: "text"}).subscribe(data =>{
-        resolve(data.split("\n"));
-      })
-    });
-    const result_3 = new Promise<string[]>((resolve,reject)=>{
-      this.connection.get("assets/exAssets/dizionarioitaliano1000.txt", {responseType: "text"}).subscribe(data =>{
-        resolve(data.split("\n"));
-      });
-    })
-
-    result_0.then(res =>{
-      this.simple = res;
-    });
-    result_1.then(res =>{
-      this.medium = res;
-    });
-    result_2.then(res =>{
-      this.hard = res;
-    });
-    result_3.then(res=>{
-      this.dictionary = res;
-    });
-  }
-
   ngOnInit(){
     setInterval(()=>{
       this.timeMillis += 500;
     }, 500);
-    this.resolvePromise();
 
-    setTimeout(()=>{
-      this.list_of_words.push(this.simple);
-      this.list_of_words.push(this.medium);
-      this.list_of_words.push(this.hard);
-      //console.log(this.simple);
-      //console.log(this.medium);
-      //console.log(this.hard);
-      this.inputSection = document.querySelector(".input");
-      this.setWord();
-    }, 1000);
     this.level = this.ES.currentInfo().difficulty;
 
+    const fetch:Promise<any> = new Promise<any>((res:any)=>{
+      console.log("fetching");
+      let fetching = setInterval(()=>{
+        this.connection.get("assets/exAssets/60000_parole_italiane.txt", {responseType: "text"}).subscribe(data =>{
+          this.dictionary = data.split("\n");
+        });
+        switch(this.level){
+          case 1:
+            this.connection.get("assets/exAssets/es410_dialoghi/es410_semplice.txt", {responseType: "text"}).subscribe(data =>{
+              this.list_of_words = data.split("\n");
+            });
+            break;
+          case 2:
+            this.connection.get("assets/exAssets/es410_dialoghi/es410_medio.txt", {responseType: "text"}).subscribe(data =>{
+              this.list_of_words = data.split("\n");
+            });
+            break;
+          case 3:
+            this.connection.get("assets/exAssets/es410_dialoghi/es410_difficile.txt", {responseType: "text"}).subscribe(data =>{
+              this.list_of_words = data.split("\n");
+            });
+            break;
+          default:
+            console.log("Undefined level");
+            break;
+        }
+        if(this.list_of_words.length > 0 && this.dictionary.length > 0){
+          console.log("Fetching completed");
+          clearInterval(fetching);
+          res(null);
+        }else{
+          console.log("continue fetching");
+        }
+      },50);
+    }).then((res:any)=>{
+      console.log("Setting phrases");
+      this.setWord();
+      res(null);
+    });
   }
 
   setWord(){
-    let random:number = Math.floor(Math.random() * this.list_of_words.at(this.level).length);
+    let random:number = Math.floor(Math.random() * this.list_of_words.length);
     var cache_word:string[] = []
-    cache_word = this.list_of_words.at(this.level).at(random).split(" ");
+    cache_word = this.list_of_words.at(random).split(" ");
     let random_string:number = Math.floor(Math.random()* cache_word.length);
 
     let random_trap:any[] = [];
@@ -171,7 +163,7 @@ export class Es410Component implements OnInit{
       }
     }
     this.missing_word = ""+cache_word.at(random_string)?.toLowerCase();
-    this.complete_string = ""+this.list_of_words.at(this.level).at(random);
+    this.complete_string = ""+this.list_of_words.at(random);
     console.log("frase da mostrare: "+this.display);
     console.log("parola mancante: "+this.missing_word);
 
@@ -182,16 +174,16 @@ export class Es410Component implements OnInit{
     this.consigli = this.shuffleArray(this.consigli);
     console.log("trappole e consigli: "+this.consigli.toString());
   }
-  checkContent(){
-    if(this.word_typed == "") return;
-    if(this.word_typed.toLocaleLowerCase() === this.missing_word.toLowerCase()){
-      this.current_state = 1;
+
+  checkContent(index:number){
+    let element = document.querySelector(".elem"+index)!;
+    if(this.consigli[index].toLocaleLowerCase() === this.missing_word.toLowerCase()){
+      element.classList.toggle("green");
       this.ES.nextExercise(410, { errors: this.errors , time: this.timeMillis });
     }else{
+      element.classList.toggle("red");
       this.errors+=1;
     }
-    this.inputSection.value = "";
-
   }
 
   shuffleArray(array: string[]){

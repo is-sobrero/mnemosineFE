@@ -1,5 +1,6 @@
 *{
     text-align: center;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 p,
@@ -69,14 +70,26 @@ span
 
 .suggerimento{
     width: fit-content;
-    font-size: 18px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding:5px;
-    border-radius: 5px;
+    font-size: 19px;
+    margin:8px;
+    padding:8px;
+    border-radius: 3px;
     border: 1px solid black;
 }
 
+.suggerimento:hover{
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  border: 1px solid #00000070;
+  cursor:pointer;
+}
+
+.red{
+  background-color: #fa3c3ca0;
+}
+
+.green{
+  background-color:#6bed71a0;
+}
 
 .main_content{
   padding:20px;
