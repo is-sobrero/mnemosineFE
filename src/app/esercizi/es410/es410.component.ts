@@ -49,31 +49,12 @@ export class Es410Component implements OnInit{
 
   constructor(private ES: ExerciseService){}
 
-  /*
-  *
-  *   Current state variable.
-  *   This variable control the state of the application
-  *
-  *
-  */
-
   current_state = 0;
-
-  /*
-   *  variable used to manage the I/O system
-   *
-  */
-
 
   errors:number = 0;
   display:string = "";
   word_typed = "";
   timeMillis:number = 0;
- /*
-  *  Level: varable used to set the difficulty
-  *  Default state: 0 ( easier );
-  *
-  */
 
   level = 1;
 
