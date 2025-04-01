@@ -63,6 +63,7 @@ export class Es505Component {
 
     try{
       this.level = this.ES.currentInfo().difficulty;
+      //this.level = 2;
     }catch(Error){
       console.error("unable to define a level by calling the backend service, assign level 1");
       this.level = 1;
@@ -77,9 +78,7 @@ export class Es505Component {
     this.dummy_container.push(this.dummy_3);
 
     const prom:Promise<any> = new Promise<any>((res:any) => {
-      //console.log("fetching");
       let tm = setInterval(()=>{
-        //console.log("Try fetching");
         switch(this.level){
           case 1:
             this.connection.get("assets/exAssets/dizionario_immagini/dizionario_semplice.txt", {responseType: "text"}).subscribe(data =>{
@@ -102,26 +101,18 @@ export class Es505Component {
             break;
         }
         if(this.dictionary.length > 0){
-          //console.log("fetching completed");
           clearInterval(tm);
           res(null);
         }
       },50);
-    }).then((res:any) => { new Promise<any>((res:any)=>{
-        //console.log("loading word");
-        this.getWord();
-        res(null);
-    }).then((res:any)=>{
-        //console.log("loading images");
-        this.setImage();
-        res(null);
-      });
-    });
+    }).then((res:any) => {
+       this.getWord();
+       this.setImage();
+       res(null);
+   });
   }
 
   checkContent(dummy_index:number){
-    console.log(this.quarter);
-
     if(this.dummy_container[dummy_index].quarter == this.quarter && this.image_link == this.dummy_container[dummy_index].link){
       this.current_state = 1;
       this.ES.nextExercise(505, {errors: this.errors, time: this.timeMillis});
