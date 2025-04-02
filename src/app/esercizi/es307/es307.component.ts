@@ -67,7 +67,7 @@ export class Es307Component implements OnInit {
       if (this.risultato != this.risposta) {
         this.errori++;
       }
-    } else if (this.step == 4) {
+
       this.ES.nextExercise(301, { errors: this.errori, time: this.timeMillis });
     }
   }
