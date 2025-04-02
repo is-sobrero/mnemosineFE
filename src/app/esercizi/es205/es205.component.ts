@@ -7,7 +7,6 @@ import {
   MatCardSubtitle,
   MatCardContent,
 } from '@angular/material/card';
-import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf, CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ import { ExerciseService } from '../../exercise.service';
     MatCardTitle,
     MatCardSubtitle,
     MatCardContent,
-    MatButton,
     NgFor,
     NgIf,
     CommonModule,
@@ -38,7 +36,7 @@ export class Es205Component {
   immagineSinistra: string = '';
   immagineDestra: string = '';
   step = 0;
-  errori: number = 0;
+  error: number = 0;
   timeMillis: number = 0;
   differenzeTrovate: number = 0;
   totaleDifferenze: number = 0;
@@ -56,21 +54,21 @@ export class Es205Component {
         {
           id: 'btn-diff1',
           bottom: '90px',
-          right: '360px',
+          right: '350px',
           width: '50px',
           height: '100px',
         },
         {
           id: 'btn-diff2',
           bottom: '100px',
-          right: '25px',
+          right: '17px',
           width: '25px',
           height: '53px',
         },
         {
           id: 'btn-diff3',
           bottom: '335px',
-          right: '165px',
+          right: '155px',
           width: '33px',
           height: '33px',
         },
@@ -84,36 +82,36 @@ export class Es205Component {
         {
           id: 'btn-diff1',
           bottom: '365px',
-          right: '185px',
+          right: '173px',
           width: '35px',
           height: '70px',
         },
         {
           id: 'btn-diff2',
           bottom: '230px',
-          right: '90px',
+          right: '80px',
           width: '30px',
           height: '55px',
         },
         {
           id: 'btn-diff3',
           bottom: '180px',
-          right: '275px',
+          right: '263px',
           width: '25px',
           height: '25px',
         },
         {
           id: 'btn-diff4',
           bottom: '220px',
-          right: '370px',
+          right: '360px',
           width: '40px',
           height: '100px',
         },
         {
           id: 'btn-diff5',
           bottom: '220px',
-          right: '250px',
-          width: '75px',
+          right: '242px',
+          width: '65px',
           height: '45px',
         },
       ],
@@ -126,51 +124,51 @@ export class Es205Component {
         {
           id: 'btn-diff1',
           bottom: '255px',
-          right: '210px',
+          right: '200px',
           width: '20px',
           height: '20px',
         },
         {
           id: 'btn-diff2',
           bottom: '135px',
-          right: '165px',
+          right: '155px',
           width: '30px',
           height: '30px',
         },
         {
           id: 'btn-diff3',
-          bottom: '120px',
-          right: '440px',
+          bottom: '125px',
+          right: '430px',
           width: '25px',
           height: '25px',
         },
         {
           id: 'btn-diff4',
           bottom: '100px',
-          right: '340px',
+          right: '330px',
           width: '25px',
           height: '25px',
         },
         {
           id: 'btn-diff5',
-          bottom: '190px',
-          right: '260px',
+          bottom: '185px',
+          right: '250px',
           width: '45px',
-          height: '30px',
+          height: '35px',
         },
         {
           id: 'btn-diff6',
           bottom: '60px',
-          right: '195px',
+          right: '187px',
           width: '60px',
           height: '40px',
         },
         {
           id: 'btn-diff7',
-          bottom: '355px',
-          right: '90px',
+          bottom: '350px',
+          right: '80px',
           width: '30px',
-          height: '30px',
+          height: '35px',
         },
       ],
     },
@@ -181,12 +179,7 @@ export class Es205Component {
       this.timeMillis += 100;
     }, 100);
 
-    this.livello = this.ES.currentInfo().difficulty;
-    this.iniziaGioco();
-  }
-
-  selezionaLivello(livello: number) {
-    this.livello = livello;
+    this.livello = this.ES.currentInfo().difficulty-1;
     this.iniziaGioco();
   }
 
@@ -200,17 +193,17 @@ export class Es205Component {
   }
 
   contaErrori() {
-    this.errori += 1;
+    this.error += 1;
   }
 
   contaDifferenze(eleClass: any) {
     this.differenzeTrovate += 1;
     let ele = document.querySelector(`${eleClass}`) as HTMLElement;
-    ele.style.cursor = 'not-allowed';
+    ele.style.display = 'none';
     if (this.differenzeTrovate === this.totaleDifferenze) {
       this.step = 2; // Fine del gioco
       this.ES.nextExercise(this.ES.currentInfo().id, {
-        errori: this.errori,
+        errors: this.error,
         time: this.timeMillis,
       });
     }
