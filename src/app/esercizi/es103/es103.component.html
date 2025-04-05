@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="../es.style.scss">
+<link rel="stylesheet" href="../es.style.scss" />
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Memorizza la lista di parole e componi</mat-card-title>
+    <mat-card-title>Memorizza la lista di numeri e componi</mat-card-title>
     <mat-card-subtitle>Apprendimento e memorizzazione</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content *ngIf="step === 1">
@@ -20,12 +20,12 @@
     <p *ngIf="errori == 1">Hai commesso un errore</p>
     <p *ngIf="errori > 1">Hai commesso {{ errori }} errori</p>
   </mat-card-content>
-  <mat-card-actions>
+  <div class="avanti">
     <button [disabled]="step == 4" (click)="stepIncrease()" mat-button>
       Avanti
     </button>
     <p style="color: gray; font-size: 10px">
       {{ (timeMillis / 1000).toFixed(0) }} s
     </p>
-  </mat-card-actions>
+  </div>
 </mat-card>

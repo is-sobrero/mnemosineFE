@@ -1,19 +1,14 @@
-<!--add class blank if disabled == true-->
-<mat-stepper #stepper orientation="horizontal" linear *ngIf="visible">
-    <ng-template matStepperIcon="edit">
-        <mat-icon>check</mat-icon>
-      </ng-template>
+<div class="custom-stepper">
+  <div *ngFor="let exercise of sessionInfo.exercises; let i = index" class="step-container">
+    <div class="line" *ngIf="i > 0"></div> <!-- Linea tra i pallini -->
+    <div class="step">{{ i + 1 }}</div> <!-- Pallino -->
+  </div>
 
-        <mat-step *ngFor="let exercise of sessionInfo.exercises" disabled>
-            <ng-template matStepLabel></ng-template>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>
-                <!--End-->
-                <mat-icon>
-                    done_all 
-                </mat-icon>
-            </ng-template>
-        </mat-step>
-
-</mat-stepper>
+  <!-- Step finale -->
+  <div class="step-container">
+    <div class="line"></div>
+    <div class="step done">
+      <mat-icon>done_all</mat-icon>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,15 @@
   padding: 0;
 }
 
+body {
+  display: flex;
+}
+
+.progress {
+  margin-top: 66px;
+  max-height: calc(100dvh - 66px);
+}
+
 .route {
   display: flex;
   flex-direction: column;

@@ -1,15 +1,40 @@
-::ng-deep .mat-horizontal-stepper-header{
-    pointer-events: none !important;
+.custom-stepper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  overflow-y: auto; /* Scroll se ci sono troppi step */
+  padding: 20px 0;
+  gap: 10px; /* Spazio tra gli step */
 }
 
-        
-
-mat-stepper{
-    background-color: #00000000;
-    max-width: 1000px;
-    margin: 0 auto;
+.step-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 50px; /* Larghezza fissa per ogni step */
 }
 
-.blank{
-    opacity: 0.2;
+.step {
+  width: v-bind(getStepSize);
+  height: v-bind(getStepSize);
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: transform 0.3s ease-in-out;
+}
+
+.done {
+  background-color: green;
+}
+
+.line {
+  width: 5px;
+  height: 50px; /* Distanza tra gli step */
+  background-color: #007bff;
+  flex-grow: 1;
 }
