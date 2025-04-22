@@ -1,8 +1,8 @@
-<mat-card class="main_content">
+<mat-card class="main_content" *ngIf="current_state == 0">
     <mat-card-header>
         <h2>Completa l'oggetto con la parte mancante giusta</h2>
     </mat-card-header>
-    <mat-card-content *ngIf="current_state == 0" class="main_content">
+    <mat-card-content class="main_content">
         <p *ngIf="errors>0">errori: {{errors}}</p>
         <div class="image_container">
             <img src={{image_link}} class="show_image">
@@ -23,13 +23,11 @@
               <img  class="dummy_3 dummy_image" src={{dummy_container[3]?.link}} (click)="checkContent(3)">
             </div>
       </div>
-
     </mat-card-content>
-
-    <mat-card-content *ngIf="current_state == 1">
-        <h1>Hai indovinato l'oggetto</h1>
-    </mat-card-content>
-    <mat-card-footer *ngIf="current_state == 1">
-        <h3>Hai commesso {{errors}} errori</h3>
-    </mat-card-footer>
+</mat-card>
+<mat-card class="main_content" *ngIf="current_state == 1" >
+     <mat-card-header>
+        <h2>Esercizio completato</h2>
+    </mat-card-header>
+    <p>Hai completato l'esercizio con errori pari a: {{errors}}</p>
 </mat-card>
