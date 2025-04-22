@@ -1,0 +1,30 @@
+<mat-card class="principale">
+    <mat-card-header>
+      <mat-card-title>ES309- Cambio di regola</mat-card-title>
+      <mat-card-subtitle>Clicca sulla forma corrispondente alla regola</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="area-gioco" *ngIf="step==2">
+        <div class="punteggio">Punteggio: {{corrette}}/20</div>
+        <div class="regola">{{regolaCorrente.descrizione}}</div>
+        
+        <div class="forme-container">
+          <div *ngFor="let forma of displayedforme; let i = index"
+               [class]="'forma ' + forma.forma + ' ' + forma.colore"
+               (click)="controllaRisposta(forma, i)"
+               [innerHTML]="forma.content">
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button 
+              color="primary" 
+              *ngIf="step==1"
+              (click)="cominciaGioco()">
+              Comincia
+            </button>
+      <p class="timer" *ngIf="step==2">Time: {{(timeMillis/1000).toFixed(0)}}s</p>
+    </mat-card-actions>
