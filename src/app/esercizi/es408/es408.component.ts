@@ -7,6 +7,9 @@ import {MatSelectModule} from "@angular/material/select";
 import { MatButton } from '@angular/material/button';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {ExerciseService} from "../../exercise.service";
+import { AfterViewInit } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-es408',
@@ -30,7 +33,7 @@ import {ExerciseService} from "../../exercise.service";
   templateUrl: './es408.component.html',
   styleUrl: './es408.component.scss'
 })
-export class Es408Component implements OnInit{
+export class Es408Component implements OnInit, AfterViewInit{
   private connection = inject(HttpClient);
   private connection2 = inject(HttpClient);
   private dictionary:any[] = [];
@@ -41,6 +44,7 @@ export class Es408Component implements OnInit{
   private totalArray:any[] = [];
   private inputCache:string[] = [];
   selectedArray:any[] = [];
+  display_solutions:any[] = [];
 
   constructor(private ES: ExerciseService){}
   /*
@@ -138,8 +142,8 @@ export class Es408Component implements OnInit{
       this.inputSection = document.querySelector(".input");
 
     });
-  this.level = this.ES.currentInfo().dificulty;
-
+    this.level = this.ES.currentInfo().dificulty;
+    //this.level = 1;
   }
 
   setWord():void{
@@ -149,14 +153,55 @@ export class Es408Component implements OnInit{
     this.inputCache = [];
     this.errors = 0;
     this.points = 0;
-    console.log(this.selectedArray.toString());
+    this.ngAfterViewInit();
   }
 
-  checkContent(){
-    if(this.word_typed.toLowerCase() != this.display.toLowerCase() && this.selectedArray.includes(this.word_typed.toLowerCase()) && !this.inputCache.includes(this.word_typed.toLowerCase())){
+  ngAfterViewInit(){
+    let container = document.querySelector(".check_word")!;
+
+    if(this.selectedArray.length > 0){
+      let random = Math.floor(Math.random() * this.selectedArray.length);
+      let oldr = 0;
+      let end:boolean = false;
+      this.display_solutions = [];
+      for(let i=0;i < this.level + 2;i++){
+        while(!end){
+          random = Math.floor(Math.random() * this.selectedArray.length);
+          if(random != oldr){
+            end = true
+          }
+        }
+        this.display_solutions.push(this.selectedArray.at(random).toString());
+        end = false;
+        oldr = random;
+      }
+
+      let dummyIndex = Math.floor(Math.random()*this.totalArray.length);
+      let localArray:string[] = this.totalArray.at(dummyIndex).split(", ");
+      end = false;
+      oldr = 0;
+      random = Math.floor(Math.random()*localArray.length);
+      for(let i=0;i< this.level + 2; i++){
+        while(!end){
+          random = Math.floor(Math.random()*localArray.length);
+          if(oldr != random) end = true;
+        }
+        end = false;
+        oldr = random;
+        this.display_solutions.push(localArray.at(random));
+      }
+      this.display_solutions = this.shuffle(this.display_solutions);
+    }
+  }
+
+  checkContent(index:number){
+    let element = document.getElementById(""+index)!;
+    if(this.selectedArray.includes(this.display_solutions.at(index).toLowerCase()) && !this.inputCache.includes(this.display_solutions.at(index).toLowerCase())){
       this.points += 1;
+      element.classList.toggle("green");
     }else{
       this.errors += 1;
+      element.classList.toggle("red");
     }
     if(this.points >= 3){
       this.current_state = 1;
@@ -168,5 +213,13 @@ export class Es408Component implements OnInit{
 
   onKey(event:any){
     this.word_typed = event.target.value;
+  }
+
+  shuffle(array: any[]):any[]{
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   }
 }
