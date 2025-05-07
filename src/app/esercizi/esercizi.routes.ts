@@ -19,6 +19,7 @@ import { Es110Component } from './es110/es110.component';
 import { Es301Component } from './es301/es301.component';
 import { Es302Component } from './es302/es302.component';
 import { Es303Component } from './es303/es303.component';
+import { Es306Component } from './es306/es306.component';
 import { Es307Component } from './es307/es307.component';
 import { Es308Component } from './es308/es308.component';
 import { Es401Component } from './es401/es401.component';
@@ -109,6 +110,10 @@ const routes: Routes = [
   {
     path: '303',
     component: Es303Component,
+  },
+  {
+    path: '306',
+    component: Es306Component,
   },
   {
     path: '307',

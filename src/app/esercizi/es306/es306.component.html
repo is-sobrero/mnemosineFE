@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="../es.style.scss">
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Parola simile</mat-card-title>
+    <mat-card-subtitle
+      >Seleziona la parola che più si avvicina alla parola
+      visualizzata</mat-card-subtitle
+    >
+  </mat-card-header>
+
+  <mat-card-content>
+    <img src="{{tessereDomino[0].src}}" alt="">
+  </mat-card-content>
+
+  <mat-card-content>
+    <p style="color: gray; font-size: 14px; float: left;">{{ (timeMillis / 1000).toFixed(0) }}s</p>
+  </mat-card-content>
+</mat-card>
