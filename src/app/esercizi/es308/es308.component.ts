@@ -98,19 +98,9 @@ ngOnInit(): void {
       break;
     }
     var random = Math.floor(Math.random() * 10) + 1;
-    var negative = Math.floor(Math.random() * 2);
-
-    if(negative == 1){
-      random = -random;
-    }
 
     while(this.numList.includes(random)){
       random = Math.floor(Math.random() * 10) + 1;
-      var negative = Math.floor(Math.random() * 2);
-
-    if(negative == 1){
-      random = -random;
-    }
     }
     this.numList.push(random);
   
