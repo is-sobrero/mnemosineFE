@@ -121,7 +121,7 @@ export class Es106Component implements OnInit {
         clearInterval(this.timer);
         this.stepIncrease();
       }
-    }, 1500);
+    }, 2500);
   }
 
   sequenzaSelezionata(valore: number) {
