@@ -7,8 +7,15 @@ mat-card {
   justify-content: space-between;
 }
 
-mat-card-content {
+mat-card-content{
   text-align: center;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 div.livello {

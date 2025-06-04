@@ -131,9 +131,6 @@ export class Es303Component implements OnInit {
 
   nextStep() {
     this.step++;
-    if (this.step === 5) {
-      this.ES.nextExercise(303, { time: this.timeMillis, errors: this.errori });
-    }
     if (this.step == 4) {
       this.arrayParole.sort();
       for (let i = 0; i < this.nParole; i++) {
@@ -151,6 +148,8 @@ export class Es303Component implements OnInit {
           this.errori++;
         }
       }
+
+      this.ES.nextExercise(303, { time: this.timeMillis, errors: this.errori });
     }
   }
 }

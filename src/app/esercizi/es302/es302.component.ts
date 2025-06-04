@@ -67,7 +67,7 @@ export class Es302Component implements OnInit {
         }
         i = i + 1;
       }
-    } else if (this.step == 4) {
+
       this.ES.nextExercise(302, { errors: this.errori, time: this.timeMillis });
     }
   }

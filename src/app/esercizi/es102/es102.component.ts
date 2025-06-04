@@ -10,6 +10,7 @@ import {
 import { MatButton } from '@angular/material/button';
 import { NgFor, NgIf } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ExerciseService } from '../../exercise.service';
 @Component({
   selector: 'app-es102',
   standalone: true,
@@ -34,15 +35,20 @@ export class Es102Component implements OnInit {
   numeroStimoli = 6;
   vettoreCoppie: any[] = [];
   errori = 0;
+  timeMillis = 0;
+
+  constructor(private EX: ExerciseService) {}
 
   ngOnInit(): void {
+    setInterval(() => {
+      this.timeMillis += 100;
+    }, 100);
     //riempire il vettore di coppie con numeri da 1 a numeroStimoli
     var stimolo = 0;
     for (stimolo = 1; stimolo <= this.numeroStimoli; stimolo++) {
       this.vettoreCoppie.push({ numero: stimolo, cliccato: true });
       this.vettoreCoppie.push({ numero: stimolo, cliccato: true });
     }
-    console.log(this.vettoreCoppie);
     //mescolare il vettore
     this.vettoreCoppie.sort(() => Math.random() - 0.5);
   }
@@ -55,6 +61,8 @@ export class Es102Component implements OnInit {
         this.vettoreCoppie[i].cliccato = false;
       }
     }
+    else if(this.step == 3)
+      this.EX.nextExercise(102, { errors: this.errori, time: this.timeMillis });
   }
 
   verificaMemory() {
@@ -73,7 +81,7 @@ export class Es102Component implements OnInit {
           allClicked = false;
         }
       }
-      if (allClicked) this.step++;
+      if (allClicked) this.nextStep();
       //controlla a due a due se sono uguali, rendi non cliccate le coppie senza match
       for (var i = 0; i < this.vettoreCoppie.length; i++) {
         //se l'elemento è non cliccato allora continue
@@ -92,7 +100,6 @@ export class Es102Component implements OnInit {
             match = true;
             this.vettoreCoppie[i].cliccato = true;
             this.vettoreCoppie[j].cliccato = true;
-            console.log(this.vettoreCoppie);
           }
         }
         if (match == false) {

@@ -49,7 +49,7 @@ export class Es105Component implements OnInit {
       domande: [
         { domanda: 'Con cosa gioca il cane?', risposta: 'palla' },
         { domanda: 'Di che colore è il cane?', risposta: 'arancione' },
-        { domanda: 'Quanti cani ci sono?', risposta: '1' },
+        { domanda: 'Quanti cani ci sono? (Scrivi un numero)', risposta: '1' },
       ],
     },
     {
@@ -66,7 +66,7 @@ export class Es105Component implements OnInit {
     {
       immagine: 'assets/images_es105/livello3.png',
       domande: [
-        { domanda: 'Chi tiene la zamba sulla palla?', risposta: 'gatto' },
+        { domanda: 'Chi tiene la zampa sulla palla?', risposta: 'gatto' },
         { domanda: 'Di che colore è lo sfondo?', risposta: 'rosa' },
         { domanda: 'Quante zampe in totale hai visto?', risposta: '6' },
       ],
@@ -98,7 +98,7 @@ export class Es105Component implements OnInit {
 
   mostraImmagine() {
     this.step = 1;
-    const immagineCorrente = this.immagini[this.livello];
+    const immagineCorrente = this.immagini[this.livello - 1];
     this.immagine = immagineCorrente.immagine;
     this.rispostaCorretta =
       immagineCorrente.domande[this.domandaCorrenteIndex].risposta;
@@ -121,12 +121,12 @@ export class Es105Component implements OnInit {
     ) {
       this.domandaCorrenteIndex++;
       if (
-        this.domandaCorrenteIndex < this.immagini[this.livello].domande.length
+        this.domandaCorrenteIndex < this.immagini[this.livello - 1].domande.length
       ) {
         this.rispostaUtente = '';
         this.step = 2;
         this.rispostaCorretta =
-          this.immagini[this.livello].domande[
+          this.immagini[this.livello - 1].domande[
             this.domandaCorrenteIndex
           ].risposta;
       } else {
@@ -146,7 +146,7 @@ export class Es105Component implements OnInit {
   }
 
   getDomandaCorrente(): string {
-    return this.immagini[this.livello].domande[this.domandaCorrenteIndex]
+    return this.immagini[this.livello - 1].domande[this.domandaCorrenteIndex]
       .domanda;
   }
 }

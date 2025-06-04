@@ -19,6 +19,7 @@
 
 .selezionabili {
   display: flex;
+  flex-wrap: wrap;
   button {
     all: unset;
     cursor: pointer;

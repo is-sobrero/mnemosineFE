@@ -68,7 +68,7 @@ export class Es301Component implements OnInit {
         }
         i = i + 1;
       }
-    } else if (this.step == 4) {
+
       this.ES.nextExercise(301, { errors: this.errori, time: this.timeMillis });
     }
   }

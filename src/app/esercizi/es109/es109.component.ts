@@ -82,12 +82,12 @@ export class Es109Component implements OnInit {
 
   // Avanza allo step successivo
   stepSuccessivo() {
+    this.step++;
     if (this.step === 2) {
       this.verificaRisposta();
     } else if (this.step === 3) {
       this.ES.nextExercise(109, { errors: this.errori, time: this.timeMillis });
     }
-    this.step++;
   }
 
   // Aggiorna la risposta dell'utente
