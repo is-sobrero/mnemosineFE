@@ -7,6 +7,9 @@ mat-card {
   justify-content: space-around;
   margin-top: 20px;
   position: relative;
+  background-color: transparent;
+  width: 1010px;
+  align-content: center;
 }
 
 mat-card img {
@@ -17,15 +20,15 @@ mat-card img {
 }
 
 mat-card img.selected {
-  border-color: red;
+  border-color: transparent;
 }
 
 .overlay-button {
   position: absolute;
-  top: 3px;
-  right: 11px;
+  top: 1px;
+  right: 2px;
   width: 500px;
-  height: 500px;
+  height: 501px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -36,15 +39,6 @@ mat-card img.selected {
   background-color: transparent;
   border: none;
   cursor: pointer;
-}
-
-.livelli-container {
-  align-items: center;
-  text-align: center;
-}
-
-.livelli-container button {
-  width: 150px;
 }
 
 .livello {

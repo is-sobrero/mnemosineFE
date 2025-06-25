@@ -5,13 +5,13 @@
     <mat-card-subtitle>Apprendimento e memorizzazione</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content *ngIf="step != 3">
-    <mat-card
+    <button
       class="frutto"
       *ngFor="let oggetto of vettoreCoppie"
       (click)="oggetto.cliccato = true; verificaMemory()"
     >
       <p *ngIf="oggetto.cliccato == true">{{ oggetto.numero }}</p>
-    </mat-card>
+    </button>
   </mat-card-content>
   <mat-card-content *ngIf="step == 3">
     <h3>Complimenti hai completato il memory</h3>
@@ -21,5 +21,8 @@
     <button [disabled]="step != 1" (click)="nextStep()" mat-button>
       Avanti
     </button>
+    <p style="color: gray; font-size: 10px">
+      {{ (timeMillis / 1000).toFixed(0) }} s
+    </p>
   </mat-card-actions>
 </mat-card>
